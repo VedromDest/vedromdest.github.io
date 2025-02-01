@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Refactoring :: Programmeren Gevorderd 2</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Programmeren Gevorderd 2</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+        <a class="navbar-item">Beta</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="project-name" data-version="2025.0201">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version">2025.0201</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2025.0201</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
+    <li><a href="03-storefront-refactoring.html">Refactoring</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Refactoring</h1>
+<div class="sect1">
+<h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Het eindresultaat van deze les rond <em>refactoring</em> en volledige <em>Entity Framework Core</em> implementatie is beschikbaar als <em>zip</em> op Chamilo.</p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Stilstaan bij refactoring</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_refactoring"><a class="anchor" href="#_refactoring"></a>Refactoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We hebben in het verleden reeds verschillende delen van de applicatie aangepast en herschreven door het toevoegen van business requirements en het verwerven van nieuwe technische inzichten. Het herschrijven van stukjes code, of aanpassen van het applicatieontwerp, heet <a href="https://en.wikipedia.org/wiki/Code_refactoring"><em>Refactoring</em></a>.</p>
+</div>
+<div class="paragraph">
+<p><em>Refactoring</em> is een normaal, gezond en continue aanwezig onderdeel van het ontwikkelingsproces. Net om die reden is <em>Refactoring</em> altijd impliciet aanwezig in de cursus.
+In academische context is het belangrijk de dingen expliciet te benoemen, dus laten we dat hier even doen.</p>
+</div>
+<div class="paragraph">
+<p>In dit hoofdstuk integreren we de gegenereerde <em>Data Access Layer</em> in onze <em>StoreFront</em> applicatie. We hadden ook enkele openstaande verbeterpunten. Dit brengt ons tot volgend overzicht:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Inconsistent gebruik van service layer.</p>
+</li>
+<li>
+<p>Gebruik van api contracts in data layer.</p>
+</li>
+<li>
+<p>Hardcoded connection string in DbContext.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h3>
+<div class="paragraph">
+<p>Op dit moment bestaat er enkel een <em>OrderService</em>. De <em>Api Controllers</em> voor <em>Customers</em> en <em>Products</em> spreken nog rechtstreeks tegen <em>Repositories</em>. Dergelijke inconsistenties zijn onwenselijk. <strong>We moeten een <em>CustomerService</em> en een <em>ProductService</em> introduceren.</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_connectionstring"><a class="anchor" href="#_connectionstring"></a>ConnectionString</h3>
+<div class="paragraph">
+<p>Op dit moment bevat de gegenereerde <em>DbContext</em> een vaste, leesbare <em>Connectionstring</em> naar onze MySQL databank. <em>Access Credentials</em> bewaren in broncode is niet veilig. Het is ook inflexibel - wat als we met een andere databaseserver willen verbinden? <strong>We moeten de <em>Connectionstring</em> verhuizen naar een configuratiebestand.</strong></p>
+</div>
+<div class="listingblock">
+<div class="title">AppSettings.json</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "StoreFrontMySQL": "server=127.0.0.1;port=3307;database=schemadag;user=userdag;password=userdag"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+var connectionString = builder.Configuration.GetConnectionString("StoreFrontMySQL");
+var serverVersion = new MySqlServerVersion(ServerVersion.AutoDetect(connectionString));
+builder.Services.AddDbContext&lt;StorefrontContext&gt;(options =&gt;
+    options.UseMySql(connectionString, serverVersion));
+//...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_contracts_repositories"><a class="anchor" href="#_api_contracts_repositories"></a>Api Contracts &amp; Repositories</h3>
+<div class="paragraph">
+<p>Op dit moment gebruiken de <em>Repositories</em> in de <em>Data Layer</em> onze <em>Api Contracts</em>. De contracten mogen niet dieper dan de <em>Service Layer</em> gebruikt worden. Onze contracten zijn immers bedoeld voor de buitenwereld, niet de interne logica. Interne logica mag absoluut rijkere of anders ontworpen representaties van onze data gebruiken.</p>
+</div>
+<div class="paragraph">
+<p>Om dit op te lossen, kunnen we een bibliotheek van domeinmodellen aanleggen en deze gebruiken in de <em>Repositories</em> en de business logica in de <em>Service Layer</em>. In dat geval is het aan de <em>Service Layer</em> om de mapping tussen onze domeinklassen en api contracten te voorzien.</p>
+</div>
+<div class="paragraph">
+<p><em>Willen we dat wel?</em></p>
+</div>
+<div class="paragraph">
+<p>Wat is de meerwaarde van onze <em>Repositories</em> nu we gebruik kunnen maken van de <em>DbContext</em> en zijn <em>DbSets</em> die <em>ORM</em> en <em>CRUD</em> functionaliteit leveren? Welke verantwoordelijkheid zouden deze <em>Repositories</em> nog dragen? Als we de <em>Repositories</em> behouden, zullen ze enkel dienen als doorgeefluik naar de <em>DbContext</em>, en zelf geen logica bevatten.</p>
+</div>
+<div class="paragraph">
+<p><em>Is dat waardevol?</em></p>
+</div>
+<div class="paragraph">
+<p>We zouden dit kunnen zien als abstractie/encapsulatie van alles wat specifiek is aan <em>Entity Framework</em>. Abstractie is goed. Toch? Een extra <a href="https://en.wikipedia.org/wiki/Indirection"><em>level of indirection</em></a> kan nooit kwaad. Toch? Wat als we niet langer <em>Entity Framework</em> willen gebruiken? Misschien kunnen we zelf een soort <em>Generic Repository</em> uitvinden, dynamisch configureerbaar etc&#8230;&#8203;? Hooguit een paar weken werk. Toch?</p>
+</div>
+<div class="paragraph">
+<p><em>Efkes serieus!</em></p>
+</div>
+<div class="paragraph">
+<p>We moeten voorzichtig zijn met dit soort redeneringen. Wat begonnen is als een terechte overweging, is ontspoord tot een theoretische oefening waarbij we met behulp van moeilijke woorden en het misrepresenteren van kernconcepten komen tot een situatie waarin we op alles voorbereid zouden zijn en om een of andere reden het Noorden kwijt zijn.</p>
+</div>
+<div class="paragraph">
+<p>We hebben - tijdens de ontwerpfase, als het even kan - beslist dat de applicatie gebouwd wordt met <em>Entity Framework Core</em>, en dat gaan we dus gewoon doen. De <em>DbSets</em> vervullen de rol (<em>ORM</em> en <em>CRUD</em>) van <em>Repositories</em>. <strong>We moeten de <em>DbCOntext</em> in de <em>Services</em> injecteren en onze bestaande <em>Repositories</em> verwijderen. Simpel.</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer dergelijke situaties in professionele context te herkennen. Laat je niet te snel meeslepen. Probeer steeds de reële, tastbare, aantoonbare meerwaarde van een aanpassing in kaart te brengen en af te wegen. Vind het warm water niet opnieuw uit, en al zeker niet het alles-is-mogelijk-we-weten-het-ook-niet-meer-en-rommelen-maar-wat-in-de-marge-water. De kans dat iemand paars lauw water wil dat smaakt naar tuinkabouters en vierkante bubbels heeft, is klein. Keep IT Simple.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Kunnen we concluderen dat we nooit meer een <em>Repository</em> moeten maken? Neen, dat is zeker de conclusie niet. De conclusie is dat we voor elk probleem dat zich aandient een gepaste oplossing moeten kiezen die aantoonbare meerwaarde creëert en we steeds het doel voor ogen moeten houden.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Hier is een bepaalde graad van bescheidenheid op zijn plaats: <strong>programmeren</strong> is een (van de) <strong>middel</strong>(en), het <strong>doel</strong> is een correct werkende <strong>applicatie</strong> die bestaat om een <strong>bedrijfsproces te ondersteunen</strong>. IT&#8217;ers die dat begrijpen en er naar handelen, kunnen rekenen op mooie carrière opportuniteiten.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wat we bekijken tijdens de lessen is <em>een</em> soort probleem dat op <em>een</em> manier opgelost wordt. Er bestaan eindeloos veel problemen, maar we kunnen ze veelal groeperen per soort of type. Elk soort probleem heeft een paar frequent gebruikte oplossingen. Problemen herkennen en vervolgens een passende geijkte oplossing kunnen kiezen en implementeren is een van de belangrijkste <em>tools</em> die een developer op zak kan hebben.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+I&#8217;m a pro, what about unit tests, bro? Zonder een <em>Interface</em> voor de repositories kan ik toch geen <em>fake</em> implementatie maken om mee te testen? Een probleem is zelden uniek en dus gewoonlijk ook al opgelost. De 7+ miljoen downloads van <a href="https://github.com/MichalJankowskii/Moq.EntityFrameworkCore">Moq.EntityFrameworkCore</a> bevestigen dit.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Er zijn zeker nog andere verbeterpunten te vinden in onze solution. Daar komen we, in de mate van het mogelijke, nog op terug.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-code-examples">ADO.NET</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/ef/core/">EF Core</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/MichalJankowskii/Moq.EntityFrameworkCore">Moq.EntityFrameworkCore</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql">Pomelo.EntityFrameworkCore.MySql</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/Indirection">level of indirection</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/Code_refactoring">Refactoring</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

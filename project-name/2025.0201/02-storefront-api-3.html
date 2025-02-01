@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Service Layer :: Programmeren Gevorderd 2</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Programmeren Gevorderd 2</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+        <a class="navbar-item">Beta</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="project-name" data-version="2025.0201">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version">2025.0201</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2025.0201</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
+    <li><a href="02-storefront-api.html">StoreFront Api</a></li>
+    <li><a href="02-storefront-api-3.html">Service Layer</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Service Layer</h1>
+<div class="sect1">
+<h2 id="_service_layer_orders"><a class="anchor" href="#_service_layer_orders"></a>Service Layer (Orders)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In deze fase brengen we de <em>Customer</em> en <em>Product</em> concepten samen door een <em>Order</em> (bestelling) te introduceren. Hoewel we nog steeds aan een "eenvoudige" CRUD api werken, stijgt de complexiteit aanzienlijk.</p>
+</div>
+<div class="sect2">
+<h3 id="_multipliciteit"><a class="anchor" href="#_multipliciteit"></a>Multipliciteit</h3>
+<div class="paragraph">
+<p>De <em>Customer</em> en <em>Product</em> api&#8217;s hanteren steeds enkelvoudige concepten voor de <code>POST</code> operatie. Voor een <em>Order</em> is dit niet voldoende. We willen meerdere exemplaren van een artikel, of zelfs meerdere artikels, kunnen bestellen. Dit brengt ons tot een contract dat een lijst moet bevatten.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OrderRequestContract
+{
+    public int CustomerId { get; set; }
+    public List&lt;OrderProductRequestContract&gt; Products { get; set; }
+}
+
+public class OrderProductRequestContract
+{
+    //...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_denormalisatie"><a class="anchor" href="#_denormalisatie"></a>Denormalisatie</h3>
+<div class="paragraph">
+<p>De prijs en de beschrijving van een product verandert doorheen de tijd. In de toekomst willen we met zekerheid kunnen bepalen voor welke prijs een bepaald product aan een bepaalde klant verkocht werd. Dit is nodig voor <em>user experience</em> - denk aan correcte historiek in "Mijn Bestellingen" - en legale vereisten zoals het voeren van een correcte boekhouding.</p>
+</div>
+<div class="paragraph">
+<p>Hoewel we vanuit technische invalshoek de gegevens van een <em>Order</em> al snel zouden bekijken als referenties naar producten en klanten, dwingen de <em>business requirements</em> ons ertoe om informatie te dupliceren, en dus te <em>denormaliseren</em>.</p>
+</div>
+<div class="paragraph">
+<p>We gaan voor elke bestelling de cruciale informatie betreffende <em>Product</em> en <em>Customer</em> bijhouden zoals deze was op het moment van de bestelling.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_veiligheid"><a class="anchor" href="#_veiligheid"></a>Veiligheid</h3>
+<div class="paragraph">
+<p>We beschouwen onze api als <em>public facing</em> en moeten dus even stilstaan bij de gevolgen van onze ontwerp beslissingen in dat kader.</p>
+</div>
+<div class="sect3">
+<h4 id="_operaties_rollen"><a class="anchor" href="#_operaties_rollen"></a>Operaties &amp; Rollen</h4>
+<div class="paragraph">
+<p>Niet eender wie mag eender welke <em>call</em> (api operatie) in het systeem doen. Zo willen we bijvoorbeeld dat enkel een interne medewerker producten kan aanmaken. Technisch zouden we dit kunnen afdwingen door gebruikersrollen te definiëren en de <code>POST /products</code> te beperken tot een welbepaalde rol.</p>
+</div>
+<div class="paragraph">
+<p>Op die manier kunnen we ervoor zorgen dat enkel een beperkt aantal vertrouwde personen aanpassingen kan maken aan, bijvoorbeeld, de prijs van een product.</p>
+</div>
+<div class="paragraph">
+<p>We kunnen ons nu voornemen op een later moment rollen toe te voegen en dit type probleem intellectueel als opgelost te beschouwen.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operaties_verantwoordelijkheden"><a class="anchor" href="#_operaties_verantwoordelijkheden"></a>Operaties &amp; Verantwoordelijkheden</h4>
+<div class="paragraph">
+<p>We hebben eerder geconcludeerd dat een deel van de <em>Product</em> en <em>Customer</em> data gedupliceerd zal moeten worden naar een <em>Order</em>.</p>
+</div>
+<div class="paragraph">
+<p>We zouden dus onderstaand contract kunnen aanwenden voor de <code>POST</code> operatie.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OrderContract
+{
+    public OrderCustomerResponseContract Customer { get; set; }
+    public List&lt;OrderProductResponseContract&gt; Products { get; set; }
+}
+
+public class OrderCustomerContract
+{
+    public int CustomerId { get; set; }
+    // snapshot details zoals billing address etc
+    public string CustomerEmail { get; set; }
+    public string CustomerFirstName { get; set; }
+    //...
+}
+
+public class OrderProductContract
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Price { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
+    public int Quantity { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De prijs maakt deel uit van het contract dat van Client naar Server verzonden wordt.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Dit laat ons toe te voldoen aan de typisch relevante requirements, maar het introduceert een veiligheidsprobleem. Immers, de client (web)applicatie levert de prijs van het product aan in het request. Dit zet de deur open voor fraude. Elke request die door een browser verzonden wordt, kan gemanipuleerd worden door de gebruiker.</p>
+</div>
+<div class="paragraph">
+<p>In het geval van <code>POST /products</code> beslisten we later via een rol te gaan bepalen <em>wie</em> de call mag doen. <em>Wat</em> er in dat geval ingestuurd wordt, vertrouwen we impliciet, want we vertrouwen de interne medewerkers.</p>
+</div>
+<div class="paragraph">
+<p><code>POST /orders</code> kunnen we ook toekennen aan een rol, specifiek voor klanten, maar dat lost ons probleem niet op. Het probleem ligt hier immers niet bij de <em>wie</em>, maar wel bij de <em>wat</em>. We kunnen niet vertrouwen <em>wat</em> de klant instuurt.</p>
+</div>
+<div class="paragraph">
+<p><strong>We moeten dus concluderen dat het niet de verantwoordelijkheid van de client mag zijn om de prijs in te sturen.</strong> Het is <strong>wel</strong> de verantwoordelijkheid van de client om te zeggen welk <strong>product</strong> er gekocht wordt (<code>ProductId</code>), maar <strong>niet</strong> wat de <strong>prijs</strong> is. Die verantwoordelijkheid ligt bij de server.</p>
+</div>
+<div class="paragraph">
+<p>We gebruiken dus een contract dat nauwer aansluit bij de verantwoordelijkheid van de client.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OrderRequestContract
+{
+    public int CustomerId { get; set; }
+    public List&lt;OrderProductRequestContract&gt; Products { get; set; }
+}
+
+public class OrderProductRequestContract
+{
+    public int ProductId { get; set; }
+    public int Quantity { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De overige data nodig voor het verwerken van het <em>Order</em> is reeds beschikbaar op de server.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h3>
+<div class="paragraph">
+<p>We hebben dit project gestart met een eenvoudige applicatiearchitectuur waarbij per concept een <em>Controller</em> en een <em>Repository</em> beschikbaar is.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/api-data.png" alt="api data"></span></p>
+</div>
+<div class="paragraph">
+<p>Het verwerken van <em>Orders</em> introduceert een hoeveelheid logica die niet aanwezig is voor de andere concepten. Dit brengt ons al snel in onderstaande situatie.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/api-data-order.png" alt="api data order"></span></p>
+</div>
+<div class="paragraph">
+<p>Hoewel het nog steeds een eenvoudig academisch voorbeeld betreft, belanden we reeds in een situatie waarbij het aantal te injecteren dependencies in de <code>OrdersController</code> snel oploopt. Een van de meest gebruikte patronen om dit op te lossen, is het introduceren van een <em>Service Layer</em>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/api-data-service.png" alt="api data service"></span></p>
+</div>
+<div class="paragraph">
+<p>Op dit moment is de <em>OrdersController</em> losgekoppeld van de data laag. Dit is wenselijk in nagenoeg alle scenario&#8217;s. Elke laag heeft zijn eigen verantwoordelijkheid:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Api Layer</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Routing</p>
+</li>
+<li>
+<p>Modelbinding / Input Validatie</p>
+</li>
+<li>
+<p>Bepalen HTTP responses</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Service Layer</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Logica</p>
+</li>
+<li>
+<p>Communiceert met Api Layer gebruik makende van de Api Contracten, maar is verder http-agnostic.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Data Layer</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Encapsuleert data storage en eventueel bijhorende 'low level' logica.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We hanteren hier - hoewel veelgebruikt - <em>een</em> manier om dergelijke problemen op te lossen, niet <em>de</em> manier.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_problemen"><a class="anchor" href="#_problemen"></a>Problemen</h3>
+<div class="sect3">
+<h4 id="_uniformiteit"><a class="anchor" href="#_uniformiteit"></a>Uniformiteit</h4>
+<div class="paragraph">
+<p>Hoewel de <em>Product</em> en <em>Customers</em> code op dit moment nog niet echt uitgebreid is, zullen we toch een refactoring moeten doorvoeren om ook daarvoor een <em>Service</em> te introduceren. Immers, wanneer je een patroon begint te volgen, pas je het best uniform toe in je project.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gebruik_api_contracten"><a class="anchor" href="#_gebruik_api_contracten"></a>Gebruik Api Contracten</h4>
+<div class="paragraph">
+<p>Op dit moment worden de api contracten gebruikt doorheen al onze lagen. Dat is een <em>Bad Practice</em>. Bij het introduceren van een relationele databank met behulp van Entity Framework, gaan we dit oplossen.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/api-service-data-contracts.png" alt="api service data contracts"></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

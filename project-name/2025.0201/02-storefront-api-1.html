@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Customers :: Programmeren Gevorderd 2</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Programmeren Gevorderd 2</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+        <a class="navbar-item">Beta</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="project-name" data-version="2025.0201">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active is-current-page" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version">2025.0201</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2025.0201</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
+    <li><a href="02-storefront-api.html">StoreFront Api</a></li>
+    <li><a href="02-storefront-api-1.html">Customers</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Customers</h1>
+<div class="sect1">
+<h2 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In de les wordt samen een Solution opgezet.</p>
+</div>
+<div class="paragraph">
+<p>Daarin komt een <em>Api</em> project met eenvoudige <em>Program.cs</em> analoog aan onderstaande.</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddSingleton&lt;ICustomerRepository, CustomerRepository&gt;();
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+app.MapControllers();
+
+app.Run();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api"><a class="anchor" href="#_api"></a>Api</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We bouwen in een <em>ApiController</em> de CRUD api op voor klantenbeheer op het <code>api/customers</code> endpoint.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[C] <code>POST</code>: Maak nieuwe klant</p>
+</li>
+<li>
+<p>[R] <code>GET</code>: Geef alle klanten</p>
+</li>
+<li>
+<p>[R] <code>GET /{id}</code>: Geef specifieke klant</p>
+</li>
+<li>
+<p>[U] <code>PUT /{id}</code>: Update specifieke klant</p>
+</li>
+<li>
+<p>[D] <code>DELETE /{id}</code>: Delete specifieke klant</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We returnen steeds een expliciet <em>ActionResult</em> zoals bijvoorbeeld</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CreatedAtAction</p>
+</li>
+<li>
+<p>Ok</p>
+</li>
+<li>
+<p>BadRequest</p>
+</li>
+<li>
+<p>NotFound</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controller_routing"><a class="anchor" href="#_controller_routing"></a>Controller (Routing)</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">CustomersController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[ApiController] <i class="conum" data-value="1"></i><b>(1)</b>
+[Route("api/[controller]")] <i class="conum" data-value="2"></i><b>(2)</b>
+public class CustomersController : ControllerBase
+{
+    private readonly ICustomerRepository _repo;
+
+    public CustomersController(ICustomerRepository repo)
+    {
+        _repo = repo;
+    }
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Het <code>ApiController</code> <em>Attribute</em> zorgt ervoor dat de Controller gevonden wordt en de routes zullen gemapped worden. Het activeert ook <em>ModelBinding</em> op de input van de methodes.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Het <code>Route</code> <em>Attribute</em> bepaalt via welk api pad we deze <em>Controller</em> kunnen benaderen. De <code>[controller]</code> template variabele wordt gebruikt in dit voorbeeld. Het zal resulteren in <code>Customers</code>, wat afstamt van de naam van de klasse.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">CustomersController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">...
+    [HttpGet] <i class="conum" data-value="1"></i><b>(1)</b>
+    public ActionResult&lt;List&lt;CustomerResponseContract&gt;&gt; Get()
+    {
+        return _repo.GetAll();
+    }
+
+    [HttpGet] <i class="conum" data-value="2"></i><b>(2)</b>
+    [Route("{id}")] <i class="conum" data-value="2"></i><b>(2)</b>
+    public ActionResult&lt;CustomerResponseContract&gt; GetCustomer([FromRoute] int id) <i class="conum" data-value="3"></i><b>(3)</b>
+    {
+        //
+    }
+...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Routing naar methode op basis van HTTP verb.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Routing naar methode op basis van HTTP verb en route info. In dit geval templating variable <code>{id}</code> &#8594; voorbeeld <code>api/customers/37</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We zeggen expliciet dat <code>id</code> uit de route komt.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contracten"><a class="anchor" href="#_contracten"></a>Contracten</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We maken onderscheid tussen een <code>CustomerRequestContract</code> en <code>CustomerResponseContract</code>. Het request contract wordt door de client naar de server gezonden. Het response contract wordt door de server naar de client gezonden.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Het is niet omdat dingen in de praktijk (initieel) op elkaar lijken, dat ze conceptueel hetzelfde zijn.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class CustomerRequestContract
+{
+    [MaxLength(10)] <i class="conum" data-value="1"></i><b>(1)</b>
+    public string FirstName { get; set; }
+    ...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deze validatieregel zal afgedwongen worden tijdens de modelbinding. Dit zorgt voor cleane, exhaustieve json foutmeldingen, en geen stacktraces, naar buiten.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_repository"><a class="anchor" href="#_repository"></a>Repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We voorzien een eenvoudige <em>Repository</em> interface en in-memory implementatie voor het beheer van de klanten. De exacte implementatie van het repository is op dit moment onbelangrijk. We voegen het toe aan de <em>DI Container</em> (in Program.cs) als Singleton zodat de dataset in geheugen blijft zolang onze api (server) draait.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface ICustomerRepository
+{
+    List&lt;CustomerResponseContract&gt; GetAll();
+    CustomerResponseContract Get(int id);
+    void Delete(int id);
+    CustomerResponseContract Create(CustomerRequestContract customer);
+    void Update(CustomerRequestContract customer, int id);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_postman"><a class="anchor" href="#_postman"></a>Postman</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We testen de api met Postman. De belangrijkste toevoegingen tov vorige les zijn:</p>
+</div>
+<div class="paragraph">
+<p>Gebruik van Request Body</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/storefront-api/postman-body.png" alt="postman body">
+</div>
+</div>
+<div class="paragraph">
+<p>Gebruik van Reponse Header</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/storefront-api/postman-header.png" alt="postman header">
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

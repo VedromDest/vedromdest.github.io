@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RESTful HTTP Api :: Programmeren Gevorderd 2</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Programmeren Gevorderd 2</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+        <a class="navbar-item">Beta</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="project-name" data-version="2025.0201">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version">2025.0201</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2025.0201</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="01-http-apis.html">RESTful HTTP Api</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">RESTful HTTP Api</h1>
+<div class="sect1">
+<h2 id="_web_architectuur"><a class="anchor" href="#_web_architectuur"></a>Web Architectuur</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Programma&#8217;s geschreven in de vakken <em>Programmeren Basis</em> en <em>Programmeren Gevorderd</em> resulteren in een enkele executable. Deze is bedoeld om lokaal uitgevoerd te worden en communiceert niet met de buitenwereld.</p>
+</div>
+<div class="paragraph">
+<p>In de bedrijfswereld bestaat software veelal uit verschillende componenten en applicaties die met elkaar communiceren over een netwerk. Dit kan een privé-netwerk zijn, of het internet. Opdat deze communicatie vlot en voorspelbaar zou verlopen, moeten er goede afspraken gemaakt worden.</p>
+</div>
+<div class="paragraph">
+<p>In dit vak worden technieken en technologieën aangeleerd die nodig zijn om een brug te slaan naar de online wereld, die in <em>Programmeren Gevorderd 3</em> uitgediept wordt.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_http"><a class="anchor" href="#_http"></a>HTTP</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Het <strong>Hypertext Transfer Protocol</strong> (HTTP) is een verzameling van <strong>afspraken</strong> die bepalen hoe <strong>applicaties via internet</strong> met elkaar kunnen <strong>communiceren</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Correct geconfigureerde moderne computersystemen gebruiken HTTPS (Hypertext Transfer Protocol <strong>Secure</strong>). <strong>HTTPS</strong> past <strong>encryptie</strong> toe waardoor de <strong>communicatie veilig</strong> verloopt.</p>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Request</dt>
+<dd>
+<p>Het <strong>vraag</strong> gedeelte van een informatieuitwisseling.</p>
+</dd>
+<dt class="hdlist1">Response</dt>
+<dd>
+<p>Het <strong>antwoord</strong> gedeelte van een informatieuitwisseling.</p>
+</dd>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@startuml
+Client -&gt; Server: Request
+Server --&gt; Client: Response
+@enduml</pre>
+</div>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">URL</dt>
+<dd>
+<p>Uniform Resource Locator, een <strong>web adres</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@startuml
+Client -&gt; Server: Request - https://demo.be/geef-klanten
+Server --&gt; Client: Response (lijst van klanten)
+@enduml</pre>
+</div>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Method</dt>
+<dd>
+<p>De <strong>intentie</strong> van een <strong>Request</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GET</code>: <strong>Geef</strong> mij datgene waar ik naar vraag.</p>
+</li>
+<li>
+<p><code>POST</code>: <strong>Verwerk</strong> wat ik je stuur.</p>
+</li>
+<li>
+<p><code>PUT</code>: <strong>Bewaar of overschrijf</strong> wat ik je stuur.</p>
+</li>
+<li>
+<p><code>DELETE</code>: <strong>Verwijder</strong> datgene waar ik naar verwijs.</p>
+</li>
+<li>
+<p><code>PATCH</code>: <strong>Overschrijf een stukje</strong> van datgene waar ik naar verwijs</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@startuml
+Client -&gt; Server: GET https://demo.be/klanten
+Server --&gt; Client: Response (lijst van klanten)
+@enduml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bij het bezoeken van een URL via een web browser, zal deze standaard een <code>GET</code> operatie doen.</p>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Header</dt>
+<dd>
+<p><strong>Randinformatie</strong> omtrent Request/Response.</p>
+</dd>
+</dl>
+</div>
+<hr>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Content</dt>
+<dd>
+<p>De <strong>inhoud</strong> van een Request/Response.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Een POST Request kan bijvoorbeeld als content de gegevens van een nieuwe klant, nieuw product of nieuwe bestelling bevatten.</p>
+</div>
+<div class="paragraph">
+<p>Een GET Request zal bijvoorbeeld een Response krijgen met daarin een lijst van bestaande klanten.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p>Status: <strong>Categorie</strong> van de <strong>Response</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>100-199: "Information"</p>
+</li>
+<li>
+<p>200-299: "Success"</p>
+</li>
+<li>
+<p>300-399: "Redirect" (doorverwijzing naar andere url)</p>
+</li>
+<li>
+<p>400-499: "Client Error" (probleem met Request)</p>
+</li>
+<li>
+<p>500-599: "Server Error" (probleem tijdens verwerking Request)</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@startuml
+Client -&gt; Server: GET https://demo.be/klanten
+Server --&gt; Client: 200 OK, Content: lijst van klanten
+@enduml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mozilla onderhoudt zeer goeie <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">documentatie</a> betreffende het gebruik van deze response codes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rest"><a class="anchor" href="#_rest"></a>REST</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wanneer componenten die over HTTP communiceren elkaar begrijpen - status codes, content etc. - bekomen we een werkend systeem. Dat is prima, maar laat veel ruimte voor interpretatie. Het is wenselijk een bepaalde aanpak globaal toe te passen zodat mensen en systemen vlotter kunnen samenwerken. Om deze reden werd REST in het leven geroepen.</p>
+</div>
+<div class="paragraph">
+<p>REST (REpresentational State Transfer) is een architectuurmodel, geen <em>protocol</em> of <em>standaard</em>, voor het bouwen van gedistribueerde systemen. Het is momenteel de meest gebruikte manier om web APIs (Application Programming Interfaces) te implementeren.</p>
+</div>
+<div class="sect2">
+<h3 id="_architectuurprincipes"><a class="anchor" href="#_architectuurprincipes"></a>Architectuurprincipes</h3>
+<div class="paragraph">
+<p>Web api&#8217;s die voldoen aan de REST architectuurprincipes zijn RESTful. REST is dus niet zomaar een synoniem voor HTTP/Web api. Er werden zes <a href="https://restfulapi.net">Guiding Principles</a> bepaald.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Uniform Interface</dt>
+<dd>
+<p>Zodra een ontwikkelaar vertrouwd is met een van je API’s, zou hij een vergelijkbare aanpak moeten kunnen volgen voor andere API’s.</p>
+</dd>
+<dt class="hdlist1">Client-Server</dt>
+<dd>
+<p>Servers en clients kunnen ook onafhankelijk van elkaar worden vervangen en ontwikkeld, zolang de interface tussen hen niet wordt gewijzigd.</p>
+</dd>
+<dt class="hdlist1">Stateless</dt>
+<dd>
+<p>Er mag geen client-context op de server worden opgeslagen tussen verzoeken. De client is verantwoordelijk voor het beheren van de status van de applicatie.</p>
+</dd>
+<dt class="hdlist1">Cacheable</dt>
+<dd>
+<p>Goed beheerde caching elimineert gedeeltelijk of volledig enkele client-server interacties, waardoor de schaalbaarheid en prestaties verder verbeteren.</p>
+</dd>
+<dt class="hdlist1">Layered System</dt>
+<dd>
+<p>REST stelt je in staat om een gelaagde systeemarchitectuur te gebruiken waarbij je de API’s op server A implementeert, gegevens opslaat op server B en verzoeken authenticeert op server C, bijvoorbeeld. Een client kan doorgaans niet zien of hij direct is verbonden met de eindserver of met een tussenliggende server.</p>
+</dd>
+<dt class="hdlist1">Code on Demand (Optional)</dt>
+<dd>
+<p>Meestal stuur je de statische representaties van bronnen in de vorm van XML of JSON. Maar wanneer dat nodig is, ben je vrij om uitvoerbare code terug te sturen om een deel van je applicatie te ondersteunen. Dit was in het verleden van toepassing op bijvoorbeeld Java Applets en Flash. Denk hedendaags vooral aan javascript. Bestanden met javascript broncode worden op de server bewaard als tekst. Ze worden verstuurd naar een web-app en pas daar uitgevoerd.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_richardson_maturity_model"><a class="anchor" href="#_richardson_maturity_model"></a>Richardson Maturity Model</h3>
+<div class="paragraph">
+<p>De mate waarin een api voldoet aan de principes bepaalt de graad van maturiteit op het <a href="https://restfulapi.net/richardson-maturity-model/">Richardson Maturity Model</a>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Level 0</dt>
+<dd>
+<p>Single URI &amp; Single Verb - Alle intentie in de Content. Er is maar 1 URI en 1 verb in gebruik. Deze vertellen ons dus niets over de gegevensuitwisseling.</p>
+</dd>
+<dt class="hdlist1">Level 1</dt>
+<dd>
+<p>Multiple URI&#8217;s &amp; Single Verb - De URI vertelt iets over het onderwerp, maar het enkele verb niets over de intentie.</p>
+</dd>
+<dt class="hdlist1">Level 2</dt>
+<dd>
+<p>Multiple URI&#8217;s &amp; Multiple Verbs - De URI vertelt iets over het onderwerp en het verb over de intentie. Dit is wat vele bedrijven als de baseline van een RESTful api.</p>
+</dd>
+<dt class="hdlist1">Level 3</dt>
+<dd>
+<p>De meeste RESTful api&#8217;s die in productie draaien hebben een Level 2 maturiteit. HATEOAS wordt immers vaak weggelaten, waardoor clients wel expliciete kennis van de endpoints voorbij de api root nodig hebben. Deze expliciete codering van de api structuur in de client is wat HATEOAS wil vermijden.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_json"><a class="anchor" href="#_json"></a>JSON</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JSON (JavaScript Object Notation) is een formaat voor gegevensuitwisseling dat gemakkelijk leesbaar is voor zowel mensen als machines. Het wordt vaak gebruikt om gegevens te verzenden tussen een server en een webapplicatie.</p>
+</div>
+<div class="paragraph">
+<p>De syntax van JSON bestaat uit objecten en arrays. Een object wordt weergegeven door accolades <code>{}</code> en bevat key-value pairs, waarbij de key altijd een string is en de waarde een string, getal, boolean, array, object of <code>null</code> kan zijn. Arrays worden weergegeven door vierkante haken <code>[]</code> en bevatten een geordende lijst van waarden.</p>
+</div>
+<div class="paragraph">
+<p>Hier is een voorbeeld van een JSON-object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "naam": "Timmy",
+  "leeftijd": 21,
+  "isStudent": true,
+  "vakken": ["communicatie", "programmeren"],
+  "adres": {
+    "straat": "Arbeidsstraat",
+    "nummer": 1337,
+    "stad": "Aalst"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tijdens de lessen zal JSON gebruikt worden als dataformaat in de RESTful api&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_xml"><a class="anchor" href="#_xml"></a>XML</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>XML (Extensible Markup Language) en JSON zijn beide formaten voor gegevensuitwisseling, maar XML is ouder en werd oorspronkelijk ontwikkeld in de late jaren '90.</p>
+</div>
+<div class="paragraph">
+<p>XML is ontworpen om gegevens op een gestructureerde manier te beschrijven en wordt vaak gebruikt in configuratiebestanden, documentopslag en gegevensuitwisseling tussen verschillende systemen. Het maakt gebruik van <em>tags</em> om gegevens te omsluiten, vergelijkbaar met HTML, en is zeer flexibel omdat je je eigen tags kunt definiëren.</p>
+</div>
+<div class="paragraph">
+<p>Hoewel kennis van XML nog steeds nuttig is, bijvoorbeeld in de financiële sector, heeft JSON de voorkeur gekregen in moderne computersystemen. JSON is eenvoudiger en lichter dan XML.</p>
+</div>
+<div class="paragraph">
+<p>Hier is een voorbeeld van hoe de eerder gebruikte JSON gegevens er zouden uitzien in XML.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;persoon&gt;
+  &lt;naam&gt;Timmy&lt;/naam&gt;
+  &lt;leeftijd&gt;21&lt;/leeftijd&gt;
+  &lt;isStudent&gt;true&lt;/isStudent&gt;
+  &lt;vakken&gt;
+    &lt;vak&gt;communicatie&lt;/vak&gt;
+    &lt;vak&gt;programmeren&lt;/vak&gt;
+  &lt;/vakken&gt;
+  &lt;adres&gt;
+    &lt;straat&gt;Arbeidsstraat&lt;/straat&gt;
+    &lt;nummer&gt;1337&lt;/nummer&gt;
+    &lt;stad&gt;Aalst&lt;/stad&gt;
+  &lt;/adres&gt;
+&lt;/persoon&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_net_minimal_api"><a class="anchor" href="#_net_minimal_api"></a>.Net Minimal Api</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Dit scenario speelt zich, om gefocust te blijven op de essentie, hoofdzakelijk af in de CLI. Je kan het project uiteraard ook vanuit dezelfde template aanmaken via een IDE.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Maak een nieuw C# project op basis van de <code>web</code> template.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MacBook-Pro-van-Stefan % dotnet new web -o DemoApi
+The template "ASP.NET Core Empty" was created successfully.
+
+Processing post-creation actions...
+Restoring /Users/stefancourteaux/Source/Gevorderd2/DemoApi/DemoApi.csproj:
+  Determining projects to restore...
+  Restored /Users/stefancourteaux/Source/Gevorderd2/DemoApi/DemoApi.csproj (in 26 ms).
+Restore succeeded.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inspecteer de inhoud van <em>Program.cs</em>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MacBook-Pro-van-Stefan % cat Program.cs</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Windows equivalent voor <code>cat</code> is <code>type</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; "Hello World!"); <i class="conum" data-value="1"></i><b>(1)</b>
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Er wordt een HTTP <code>GET</code> gemapped op pad <code>/</code>. Dit geeft de <em>platte tekst</em> "Hello World" terug.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Start het project.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MacBook-Pro-van-Stefan % dotnet run
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5269 <i class="conum" data-value="1"></i><b>(1)</b>
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De web api is <strong>lokaal</strong> bereikbaar op dit adres.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Navigeer in een web browser naar het relevante adres en observeer het resultaat.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/http-apis/browserGET.png" alt="browserGET">
+</div>
+</div>
+<div class="paragraph">
+<p>Stop de executie.</p>
+</div>
+<div class="paragraph">
+<p>Verander in de broncode de <code>GET</code> naar een <code>POST</code> operatie.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>nano Program.cs</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Windows equivalent voor <code>nano</code> is <code>notepad.exe</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapPost("/", () =&gt; "Hello World!");<i class="conum" data-value="1"></i><b>(1)</b>
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>MapGet</code> werd vervangen door <code>MapPost</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Start het project opnieuw</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MacBook-Pro-van-Stefan % dotnet run
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5269 <i class="conum" data-value="1"></i><b>(1)</b>
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Navigeer in een web browser naar het adres.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/http-apis/browserPOST.png" alt="browserPOST">
+</div>
+</div>
+<div class="paragraph">
+<p>Deze keer is er geen resultaat. Een web browser voert immers standaard <code>GET</code> requests uit. Web browsers zijn om die reden niet geschikt voor het testen van web api&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_postman"><a class="anchor" href="#_postman"></a>Postman</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bij het bouwen, testen en verkennen van web api&#8217;s heeft men nood aan een tool om de verschillende Requests te beheren en uit te voeren. Op moment van schrijven is <a href="https://www.postman.com">Postman</a> de meest gebruikte app.</p>
+</div>
+<div class="paragraph">
+<p>Bezoek de lokaal draaiende web api opnieuw, maar nu vanuit Postman. Observeer de duidelijke presentatie van Request, Response en de foutmelding.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/http-apis/postmanGET.png" alt="postmanGET">
+</div>
+</div>
+<div class="paragraph">
+<p>Selecteer <code>POST</code> als methode en probeer opnieuw. Nu slaagt de operatie.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/http-apis/postmanPOST.png" alt="postmanPOST">
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

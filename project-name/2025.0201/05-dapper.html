@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dapper Micro ORM :: Programmeren Gevorderd 2</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Programmeren Gevorderd 2</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+
+        <a class="navbar-item">Beta</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="project-name" data-version="2025.0201">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version">2025.0201</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">2025.0201</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="05-dapper.html">Dapper Micro ORM</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Dapper Micro ORM</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Dit Dapper voorbeeld staat los van de StoreFront app.</strong></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Verschil tussen Dapper en EF Core benoemen.</p>
+</li>
+<li>
+<p>Dapper leren kennen.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CRUD</p>
+</li>
+<li>
+<p>1 to Many</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inleiding"><a class="anchor" href="#_inleiding"></a>Inleiding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In de vorige lessen hebben we geleerd hoe je via Entity Framework Core met databanken werkt. De SQL First en Code First aanpak kent verschillen, maar wat ze gemeenschappelijk hebben is dat je zelf <strong>geen</strong> SQL <strong>DML</strong> statements schrijft.</p>
+</div>
+<div class="paragraph">
+<p>Dapper is een minimalistische ORM tool waar je zelf alle DDL én DML schrijft. Dapper biedt niet veel meer dan mapping van SQL result sets naar C# objecten. Bijgevolg is Dapper populair bij teams die graag zelf alle SQL onder controle hebben.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concreet_voorbeeld"><a class="anchor" href="#_concreet_voorbeeld"></a>Concreet Voorbeeld</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We bouwen (een deeltje van!) een informatiebeheersysteem voor dierenartsen.</p>
+</div>
+<div class="paragraph">
+<p>Beschouw onderstaand klassendiagram.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Een Eigenaar (<code>Owner</code>)  kan een aantal huisdieren (<code>Pets</code>) hebben.</p>
+</li>
+<li>
+<p>Een Huisdier (<code>Pet</code>)  heeft één eigenaar (<code>Owner</code>).</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dapper/DCD.png" alt="DCD">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Scope</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Database aanmaken</p>
+</li>
+<li>
+<p><code>Owner</code> Repository</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Create</p>
+</li>
+<li>
+<p>GetAll - zonder pets</p>
+</li>
+<li>
+<p>GetSingle - zonder pets</p>
+</li>
+<li>
+<p>GetSingle - met pets</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>Pet</code> CRUD Repository</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Create</p>
+</li>
+<li>
+<p>Get - zonder owner</p>
+</li>
+<li>
+<p>Get - met owner</p>
+</li>
+<li>
+<p>Update</p>
+</li>
+<li>
+<p>Delete</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_databank"><a class="anchor" href="#_databank"></a>Databank</h3>
+<div class="paragraph">
+<p>Gezien deze les niet rechtstreeks verbonden is aan de StoreFront app, is het een goed idee deze scheiding ook op databaseniveau te maken.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Maak een nieuw schema <code>gevorderd2dapperdemo</code> in de bestaande databank.</p>
+</li>
+<li>
+<p>Voeg een gebruiker <code>dapperuser</code> toe.</p>
+</li>
+<li>
+<p>Geef de nieuwe gebruiker rechten op het nieuwe schema.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+De les "Werken Met MySQL" legt uit hoe deze dingen te doen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Elke table heeft unieke PK-kolomnaam. Dapper heeft dat nodig.</p>
+</div>
+<div class="listingblock">
+<div class="title">DDL Script</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">DROP TABLE IF EXISTS Pets;
+DROP TABLE IF EXISTS Owners;
+
+
+CREATE TABLE Owners (
+    OwnerId  int not null auto_increment primary key,
+    FirstName varchar(30) not null,
+    LastName varchar(30) not null,
+    Email varchar(60) not null
+);
+
+CREATE TABLE Pets (
+    PetId  int not null auto_increment primary key,
+    OwnerId int not null,
+    Name varchar(30) not null,
+    DateOfBirth timestamp not null,
+    DateOfDeath timestamp null
+);
+
+ALTER TABLE Pets ADD CONSTRAINT FK_Pet_Owner FOREIGN KEY (OwnerId) REFERENCES Owners(OwnerId);
+
+
+insert into Owners (FirstName, LastName, Email)
+values ("Test", "TestLast", "tist@test.com");
+insert into Owners (FirstName, LastName, Email)
+values ("Test2", "TestLast2", "tist2@test.com");
+
+insert into Pets (Name, DateOfBirth, OwnerId)
+values ("Felix", "2010-09-13", 1);
+insert into Pets (Name, DateOfBirth, OwnerId)
+values ("Fifi", "2011-09-13", 2);
+insert into Pets (Name, DateOfBirth, OwnerId)
+values ("Coco", "1990-09-13", 1);
+
+select * from Owners;
+select * from Pets;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_net_project"><a class="anchor" href="#_net_project"></a>.Net Project</h3>
+<div class="paragraph">
+<p>Maak een nieuw <em>Console</em> project.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dotnet new console -o Gevorderd2Dapper</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg de MySQL en Dapper packages toe.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">dotnet add package MySqlConnector
+dotnet add package Dapper</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_c_model"><a class="anchor" href="#_c_model"></a>C# Model</h4>
+<div class="paragraph">
+<p>We maken een klasse voor elke tabel.</p>
+</div>
+<div class="listingblock">
+<div class="title">Model</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Owner
+{
+    public int OwnerId { get; set; }
+
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+
+    public List&lt;Pet&gt; Pets { get; set; } = new List&lt;Pet&gt;();
+}
+
+public class Pet
+{
+    public int PetId { get; set; }
+
+    public string Name { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public DateTime? DateOfDeath { get; set; }
+
+    public Owner Owner { get; set; }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_owner_repo"><a class="anchor" href="#_owner_repo"></a>Owner Repo</h4>
+<div class="listingblock">
+<div class="title">IOwnerRepository</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IOwnerRepository
+{
+    void Create(Owner owner);
+    Owner GetById(int id);
+    Owner GetByIdIncludePets(int id);
+    List&lt;Owner&gt; GetAll();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We implementeren eerst de globale <code>GetAll()</code> methode.</p>
+</div>
+<div class="listingblock">
+<div class="title">OwnerRepository.GetAll()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OwnerRepository : IOwnerRepository
+{
+    //...
+
+    public List&lt;Owner&gt; GetAll()
+    {
+        const string query = "SELECT * FROM Owners";
+        using var connection = new MySqlConnection(ConnectionString);
+        var result = connection.Query&lt;Owner&gt;(query);
+        return result.ToList();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Meer code hoeven we niet te schrijven om het systeem werkend te krijgen. Deze absolute eenvoud is de grote sterkte van Dapper.</p>
+</div>
+<div class="paragraph">
+<p>Nu implementeren we <code>GetById</code>(int id). Hier gaan we een <em>bind variable</em> nodig hebben.</p>
+</div>
+<div class="listingblock">
+<div class="title">OwnerRepository.GetById(int id)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OwnerRepostory : IOwnerRepository
+{
+    //...
+    public Owner? GetOwnerById(int id)
+    {
+        var sql = "SELECT * FROM Owners WHERE OwnerId = @Id"; <i class="conum" data-value="1"></i><b>(1)</b>
+
+        using var connection = new MySqlConnection(_connectionString);
+        var owner = connection.QuerySingle&lt;Owner&gt;(sql, new { Id = id });
+
+        return owner;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><em>Bind variable</em>, herkenbaar aan de <code>@</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De Query methode heeft een object nodig met de nodige property (of properties) om te <em>binden</em> op de SQL variabelen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Om een Owner te inserten, zullen we meerdere waarden moeten binden.</p>
+</div>
+<div class="listingblock">
+<div class="title">OwnerRepository.Create(Owner owner)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public void Create(Owner owner)
+{
+    const string query = "INSERT INTO Owners (FirstName, LastName, Email) VALUES (@FirstName, @LastName, @Email)";
+    using var connection = new MySqlConnection(ConnectionString);
+    connection.Execute(query, owner);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pet_repo"><a class="anchor" href="#_pet_repo"></a>Pet Repo</h4>
+<div class="listingblock">
+<div class="title">IPetRepository</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPetRepository
+{
+    void Create(Pet pet);
+    Pet GetById(int id);
+    Pet GetByIdIncludeOwner(int id);
+    List&lt;Pet&gt; GetAll();
+    void Update(Pet pet);
+    void Delete(Pet pet);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De <code>Get</code> en <code>GetAll</code> methodes zijn analoog aan die voor Owners.</p>
+</div>
+<div class="paragraph">
+<p>Bij de <code>Create(Pet pet)</code> botsen we wel tegen een probleem. Een Pet record heeft een OwnerId nodig, maar de <code>Pet</code> klasse heeft geen <code>OwnerId</code>, enkel een Owner object. Dapper gaat dit niet vanzelf kunnen mappen.</p>
+</div>
+<div class="paragraph">
+<p>We kunnen dit oplossen door een <code>OwnerId</code> te voorzien.</p>
+</div>
+<div class="listingblock">
+<div class="title">Pet</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Pet
+{
+    //...
+    public Owner Owner { get; set; }
+    public int? OwnerId =&gt; Owner?.OwnerId; <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dit wordt steeds uit het <code>Owner</code> object gelezen zodat we geen logica moeten schrijven om de waardes in sync te houden.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">PetRepository.Create()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">    public void Create(Pet pet)
+    {
+        const string query = "INSERT INTO Pets (Name, DateOfBirth, DateOfDeath, OwnerId) VALUES (@Name, @DateOfBirth, @DateOfDeath, @OwnerId)";
+        using var connection = new MySqlConnection(_connectionstring);
+        connection.Execute(sql: query, param: pet);
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Delete en Update methodes verlopen analoog aan Create. Het is een <code>Execute()</code> Dapper call, geen <code>Query()</code> call.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_includes"><a class="anchor" href="#_includes"></a>Includes</h4>
+<div class="paragraph">
+<p>We willen een <code>Pet</code> inclusief ingevuld <code>Owner</code> object bekomen uit het repository.</p>
+</div>
+<div class="paragraph">
+<p>In tegenstelling to Entity Framework, kent Dapper de structuur van onze databank niet. We moeten dus op artisanale wijze de nodige tabellen joinen en aangeven welke kolommen op welke klasse gemapt moeten worden.</p>
+</div>
+<div class="listingblock">
+<div class="title">PetRepository.GetByIdIncludeOwner(int id)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Pet GetByIdIncludeOwner(int id)
+{
+    const string query = @"SELECT  o.OwnerId, o.FirstName, o.LastName, o.Email,
+        p.PetId, p.Name, p.DateOfBirth, p.DateOfDeath
+        FROM    Pets p
+        INNER JOIN Owners o on p.OwnerId = o.OwnerId <i class="conum" data-value="1"></i><b>(1)</b>
+        WHERE   p.PetId = @PetId";
+
+    using var connection = new MySqlConnection(ConnectionString);
+    var result = connection.Query&lt;Owner, Pet, Pet&gt;(<i class="conum" data-value="2"></i><b>(2)</b>
+        sql: query,
+        map: (owner, pet) =&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+        {
+            pet.Owner = owner;
+            return pet;
+        },
+        param: new { PetId = id},
+        splitOn: "PetId"); <i class="conum" data-value="4"></i><b>(4)</b>
+
+    return result.First(); <i class="conum" data-value="5"></i><b>(5)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>JOIN</code> de <code>Owner</code> tabel.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De resultset van mijn <code>SQL</code> bevat een <code>Owner</code> en daarnaast een <code>Pet</code> en ik wil een <code>Pet</code> als return type van de query.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Gegeven het gemapte <code>Owner</code> en <code>Pet</code> object, welke logica moet uitgevoerd worden om het te mappen naar de <code>Pet</code> reponse type?</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Alle kolommen links van <code>PetId</code> behoren tot de <code>Owner</code>. Alles vanaf <code>PetId</code> behoort tot de <code>Pet</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>De resultset heeft in theorie wel meerdere rijen, maar ik weet dat een <code>Pet</code> record maar één <code>Owner</code> zal joinen, dus geef mij gewoon de eerste.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Veel artisanaler dan dit wordt het niet.</p>
+</div>
+<div class="paragraph">
+<p>Laten we de <code>Owner</code> eens uitlezen met alle <code>Pets</code> ingevuld. Daarnet had elke <code>Pet</code> maar één <code>Owner</code>. Nu ligt het lastiger: een <code>Owner</code> heeft een lijst van <code>Pets</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">SELECT  o.OwnerId, o.FirstName, o.LastName, o.Email,
+        p.PetId, p.Name, p.DateOfBirth, p.DateOfDeath
+FROM    Owners o
+            LEFT OUTER JOIN Pets p on p.OwnerId = o.OwnerId
+WHERE   o.OwnerId = @OwnerId</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dapper/resultset.png" alt="resultset">
+</div>
+</div>
+<div class="paragraph">
+<p>De SQL result set zal dus wel degelijk meerdere records kunnen teruggeven waar we effectief rekening moeten mee houden.</p>
+</div>
+<div class="listingblock">
+<div class="title">OwnerRepository.GetByIdIncludePets(int id)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Owner GetByIdIncludePets(int id)
+{
+    using var connection = new MySqlConnection(ConnectionString);
+    var result = connection.Query&lt;Owner, Pet, Owner&gt;(<i class="conum" data-value="1"></i><b>(1)</b>
+        sql: "&lt;de query van hierboven&gt;",
+        map: (owner, pet) =&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+        {
+            owner.Pets.Add(pet);
+            return owner;
+        },
+        param: new { OwnerId = id},
+        splitOn: "PetId"); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    return MapToManyPets(result); <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De resultset van mijn <code>SQL</code> bevat een <code>Owner</code> en daarnaast een <code>Pet</code> en ik wil een <code>Owner</code> als return type van de query.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Gegeven het gemapte <code>Owner</code> en <code>Pet</code> object, welke logica moet uitgevoerd worden om het te mappen naar de <code>Owner</code> reponse type?</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Alle kolommen links van <code>PetId</code> behoren tot de <code>Owner</code>. Alles vanaf <code>PetId</code> behoort tot de <code>Pet</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>De resultset bevat wel alle data, maar we gaan logica nodig hebben om dat te herstructureren naar één <code>Owner</code> met veel <code>Pets</code> ipv een lijst van <code>Owners</code> met telkens één <code>Pet</code>. Laten we dat in een aparte methode doen.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">MapToManyPets(IEnumerable&lt;Owner&gt; ownerRecords)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">private Owner MapToManyPets(IEnumerable&lt;Owner&gt; ownerRecords)
+{
+    var singleOwner = ownerRecords.First();<i class="conum" data-value="1"></i><b>(1)</b>
+
+    singleOwner.Pets = ownerRecords.Select(or =&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+    {
+        var pet = or.Pets.First();
+        pet.Owner = singleOwner; <i class="conum" data-value="3"></i><b>(3)</b>
+        return pet;
+    }).ToList();
+
+    return singleOwner; <i class="conum" data-value="4"></i><b>(4)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De eerst <code>Owner</code> in de lijst wordt dé <code>Owner</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Bouw een lijst die alle <code>Pets</code> bevat.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Laat elk van die <code>Pets</code> naar dé <code>Owner</code> verwijzen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Return dé <code>Owner</code> met alle <code>Pets</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De output van de testjes in de Program file bevestigen dat dit werkt.</p>
+</div>
+<div class="listingblock">
+<div class="title">Method call</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var ownerWithPets = ownerRepo.GetByIdIncludePets(1);
+Console.WriteLine(ownerWithPets);
+foreach (var pet in ownerWithPets.Pets)
+{
+    Console.WriteLine(pet);
+}</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Voorbeeldoutput</div>
+<div class="content">
+<pre>Owner(1) Test TestLast - tist@test.com
+Pet (1) Felix
+Pet (3) Coco</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Als je een <code>GetAllOwnersIncludePets()</code> zou willen implementeren, moet de logica nog verrijkt worden. De huidige redenering werkt enkel wanneer de resultset één owner bevat. Als deze meerder owners met elk meerdere pets bevat, moet je er op letten meerdere owners in het resultaat te hebben, elk met hun relevante pets.
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_queries_out_of_line_bewaren"><a class="anchor" href="#_queries_out_of_line_bewaren"></a>Queries Out-Of-Line Bewaren</h3>
+<div class="paragraph">
+<p>Tot op heden staan de SQL queries inline in de C# code. Dat is niet inherent verkeerd, maar het kan ook anders. We kunnen elke query in een sql file bewaren.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/dapper/outofline.png" alt="outofline">
+</div>
+</div>
+<div class="paragraph">
+<p>In de "File Properties" van het sql bestand, moet je "Copy If Newer" selecteren opdat het bestand meegenomen zou worden naar het output directory van de build operatie. Zoals altijd is er niets magisch aan het klikken in een IDE, dit schrijft gewoon een extra lijntje config in de csproj file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;None Update="Repositories\Queries\SQL\GetOwnerByIdIncludePetsQuery.sql"&gt;
+    &lt;CopyToOutputDirectory&gt;PreserveNewest&lt;/CopyToOutputDirectory&gt;
+&lt;/None&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We maken een repository via dewelke de queries toegankelijk gemaakt worden.</p>
+</div>
+<div class="paragraph">
+<p>We zorgen ervoor dat een file maar één keer gelezen wordt zolang het repository leeft. Doe je dat niet, dan zal het systeem elke keer je een query wil uitvoeren eerst een file moeten lezen. Dat zou waanzinnig inefficient zijn.</p>
+</div>
+<div class="listingblock">
+<div class="title">QueryRepository</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class QueryRepository
+{
+    private string? _getOwnerByIdIncludePetsQuery;
+    private string? _getOwnerById;
+
+    private const string QueryRoot = "Repositories/Queries/SQL/";
+
+    public string GetOwnerByIdIncludePetsQuery =&gt;
+        _getOwnerByIdIncludePetsQuery ??= GetQuery(nameof(GetOwnerByIdIncludePetsQuery));
+    public string GetOwnerById =&gt;
+        _getOwnerById ??= GetQuery(nameof(GetOwnerById));
+
+    private static string GetQuery(string queryName) =&gt;
+        File.ReadAllText(QueryRoot + queryName + ".sql");
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze implementatie bevat twee queries als voorbeeld. In een echt project ga je natuurlijk alle queries wél of niet op deze manier verwerken. Je wil geen situatie waar sommige queries inline staan en andere out-of-line, dat is verwarrend.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In de andere repositories moeten we dan de juiste query selecteren.</p>
+</div>
+<div class="listingblock">
+<div class="title">OwnerRepository</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Owner GetByIdIncludePets(int id)
+{
+    using var connection = new MySqlConnection(_connectionstring);
+    var query = _queryRepository.GetOwnerByIdIncludePetsQuery();
+    //...
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://www.learndapper.com">Learn Dapper</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT</p>
+</footer>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
