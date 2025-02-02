@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cloud Connected :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="01-cloud-connected.html">Cloud Connected</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Cloud Connected</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Introductie tot het vak.</p>
+</li>
+<li>
+<p>Communiceren van evaluatiemethode.</p>
+</li>
+<li>
+<p>Overlopen van de ontwikkelomgeving.</p>
+</li>
+<li>
+<p>Een eerste api maken en deployen.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samenvatting_van_deze_les"><a class="anchor" href="#_samenvatting_van_deze_les"></a>Samenvatting van deze les</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_de_wereld_is_cloud_connected"><a class="anchor" href="#_de_wereld_is_cloud_connected"></a>De wereld is cloud connected</h3>
+<div class="paragraph">
+<p>Nagenoeg alle moderne <strong>software</strong> is <strong>verbonden</strong> met, of specifiek ontworpen voor, <strong>internet</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Het merendeel van de moderne <strong>bedrijfsprocessen</strong> en <strong>klanten</strong> zijn <strong>permanent online</strong>. Klanten <strong>verwachten</strong> dat een <strong>systeem</strong> nagenoeg <strong>altijd beschikbaar</strong> is.</p>
+</div>
+<div class="paragraph">
+<p>Het opzetten en <strong>onderhouden</strong> van <strong>infrastructuur</strong>, zoals servers en netwerkprovisie, om software op te installeren en te voldoen aan deze <strong>hoge eisen</strong> is een <strong>lastige opdracht</strong>, zeker wanneer er nood is aan <a href="https://en.wikipedia.org/wiki/Geo-replication">geo-replicatie</a> of er strenge <a href="https://en.wikipedia.org/wiki/Service-level_agreement">SLA&#8217;s</a> zijn.</p>
+</div>
+<div class="paragraph">
+<p><strong>Kapitaalkrachtige multinationals zoals Microsoft</strong> en Amazon hebben hier slim op ingespeeld. Zij hebben gigantische <strong>serverparken gebouwd</strong> waarop <strong>iedereen software</strong> kan <strong>installeren</strong> en configureren <strong>via</strong> indrukwekkende <strong>self-service web portalen</strong>. Deze omgeving maakt in grote mate <strong>abstractie van infrastructuur</strong>, zij doen het nodige om jouw software in de lucht te houden. Dit is de <strong>"Cloud"</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_over_het_vak"><a class="anchor" href="#_over_het_vak"></a>Over het vak</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Via Azure DevOps flow iteratief bouwen van een data-driven async .Net webapi systeem én dit deployen naar de Microsoft Azure Cloud.</strong></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Wanneer je de inhoud van dit vak echt beheerst, ben je klaar om te starten als .Net webapi developer.</p>
+</div>
+<div class="sect3">
+<h4 id="_aanpak"><a class="anchor" href="#_aanpak"></a>Aanpak</h4>
+<div class="paragraph">
+<p>De <strong>rode draad</strong> doorheen de lessen, te beginnen met les twee, is de <strong>ontwikkeling</strong> van een <strong>systeem</strong> voor een <strong>fictief bedrijf</strong> dat <strong>pakjes levert</strong>, zoals PostNL of UPS.</p>
+</div>
+<div class="paragraph">
+<p><strong>Elke les</strong> zullen er nieuwe business <strong>requirements</strong> aangebracht worden. De <strong>implementatie</strong> zal besproken en <strong>getoond</strong> worden tijdens de les.</p>
+</div>
+<div class="paragraph">
+<p>Het is steeds aangewezen, maar niet verplicht, tegen volgende les zelf de aanpassingen te maken op de code van vorige les.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_studiemateriaal"><a class="anchor" href="#_studiemateriaal"></a>Studiemateriaal</h4>
+<div class="paragraph">
+<p><strong>Na afloop</strong> van elke <strong>les</strong>, zal de <strong>integrale code</strong> en een <strong>samenvatting</strong> van de theorie <strong>beschikbaar</strong> gemaakt worden.</p>
+</div>
+<div class="paragraph">
+<p>Het wordt sterk aangemoedigd de <a href="https://dotnet.microsoft.com/en-us/">online documentatie</a> van <strong>Microsoft</strong> te raadplegen.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_evaluatie"><a class="anchor" href="#_evaluatie"></a>Evaluatie</h4>
+<div class="paragraph">
+<p>Student kiest een onderwerp waarrond deze individueel een cloud project zal bouwen. Geen pakjesbedrijf, maar iets grofweg equivalent qua complexiteit.</p>
+</div>
+<div class="paragraph">
+<p>Het doel is werk op te leveren dat goed genoeg is om in een bedrijf gebruikt te worden.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_timing"><a class="anchor" href="#_timing"></a>Timing</h5>
+<div class="paragraph">
+<p>Rond <strong>les 4 onderwerp</strong> vastleggen.</p>
+</div>
+<div class="paragraph">
+<p>Ronde <strong>einde lessenreeks afgewerkt</strong> product tonen.
+Student krijgt feedback en eventueel bijkomende requirements richting <strong>herkansing</strong>.</p>
+</div>
+<div class="paragraph">
+<p>De exacte data worden tijdig gecommuniceerd.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tooling"><a class="anchor" href="#_tooling"></a>Tooling</h4>
+<div class="paragraph">
+<p>We gaan onderstaande cloud tooling gebruiken.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://dev.azure.com">Azure DevOps</a></p>
+</li>
+<li>
+<p><a href="https://portal.azure.com">Azure Portal</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Microsoft investeerde de afgelopen jaren enorm veel geld in platformonafhankelijke ontwikkelsoftware die werkt op Windows, macOS en Linux. Deze tools verschijnen steeds vaker in het werkveld. Steeds meer developers ontwikkelen voor de Microsoft omgeving gebruik makende van macOS of Linux.</p>
+</div>
+<div class="paragraph">
+<p>Onderstaande desktop tools worden gebruikt tijdens de lessen. Je bent vrij om alternatieven te verkennen en te gebruiken.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a></p>
+</li>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio">Azure Data Studio</a></p>
+</li>
+<li>
+<p><a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/">Azure Storage Explorer</a></p>
+</li>
+<li>
+<p><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">.Net 8 LTS SDK</a></p>
+</li>
+<li>
+<p><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/downloads">Git</a></p>
+</li>
+<li>
+<p><a href="https://www.postman.com/downloads/">Postman</a></p>
+</li>
+<li>
+<p>IDE</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com">Visual Studio Code</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Best met C# Dev Kit extension</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://visualstudio.microsoft.com/vs/">Visual Studio 2022</a> (Alleen voor Windows)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Community Edition is prima, Enterprise licentie tevens beschikbaar via Academic Software.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/rider/download/">Jetbrains Rider</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Belangrijkste concurrent van Visual Studio sinds .NET core, gebruikt veel RAM.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_http"><a class="anchor" href="#_http"></a>HTTP</h3>
+<div class="paragraph">
+<p>Het <strong>Hypertext Transfer Protocol</strong> (HTTP) is een verzameling van <strong>afspraken</strong> die bepalen hoe <strong>applicaties via internet</strong> met elkaar kunnen <strong>communiceren</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Correct geconfigureerde moderne computersystemen gebruiken HTTPS (Hypertext Transfer Protocol <strong>Secure</strong>). <strong>HTTPS</strong> past <strong>encryptie</strong> toe waardoor de <strong>communicatie veilig</strong> verloopt.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Request: Het <strong>vraag</strong> gedeelte van een informatieuitwisseling.</p>
+</li>
+<li>
+<p>Response: Het <strong>antwoord</strong> gedeelte van een informatieuitwisseling.</p>
+</li>
+<li>
+<p>Method: De <strong>intentie</strong> van een Request</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>GET</code> Geef mij datgene waar ik naar vraag.</p>
+</li>
+<li>
+<p><code>POST</code>: Verwerk wat ik je stuur.</p>
+</li>
+<li>
+<p><code>PUT</code>: Bewaar of overschrijf wat ik je stuur.</p>
+</li>
+<li>
+<p><code>DELETE</code>: Verwijder datgene waar ik naar verwijs.</p>
+</li>
+<li>
+<p><code>PATCH</code>: Overschrijf een stukje van datgene waar ik naar verwijs</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>URL: uniform resource locator, een <strong>web adres</strong>.</p>
+</li>
+<li>
+<p>Header: <strong>Randinformatie</strong> omtrent Request/Response.</p>
+</li>
+<li>
+<p>Content: De <strong>inhoud</strong> van een Request/Response.</p>
+</li>
+<li>
+<p>Status: <strong>Categorie</strong> van de Response.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>100-199 "Information"</p>
+</li>
+<li>
+<p>200-299 "Success"</p>
+</li>
+<li>
+<p>300-399 "Redirect" (doorverwijzing naar andere url)</p>
+</li>
+<li>
+<p>400-499 "Client Error" (probleem met Request)</p>
+</li>
+<li>
+<p>500-599 "Server Error" (probleem tijdens verwerking Request)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Doorheen de lessen zullen we zien wanneer welke Methods, Status, Headers etc best gebruikt worden in welke scenario&#8217;s.</p>
+</div>
+<div class="sect3">
+<h4 id="_een_eerste_http_api_in_net"><a class="anchor" href="#_een_eerste_http_api_in_net"></a>Een eerste HTTP api in .Net</h4>
+<div class="paragraph">
+<p>Maak een nieuw project in Visual Studio Code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/create.png" alt="create">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies de template "ASP.NET Core Empty" .</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/template.png" alt="template">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies de map waar je solutions of projecten bewaart.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/folder.png" alt="folder">
+</div>
+</div>
+<div class="paragraph">
+<p>Geef je project een naam.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/naam.png" alt="naam">
+</div>
+</div>
+<div class="paragraph">
+<p>Geef de C# Dev Kit plugin een moment om de projectstructuur te ontdekken, en open dan de Solution Explorer. Er werd een piepkleine api aangemaakt. Deze maakt een web api aan en reageert op de HTTP <code>GET</code> operatie op de <strong>root url</strong> (<code>/</code>) met de platte tekst <code>"Hello World!"</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/solution.png" alt="solution">
+</div>
+</div>
+<div class="paragraph">
+<p>Navigeer naar de Run &amp; Debug sectie. Klik op Run and Debug.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/runanddebug.png" alt="runanddebug">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies voor C#.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/csharp.png" alt="csharp">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies voor https.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/https.png" alt="https">
+</div>
+</div>
+<div class="paragraph">
+<p>De app start en communiceert op welke url deze bereikbaar is. In mijn geval is dat <a href="https://localhost:7239" class="bare">https://localhost:7239</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/running.png" alt="running">
+</div>
+</div>
+<div class="paragraph">
+<p>Visual Studio Code opent de standaard web browser van jouw systeem op deze url. De browser geeft het antwoord van de api weer als platte tekst.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/browser.png" alt="browser">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deployen_naar_azure"><a class="anchor" href="#_deployen_naar_azure"></a>Deployen naar Azure</h4>
+<div class="paragraph">
+<p>Het installeren van eigen gebouwde software naar een server die de app zal uitvoeren, heet <strong>deployen</strong>. Wij gaan nu een kort-door-de-bocht deployment doen naar Azure. We gaan dus deployen naar "De Cloud".</p>
+</div>
+<div class="paragraph">
+<p>Open een terminal venster en log in op Azure met je Hogent account.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">az login</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De login operatie zal de standaard web browser van jouw systeem openen op de Microsoft login pagina. Gebruik je Hogent account om in te loggen. Je krijgt een bevestiging.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/login.png" alt="login">
+</div>
+</div>
+<div class="paragraph">
+<p>Navigeer in de terminal naar de root folder van het demo project dat je gemaakt hebt. Dit is de folder waar de <code>.sln</code> file staat. Navigeer nu nog 1 niveau dieper tot in de folder waar de <code>.csproj</code> file zicht bevindt.</p>
+</div>
+<div class="paragraph">
+<p>Gebruik onderstaande commando om de app te deployen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">az webapp up --sku F1 --name hogent-demoapi-&lt;voornaam&gt;&lt;naam&gt; --os-type linux</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De api staat nu in de cloud en is beschikbaar op de url aangegeven in de terminal output. Het kan enkele minuten duren vooraleer deze bereikbaar is. Bovenop de url krijg je nog andere informatie over de deploy.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "URL": "http://hogent-demoapi-stefancourteaux.azurewebsites.net",
+  "appserviceplan": "stefan.courteaux_asp_5379",
+  "location": "eastus",
+  "name": "hogent-demoapi-stefancourteaux",
+  "os": "Linux",
+  "resourcegroup": "stefan.courteaux_rg_9747",
+  "runtime_version": "dotnetcore|8.0",
+  "runtime_version_detected": "8.0",
+  "sku": "FREE",
+  "src_path": "//Users//stefancourteaux//SourceLocal//MyFirstApi//MyFirstApi"
+}</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/deployed.png" alt="deployed">
+</div>
+</div>
+<div class="paragraph">
+<p>Navigeer naar de <a href="https://portal.azure.com">Azure Portal</a> en klik op de App Services sectie.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/portal.png" alt="portal">
+</div>
+</div>
+<div class="paragraph">
+<p>Hier gaan we de app terugvinden.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/appservice.png" alt="appservice">
+</div>
+</div>
+<div class="paragraph">
+<p>Klik op de app om details te zien. Hier kan je de app na afloop stoppen zodat deze zeker geen onnodige resources (en dus budget) gebruikt en niet langer aangeroepen kan worden.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cloud-connected/details.png" alt="details">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Installeer tegen volgende les alle vermelde tools en begrijp hoogover waarvoor ze dienen.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer een api te publiceren naar je eigen Azure subscription en experimenteer met de C# code.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net70&amp;pivots=development-environment-cli">Deploy an ASP.NET web app</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/HTTP">HTTP WikiPedia</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
