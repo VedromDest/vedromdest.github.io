@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Totaalplaatje Met Web App :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="10-totaalplaatje.html">Totaalplaatje</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Totaalplaatje Met Web App</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Front-end is <strong>geen</strong> onderdeel van dit vak. De ShipIt WebUI wordt voorzien om het groter geheel, inclusief Identity Server <em>redirects</em>, beter te illustreren. Neem <strong>geen</strong> voorbeeld aan deze frontend code.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Totaalplaatje cloud hosted web app begrijpen.</p>
+</li>
+<li>
+<p>Weten wat Razor Pages zijn.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rudimentaire_shipit_web_app"><a class="anchor" href="#_rudimentaire_shipit_web_app"></a>Rudimentaire ShipIt Web App</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De UI van Identity Server is bedoeld om de login flow van een user te faciliteren. Het is <strong>niet</strong> de bedoeling in de IS web app je business logica en  web pagina&#8217;s toe te voegen.</p>
+</div>
+<div class="paragraph">
+<p>We maken een nieuwe web app voor de business flows.
+Deze web app zal met Identity Server spreken en dmv redirect de user naar de login pagina brengen.
+Na succesvolle login zal deze terug naar de business app geleid zal worden.</p>
+</div>
+<div class="paragraph">
+<p>De business app zal in de achtergrond tegen de applicatie-api&#8217;s spreken.</p>
+</div>
+<div class="sect2">
+<h3 id="_net_project"><a class="anchor" href="#_net_project"></a>.Net Project</h3>
+<div class="paragraph">
+<p>Voeg een Web App met Razor Pages toe aan de Solution.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/web-create.png" alt="web create">
+</div>
+</div>
+<div class="paragraph">
+<p>Start de nieuwe web app eens op om te valideren dat alles correct aangemaakt werd.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/web-start.png" alt="web start">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_app_client"><a class="anchor" href="#_app_client"></a>App Client</h3>
+<div class="paragraph">
+<p>De nieuwe web app heeft zelf een client nodig om met IdentityServer te spreken. Voeg in IdentityServer een client toe voor deze web app. Let er op dat je het juiste poortnummer gebruikt van jouw web app. Dit kan verschillen van het voorbeeld en moet verschillen van de poort waarop IS zelf draait.</p>
+</div>
+<div class="listingblock">
+<div class="title">Config.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">new Client {
+    ClientId = "webapp-client",
+    ClientSecrets = {new Secret("eenNogGroterGeheim".Sha256())},
+    AllowedGrantTypes = GrantTypes.Code,
+    AllowedScopes = {
+        IdentityServerConstants.StandardScopes.OpenId,
+        IdentityServerConstants.StandardScopes.Profile,
+        "shipit.pricequotes.api.read" <i class="conum" data-value="1"></i><b>(1)</b>
+    },
+    RedirectUris = { "https://localhost:7164/signin-oidc" },
+    PostLogoutRedirectUris = { "https://localhost:7164/signout-callback-oidc" },
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Want we gaan straks een demo pagina maken die een quote uitleest.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Deze Client krijgt toestemming om user profile claims op te vragen. We gaan de passende scope moeten activeren.</p>
+</div>
+<div class="listingblock">
+<div class="title">Config.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public static IEnumerable&lt;IdentityResource&gt; IdentityResources =&gt;
+    new IdentityResource[]
+    {
+        new IdentityResources.OpenId(),
+        new IdentityResources.Profile()
+    };</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Gezien Identity Server de Clients uit een database leest, en niet uit de in-memory config, zouden we de configuratie in de databank moeten toevoegen. Indien dit frequent nodig is in een bedrijf, zal men een UI voorzien.</p>
+</div>
+<div class="paragraph">
+<p>Hier kiezen we ervoor de databaseinitialisatielogica voor Clients een beetje bij te sturen. Wanneer Clients enkel bestaan in <code>Config</code>, voegen we ze toe aan de database.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">private static void InitializeDatabase(IApplicationBuilder app)
+{
+    //...
+    foreach (var client in Config.Clients)
+    {
+        if(!context.Clients.Any(c =&gt;  c.ClientId == client.ClientId))
+            context.Clients.Add(client.ToEntity());
+    }
+    context.SaveChanges();
+    //...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_verbinden_met_identity_server"><a class="anchor" href="#_verbinden_met_identity_server"></a>Verbinden Met Identity Server</h3>
+<div class="paragraph">
+<p>Voeg nuget package <code>Microsoft.AspNetCore.Authentication.OpenIdConnect</code> <code>8.0.11</code> toe aan de ShipIt WebApp. Deze package, in combinatie met de nodige configuratie en net aangemakte Client, zal de web app laten inhaken op Identity Server.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+builder.Services.AddAuthentication(options =&gt;
+{
+	options.DefaultScheme = "Cookies";
+	options.DefaultChallengeScheme = "oidc"; <i class="conum" data-value="1"></i><b>(1)</b>
+})
+.AddCookie("Cookies")
+.AddOpenIdConnect("oidc", options =&gt;
+{
+	options.Authority = "https://localhost:5001";
+
+	options.ClientId = "webapp-client";
+	options.ClientSecret = "eenNogGroterGeheim";
+	options.ResponseType = "code";
+
+	options.Scope.Clear();
+	options.Scope.Add("openid");
+	options.Scope.Add("profile");
+
+	options.GetClaimsFromUserInfoEndpoint = true;
+	options.MapInboundClaims = false;
+
+    // access_token en id_token bijhouden
+	options.SaveTokens = true;
+});
+//...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Controleer of de web app ingesteld is om auth af te dwingen.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapRazorPages().RequireAuthorization();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start nu IdentityServer én de WebApp.</p>
+</div>
+<div class="paragraph">
+<p>IdentityServer zal opstarten zoals voorheen en een overzicht tonen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/is-start.png" alt="is start">
+</div>
+</div>
+<div class="paragraph">
+<p>De WebApp zal de homepage <strong>niet</strong> tonen. Deze zal redirecten naar de login page van IS!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/app-redirect.png" alt="app redirect">
+</div>
+</div>
+<div class="paragraph">
+<p>Eenmaal ingelogd, zal IS je terugbrengen naar de web app.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/app-home.png" alt="app home">
+</div>
+</div>
+<div class="paragraph">
+<p>Merk op dat je niet opnieuw moet inloggen tussen restarts van de services. De login informatie blijft behouden in de browser.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_duidelijker_communiceren"><a class="anchor" href="#_duidelijker_communiceren"></a>Duidelijker Communiceren</h3>
+<div class="paragraph">
+<p>Op dit moment weet de web app dat we ingelogd zijn, maar ze geeft geen feedback. We hebben ook de mogelijk niet om vanuit de webapp uit te loggen - we moeten zelf expliciet naar Identity Server navigeren om dit doen.</p>
+</div>
+<div class="paragraph">
+<p>We kunnen de relevante cookie uitlezen en de inhoud in de WebApp visualiseren.</p>
+</div>
+<div class="listingblock">
+<div class="title">src/WebClient/Pages/Index.cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;!-- --&gt;
+&lt;div class="text-center"&gt;
+    &lt;!-- --&gt;
+    &lt;p&gt;Jouw naam is @(User.Claims.First(_ =&gt; _.Type == "name").Value)&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/wa-loggedin.png" alt="wa loggedin">
+</div>
+</div>
+<div class="paragraph">
+<p>We voorzien een Logout flow in de ShipIt Web App.</p>
+</div>
+<div class="paragraph">
+<p>Voeg een <code>Logout.cshtml</code> pagina toe.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp/Pages/Logout.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class LogoutModel : PageModel
+{
+    public IActionResult OnGet()
+    {
+        return SignOut("Cookies", "oidc");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg een link naar de pagina toe in de navigatiebalk.</p>
+</div>
+<div class="listingblock">
+<div class="title">Shared\_Layout.cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+    &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link text-dark" asp-area="" asp-page="/Logout"&gt;Logout&lt;/a&gt;
+    &lt;/li&gt;
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start de WebApp en IS. Log in op de WebApp als je nog niet ingelogd bent. Er is een Logout knop aanwezig.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/wa-logout.png" alt="wa logout">
+</div>
+</div>
+<div class="paragraph">
+<p>Klik op Logout. De WebApp redirect naar IS en deze bevestigt de logout.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/wa-loggedout.png" alt="wa loggedout">
+</div>
+</div>
+<div class="paragraph">
+<p>Merk op dat de IS logged out pagina de mogelijkheid geeft door te klikken naar de WebApp.
+Deze url werd ingesteld in de Client. Als je er op klikt, ga je naar de WebApp.</p>
+</div>
+<div class="paragraph">
+<p>Deze ziet dat je niet ingelogd bent en brengt je terug naar IS, maar deze keer naar het login scherm.
+Dit is het gewenste gedrag, zo is de authenticatie flow volledig gesloten.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_integratie_backend_apis"><a class="anchor" href="#_integratie_backend_apis"></a>Integratie Backend Api&#8217;s</h3>
+<div class="paragraph">
+<p>De business app zal uiteraard calls naar onze api moeten maken. Bij wijze van demonstratie gaan we de GET Quote api aanroepen voor een bestaand id.</p>
+</div>
+<div class="paragraph">
+<p>Vraag de relevante scope aan in web app.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp\Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+options.Scope.Add("shipit.pricequotes.api.read");
+//...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg een nieuwe pagina GetQuote toe.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp\Pages\GetQuote.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class GetQuoteModel : PageModel
+{
+    private readonly IConfiguration _configuration;
+    public string Json { get; set; } = string.Empty;
+    public QuoteResponseDTO QuoteResponse { get; set; } = new QuoteResponseDTO();
+
+    [BindProperty]
+    public string QuoteId { get; set; }
+
+    public GetQuoteModel(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
+    public async Task OnPost()
+    {
+        var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+        var client = new HttpClient();
+        client.SetBearerToken(accessToken);
+
+        var response = await client
+            .GetAsync($"{_configuration["QuoteApiBaseUrl"]}{QuoteId}");
+
+        var stringContent = await response.Content.ReadAsStringAsync();
+        Json = stringContent;
+
+        var options = new JsonSerializerOptions();
+        options.PropertyNameCaseInsensitive = true;
+        options.Converters.Add(new JsonStringEnumConverter());
+        QuoteResponse = await response.Content
+            .ReadFromJsonAsync&lt;PriceQuoteResponseContract&gt;(options);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We gebruiken een <code>PriceQuoteResponseContract</code> dus we maken een <em>Reference</em> naar het <em>Contracts</em> project.</p>
+</div>
+<div class="paragraph">
+<p>Ook de <code>IdentityModel</code> nuget package wordt gebruikt.</p>
+</div>
+<div class="paragraph">
+<p>We voegen de base url van de Quote Api toe in de <code>appsettings.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Het access_token bevat de credentials om een backend api te roepen. Dit token bevat <strong>geen</strong> gedetailleerde info over de user. Je kan wel het id van de user vinden in de sub claim.</p>
+</div>
+<div class="paragraph">
+<p>Ditzelfde token bevat ook de nodige rechten om bij het userprofile endpoint (<code><a href="https://{host}:{port}/connect/userinfo" class="bare">https://{host}:{port}/connect/userinfo</a></code>) van Identity Server meer details over de user op te vragen. Indien nodig kan de backend api daar gebruik van maken.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.WebApp\Pages\GetQuote.cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">@page
+@model ShipIt.WebApp.Pages.GetQuoteModel
+@{
+}
+&lt;form method="POST"&gt;
+    &lt;legend&gt;GET Quote&lt;/legend&gt;
+    &lt;p&gt;
+        &lt;label for="txtQuoteId" class="form-label"&gt;Quote Id :&lt;/label&gt;
+        &lt;input asp-for="QuoteId" type="text" class="form-control" id="txtQuoteId" /&gt;
+    &lt;/p&gt;
+    &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;h3&gt;Parsed Quote&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;Id: @Model.QuoteResponse.Id&lt;/li&gt;
+    &lt;li&gt;Price: @Model.QuoteResponse.PriceEuro&lt;/li&gt;
+    &lt;li&gt;ValidUntil: @Model.QuoteResponse.ValidUntil&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg een link naar de pagina toe in de navigatiebalk.</p>
+</div>
+<div class="listingblock">
+<div class="title">Shared\_Layout.cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">...
+    &lt;li class="nav-item"&gt;
+        &lt;a class="nav-link text-dark" asp-area="" asp-page="/GetQuote"&gt;GetQuote&lt;/a&gt;
+    &lt;/li&gt;
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start Identity Server, WebApp én Quote Api op.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Op dit punt hebben we een volledige samenwerking tussen front end, back end, identity server(OAuth/OpenId) en cloud services!
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/totaal/web-get-quote.png" alt="web get quote">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_gebruiken_in_backend"><a class="anchor" href="#_user_gebruiken_in_backend"></a>User Gebruiken In Backend</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Laat ons de user uitlezen in de Quote api en Bob (id 2) rejecten.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; GetQuoteAsync([FromRoute]string quoteId)
+{
+    if(await GetUserIdIfAnyAsync() == "2")
+        return Forbid();
+    var quote = await _priceQuoteService.GetQuoteAsync(quoteId);
+    return Ok(quote);
+}
+
+private async Task&lt;string?&gt; GetUserIdIfAnyAsync()
+{
+    var accessToken = await HttpContext.GetTokenAsync("access_token");
+    var parsedToken = new JwtSecurityTokenHandler().ReadJwtToken(accessToken);
+
+    var userId = parsedToken
+        .Claims.FirstOrDefault(_ =&gt; _.Type == "sub")?.Value;
+
+    if (string.IsNullOrWhiteSpace(userId))
+        return null;
+
+    return userId;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Je kan de userId opslaan bij data in het systeem en vergelijken bij het uitlezen om een mate van security te implementeren.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We moeten nu in de front-end ook een Forbid resultaat afhandelen.</p>
+</div>
+<div class="listingblock">
+<div class="title">GetQuote.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class GetQuoteModel : PageModel
+{
+    //...
+    public bool IsForbidden { get; set; } = false;
+    //...
+    public async Task OnPost()
+    {
+        //...
+        var response = //...
+
+        if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+        {
+            IsForbidden = true;
+            return;
+        }
+
+        var stringContent = await response.Content.ReadAsStringAsync();
+        Json = stringContent;
+        //...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">GetQuote.cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">@page
+@model ShipIt.WebApp.Pages.GetQuoteModel
+@{
+}
+
+//...
+
+@if (Model.IsForbidden)
+{
+    &lt;p style="border: 1px dotted red"&gt;
+        &lt;span &gt;Jij mag dit niet zien &lt;/span&gt;
+    &lt;/p&gt;
+}
+else
+{
+    &lt;h3&gt;Parsed Quote&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Id: @Model.QuoteResponse.Id&lt;/li&gt;
+        &lt;li&gt;Price: @Model.QuoteResponse.PriceEuro&lt;/li&gt;
+        &lt;li&gt;ValidUntil: @Model.QuoteResponse.ValidUntil&lt;/li&gt;
+    &lt;/ul&gt;
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment_eindresultaat"><a class="anchor" href="#_deployment_eindresultaat"></a>Deployment Eindresultaat</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deploy alle services naar Azure. Zorg ervoor dat de <code>appsettings.json</code> naar de juiste service urls op Azure verwijzen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het voorbeeld uit de les is <a href="https://hogent-gevorderd3-dag-stefancourteaux-shipit-webapp.azurewebsites.net/">beschikbaar op Azure</a>. Het kan even duren om de site te laden wanneer deze al een tijdje niet bezocht werd omwille van resource optimalisatie in Azure.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/PG3Totaal.drawio.png" alt="PG3Totaal.drawio"></span></p>
+</div>
+<div class="literalblock">
+<div class="title">ShipItRepo\src\ShipIt\ShipIt.Identity.Api\</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-identity `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">ShipItRepo\src\ShipIt\ShipIt.PriceQuotes.Api\</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">ShipItRepo\src\ShipIt\ShipIt.Labels.Presentation.Api\</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-label `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">ShipItRepo\src\ShipIt\ShipIt.WebApp\</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-webapp `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alle App Services zijn nu zichtbaar in de Azure Portal.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/app-services.png" alt="app services"></span></p>
+</div>
+<div class="paragraph">
+<p>We moeten ook de app client redirects naar Azure doen verwijzen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">update pg3is.ClientRedirectUris
+set RedirectUri = 'https://blabla-webapp.azurewebsites.net/signin-oidc'
+where RedirectUri = 'https://localhost:7164/signin-oidc'
+GO
+
+update pg3is.ClientPostLogoutRedirectUris
+set PostLogoutRedirectUri = 'https://blabla-webapp.azurewebsites.net/signout-callback-oidc'
+where PostLogoutRedirectUri = 'https://localhost:7164/signout-callback-oidc'
+GO</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De webapp is nu operationeel in Azure.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/az-webapp-login.png" alt="az webapp login"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/az-webapp-loggedin.png" alt="az webapp loggedin"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/az-webapp-quote.png" alt="az webapp quote"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/totaal/az-webapp-loggedout.png" alt="az webapp loggedout"></span></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

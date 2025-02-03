@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cosmos Database :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="05-cosmos.html">Cosmos Database</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Cosmos Database</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Azure Cosmos DB leren kennen.</p>
+</li>
+<li>
+<p>Options Pattern gebruiken.</p>
+</li>
+<li>
+<p>Niet schrikken van verticaal Async implementatie.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_story_quotes_opslaan"><a class="anchor" href="#_story_quotes_opslaan"></a>Story - Quotes Opslaan</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>AS A</strong> ShipIt Customer <strong>I WANT</strong> to obtain a reference to my quote <strong>SO THAT</strong> I can consult it later on.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functionele_input"><a class="anchor" href="#_functionele_input"></a>Functionele Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Quotes moeten opgeslagen worden. We willen deze informatie later in de customer journey gebruiken.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technische_input"><a class="anchor" href="#_technische_input"></a>Technische Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Voeg een storage layer toe aan de solution.</p>
+</li>
+<li>
+<p>Dit is geen relationele data, gebruik Cosmos NoSQL Document DB</p>
+</li>
+<li>
+<p>Voorzie een Created response op de POST.</p>
+</li>
+<li>
+<p>Voorzie een GET endpoint.</p>
+</li>
+<li>
+<p>Een aparte domeinlaag is niet nodig, er is weinig logica, gebruik wel aparte modellen.</p>
+</li>
+<li>
+<p>Let er op geen connectionstrings te committen!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cosmos_database_aanmaken"><a class="anchor" href="#_cosmos_database_aanmaken"></a>Cosmos Database Aanmaken</h3>
+<div class="paragraph">
+<p>Maak een nieuwe Cosmos DB for NoSQL aan via de Azure Portal.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/cosmos-kiezen.png" alt="cosmos kiezen">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies Cosmos DB for NoSQL.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/cosmos-type-kiezen.png" alt="cosmos type kiezen">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies een logische naam en maak je resource in Europa. De andere settings staan normaal vanzelf goed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/cosmos-confirmation.png" alt="cosmos confirmation">
+</div>
+</div>
+<div class="paragraph">
+<p>We kunnen vanuit ons project met de database verbinden via een <em>CosmosClient</em>, beschikbaar gesteld door de nuget package <code>Microsoft.Azure.Cosmos</code>. De connectionstring kunnen we vinden onder de <em>Keys</em> sectie van de resource in Azure.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/cosmosconn.png" alt="cosmosconn">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
+<div class="sect3">
+<h4 id="_storage_layer"><a class="anchor" href="#_storage_layer"></a>Storage Layer</h4>
+<div class="paragraph">
+<p>Voeg een project <code>ShipIt.PriceQuotes.Storage</code> toe aan de Solution.</p>
+</div>
+<div class="paragraph">
+<p>Voeg nuget package <code>Microsoft.Azure.Cosmos</code> toe aan het nieuwe project.</p>
+</div>
+<div class="paragraph">
+<p>Definieer een <em>Repository</em> interface en een <em>Model</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteModel.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteModel
+{
+    public string id { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
+    public int LengthCm { get; set; }
+    public int WidthCm { get; set; }
+    public int HeightCm { get; set; }
+    public int WeightKg { get; set; }
+    public CountryEnum OriginCountry { get; set; }
+    public CountryEnum DestinationCountry { get; set; }
+    public double PriceEuro { get; set; }
+    public DateTime ValidUntil { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Gebruik een lowercase id om automatisch te mappen op de key in Cosmos.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De <em>CosmosClient</em> gebruikt <em>Async</em> operaties. Dit wil zeggen dat we het async-await-task paradigma in onze code moeten verwerken.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Storage/IPriceQuoteRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPriceQuoteRepository
+{
+    Task&lt;PriceQuoteModel?&gt; GetAsync(string id);
+    Task CreateAsync(PriceQuoteModel model);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De implementatie van het <em>Repository</em> steunt volledig op de <em>CosmosClient</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">using Microsoft.Azure.Cosmos;
+
+public class PriceQuoteRepository : IPriceQuoteRepository
+{
+    //...
+    public async Task CreateAsync(PriceQuoteModel model)
+    {
+        await GetCosmosContainer().CreateItemAsync(
+            item: model,
+            partitionKey: new PartitionKey(model.id)
+        );
+    }
+
+    public async Task&lt;PriceQuoteModel?&gt; GetAsync(string id)
+    {
+        var itemResponse = await GetCosmosContainer().ReadItemAsync&lt;PriceQuoteModel&gt;(
+            id: id,
+            partitionKey: new PartitionKey(id)
+        );
+
+        var dbQuote = itemResponse.Resource;
+        return dbQuote;
+    }
+
+    private Container? GetCosmosContainer() <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+        var client = new CosmosClient("connstring");
+        var database = client.GetDatabase("dbname");
+        var container = database.GetContainer("dbname");
+        return container;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De logica om de <em>Container</em> vast te krijgen, is dezelfde voor <em>Read</em> en <em>Write</em> operaties, dus we encapsuleren dit in een methode.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Er valt meer te vertellen over <em>PartitionKeys</em>. Dat leer je wel op het werk in de mate van het nodige. We beperken ons hier tot een implementatie die gewoon werkt, zonder stil te staan bij de exacte details en implicaties van de partition key keuze.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h4>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Services/IPriceQuoteService.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPriceQuoteService
+{
+    Task&lt;PriceQuoteResponseContract&gt; CreateQuoteAsync(PriceQuoteRequestContract priceQuoteRequest);<i class="conum" data-value="1"></i><b>(1)</b>
+    Task&lt;PriceQuoteFullResponseContract&gt; GetQuoteAsync(string id); <i class="conum" data-value="2"></i><b>(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De bestaande create methode wordt <em>async</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Er wordt een read methode voorzien.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De concrete implementatie van de interface zal de mapping tussen data model en api contract verzorgen.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api_layer"><a class="anchor" href="#_api_layer"></a>Api Layer</h4>
+<div class="paragraph">
+<p>Om te kunnen voldoen aan de <em>CreatedAt</em> requirement, breiden we het <code>PriceQuoteResponseContract</code> uit met <em>Quote</em> Id.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api.Contracts/PriceQuoteResponseContract.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteResponseContract
+{
+    public string Id { get; set; }
+    public double PriceEuro { get; set; }
+    public DateTime ValidUntil { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Om te nieuwe Get operatie te ondersteunen, voegen we een nieuw contract toe. Dit is rijker: het bevat de originele vraag en het resultaat van de berekening.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api.Contracts/PriceQuoteFullResponseContract.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteFullResponseContract
+{
+    public string Id { get; set; }
+    public int LengthCm { get; set; }
+    public int WidthCm { get; set; }
+    public int HeightCm { get; set; }
+    public int WeightKg { get; set; }
+    public CountryEnum OriginCountry { get; set; }
+    public CountryEnum DestinationCountry { get; set; }
+    public double PriceEuro { get; set; }
+    public DateTime ValidUntil { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De <em>Controller</em> heeft een nieuwe methode nodig om de Get operatie te ondersteunen.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Controllers/PriceQuotesController.cs/GetQuoteAsync()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpGet]
+[Route("{quoteId}")]
+public async Task&lt;ActionResult&lt;PriceQuoteFullResponseContract&gt;&gt; GetQuoteAsync([FromRoute]string quoteId)
+{
+    var quote = await _priceQuoteService.GetQuoteAsync(quoteId);
+    return Ok(quote);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De bestaande <em>POST</em> operatie wordt aangepast om een <em>CreatedAtAction</em> result te gebruiken.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Controllers/PriceQuotesController.cs/CreateQuoteAsync()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpPost]
+public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreateQuoteAsync(
+    [FromBody] PriceQuoteRequestContract priceQuoteRequest)
+{
+    if (priceQuoteRequest.OriginCountry == CountryEnum.NL &amp;&amp; priceQuoteRequest.WeightKg &gt; 10)
+        return BadRequest();
+
+    var quoteResponse = await _priceQuoteService.CreateQuoteAsync(priceQuoteRequest);
+    return CreatedAtAction(nameof(GetQuoteAsync), new {quoteId = quoteResponse.Id}, quoteResponse); <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dit zal de <em>Location Header</em> correct invullen op de <em>Response</em>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Om de <code>nameof(GetQuoteAsync)</code> te kunnen resolven in de context van een <em>CreatedAtAction</em>, moeten we .Net vertellen de Async suffix van methode namen wel in rekening te brengen.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+    builder.Services.AddControllers().AddJsonOptions(opt =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
+         opt.JsonSerializerOptions.Converters.Add(
+        new JsonStringEnumConverter());
+    }).AddMvcOptions(options =&gt;
+    {
+        options.SuppressAsyncSuffixInActionNames = false; <i class="conum" data-value="2"></i><b>(2)</b>
+    });
+//...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Reeds aanwezige configuratie om <em>Enums</em> als string te serializen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Nieuwe setting om Async suffix van methode namen in rekening te brengen.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we de naam van de methode veranderen bij refactoring.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_options_pattern"><a class="anchor" href="#_options_pattern"></a>Options Pattern</h4>
+<div class="paragraph">
+<p>Een handige manier om settings niet te hardcoden is een strongly typed configuratie (klasse) te definieren en data uit <code>appsettings.(Development).json</code> daar op te mappen. Zoals altijd kan je dit zelf implementeren, maar is het verstandiger een gepaste Nuget van Microsoft te gebruiken.</p>
+</div>
+<div class="sect4">
+<h5 id="_definitie"><a class="anchor" href="#_definitie"></a>Definitie</h5>
+<div class="paragraph">
+<p>Voeg toe aan <em>Persistence</em> en <em>Api</em> projecten: <code>Microsoft.Extensions.Options</code></p>
+</div>
+<div class="paragraph">
+<p>Definieer de settings.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/appsettings.json</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  ...
+  "AllowedHosts": "*",
+  "PriceQuoteRepositoryOptions": {
+    "Connectionstring" : "",
+    "DatabaseName" : "pricequotes",
+    "ContainerName" : "pricequotes"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>appsettings.json</code> hoort thuis in git. De file mag <strong>geen</strong> gevoelige settings bevatten.</p>
+</div>
+<div class="paragraph">
+<p>Gevoelige settings bewaar je in <code>appsettings.Development.json</code>. Deze file hoort <strong>niet</strong> thuis in Git. De waarden in <code>appsettings.Development.json</code> override <code>appsettings.json</code> bij lokaal uitvoeren van de code.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/appsettings.Development.json</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  ...
+  "AllowedHosts": "*",
+  "PriceQuoteRepositoryOptions": {
+    "Connectionstring" : "het grote geheim",
+    "DatabaseName" : "pricequotes",
+    "ContainerName" : "pricequotes"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Definieer een klasse voor de <em>Repository</em> settings.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepositoryOptions.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteRepositoryOptions
+{
+    public string Connectionstring { get; set; }
+    public string DatabaseName { get; set; }
+    public string ContainerName { get; set; }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gebruik"><a class="anchor" href="#_gebruik"></a>Gebruik</h5>
+<div class="paragraph">
+<p>Voeg deze toe aan de constructor van het repo en spreek het object aan in de code.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteRepository : IPriceQuoteRepository
+{
+    private readonly PriceQuoteRepositoryOptions _options;
+
+    public PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; options)
+    {
+        _options = options.Value;
+    }
+
+    public async Task CreateAsync(PriceQuoteModel model)
+    {
+        //...
+    }
+
+    public async Task&lt;PriceQuoteModel?&gt; GetAsync(string id)
+    {
+        //...
+    }
+
+    private Container? GetCosmosContainer()
+    {
+        var client = new CosmosClient(_options.Connectionstring); <i class="conum" data-value="1"></i><b>(1)</b>
+        var database = client.GetDatabase(_options.DatabaseName); <i class="conum" data-value="1"></i><b>(1)</b>
+        var container = database.GetContainer(_options.ContainerName); <i class="conum" data-value="1"></i><b>(1)</b>
+        return container;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hier worden de options gebruikt.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dependency_injection"><a class="anchor" href="#_dependency_injection"></a>Dependency Injection</h4>
+<div class="paragraph">
+<p>Nu moeten we enkel nog het systeem vertellen de juiste sectie te mappen en klaar te houden voor injectie.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+    builder.Services.Configure&lt;PriceQuoteRepositoryOptions&gt;(
+        builder.Configuration.GetSection(nameof(PriceQuoteRepositoryOptions)) <i class="conum" data-value="1"></i><b>(1)</b>
+    );
+
+    builder.Services.AddScoped&lt;IPriceQuoteRepository, PriceQuoteRepository&gt;(); <i class="conum" data-value="2"></i><b>(2)</b>
+//...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Aanduiden welke sectie uit settings file te mappen op welke klasse. Het gebruik van nameof in deze context is <em>La Beauté du geste</em> - je kan natuurlijk eender welke key mappen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Vergeet de <em>IPriceQuoteRepository</em> niet te vermelden zodat deze in de <em>PriceQuoteService</em> geresolved kan worden.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h4>
+<div class="listingblock">
+<div class="title">Alles ineens</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_huidige_deployment"><a class="anchor" href="#_huidige_deployment"></a>Huidige Deployment</h3>
+<div class="paragraph">
+<p>De service is beschikbaar op Azure.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Documentatie als HTML page.</p>
+</li>
+<li>
+<p>Api bereikbaar via Postman etc.</p>
+</li>
+<li>
+<p>Systeem bewaart informatie in Azure Cosmos DB.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_swagger_ui"><a class="anchor" href="#_swagger_ui"></a>Swagger UI</h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/swagger.png" alt="swagger">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api"><a class="anchor" href="#_api"></a>Api</h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/postman.png" alt="postman">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cosmos"><a class="anchor" href="#_cosmos"></a>Cosmos</h4>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cosmos/data.png" alt="data">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-dotnet?pivots=devcontainer-codespace">Cosmos NoSQL QuickStart</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

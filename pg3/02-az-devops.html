@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ontwikkelen Met Azure DevOps :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Ontwikkelen Met Azure DevOps</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Wat is iteratief ontwikkelen?</p>
+</li>
+<li>
+<p>Azure DevOps leren kennen.</p>
+</li>
+<li>
+<p>Git flows.</p>
+</li>
+<li>
+<p>Een eerste Story uitwerken.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_iteratief_ontwikkelen"><a class="anchor" href="#_iteratief_ontwikkelen"></a>Iteratief Ontwikkelen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bij traditionele softwareontwikkeling schrijven analisten een enkel groot specificatiedocument. Dit wordt overhandigd aan het ontwikkelteam en x maand later wordt de software opgeleverd. Dit kan goed werken onder bepaalde omstandigheden, maar veelal moet men bij oplevering toch concluderen dat een en ander over het hoofd gezien werd tijdens de analyse. Deze manier van werken wordt het <a href="https://en.wikipedia.org/wiki/Waterfall_model">waterfall model</a> genoemd.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer iedereen akkoord is dat er een mate van onzekerheid bestaat rond de specificaties, werkt het beter om in <a href="https://en.wikipedia.org/wiki/Iterative_and_incremental_development">kleine stapjes te ontwikkelen</a> en veel feedbackmomenten met de klant te organiseren. Wanneer je bijvoorbeeld elke 2 weken een nieuwe versie oplevert en de resultaten bespreekt met de klant, is de kans groot dat je project na 6 maand dichter aanleunt bij de werkelijke wensen en noden, dan wanneer je 6 maand niet gesproken hebt met elkaar. Dit wil niet automatisch zeggen dat het sneller klaar zal zijn of goedkoper zal zijn.</p>
+</div>
+<div class="paragraph">
+<p>Er zijn vele manieren om softwareontwikkeling op flexibele, iteratieve manier te organiseren. Er werden al vele boeken over geschreven en een niet te onderschatten aantal mensen en bedrijven slaan geld uit het prediken en coachen van een bepaalde aanpak. Ook hier geldt dat het bedrijf waar je terechtkomt zal bepalen hoe er gewerkt wordt.</p>
+</div>
+<div class="paragraph">
+<p>Een populaire iteratieve aanpak is <a href="https://en.wikipedia.org/wiki/Scrum_(software_development)">SCRUM</a>.</p>
+</div>
+<div class="paragraph">
+<p>Het is niet haalbaar om tijdens deze lessen dieper in te gaan op deze technieken. We houden wel rekening met de meest cruciale concepten. We proberen functionele requirements uit te werken op basis van een <strong>story</strong>. We houden rekening met <strong>Definition Of Ready</strong> for development (DOR), <strong>Definition Of Done</strong> (DOD), en <strong>Tech Debt</strong>.</p>
+</div>
+<div class="sect2">
+<h3 id="_definition_of_ready_dor"><a class="anchor" href="#_definition_of_ready_dor"></a>Definition Of Ready (DOR)</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>User Story in correct formaat (AS A &#8230;&#8203; I WANT &#8230;&#8203; SO THAT &#8230;&#8203;).</p>
+</li>
+<li>
+<p>Bijkomende business info verschaft.</p>
+</li>
+<li>
+<p>Bijkomende technische info verschaft.</p>
+</li>
+<li>
+<p>Developers begrijpen wat ze moeten doen.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_definition_of_done_dod"><a class="anchor" href="#_definition_of_done_dod"></a>Definition Of Done (DOD)</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Code is gemerged naar /main.</p>
+</li>
+<li>
+<p>Manuele testen slagen.</p>
+</li>
+<li>
+<p>Systeem geeft duidelijke foutmeldingen.</p>
+</li>
+<li>
+<p>Systeem publiek beschikbaar.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_azure_devops"><a class="anchor" href="#_azure_devops"></a>Azure DevOps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We gaan Microsoft Azure DevOps gebruiken om de ontwikkeling van software te plannen en op te volgen.
+Microsoft publiceert <a href="https://learn.microsoft.com/en-us/azure/devops/get-started/?view=azure-devops">uitgebreide documentatie</a>.</p>
+</div>
+<div class="paragraph">
+<p>De belangrijkste elementen verhouden zich als volgt:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organisations: Een bedrijf of organisatie die DevOps zal gebruiken.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project: Een applicatie.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Boards: Beheer van taken en planning.</p>
+</li>
+<li>
+<p>Code: Code repositories (Git).</p>
+</li>
+<li>
+<p>Pipelines: Uitvoeren van taken om code te builden en te deployen.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_git"><a class="anchor" href="#_git"></a>Git</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Git is een open source versiebeheersysteem. Dit systeem vormt de kern van de meeste moderne versiebheersproducten zoals GitHub, BitBucket, en Azure DevOps Code Repositories. Git is dus <strong>geen</strong> afkorting voor GitHub, wel het systeem achter verschillende vergelijkbare diensten.</p>
+</div>
+<div class="paragraph">
+<p>Een <strong>repository</strong> omvat alles wat je in het versiebeheersysteem onderbrengt.</p>
+</div>
+<div class="paragraph">
+<p>Er zal minstens 1 <strong>branch</strong> bestaan. Deze heet gewoonlijk <strong><em>main</em></strong>, <em>master</em> of <em>trunk</em>. Van die branch kan je zelf <strong>branchen</strong> (een nieuwe aftakking maken) om jouw werk in te doen.</p>
+</div>
+<div class="paragraph">
+<p>Een set van wijzigingen lokaal vastleggen doe je door te <strong>committen</strong>.
+Een commit is steeds vergezeld van een duidelijke <strong>commit message</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Jouw branch, inclusief commits, naar de repository op de server sturen heet <strong>pushen</strong>.
+Wijzigingen op een branch van de server halen, heet <strong>pullen</strong>.
+Pullen en dan pushen noemen we <strong>syncen</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer je de wijzigingen op jouw branch wil doorvoeren op een andere branch, gaan we deze <strong>mergen</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Mergen wordt gedaan aan de hand van <strong>pull requests</strong>. Deze geven 1 of meer collega&#8217;s de kans om jouw code te bekijken en hun opmerkingen te geven vooraleer de merge finaal doorgevoerd wordt.</p>
+</div>
+<div class="paragraph">
+<p>Er bestaan verschillende standaard <strong>branching strategies</strong>. Je kan er ook zelf verzinnen. Afhankelijk van het bedrijf waar je terechtkomt, zal dit anders verlopen. Enkele opties zijn</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.gitkraken.com/learn/git/git-flow">Git Flow</a></p>
+</li>
+<li>
+<p><a href="https://www.atlassian.com/continuous-delivery/continuous-integration/trunk-based-development">Trunk Based</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Voor dit vak gaan we trunk based development gebruiken op basis van een <em>main</em> branch en <em>feature</em> branches.</p>
+</div>
+<div class="paragraph">
+<p>Er bestaan verschillende tools om een git repository op je computer te beheren.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Git command line tools</p>
+</li>
+<li>
+<p>IDE&#8217;s zoals Visual Studio, Rider,&#8230;&#8203;</p>
+</li>
+<li>
+<p>Editor (plugin) zoals VS Code</p>
+</li>
+<li>
+<p>Applicaties zoals Sourcetree</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ze kennen elk hun eigen voor- en nadelen en werken over het algemeen naadloos samen, gezien ze in de achtergrond dezelfde git commando&#8217;s uitvoeren.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_story_prijs_berekenen"><a class="anchor" href="#_story_prijs_berekenen"></a>Story - Prijs Berekenen</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>AS A</strong> ShipIt customer, <strong>I WANT</strong> to calculate the price of a shipment, <strong>SO THAT</strong> I can inform my own customers.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functionele_input"><a class="anchor" href="#_functionele_input"></a>Functionele Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Basisprijs = €2,5 + volume in cm³ * €0,0001 + gewicht in kg * €1,15.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Toeslag landsgrens €3.</p>
+</li>
+<li>
+<p>Afgerond op 1 decimaal.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Een prijsberekening is 48h geldig. Dit wordt informatief meegegeven.</p>
+</li>
+<li>
+<p>Een zending uit NL mag maximaal 10kg wegen.</p>
+</li>
+<li>
+<p>We zijn actief in BE, NL, LU, FR.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technische_input"><a class="anchor" href="#_technische_input"></a>Technische Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Voorzie een Web API endpoint met JSON in- en output.</p>
+</li>
+<li>
+<p>Gebruik geen minimal api, maar wel Controllers met DTO en ModelBinding.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Definieer de api contracten in een aparte <em>class library</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Gebruik HTTP POST.</p>
+</li>
+<li>
+<p>Voorzie propere exception handling.</p>
+</li>
+<li>
+<p>Settings mogen hardcoded zijn</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_devops_workflow"><a class="anchor" href="#_devops_workflow"></a>DevOps Workflow</h3>
+<div class="paragraph">
+<p>Maak een <em>work item</em> aan in het relevante Azure DevOps project board.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/prep-create-item.png" alt="prep create item">
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg alle relevante informatie toe. Bewaar het <em>work item</em> en maak een <em>branch</em> om in te werken.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/prep-create-branch-1.png" alt="prep create branch 1">
+</div>
+</div>
+<div class="paragraph">
+<p>Maak de branch onder <code>feature/&#8230;&#8203;</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/prep-create-branch-2.png" alt="prep create branch 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Deze branch is automatisch gelinkt aan het <em>work item</em>.</p>
+</div>
+<div class="paragraph">
+<p>Navigeer naar het <em>repository</em> in DevOps en start de <em>Clone</em> operatie.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/clone-1.png" alt="clone 1">
+</div>
+</div>
+<div class="paragraph">
+<p>Kies voor VS Code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/clone-2.png" alt="clone 2">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze lessenreeks maakt gebruik van VS Code. Je kan de repository natuurlijk ook op tal van andere manieren, waaronder de klassieke Visual Studio, benaderen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Kies een gepaste locatie voor de <em>repository</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/clone-3.png" alt="clone 3">
+</div>
+</div>
+<div class="paragraph">
+<p>Werk op de <em>branch</em> die je gemaakt hebt voor deze <em>story</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/clone-4.png" alt="clone 4">
+</div>
+</div>
+<div class="paragraph">
+<p>Maak een <em>folder</em> genaamd <code>src</code> aan. Bewaar alle broncode in deze <em>folder</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
+<div class="sect3">
+<h4 id="_solution_opzetten"><a class="anchor" href="#_solution_opzetten"></a>Solution Opzetten</h4>
+<div class="paragraph">
+<p>Zet een <em>solution</em> op met een <em>web</em> project voor de api en een <em>class library</em> voor de contracten.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/sln-1.png" alt="sln 1">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Build</em> en <em>run</em> de <em>web api</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/sln-2.png" alt="sln 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Test met een <em>browser</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/sln-32.png" alt="sln 32">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aandachtspunten_code"><a class="anchor" href="#_aandachtspunten_code"></a>Aandachtspunten Code</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+De <em>story</em> werd tijdens de les stapsgewijs geïmplementeerd. Deze samenvatting beperkt zich tot de aandachtspunten van het eindresultaat.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt/ShipIt.PriceQuote.Api/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">using System.Text.Json.Serialization; <i class="conum" data-value="1"></i><b>(1)</b>
+using ShipIt.PriceQuote.Api.Services;
+
+namespace ShipIt.PriceQuote.Api
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddControllers().AddJsonOptions(opt =&gt; {
+                opt.JsonSerializerOptions.Converters.Add(
+                    new JsonStringEnumConverter()); <i class="conum" data-value="2"></i><b>(2)</b>
+            });
+            ;
+
+            builder.Services.AddScoped&lt;IPriceQuoteService, PriceQuoteService&gt;();
+
+            var app = builder.Build();
+            app.MapControllers(); <i class="conum" data-value="3"></i><b>(3)</b>
+
+            if (app.Environment.IsDevelopment()) <i class="conum" data-value="4"></i><b>(4)</b>
+                app.UseExceptionHandler("/error-development");
+            else
+                app.UseExceptionHandler("/error");
+
+            app.Run();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>System.Text.Json</code>, er is hier geen reden om het historisch populaire <code>Newtonsoft</code> te gebruiken.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><em>Enumerations</em> zullen naar buiten toe geserialiseerd worden als <code>string</code> - niet als <code>int</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Verken en map de <em>routes</em> gedefinieerd in <em>api controllers</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><em>Exceptions</em> worden afgevangen en verwerkt door <code>ErrorsController</code>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt/ShipIt.PriceQuote.Api/Controllers/PriceQuotesController.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">using Microsoft.AspNetCore.Mvc;
+using ShipIt.PriceQuote.Api.Contracts;
+
+namespace ShipIt.PriceQuote.Api.Controllers
+{
+    [Route("api/[controller]")] <i class="conum" data-value="1"></i><b>(1)</b>
+    [ApiController] <i class="conum" data-value="2"></i><b>(2)</b>
+    public class PriceQuotesController : ControllerBase
+    {
+        [HttpPost]
+        public ActionResult&lt;PriceQuoteResponseContract&gt; CreatePriceQuote(
+            PriceQuoteRequestContract priceQuoteRequest) {
+            ...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De route <code>api/pricequotes</code> wordt dynamisch bepaald op basis van de controllernaam.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>[ApiController]</code> activeert de <em>modelbinding</em> <strong>en dus validatie</strong>. Validatiefouten resulteren daardoor automatisch in <a href="https://www.rfc-editor.org/rfc/rfc7807.html">ProblemDetails</a>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt/ShipIt.PriceQuote.Api/Controllers/ErrorsController.cs (Voorbeeldimplementatie Microsoft)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class ErrorController : ControllerBase
+{
+	[Route("/error-development")]
+	public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
+	{
+		if (!hostEnvironment.IsDevelopment())
+		{
+			return NotFound(); <i class="conum" data-value="1"></i><b>(1)</b>
+		}
+
+		var exceptionHandlerFeature = HttpContext.Features.Get&lt;IExceptionHandlerFeature&gt;()!;
+
+		return Problem(
+			detail: exceptionHandlerFeature.Error.StackTrace,
+			title: exceptionHandlerFeature.Error.Message
+		); <i class="conum" data-value="2"></i><b>(2)</b>
+	}
+
+	[Route("/error")]
+	public IActionResult HandleError()
+	{
+		var exceptionHandlerFeature = HttpContext.Features.Get&lt;IExceptionHandlerFeature&gt;()!;
+		return Problem(title: exceptionHandlerFeature.Error.Message); <i class="conum" data-value="3"></i><b>(3)</b>
+	}
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De route <code>error-development</code> proberen bezoeken in een <code>release</code> <em>HostingEnvironment</em> resulteert in een <code>NotFound</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De <em>exception</em> wordt omgezet in een <em>ProblemDetails</em> <strong>met</strong> <em>StackTrace</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De <em>exception</em> wordt omgezet in een <em>ProblemDetails</em> <strong>zonder</strong> <em>StackTrace</em>.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_versiebeheer"><a class="anchor" href="#_versiebeheer"></a>Versiebeheer</h3>
+<div class="paragraph">
+<p>Weer ongewenste bestanden uit het git <em>repository</em>.</p>
+</div>
+<div class="literalblock">
+<div class="title">.gitignore</div>
+<div class="content">
+<pre>.DS_Store
+src/ShipIt.PriceQuote.Api/obj/
+src/ShipIt.PriceQuote.Api/bin/
+src/ShipIt.PriceQuote.Api.Contracts/obj/
+src/ShipIt.PriceQuote.Api.Contracts/bin/
+src/ShipIt.PriceQuote.Api/appsettings.Development.json</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Push je branch naar Azure DevOps.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/push.png" alt="push">
+</div>
+</div>
+<div class="paragraph">
+<p>Controleer deze in Azure DevOps.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/pushed.png" alt="pushed">
+</div>
+</div>
+<div class="paragraph">
+<p>Open een <em>Pull Request</em> naar <code>main</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/createpr.png" alt="createpr">
+</div>
+</div>
+<div class="paragraph">
+<p>Complete het <em>PR</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/az-devops/completepr.png" alt="completepr">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h3>
+<div class="paragraph">
+<p>Build en deploy het resulterende project naar Azure.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">az webapp up --sku F1 --name hogent-shipit-&lt;voornaam&gt;&lt;naam&gt;-quote --os-type linux</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Maak zelf een Organization <code>hg-pg3-{naam}-{voornaam}</code> en Project aan in Azure DevOps.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">Dependency Injection</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-8.0">Data Annotations</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs">Dev Certs Accepteren</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/azure/devops/get-started/?view=azure-devops">DevOps Manual</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

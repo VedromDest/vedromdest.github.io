@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Middleware :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="04-middleware.html">Middleware</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Middleware</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Middleware leren kennen.</p>
+</li>
+<li>
+<p>Beter begrip van Azure resources.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_middleware"><a class="anchor" href="#_middleware"></a>Middleware</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wij hoeven niet veel code te schrijven om een werkende web api te bouwen in .Net dankzij de uitgebreide "ingebakken" functionaliteit. Een HTTP request vloeit door verschillende stappen. Onze eigen code is slechts een van die stappen.</p>
+</div>
+<div class="paragraph">
+<p>De verschillende stappen en hun volgorde noemt men de <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0">request processing pipeline</a>. We kunnen het gedrag van de pipeline beïnvloeden wanneer we de app opbouwen in Program.cs door bestaande, of custom, middleware aan te spreken.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/middleware.png" alt="middleware">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_story_rate_limiting"><a class="anchor" href="#_story_rate_limiting"></a>Story - Rate Limiting</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>AS A</strong> api user, <strong>I WANT</strong> to receive clear feedback when the system is experiencing high load, <strong>SO THAT</strong> I can take it into account when working on our system integration.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functionele_input"><a class="anchor" href="#_functionele_input"></a>Functionele Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Onze api staat publiek op internet. Men kan dus van overal ter wereld ons systeem benaderen en requests uitvoeren. Elke request belast ons systeem. We moeten verhinderen dat het systeem overbelast geraakt. Dit kunnen we doen door het aantal requests in de gaten te houden zodat we kunnen ingrijpen wanneer het volume te hoog wordt.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technische_input"><a class="anchor" href="#_technische_input"></a>Technische Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>In de prakijk wil dit zeggen dat we bepaalde requests gaan verwerpen of pauzeren. We kunnen beroep doen op een <a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-8.0">rate limiting middleware</a> en hoeven de nodige code dus niet from scratch te schrijven.</p>
+</div>
+<div class="paragraph">
+<p>We kunnen gebruik maken van een aantal strategieën om het aantal requests te limiteren. Kort door de bocht:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed Window: Maximaal x requests in een blok van y minuten.</p>
+</li>
+<li>
+<p>Sliding Window: Maximaal x requests in de laatste y minuten.</p>
+</li>
+<li>
+<p>Token Bucket: Variant op Sliding Window met andere interne logica.</p>
+</li>
+<li>
+<p>Concurrency: Maximaal x requests tegelijk.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Een eenvoudige Fixed Window Limiter volstaat op dit moment.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+//...
+builder.Services.AddRateLimiter(_ =&gt; _
+	.AddFixedWindowLimiter(policyName: "gevorderd3fixed", options =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+	{
+		options.PermitLimit = 3; <i class="conum" data-value="2"></i><b>(2)</b>
+		options.Window = TimeSpan.FromSeconds(10); <i class="conum" data-value="3"></i><b>(3)</b>
+		options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+		options.QueueLimit = 2; <i class="conum" data-value="5"></i><b>(5)</b>
+	}));
+//...
+var app = builder.Build();
+//...
+app.UseRateLimiter(); <i class="conum" data-value="6"></i><b>(6)</b>
+//...
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We kiezen zelf de naam van de rate limiting policy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Aantal requests af te handelen per window.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Lengte van het window in seconden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Requests die we dit window niet gaan afhandelen stoppen we in een FIFO queue.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Maximaal aantal requests in de queue.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Requests die niet direct kunnen behandeld worden belanden in een queue. Requests in de queue wachten hun beurt af en zullen in een van de volgende windows afgehandeld worden. Requests die niet in de queue passen krijgen een HTTP 503 Service Unavailable response.</p>
+</div>
+<div class="paragraph">
+<p>We moeten de rate limiting policy nu nog koppelen aan de relevante endpoints. Dat kunnen we doen door een annotation toe te voegen.</p>
+</div>
+<div class="listingblock">
+<div class="title">QuotesController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpPost]
+[EnableRateLimiting("gevorderd3fixed")] <i class="conum" data-value="1"></i><b>(1)</b>
+public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
+    [FromBody] PriceQuoteRequestContract priceQuoteRequest)
+{
+    //...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De policy is nu van toepassing op dit endpoint, niet op de volledige applicatie.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_story_api_documentatie"><a class="anchor" href="#_story_api_documentatie"></a>Story - Api Documentatie</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>AS A</strong> api user, <strong>I WANT</strong> to access documentation, <strong>SO THAT</strong> I can integrate my system.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functionele_input_2"><a class="anchor" href="#_functionele_input_2"></a>Functionele Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Voorzie self service documenatie voor api gebruikers. Wij willen geen kostenoverhead om uitleg te geven over onze api&#8217;s.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technische_input_2"><a class="anchor" href="#_technische_input_2"></a>Technische Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Gebruik NSwag.AspNetCore om documentatie te genereren.</p>
+</li>
+<li>
+<p>Documenteer alle response codes.</p>
+</li>
+<li>
+<p>Verberg de /error endpoints.</p>
+</li>
+<li>
+<p>Koppel expliciet response types aan codes.</p>
+</li>
+<li>
+<p>Voeg een titel toe.</p>
+</li>
+<li>
+<p>Voeg een beschrijving toe.</p>
+</li>
+<li>
+<p>Voeg een contactpersoon toe.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie_2"><a class="anchor" href="#_implementatie_2"></a>Implementatie</h3>
+<div class="paragraph">
+<p>We voegen de nodige referenties toe.</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+//...
+builder.Services.AddOpenApiDocument(); <i class="conum" data-value="1"></i><b>(1)</b>
+//...
+var app = builder.Build();
+//...
+app.UseOpenApi(); <i class="conum" data-value="2"></i><b>(2)</b>
+app.UseSwaggerUi(); <i class="conum" data-value="3"></i><b>(3)</b>
+//...
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Voeg relevante middleware toe.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Voorzie api spec in json formaat. Beschikbaar op <code><a href="https://&lt;host&gt;:&lt;port&gt;/swagger/v1/swagger.json" class="bare">https://&lt;host&gt;:&lt;port&gt;/swagger/v1/swagger.json</a></code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Voorzie interactieve web ui op basis van json api spec. Beschikbaar op <code><a href="https://&lt;host&gt;:&lt;port&gt;/swagger" class="bare">https://&lt;host&gt;:&lt;port&gt;/swagger</a></code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De interactieve web ui is bedoeld om de api te verkennen. Het is <strong>geen</strong> volwaardige user interface. Verwar deze interactieve documentatie van de api ook niet met de api zelf.</p>
+</div>
+<div class="paragraph">
+<p>Nu de api documentatie gegenereerd wordt, zullen we de nodige aanpassingen maken om te voldoen aan de requirements van de story.</p>
+</div>
+<div class="paragraph">
+<p>De globale changes kunnen we maken op het moment dat we het OpenApiDocument toevoegen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">builder.Services.AddOpenApiDocument(options =&gt; {
+	options.PostProcess = document =&gt;
+	{
+		document.Info = new OpenApiInfo
+		{
+			Title = "ShipIt Api",
+            Description = "Public ShipIt Api for price quotes, label creation, etc...",
+			Contact = new OpenApiContact
+			{
+				Name = "Stefan Courteaux",
+				Email = "stefan.courteaux@hogent.be"
+			}
+		};
+	};
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De response codes en types kunnen we per endpoint toevoegen in de Controller. We vermelden de types expliciet wanneer ze gekend zijn.</p>
+</div>
+<div class="listingblock">
+<div class="title">QuoteController.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+[HttpPost]
+[EnableRateLimiting("gevorderd3fixed")]
+[ProducesResponseType&lt;PriceQuoteResponseContract&gt;(StatusCodes.Status200OK)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public ActionResult&lt;PriceQuoteResponseContract&gt; CreateQuote(
+    [FromBody] PriceQuoteRequestContract priceQuoteRequest)
+{
+//...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We gebruiken ook een attribuut om bepaalde endpoints niet op te nemen in de documentatie.</p>
+</div>
+<div class="listingblock">
+<div class="title">ErrorController.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+[ApiExplorerSettings(IgnoreApi = true)]
+public IActionResult HandleError()
+//...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_collection_extensions"><a class="anchor" href="#_service_collection_extensions"></a>Service Collection Extensions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De Program.cs van de Quote api is snel uitgegroeid tot een grote file. We gaan dit leesbaarder maken door de file uit te splitsen. Een veelgebruikte manier om dit te doen, is extension methods op de ServiceCollection.</p>
+</div>
+<div class="listingblock">
+<div class="title">ServiceCollectionExtensions</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddShipItRateLimiter(
+        this IServiceCollection services)
+    {
+        services.AddRateLimiter(_ =&gt; _
+            .AddFixedWindowLimiter(policyName: "gevorderd3fixed", options =&gt; {
+                options.PermitLimit = 3;
+                options.Window = TimeSpan.FromSeconds(10);
+                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                options.QueueLimit = 0;
+            }));
+        return services;
+    }
+    // etc...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We maken zoveel extensions als logisch voelt in de context. Op dit moment brengt ons dat bijvoorbeeld tot onderstaande</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddControllers().AddJsonOptions(opt =&gt; {
+         opt.JsonSerializerOptions.Converters.Add(
+        new JsonStringEnumConverter());
+    });;
+
+    builder.Services.AddScoped&lt;IPriceQuoteService, PriceQuoteService&gt;();
+
+    builder.Services.AddShipItRateLimiter(); <i class="conum" data-value="1"></i><b>(1)</b>
+    builder.Services.AddShipItOpenApi(); <i class="conum" data-value="2"></i><b>(2)</b>
+
+    var app = builder.Build();
+//...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deze extension method encapsuleert ShipIt rate limiting settings.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deze extension method encapsuleert de ShipIt openapi (doc) settings.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Iemand die de Program.cs leest, ziet in een oogopslag dat deze functionaliteiten gebruikt worden, maar wordt niet overspoeld met details. Wie nood heeft aan details te zien of aan te passen, kan naar de implementatie navigeren.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_azure_deployment_resources"><a class="anchor" href="#_azure_deployment_resources"></a>Azure Deployment &amp; Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tot op heden hebben we zeer kort door de bocht gedeployed naar Azure. Deze manier van deployen is handig, maar doet veel impliciet werk dat na herhaalde deployments ongewenste resources acherlaat in Azure. We kunnen dit beter doen door expliciet te zijn en resources te hergebruiken.</p>
+</div>
+<div class="paragraph">
+<p>Indien er nog resources bestaan, wissen we deze eerst via de Azure Portal. De handigste manier is vetrekken vanuit Resource Groups.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/rgroups.png" alt="rgroups">
+</div>
+</div>
+<div class="paragraph">
+<p>Dan kunnen we een Resource Group en de inhoud ineens wissen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/rgdelete.png" alt="rgdelete">
+</div>
+</div>
+<div class="paragraph">
+<p>Nu kunnen we stap voor stap de nodige resources aanmaken en expliciet benoemen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Resource Group</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az group create ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --location westeurope <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Je kan PowerShell commands splitsen over meerdere lijnen door een backtick <strong>`</strong> te gebruiken.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We deployen naar Azure in Europa.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">App Service Plan</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az appservice plan create `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --is-linux `
+  --sku F1</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De naam die je gekozen hebt in de eerste stap.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">App Service</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="3"></i><b>(3)</b>
+  --os-type linux</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De naam die je gekozen hebt in de eerste stap.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De naam die je gekozen hebt in de vorige stap.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We kunnen een nieuwe versie van de app deployen door bovenstaand commando opnieuw uit te voeren. Op deze manier worden er niet elke keer bijkomende resources aangemaakt.</p>
+</div>
+<div class="paragraph">
+<p>Nu we de hiërarchie begrijpen, is het interessant om weten dat we dit allemaal in een enkel statement kunnen inrichten. We moeten er gewoon op letten telkens exact hetzelfde statement uit te voeren om een bepaalde service te deployen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Alles ineens</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_huidige_deployment"><a class="anchor" href="#_huidige_deployment"></a>Huidige Deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De service is beschikbaar <strong>op Azure</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Documentatie als HTML page.</p>
+</li>
+<li>
+<p>Api bereikbaar via Postman etc.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_swagger_ui"><a class="anchor" href="#_swagger_ui"></a>Swagger UI</h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/deploy-s.png" alt="deploy s">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/deploy-p.png" alt="deploy p">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0">Middleware</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-8.0&amp;tabs=visual-studio">Swagger</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

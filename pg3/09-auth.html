@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Authenticatie &amp; Autorisatie :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="09-auth.html">Authenticatie en Autorisatie</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Authenticatie &amp; Autorisatie</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Verschil tussen Authenticatie en Authorisatie</p>
+</li>
+<li>
+<p>Verschil tussen User en Client</p>
+</li>
+<li>
+<p>Identity Providers</p>
+</li>
+<li>
+<p>OAuth (met Identity Server)</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authenticatie_en_authorisatie"><a class="anchor" href="#_authenticatie_en_authorisatie"></a>Authenticatie en Authorisatie</h2>
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Authenticatie behandelt het onderwerp. <strong>Wie?</strong> Authorisatie behandelt het werkwoord. <strong>Wat?</strong> De intersectie van Authenticatie en Authorisatie bepaalt wie wat mag doen in het systeem.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>De web api&#8217;s die we gebouwd hebben, staan publiek op Azure. Eender wie ter wereld kan api calls maken. Het is logisch dat een <strong>web</strong> api een bepaalde graad van bereikbaarheid heeft via internet, maar de huidige situatie is niet wenselijk. We moeten beveiliging introduceren.</p>
+</div>
+<div class="paragraph">
+<p>Op dit moment weten we niet wie de calls naar onze api&#8217;s maakt. De ene keer is het een oproep vanuit Postman tijdens de les, de andere keer is het een Noord-Koreaanse hacker. We willen de controle nemen over <strong>wie</strong> calls kan doen naar ons systeem. Om dit te doen, gaan we afdwingen dat het callende systeem of gebruiker zich identificeert, zich <strong>authenticeert</strong>.</p>
+</div>
+<div class="paragraph">
+<p>De meeste applicaties hebben naast authenticatie ook nood aan verschillende <em>(gebruikers)rollen</em>. Denk bijvoorbeeld aan een HR-systeem. Jij hebt een account (authenticatie) en kan daarmee je verlof plannen en je eigen loonfiches bekijken. Je kan de loonfiches van je collega&#8217;s niet bekijken. Je hebt het recht, "de autoriteit", niet. De payroll officer van het HR departement moet dit wil kunnen doen om de job correct uit te voeren. Deze zal wel het recht, de <strong>autorisatie</strong>, krijgen.</p>
+</div>
+<div class="paragraph">
+<p>Een web systeem dat weigert een call uit te voeren omdat de authorisatie en/of authenticatie niet goed zit, zal typisch onderstaande response codes gebruiken.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+401 Unauthorized
+</td>
+<td class="hdlist2">
+<p>The request has not been completed because it lacks valid authentication credentials for the requested resource.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+403 Forbidden
+</td>
+<td class="hdlist2">
+<p>The server understands the request but refuses to authorize it.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Achteraf gezien zouden 401 "Unauthenticated" en, in mindere mate, 403 "Unauthorized" betere namen voor de status codes zijn, maar ze zijn al in gebruik sinds 1996. We moeten dus een beetje van goeie wil zijn en gewoon accepteren dat het zo in elkaar zit.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_users_en_clients"><a class="anchor" href="#_users_en_clients"></a>Users en Clients</h2>
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Een <strong>user(account)</strong> behandelt de authenticatie van een <strong>mens</strong> die een systeem benadert. Een <strong>(applicatie)client</strong> behandelt de authenticatie van een <strong>systeem</strong> die een ander systeem benadert.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_users"><a class="anchor" href="#_users"></a>Users</h3>
+<div class="paragraph">
+<p>Wanneer een systeem door <strong>mensen</strong> gebruikt wordt, gaan we deze gebruikers <strong>user</strong>(accounts) toekennen. Een user zal typisch kenmerken dragen die deze identificeren in de alledaagse realiteit: naam, email, adres, telefoonnummer etc. In het systeem zal deze veelal uniek identificeerbaar zijn op basis van <em>username</em>. Vaak wordt het email adres gebruikt als <em>username</em>, maar dat hoeft niet. Er is ook een <em>password</em> om de account te beveiligen, en steeds vaker <a href="https://support.microsoft.com/en-us/topic/what-is-multifactor-authentication-e5e39437-121c-be60-d123-eda06bddf661">multifactor authenticatie</a>.</p>
+</div>
+<div class="paragraph">
+<p>Vele moderne web toepassingen voorzien de nodige functionaliteit opdat een gebruiker zichzelf kan registeren. Eventueel worden er bijkomende rechten manueel toegekend door een helpdesk.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_app_clients"><a class="anchor" href="#_app_clients"></a>(App) Clients</h3>
+<div class="paragraph">
+<p>Niet enkel mensen gebruiken systemen. Ook systemen gebruiken andere systemen. De systemen die informatie uitwisselen, hebben een Client-Server relatie. Het client-systeem moet zich authenticeren bij het serversysteem om een call te kunnen maken. Hoewel technisch mogelijk, is het <strong>bad practice</strong> om users te voorzien voor systemen. Systemen hebben geen menselijke eigenschappen en integreren via api&#8217;s waar mensen (web) applicaties gebruiken.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer een systeem wil verbinden met ons <strong>systeem</strong>, voorzien we een <strong><em>Client</em></strong> voor dit client-systeem. Een client is bedoeld om één enkel systeem te authenticeren. Wanneer je samenwerkt met een bedrijf en er verschillende systemen geïntegreerd worden, voorzie je altijd een aparte client voor elk systeem. Zo blijft authenticatie en autorisatie van de verschillende systemen gescheiden.</p>
+</div>
+<div class="paragraph">
+<p>Door aparte clients toe te kennen, verhinder je dat systemen per ongeluk verkeerde operaties in verkeerde systemen uitvoeren. Wanneer de <em>credentials</em> van een client zouden uitlekken, geven deze slechts toegang tot de rechten van het gerelateerde systeem, ipv de som van alle systemen.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Het OAuth 2.0 Protocol wordt gebruikt om systemen toegang te geven tot resources - Autorisatie. Het OIDC Protocol wordt gebruikt om personen te identificeren - Authenticatie. Deze twee zijn nauw gerelateerd, maar verantwoordelijk voor andere aspecten van het geheel.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_identity_providers"><a class="anchor" href="#_identity_providers"></a>Identity Providers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nu concepten zoals Authenticatie, Autorisatie, Users, Clients etc gekend zijn, kunnen we deze functionaliteiten toevoegen aan ons systeem. Gaan we al de relevante logica, api&#8217;s validaties en dergelijke zelf programmeren? Alle scenario&#8217;s uitdenken? Allerhande afspraken betreffende systeemontwerp met klanten en front-end developers uitwerken? Nee.</p>
+</div>
+<div class="paragraph">
+<p>Er bestaan meerdere <em>Identity Providers</em> die we kunnen integreren in onze .Net applicatie. Deze implementeren verschillende internationaal gebruikte standaarden rond Authenticatie en Autorisatie. Al naargelang de professionele context waarin gewerkt wordt, zal er een keuze gemaakt worden.</p>
+</div>
+<div class="paragraph">
+<p>Microsoft biedt een optie onder de vorm van <a href="https://learn.microsoft.com/en-us/entra/identity-platform/">Identity Platform</a>. Dit is een geldige keuze, maar kan niet vlot gebruikt worden met Azure for Students. Tevens willen we vanuit de opleiding het beeld niet scheppen dat alles uit de Microsoft-winkel moet komen.</p>
+</div>
+<div class="paragraph">
+<p>Een andere zeer populaire Identity Provider is <a href="https://duendesoftware.com/products/identityserver">Identity Server</a>. Deze implementeert de <em>OpenID Connect</em> en <em>OAuth 2.0</em> protocols. Identity Server is open-source, geschreven in .Net, en gratis voor onderwijs. Een goeie keuze voor ons project!</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

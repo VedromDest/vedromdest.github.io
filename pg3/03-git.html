@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Git Problemen Oplossen :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="03-git.html">Git Problemen Oplossen</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Git Problemen Oplossen</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Veel voorkomende Git problemen leren oplossen.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stoppen_met_file_te_tracken"><a class="anchor" href="#_stoppen_met_file_te_tracken"></a>Stoppen met file te tracken.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Het <em>.gitignore</em> bestand bevat een lijst van (file)paden, al dan niet met wildcards, die niet getracked zullen worden door git. Wanneer git reeds een file trackt die je liever niet wil tracken, kan je deze <strong>niet</strong> untracken door hem alsnog toe te voegen aan de _.gitignore file.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Bestanden zoals build output en lokale settings horen niet thuis in git. Het is best practice deze zo snel mogelijk aan <em>.gitignore</em> toe te voegen en ze nooit te committen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Stel dat de <em>appsettings.Development.json</em> file per ongeluk eerder gecommit en gepushed werd. Dit bestand is bedoeld voor lokaal gebruik en hoort dus niet thuis in git. Wanneer je het bestand lokaal aanpast, zal git de changes opmerken gezien de file getracked wordt.</p>
+</div>
+<div class="listingblock">
+<div class="title">git status</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ git status
+On branch feature/untrack
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        modified:   src/ShipItPrep/ShipItPrep.Api/appsettings.Development.json <i class="conum" data-value="1"></i><b>(1)</b>
+
+no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Git detecteert een change op <em>appsettings.Development.json</em></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Je kan git expliciet vertellen dat je de file niet langer wil tracken door het <em>git rm</em> commando te gebruiken.</p>
+</div>
+<div class="listingblock">
+<div class="title">git rm --cached</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ git rm --cached src/ShipItPrep/ShipItPrep.Api/appsettings.Development.json <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De <em>--cached</em> flag zorgt ervoor dat de file <strong>niet</strong> gewist wordt van het file systeem, enkel uit de git index.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">git status</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ git status
+On branch feature/untrack
+Changes to be committed:
+  (use "git restore --staged &lt;file&gt;..." to unstage)
+        deleted:    src/ShipItPrep/ShipItPrep.Api/appsettings.Development.json <i class="conum" data-value="1"></i><b>(1)</b>
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        src/ShipItPrep/ShipItPrep.Api/appsettings.Development.json <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De file werd gedeleted werd vanuit het <em>git</em> perspectief.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De file bestaat wel nog lokaal op disk en wordt gezien als <em>untracked</em>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Moest je nu de pending change committen, zal de delete in de branch opgenomen worden. Als je op dit moment niet zorgvuldig bent en, bijvoorbeeld via Visual Studio, gewoon alle lokale files commit, zal de ongewenste file weer getracked worden. Dit voorkom je door onmiddelijk de file toe te voegen aan <em>.gitignore</em>.</p>
+</div>
+<div class="paragraph">
+<p>Eenmaal je de <em>.gitignore</em> aangepast hebt, is het verstandig een nieuwe status te maken.</p>
+</div>
+<div class="listingblock">
+<div class="title">git status</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ git status
+On branch feature/untrack
+Changes to be committed:
+  (use "git restore --staged &lt;file&gt;..." to unstage)
+        modified:   .gitignore <i class="conum" data-value="1"></i><b>(1)</b>
+        deleted:    src/ShipItPrep/ShipItPrep.Api/appsettings.Development.json <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De aanpassing aan .gitignore wordt opgenomen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De delete blijft geldig, maar de lokale file wordt niet meer vermeld gezien deze nu in de <em>.gitignore</em> staat.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Op dit punt is het probleem opgelost en kan je committen. Deze aanpak kan ook gebruikt worden om meerdere files in 1 commit te deleten/untracken.</p>
+</div>
+<div class="paragraph">
+<p>In plaats van <em>git rm</em>, kan je ook manueel de file deleten van het filesysteem. Dit zal met succes de delete registreren in git en je zal deze kunnen committen. Het is een prima optie voor wanneer de inhoud van de files geen waarde heeft, bijvoorbeeld build output. Het <em>.gitignore</em> bestand moet je uiteraard alsnog aanpassen.</p>
+</div>
+<div class="paragraph">
+<p><em>git rm</em> met de <em>--cached</em> flag is handig wanneer je de file lokaal niet wil wissen, bijvoorbeeld omdat deze informatie zoals connectionstrings bevat.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Populaire tools, zoals Visual Studio, bieden een <em>Ingore and Untrack</em> in hun source control context menu.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pushen_naar_branch_niet_mogelijk"><a class="anchor" href="#_pushen_naar_branch_niet_mogelijk"></a>Pushen Naar Branch Niet Mogelijk</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We willen niet dat iemand zomaar changes kan pushen naar de /main branch. Aanpassingen moeten verlopen via een PR. Bij /feature branches willen we wel de mogelijkheid om changes te pushen zonder een PR te gebruiken.</p>
+</div>
+<div class="paragraph">
+<p>Het kan gebeuren dat je naar een /feature branch wil pushen en dit, tegen je verwachtingen in, niet toegelaten wordt.</p>
+</div>
+<div class="literalblock">
+<div class="title">Push Foutmelding</div>
+<div class="content">
+<pre>Pushing feature/demo-push
+Enumerating objects: 11, done.
+Delta compression using up to 4 threads
+Total 6 (delta 4), reused 0 (delta 0), pack-reused 0
+Remote:
+Remote: Analyzing objects... (6/6) (3 ms)
+Remote:
+Remote: Validating commits... (1/1) done (0 ms)
+Remote: Storing packfile... done (54 ms)
+Remote: Storing index... done (37 ms)
+To https://dev.azure.com/hogent-web4-stefancourteaux/Sandbox/_git/Sandbox
+Error encountered while pushing to the remote repository: Failed to push to the remote repository. See the Output window for more details.
+Failed to push to the remote repository. See the Output window for more details.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De reden hiervoor zal nagenoeg altijd zijn dat je onbedoeld een Policy gezet hebt op de /feature branches. Eenmaal er policies van kracht zijn, is pushen verboden. Je kan branches met policies herkennen door het symbooltje in het overzicht onder de Repo settings.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/git/feature-policy.png" alt="feature policy">
+</div>
+</div>
+<div class="paragraph">
+<p>Deze policies kunnen impliciet bestaan door overerving van hogerliggende instellingen. Bekijk de situatie rustig en grondig. Zorg ervoor dat je geen ongewenste policies hebt op branches waar je wil naar pushen. Eenmaal dit opgelost is, zal het pushen wel lukken.</p>
+</div>
+<div class="literalblock">
+<div class="title">Push Geslaagd</div>
+<div class="content">
+<pre>Pushing feature/demo-push
+Enumerating objects: 11, done.
+Delta compression using up to 4 threads
+Total 6 (delta 4), reused 0 (delta 0), pack-reused 0
+Remote:
+Remote: Analyzing objects... (6/6) (30 ms)
+Remote:
+Remote: Validating commits... (1/1) done (7 ms)
+Remote: Storing packfile... done (60 ms)
+Remote: Storing index... done (38 ms)
+To https://dev.azure.com/hogent-web4-stefancourteaux/Sandbox/_git/Sandbox
+   f01abde..aa15697  feature/demo-push -&gt; feature/demo-push</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lokale_commit_terugdraaien"><a class="anchor" href="#_lokale_commit_terugdraaien"></a>Lokale Commit Terugdraaien</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Soms commit je per ongeluk een verkeerde file, of commit je op de verkeerde branch. In zo een geval wil je de commit niet pushen, maar wel terugdraaien en een correcte commit samenstellen. Je kan dit doen dmv het <em>reset</em> command.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git reset HEAD~1 <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Het aantal commits om ongedaan te maken. 1 in dit geval.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De commit wordt geschrapt, maar je changes blijven behouden. Je kan nu aanpassingen maken of - belangrijk - van branch wisselen en daarop een nieuwe commit maken.</p>
+</div>
+<div class="paragraph">
+<p>Hoe sneller je het probleem opmerkt, hoe minder werk om het op te lossen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_merge_conflict_bij_pr_naar_main"><a class="anchor" href="#_merge_conflict_bij_pr_naar_main"></a>Merge Conflict Bij PR naar /main</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Het kan gebeuren dat er een merge conflict ontstaat wanneer je een PR opent van je /feature branch naar /main. In een professionele context probeert men dit te vermijden door goede afspraken te maken omtrent branching (wie/wat/wanneer). Toch zal het nu en dan voorkomen dat je een conflict moet oplossen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/git/conflict.png" alt="conflict">
+</div>
+</div>
+<div class="paragraph">
+<p>Wanneer je alleen werkt en toch merge conflicten ervaart, is dit nagenoeg altijd omdat je lokaal een /feature branch gemaakt hebt van een /main die ouder is dan de /main in het DevOps Repo. Het conflict kan dan ontstaan wanneer je een PR opent.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Branch lokaal altijd van de meest recente /main. Doe altijd een <em>pull</em> om zeker te zijn. Vermijd overlappende wijzigingen in verschillende openstaande /feature branches
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Een veelgebruikte methode om een PR merge conflict op te lossen is <em>rebasen</em>. Bij het rebasen wordt de inhoud en historiek van je lokale /feature branch herschreven. Alle commits sinds het gemeenschappelijke punt in de historiek, worden lokaal (opnieuw) afgespeeld. Wanneer door deze ingreep een conflict ontstaat, kan je dit lokaal in je /feature branch oplossen. Eenmaal de rebase voltooid is, en je onderweg alle conflicten opgelost hebt, kan je je lokale /feature toestand pushen. Het PR systeem zal een nieuwe evaluatie maken en, indien alles goed verlopen is, geen conflict meer hebben.</p>
+</div>
+<div class="sect2">
+<h3 id="_rebasen_via_git_cli"><a class="anchor" href="#_rebasen_via_git_cli"></a>Rebasen Via Git CLI</h3>
+<div class="paragraph">
+<p>Zorg er altijd voor dat je lokaal de meest recente versie hebt van <code>main</code> en de <code>feature/</code> branch die een merge conflict geeft voor het starten van de rebase.</p>
+</div>
+<div class="paragraph">
+<p>Check de branch uit die je wil mergen naar <code>main</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">stefancourteaux@MacBook-Pro-van-Stefan % git checkout feature/kaboom
+Switched to branch 'feature/kaboom'
+
+stefancourteaux@MacBook-Pro-van-Stefan % ls -l
+-rw-r--r--  1 stefancourteaux  staff    6  4 sep 11:37 NietOkFile.txt
+-rw-r--r--  1 stefancourteaux  staff    2  4 sep 11:37 OkFile.txt
+-rw-r--r--  1 stefancourteaux  staff  985  4 sep 11:27 README.md
+
+stefancourteaux@MacBook-Pro-van-Stefan % git status
+On branch feature/kaboom
+nothing to commit, working tree clean</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start de rebase.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">stefancourteaux@MacBook-Pro-van-Stefan % git rebase main
+Auto-merging NietOkFile.txt
+CONFLICT (add/add): Merge conflict in NietOkFile.txt
+error: could not apply ff6b7da... Added NietOkFile.txt
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm &lt;conflicted_files&gt;", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply ff6b7da... Added NietOkFile.txt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Git laat ons weten dat het onmogelijk de rebase automatisch te completen. Er is een conflict. Dit is hetzelfde conflict dat problemen geeft in het Azure DevOps PR.</p>
+</div>
+<div class="paragraph">
+<p>We moeten de file manueel inspecteren en corrigeren (indien nodig). Je kan dit doen met eender welke editor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/git/resolve.png" alt="resolve">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/git/resolved.png" alt="resolved">
+</div>
+</div>
+<div class="paragraph">
+<p>Nu moeten we git informeren dat we klaar zijn en de rebase verder mag lopen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">stefancourteaux@MacBook-Pro-van-Stefan % git add NietOkFile.txt
+stefancourteaux@MacBook-Pro-van-Stefan % git rebase --continue
+Successfully rebased and updated refs/heads/feature/kaboom.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dan (force) pushen we de status van de branch naar de server.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">stefancourteaux@MacBook-Pro-van-Stefan % git push -f
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://dev.azure.com/hogent-web4-stefancourteaux/Sandbox/_git/RebaseTesten
+ + ff6b7da...38b2630 feature/kaboom -&gt; feature/kaboom (forced update)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De Pull Request zal nu geen conflict meer hebben in Azure DevOps.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_git_filter_repo"><a class="anchor" href="#_git_filter_repo"></a>Git-Filter-Repo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In de academische context bestaat er tijd noch ruimte om onze Solution transversaal te perfectioneren. Toch moeten we voldoende bewust worden van best practices en mogelijke veiligheidsrisicos&#8217;s die in een professionele context wel doorwegen.</p>
+</div>
+<div class="paragraph">
+<p>We hebben reeds gezien hoe je git gebruikt om versiebeheer van broncode in te regelen en hoe je de meest voorkomende probleemsituaties oplost. Dit laatste werd gedreven door pragmatisme, namelijk de nood om zichzelf te deblokkeren en verder te kunnen werken.</p>
+</div>
+<div class="paragraph">
+<p>Hier lossen we een laatste git probleem op dat in academische context geen noodzaak is, maar dit wel kan zijn in een professionele omgeving: het wissen van een bestand uit de <strong>volledige</strong> git historiek. Dit kan nodig worden geacht, bijvoorbeeld wanneer iemand per ongeluk een bestand met gevoelige informatie, zoals credentials van een productieomgeving, gepusht heeft naar het git repository. Immers, wanneer je op een bestaande file <em>ignore &amp; untrack</em> toepast, wordt de reeds bestaande historiek in het repository <strong>niet</strong> verwijderd. Je zal het bestand via (DevOps) git historiek kunnen terugvinden.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Als je in professionele context een rewrite van de geschiedenis wil doen omdat er credentials in git geslopen zijn, kan je beter de relevante credentials (laten) invalideren.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>De git <a href="https://git-scm.com/docs/git-filter-branch#_warning">documentatie</a> adviseert ons <a href="https://github.com/newren/git-filter-repo">git-filter-repo tool</a> te gebruiken om geschiedenis te herschrijven. Deze tool werd ontwikkeld in <a href="https://www.python.org/downloads/">Python</a>. Een werkende Python installatie is bijgevolg een vereiste. Dit kan je controleren door <code>python --version</code> uit te voeren in een terminal(venster).</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/newren/git-filter-repo/releases">Download</a> de laatste source code zip en pak het archief uit op een locatie die voor jou handig is. In mijn geval is dit</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>C:\Users\stefa\source\git-filter-repo-2.38.0\git-filter-repo-2.38.0\</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Navigeer in een terminal(venster) naar deze locatie om de tool te gebruiken.
+Voer daar <code>python git-filter-repo</code> uit. We verwachten de melding <code>No arguments specified.</code> Zo weten we dat de tool klaar is om gebruikt te worden.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Het doel van git is een exhaustieve geschiedenis bewaren. Zodoende is het herschrijven van de git history een zeer delicate zaak. Overweeg steeds of het wel echt nodig is. Maak altijd een backup en zorg ervoor dat alle betrokken developers weten wat er te gebeuren staat.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Het is geen goed idee deze ingreep te oefenen op een bestaande repository van enig belang. We zetten een test scenario op.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Maak een nieuw repository aan in Azure DevOps.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Geen Policies</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Maak 2 nieuwe bestanden aan.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Geen branches nodig, werk direct op /main</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Doe een paar commits op die bestanden.</p>
+</li>
+<li>
+<p>Pull naar je lokale machine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Navigeer in een terminalvenster naar de root van het git repository dat je wil bewerken. In mijn geval is dit.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>C:\Users\stefa\source\repos\MyRepo\</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De tool verwacht als input een lijst van bestanden die <strong>behouden</strong> moeten worden. Meestal wil je de meerderheid van de bestanden behouden en slechts een klein aantal wissen. Standaard wil je dus het argument <code>--invert-paths</code> toevoegen.</p>
+</div>
+<div class="paragraph">
+<p>De clone (via Visual Studio) kan ongewenste sporen nalaten (.vs folder) die de tool doen twijfelen over de toestand van je repo. We kunnen de <code>--force</code> optie gebruiken, maar de .vs folder deleten is de betere oplossing in dit geval.</p>
+</div>
+<div class="paragraph">
+<p>Eenmaal je lokale situatie netjes is, kunnen we overgaan tot het wissen van een bestand uit de historiek.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python "C:\Users\stefa\source\git-filter-repo-2.38.0\git-filter-repo" --path "oops.txt" --invert-paths</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We hebben nu <strong>lokaal</strong> een git repo zonder de ongewenste file. <code>git status</code> zal communiceren dat alles clean is.</p>
+</div>
+<div class="paragraph">
+<p>We gaan het repository in Azure DevOps wissen (!) en onze herschreven geschiedenis pushen. Eenmaal dat gebeurd is, is de herschreven geschiedenis de nieuwe waarheid en voor iedereen beschikbaar.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Op dit moment zullen al je collega&#8217;s de nieuwe repo moeten clonen om van daar verder te werken.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Je kan overwegen het pad naar de filter tool toe te voegen aan je PATH. Ik doe dit niet gezien ik de ambitie niet heb deze tool frequent of, nog erger, per ongeluk te gebruiken.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Experimenteer zelf met de overlopen git scenario&#8217;s. Als je het (in paniek) moet leren op een kritiek moment, gaat het pijn doen.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://git-scm.com/docs/gitignore">gitignore</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/docs/git-reset">git reset</a></p>
+</li>
+<li>
+<p><a href="https://github.com/newren/git-filter-repo">git-filter-repo tool</a></p>
+</li>
+<li>
+<p><a href="https://www.python.org/downloads/">Python</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

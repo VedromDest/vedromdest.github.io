@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Blob Storage &amp; Web Service Architectuur :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Ontwikkelen Met Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Problemen Oplossen</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="07-blob.html">Blob Storage</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Blob Storage &amp; Web Service Architectuur</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Azure Blob Storage leren kennen.</p>
+</li>
+<li>
+<p>Nadenken over web service architectuur.</p>
+</li>
+<li>
+<p>Minimal Api beter leren kennen.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_story_label_maken"><a class="anchor" href="#_story_label_maken"></a>Story - Label Maken</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>AS A</strong> ShipIt Customer <strong>I WANT</strong> to print a label <strong>SO THAT</strong> I can drop off my package at a service point.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functionele_input"><a class="anchor" href="#_functionele_input"></a>Functionele Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Klant moet een label kunnen maken op basis van</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Een nieuwe of bestaande Quote</p>
+</li>
+<li>
+<p>Adres ontvanger</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Tracking</strong> is momenteel <strong>out of scope.</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technische_input"><a class="anchor" href="#_technische_input"></a>Technische Input</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Maak een domeinlaag om het label te genereren. We willen deze logica immers ook gebruiken in de desktop applicatie van het sorteercentrum.</p>
+</li>
+<li>
+<p>De business spreekt van een bestaande of nieuwe quote. Wanneer de klant niet vertrekt van een bestaande quote, zal de front end deze klant eerst door het quoting mechanisme loodsen. Technisch vertrekken we voor het maken van een label dus altijd van een bestaande quote.</p>
+</li>
+<li>
+<p>Haal de details van een quote op via de quote api. Gebruik een <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient">HttpClient</a>.</p>
+</li>
+<li>
+<p>Maak een pdf label. Gebruik <a href="https://github.com/QuestPDF/QuestPDF">QuestPDF</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Adres ontvanger.</p>
+</li>
+<li>
+<p>Prijs.</p>
+</li>
+<li>
+<p>Geen email adressen!</p>
+</li>
+<li>
+<p>Unieke trackingcode.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sla het label op in <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction">Azure Blob Storage</a>.</p>
+</li>
+<li>
+<p>Voorzie een web api</p>
+<div class="ulist">
+<ul>
+<li>
+<p>POST met CreatedAtAction response.</p>
+</li>
+<li>
+<p>GET met <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept">Accept Header</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>als json - voorzien voor later</p>
+</li>
+<li>
+<p>als pdf file - application/octet-stream</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>De situatie die we willen bekomen bij afronding van deze story ziet eruit als volgt.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/design.png" alt="design">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_storage_account"><a class="anchor" href="#_storage_account"></a>Storage Account</h3>
+<div class="paragraph">
+<p>Navigeer naar de Azure Portal om de <em>Storage Account Services</em> weer te geven.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/storage.png" alt="storage">
+</div>
+</div>
+<div class="paragraph">
+<p>Voeg een nieuwe storage account toe.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/add.png" alt="add">
+</div>
+</div>
+<div class="paragraph">
+<p>We hebben minder vrijheid in de naamgeving dan bij de vorige resources. Kies iets logisch. Maak je resource in Europa en kies voor goedkope backups.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/review.png" alt="review">
+</div>
+</div>
+<div class="paragraph">
+<p>Je kan dan rechtstreeks naar <em>Review</em> en <em>Create</em> gaan.</p>
+</div>
+<div class="paragraph">
+<p>Eenmaal je resource beschikbaar is op Azure, navigeer je erin naar de sectie <em>Containers</em>. Maak een nieuwe <em>Container</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/container.png" alt="container">
+</div>
+</div>
+<div class="paragraph">
+<p>Start de <em>Azure Storage Explorer</em> op en log in met je Hogent account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/aselogin.png" alt="aselogin">
+</div>
+</div>
+<div class="paragraph">
+<p>De applicatie is nu verbonden met je Azure resources. Open de Explorer.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/aseloggedin.png" alt="aseloggedin">
+</div>
+</div>
+<div class="paragraph">
+<p>De container die we aangemaakt hebben in de Azure Portal kan nu doorbladerd worden. Op dit moment zit er natuurlijk nog geen data in.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/asecontainer.png" alt="asecontainer">
+</div>
+</div>
+<div class="paragraph">
+<p>De connection string die onze eigen applicatie nodig heeft, kunnen we ophalen onder de <em>Access Keys</em> sectie.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/keys.png" alt="keys">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
+<div class="sect3">
+<h4 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h4>
+<div class="paragraph">
+<p>We voegen een aantal nieuwe projecten toe aan de solution om de label functionaliteiten in onder te brengen. Zoals vermeld in de story, maken we deze keer een (compacte) domeinlaag. We willen de logica immers later hergebruiken in een niet-webapi project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/solution.png" alt="solution">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shipit_labels_domain_models"><a class="anchor" href="#_shipit_labels_domain_models"></a>ShipIt.Labels.Domain.Models</h4>
+<div class="paragraph">
+<p>We voorzien domeinklassen. We hebben uiteraard een Label nodig. Het lijkt ook nuttig om voor het adres een klasse te voorzien.</p>
+</div>
+<div class="listingblock">
+<div class="title">Address.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Address
+{
+    public string Name { get; set; }
+    public string AddressLine1 { get; set; }
+    public string AddressLine2 { get; set; }
+    public string Country { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We weten dat het label een pdf representatie nodig heeft. QuestPDF voorziet een <em>IDocument</em> interface. Door deze te implementeren kunnen we gemakkelijk ons model als pdf weergeven. Door dit te doen, hebben we impliciet gekozen voor een "rijk" model, dwz er zit logica/gedrag in.</p>
+</div>
+<div class="listingblock">
+<div class="title">LabelModel.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Label : IDocument
+{
+    public Address Address { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
+    public string TrackingNumber { get; set; }
+    public double Price { get; set; }
+
+    public Label(Address address, double price)
+    {
+        Address = address;
+        Price = price;
+        TrackingNumber = Guid.NewGuid().ToString(); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+
+    public void Compose(IDocumentContainer container) <i class="conum" data-value="3"></i><b>(3)</b>
+    {
+        // Pdf creatie
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Het adres zit vervat in een aparte klasse.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Het model kent zichzelf een uniek trackingnummer toe.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Hier gebruiken we QuestPDF om de pdf layout te maken.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De QuestPDF nuget zal er ook voor zorgen dat de methode <em>GeneratePdf()</em> beschikbaar wordt op instanties van onze klasse die <em>IDocument</em> implementeert.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shipit_labels_persistence"><a class="anchor" href="#_shipit_labels_persistence"></a>ShipIt.Labels.Persistence</h4>
+<div class="paragraph">
+<p>Hier gaan we verbinding maken de nieuwe <em>Azure Blob Storage Account</em> om de pdf-bestanden weg te schrijven en in te lezen.</p>
+</div>
+<div class="paragraph">
+<p>De basics om te verbinden wanneer je wil lezen of schrijven, zijn dezelfde.</p>
+</div>
+<div class="listingblock">
+<div class="title">LabelRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var client = new BlobServiceClient(_options.BlobConnectionString); <i class="conum" data-value="1"></i><b>(1)</b>
+var containerClient = client.GetBlobContainerClient("shipitlabels"); <i class="conum" data-value="2"></i><b>(2)</b>
+return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Verbinding maken met storage account. De connectionstring komt via <em>Options Pattern</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Verbinding maken met de container die we voorzien hebben voor de labels.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De specifieke blob file benaderen waarin we willen lezen of schrijven.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Om files uit te lezen, gebruik je de <em>Download</em> methodes op de <em>BlobClient</em>. Om files te (over)schrijven, gebruik je de <em>Upload</em> methodes.</p>
+</div>
+<div class="paragraph">
+<p>We voorzien een interface.</p>
+</div>
+<div class="listingblock">
+<div class="title">ILabelRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface ILabelRepository
+{
+    Task SaveLabelAsPdfAsync(Label label);
+    Task&lt;MemoryStream&gt; ReadLabelAsPdfAsync(string trackingNumber);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De implementatie van <code>SaveLabelAsPdfAsync</code> zal het "rijke" domeinmodel vragen om diens pdf representatie.</p>
+</div>
+<div class="listingblock">
+<div class="title">LabelRepository.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public async Task SaveLabelAsPdfAsync(Label label)
+{
+    var blob = GetBlobClient($"{label.TrackingNumber}.pdf");
+
+    var stream = new MemoryStream();
+    label.GeneratePdf(stream); <i class="conum" data-value="1"></i><b>(1)</b>
+    stream.Position = 0;
+
+    await blob.UploadAsync(stream);
+    stream.Close();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hier zal onze <em>Compose()</em> implementatie impliciet aangeroepen worden, en het resultaat expliciet naar een stream geschreven worden.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shipit_labels_domain"><a class="anchor" href="#_shipit_labels_domain"></a>ShipIt.Labels.Domain</h4>
+<div class="paragraph">
+<p>We maken een DomeinController waar de buitenwereld (de web api dus) kan mee spreken. De interne werking van het domein wordt verborgen. We voorzien een Interface.</p>
+</div>
+<div class="listingblock">
+<div class="title">IDomainController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IDomainController
+{
+    Task&lt;string&gt; CreateLabelAsync(
+        double price,
+        string recipientName,
+        string RecipientAddressLine1,
+        string RecipientAddressLine2,
+        string RecipientCountry);
+
+    Task&lt;MemoryStream&gt; GetLabelAsync(string trackingNumber);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We implementeren de interface. De domeincontroller maakt intern gebruik van de domeinmodellen en het repository.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomainController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class DomainController : IDomainController
+{
+    private readonly ILabelRepository _repo;
+
+    public DomainController(ILabelRepository repo) <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+        _repo = repo;
+    }
+
+    public async Task&lt;string&gt; CreateLabelAsync( <i class="conum" data-value="2"></i><b>(2)</b>
+        double price,
+        string recipientName,
+        string recipientAddressLine1,
+        string recipientAddressLine2,
+        string recipientCountry)
+    {
+        var address = new Address(){
+            Name = recipientName,
+            AddressLine1 = recipientAddressLine1,
+            AddressLine2 = recipientAddressLine2,
+            Country = recipientCountry
+        };
+
+        var label = new Label(address, price); <i class="conum" data-value="3"></i><b>(3)</b>
+        await _repo.SaveLabelAsPdfAsync(label);
+
+        return label.TrackingNumber;
+    }
+
+    public Task&lt;MemoryStream&gt; GetLabelAsync(string trackingNumber){
+        return _repo.ReadLabelAsPdfAsync(trackingNumber);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Het repository zal via dependency injection binnenkomen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deze domeincontroller gebruikt geen DTO, maar een lijst van parameters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Op dit moment is het label model volwaardig, maar de pdf bestaat nog niet. Deze wordt pas aangemaakt wanneer de <em>Compose()</em> methode (impliciet) aangeroepen wordt.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_shipit_labels_presentation_api"><a class="anchor" href="#_shipit_labels_presentation_api"></a>Shipit.Labels.Presentation.Api</h4>
+<div class="paragraph">
+<p>We willen de label functionaliteit als api blootstellen. Gezien alle logica in het domein vervat zit, gaan we geen service laag maken in het api project. We maken een <em>minimal api</em> en schrijven alle api code in Program.cs. Dit kan een geldige keuze in bepaalde scenario&#8217;s en is niet per definitie "beter" of "slechter" dan een api met api controllers.</p>
+</div>
+<div class="paragraph">
+<p>We voorzien een basic DTO klasse om het Request voor te stellen.</p>
+</div>
+<div class="listingblock">
+<div class="title">LabelRequestContract</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class LabelRequestContract
+{
+    public string QuoteId { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
+    public string RecipientName { get; set; }
+    public string RecipientAddressLine1 { get; set; }
+    public string RecipientAddressLine2 { get; set; }
+    public string RecipientCountry { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We krijgen een referentie naar een Quote mee. De prijs zal hieruit komen. We geven de gebruiker niet de kans om de prijs zelf mee te geven in deze request klasse - ze zouden immers durven liegen!</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Zoals vermeld in de story, zal deze api een call moeten doen naar de Quote api om de prijs op te halen. Om http calls te doen vanuit onze eigen code, gebruiken we <code>HttpClient</code>. Er zijn vele manieren om clients te instantiëren en te gebruiken, dit is maar een van die manieren.</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure&lt;LabelRepositoryOptions&gt;(
+    builder.Configuration.GetSection(
+        nameof(LabelRepositoryOptions)));
+
+builder.Services.AddHttpClient(); <i class="conum" data-value="1"></i><b>(1)</b>
+builder.Services.AddProblemDetails();
+builder.Services.AddScoped&lt;ILabelRepository, LabelRepository&gt;(); <i class="conum" data-value="2"></i><b>(2)</b>
+builder.Services.AddScoped&lt;IDomainController, DomainController&gt;(); <i class="conum" data-value="3"></i><b>(3)</b>
+
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community; <i class="conum" data-value="4"></i><b>(4)</b>
+
+var app = builder.Build();
+
+app.MapPost("api/labels", async (IHttpClientFactory clientFactory, [FromBody] LabelRequestContract contract, IDomainController domain) =&gt; {
+    // Post Logica
+});
+
+app.MapGet("api/labels/{trackingnumber}",
+async Task&lt;Results&lt;Ok&lt;string&gt;, FileStreamHttpResult, BadRequest&gt;&gt;
+([FromRoute] string trackingNumber, [FromHeader(Name = "Accept")] string acceptValue, IDomainController domain) =&gt;
+{
+    // get Logica
+}).WithName("GetLabel"); <i class="conum" data-value="5"></i><b>(5)</b>
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We registreren httpclient bij de DI container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We registreren het repository bij de DI container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We registreren de domeincontroller bij de DI container.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>We registreren het QuestPDF licentie type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>We benoemen de Get expliciet zodat we er elders kunnen naar verwijzen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Laat ons de Post van dichterbij bekijken</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cd/Post()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">app.MapPost("api/labels", async (
+    IHttpClientFactory clientFactory, <i class="conum" data-value="1"></i><b>(1)</b>
+    [FromBody] LabelRequestContract contract, <i class="conum" data-value="2"></i><b>(2)</b>
+    IDomainController domain) =&gt; {
+
+    var httpClient = clientFactory.CreateClient();
+    var quoteResponse = await httpClient
+        .GetFromJsonAsync&lt;PriceQuoteResponseContract(
+            $"https://server/api/pricequotes/{contract.QuoteId}"); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    if(quoteResponse.ValidUntil &lt; DateTime.UtcNow)
+        throw new Exception("quote too old.");
+
+    var trackingNumber = await domain.CreateLabelAsync( <i class="conum" data-value="4"></i><b>(4)</b>
+        quoteResponse.PriceEuro,
+        contract.RecipientName,
+        contract.RecipientAddressLine1,
+        contract.RecipientAddressLine2,
+        contract.RecipientCountry);
+
+    return TypedResults.CreatedAtRoute( <i class="conum" data-value="5"></i><b>(5)</b>
+        trackingNumber,
+        "GetLabel",
+        new { trackingnumber = trackingNumber});
+});</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We verkrijgen een HttpClient.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Het labelrequest komt uit de Request Body.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We gebruiken de client om een http call te doen naar de Quote api. De response wordt in dezelfde beweging gemapped op een object van het type QuoteResponseDTO. Deze url moet uiteraard komen uit configuratie via het Options Pattern.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Nu we de prijs kennen, vragen we het domein een label te maken. We krijgen het trackingnumber terug.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>We geven een resultaat terug dat de locatie van de aangemaakte resource bevat alsook een response object met het trackingnumber.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Laat ons de Get van dichterbij bekijken. De story vertelt ons dat de partij die onze api oproept via een <code>Accept</code> header kan meegeven welke representatie deze van het label wil: json of pdf. Op dit moment geven we voor de json representatie gewoon een <em>stub</em> terug.</p>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs/Get()</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">app.MapGet("api/labels/{trackingnumber}",
+    async Task&lt;Results&lt;Ok&lt;string&gt;, FileStreamHttpResult, BadRequest&gt;&gt;(
+    [FromRoute] string trackingNumber, <i class="conum" data-value="1"></i><b>(1)</b>
+    [FromHeader(Name = "Accept")] string acceptValue, <i class="conum" data-value="2"></i><b>(2)</b>
+    IDomainController domain) =&gt;
+{
+    if(acceptValue == "text/json") <i class="conum" data-value="3"></i><b>(3)</b>
+    {
+        return TypedResults.Ok(trackingNumber);
+    }
+    else if (acceptValue == "application/octet-stream") <i class="conum" data-value="4"></i><b>(4)</b>
+    {
+        var pdfStream = await domain.GetLabelAsync(trackingNumber);
+        return TypedResults.Stream(
+            pdfStream,
+            "application/octet-stream",
+            $"{trackingNumber}.pdf");
+    }
+
+    return TypedResults.BadRequest(); <i class="conum" data-value="5"></i><b>(5)</b>
+
+}).WithName("GetLabel");</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deze input wordt uit de route gelezen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deze input wordt uit een header gelezen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De client vraagt json.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>De client vraagt pdf, we voeren dat uit. We geven een filename mee. Dit staat los van de filename op blob storage.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>De inhoud van de Accept header is niet ondersteund.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_solution_runnen"><a class="anchor" href="#_solution_runnen"></a>Solution Runnen</h3>
+<div class="paragraph">
+<p>Let op: De nieuwe label api zal de bestaande quote api uit dezelfde solution aanroepen. Dit wil zeggen dat je twee startup items nodig hebt.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In VS Code hoef je geen speciale runsettings aan te maken. Je kan gewoon een tweede (en derde etc.) project opstarten.</p>
+</li>
+<li>
+<p>In Visual Studio maak je de instellingen <a href="https://learn.microsoft.com/en-us/visualstudio/ide/how-to-set-multiple-startup-projects?view=vs-2022">zo</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deployen"><a class="anchor" href="#_deployen"></a>Deployen</h3>
+<div class="paragraph">
+<p>We hebben nu twee services om te deployen.</p>
+</div>
+<div class="literalblock">
+<div class="title">Quote</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-web4-avond-stefancourteaux-shipit-quote `
+  --plan hogent-web4-avond-stefancourteaux-shipit-plan `
+  --resource-group hogent-web4-avond-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Label</div>
+<div class="content">
+<pre>az webapp up `
+  --name hogent-web4-avond-stefancourteaux-shipit-label `
+  --plan hogent-web4-avond-stefancourteaux-shipit-plan `
+  --resource-group hogent-web4-avond-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/blob/deploy.png" alt="deploy"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient">HttpClient</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction">Azure Blob Storage</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept">Accept Header</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by stefan.courteaux@hogent.be for HOGENT.</p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
