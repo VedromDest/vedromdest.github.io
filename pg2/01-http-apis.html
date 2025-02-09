@@ -24,6 +24,7 @@
           <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Producten</a>
               <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
                   <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
                   <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
                   <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
@@ -35,8 +36,11 @@
           <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link" href="#">Diensten</a>
               <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
                   <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
                   <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
                   <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
               </div>
           </div>
@@ -174,13 +178,8 @@
 </dd>
 </dl>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>@startuml
-Client -&gt; Server: Request
-Server --&gt; Client: Response
-@enduml</pre>
-</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/http-apis/uml-req-res.png" alt="uml req res"></span></p>
 </div>
 <hr>
 <div class="dlist">
@@ -191,13 +190,8 @@ Server --&gt; Client: Response
 </dd>
 </dl>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>@startuml
-Client -&gt; Server: Request - https://demo.be/geef-klanten
-Server --&gt; Client: Response (lijst van klanten)
-@enduml</pre>
-</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/http-apis/uml-url.png" alt="uml url"></span></p>
 </div>
 <hr>
 <div class="dlist">
@@ -227,13 +221,8 @@ Server --&gt; Client: Response (lijst van klanten)
 </dd>
 </dl>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>@startuml
-Client -&gt; Server: GET https://demo.be/klanten
-Server --&gt; Client: Response (lijst van klanten)
-@enduml</pre>
-</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/http-apis/uml-method.png" alt="uml method"></span></p>
 </div>
 <div class="paragraph">
 <p>Bij het bezoeken van een URL via een web browser, zal deze standaard een <code>GET</code> operatie doen.</p>
@@ -285,16 +274,20 @@ Server --&gt; Client: Response (lijst van klanten)
 </li>
 </ul>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>@startuml
-Client -&gt; Server: GET https://demo.be/klanten
-Server --&gt; Client: 200 OK, Content: lijst van klanten
-@enduml</pre>
-</div>
-</div>
 <div class="paragraph">
-<p>Mozilla onderhoudt zeer goeie <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">documentatie</a> betreffende het gebruik van deze response codes.</p>
+<p><span class="image"><img src="_images/http-apis/uml-response.png" alt="uml response"></span></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Mozilla onderhoudt zeer goeie <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">documentatie</a> betreffende het gebruik van deze response codes.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
