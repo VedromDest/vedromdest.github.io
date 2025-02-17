@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>StoreFront Api :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>RESTful Api :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -64,20 +64,17 @@
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+    <a class="nav-link" href="02-storefront.html">Backend (Api + EF Core)</a>
 <ul class="nav-list">
       <li class="nav-item is-active is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+    <a class="nav-link" href="02-storefront-api.html">RESTful Api</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+    <a class="nav-link" href="02-storefront-api-1.html">Customers &amp; Products</a>
   </li>
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
-  </li>
-      <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+    <a class="nav-link" href="02-storefront-api-3.html">Orders &amp; Service Layer</a>
   </li>
 </ul>
   </li>
@@ -97,6 +94,9 @@
     <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
   </li>
 </ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
@@ -141,8 +141,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
-    <li><a href="02-storefront-api.html">StoreFront Api</a></li>
+    <li><a href="02-storefront.html">Backend (Api + EF Core)</a></li>
+    <li><a href="02-storefront-api.html">RESTful Api</a></li>
   </ul>
 </nav>
 </div>
@@ -151,25 +151,221 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">StoreFront Api</h1>
+<h1 class="page">RESTful Api</h1>
 <div class="sect1">
 <h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Bouwen van een .Net backend met web api voor een <em>Storefront</em> applicatie. Dit omvat volgende functionaliteiten:</p>
+<p>Bouwen van een .Net backend api voor een <em>Storefront</em> applicatie. We stellen als initieel doel het beheer van</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Beheer van klanten</p>
+<p>Klanten</p>
 </li>
 <li>
-<p>Beheer van producten</p>
+<p>Producten</p>
 </li>
 <li>
-<p>Beheer van aankopen</p>
+<p>Bestellingen</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_terminologie"><a class="anchor" href="#_terminologie"></a>Terminologie</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We nemen ons voor de oplossing in het Engels te programmeren. We kiezen dus een passende Engelstalige term voor de concepten.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+There are only two hard things in Computer Science: cache invalidation and naming things.
+</blockquote>
+<div class="attribution">
+&#8212; Phil Karlton
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Klant &#8658; Customer</dt>
+<dd>
+<p>Komende van het Nederlands, klinkt <em>Client</em> als een goede keuze, maar dat is het niet. <em>Client</em> wordt gebruikt in vele contexten: Client-Server, Client Credentials, HttpClient&#8230;&#8203; <em>Customer</em> is meestal de betere keuze.</p>
+</dd>
+<dt class="hdlist1">Product &#8658; Product</dt>
+<dd>
+<p><em>Product</em> is een prima keuze, tenzij we ook diensten gaan verkopen. Gelukkig gaan we dat niet doen.</p>
+</dd>
+<dt class="hdlist1">Bestelling &#8658; Order</dt>
+<dd>
+<p>Er bestaat een semantisch verschil tussen <em>aankoop</em> (<em>purchase</em>) en <em>bestelling</em> (<em>order</em>). Een aankoop wordt onmiddellijk voltrokken en een bestelling impliceert een wachttijd.
+<br>
+Stel: je wandelt een elektronicazaak binnen met de intentie een bepaalde laptop <em>aan te kopen</em>. Wanneer ze deze niet in voorraad hebben, zal je een <em>bestelling</em> kunnen plaatsen.
+<br>
+Gezien er hedendaags online ook digitale producten verkocht worden die wel direct geleverd worden, vervaagt de grens tussen <em>aankoop</em> en <em>bestelling</em> dat we ze in de praktijk door elkaar kunnen gebruiken. <em>Order</em> lijkt de meest gebruikte optie.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_beheren"><a class="anchor" href="#_beheren"></a>Beheren</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We opteren voor een standaard invulling van <em>beheren</em>, namelijk <em>CRUD</em> op endpoints zonder hiërarchie. We willen elk van de concepten kunnen aanmaken, lezen, wijzigen en wissen. Kort door de bocht kunnen we stellen dat we <code>POST</code>, <code>GET</code>, <code>PUT</code> en <code>DELETE</code> ondersteuning willen op <code>/customers</code>, <code>/products</code> en <code>/orders</code>.</p>
+</div>
+<div class="paragraph">
+<p>Uiteraard gaan we dit moeten uitdiepen. Wat is een <em>Customer</em>? Welke response codes verwachten we? &#8230;&#8203;</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We kunnen het gewenste resultaat formeel documenteren gebruikmakende van een api documentatietool zoals <a href="https://editor.swagger.io">Swagger Editor</a>. Het is ook mogelijk deze documentatie achteraf te genereren uit bestaande C#.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_customer"><a class="anchor" href="#_customer"></a>Customer</h3>
+<div class="sect3">
+<h4 id="_model"><a class="anchor" href="#_model"></a>Model</h4>
+<div class="paragraph">
+<p>Uit grondige analyse besluiten we dat een <code>Customer</code> bestaat uit</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>FirstName</p>
+</li>
+<li>
+<p>LastName</p>
+</li>
+<li>
+<p>DateOfBirth</p>
+</li>
+<li>
+<p>Email</p>
+</li>
+<li>
+<p>TaxIdentificationNumber (Nullable)</p>
+</li>
+<li>
+<p>AddressLine1</p>
+</li>
+<li>
+<p>AddressLine2</p>
+</li>
+<li>
+<p>AddressLine3 (Nullable)</p>
+</li>
+<li>
+<p>Country</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api"><a class="anchor" href="#_api"></a>Api</h4>
+<div class="literalblock">
+<div class="title">POST (Create)</div>
+<div class="content">
+<pre>POST api/customers
+    Expected Request
+        Body: Customer Object
+    Expected Response
+        Status: 201 - Created
+        Body: Empty</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">GET (Read)</div>
+<div class="content">
+<pre>GET api/customers
+    Expected Request
+        Body: Empty
+    Expected Response
+        Status: 200 - Ok
+        Body: Customer Object []
+
+GET api/customers/{id}
+    Expected Request
+        Body: Empty
+        Path: {id} = Valid Customer Id
+    Expected Response
+        Status: 200 - Ok
+        Body: Customer Object</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">PUT (Update)</div>
+<div class="content">
+<pre>PUT api/customers/{id}
+    Expected Request
+        Body: Customer Object
+        Path: {id} = Customer Id
+    Expected Response
+        Status: 200 - Ok
+        Body: Empty</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Delete (Delete)</div>
+<div class="content">
+<pre>DELETE api/customers/{id}
+    Expected Request
+        Body: Empty
+        Path: {id} = Valid Customer Id
+    Expected Response
+        Status: 200 - Ok
+        Body: Empty</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_products"><a class="anchor" href="#_products"></a>Products</h3>
+<div class="sect3">
+<h4 id="_model_2"><a class="anchor" href="#_model_2"></a>Model</h4>
+<div class="paragraph">
+<p>Uit grondige analyse besluiten we dat een <code>Product</code> bestaat uit</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Name</p>
+</li>
+<li>
+<p>Description</p>
+</li>
+<li>
+<p>Price</p>
+</li>
+<li>
+<p>AgeRating (Nullable)</p>
+</li>
+<li>
+<p>StockCount</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api_2"><a class="anchor" href="#_api_2"></a>Api</h4>
+<div class="paragraph">
+<p>Dit vul je zelf aan. Dit is volledig analoog aan <code>Customer</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_orders"><a class="anchor" href="#_orders"></a>Orders</h3>
+<div class="paragraph">
+<p>Dit bespreken we later.</p>
+</div>
 </div>
 </div>
 </div>

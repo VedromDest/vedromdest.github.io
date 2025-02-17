@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Backend Api Met EF Core :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Backend (Api + EF Core) :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -64,20 +64,17 @@
   </li>
       <li class="nav-item is-active is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+    <a class="nav-link" href="02-storefront.html">Backend (Api + EF Core)</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+    <a class="nav-link" href="02-storefront-api.html">RESTful Api</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
+    <a class="nav-link" href="02-storefront-api-1.html">Customers &amp; Products</a>
   </li>
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
-  </li>
-      <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+    <a class="nav-link" href="02-storefront-api-3.html">Orders &amp; Service Layer</a>
   </li>
 </ul>
   </li>
@@ -97,6 +94,9 @@
     <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
   </li>
 </ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
@@ -141,7 +141,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
+    <li><a href="02-storefront.html">Backend (Api + EF Core)</a></li>
   </ul>
 </nav>
 </div>
@@ -150,8 +150,270 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Backend Api Met EF Core</h1>
-
+<h1 class="page">Backend (Api + EF Core)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In de eerste les kreeg je een beknopte introductie tot HTTP, REST en dotnet web api&#8217;s. Laat ons even rustig de bredere context bekijken.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_klassieke_desktop_applicatie"><a class="anchor" href="#_klassieke_desktop_applicatie"></a>Klassieke Desktop Applicatie</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Een klassieke desktop applicatie, zoals we deze kennen uit "Programmeren Gevorderd", kan bestaan uit meerdere lagen en een databank, maar uiteindelijk betreft het een monolithisch geheel dat zich volledig bevindt op de computer van de gebruiker. Historisch zijn dit veelal offline applicaties.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Denk aan technologieën zoals WPF, .Net, SQL Express en ADO.Net.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/klassieke-app.drawio.png" alt="klassieke app.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Hoewel eerder ouderwets van insteek, zijn er nog steeds geldige redenen om <em>self-contained</em> monolithische offline applicaties te bouwen. Denk bijvoorbeeld aan toepassingen in kerncentrales of fabrieken die met gevaarlijke stoffen werken. Door een volledig offline systeem te ontwerpen elimineer je een hele waaier aan risico&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_klassieke_desktop_applicatie_met_internet"><a class="anchor" href="#_klassieke_desktop_applicatie_met_internet"></a>Klassieke Desktop Applicatie Met Internet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Door de opkomst en algemene ingebruikname van internet is men online functionaliteit in applicaties gaan integreren.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Denk aan technologieën zoals MAUI, .Net, MongoDB en Entity Framework Core.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/klassieke-app-online.drawio.png" alt="klassieke app online.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Maak niet onmiddellijk de sprong naar applicaties die continu met internet verbonden zijn. Een traditionele e-mail client hoeft bijvoorbeeld enkel online te zijn om e-mails te ontvangen en te versturen. Consulteren van reeds gedownloade e-mails en het opstellen van nieuwe berichten kan volledig offline gebeuren.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/klassieke-app-online-mail.png" alt="klassieke app online mail"></span></p>
+</div>
+<div class="paragraph">
+<p>Niet enkel e-mail, maar de meeste lokaal geïnstalleerde traditionele kantoorsoftware kadert in deze context. Microsoft Word en PowerPoint zijn hier ook prima voorbeelden van. Ze kunnen veelal offline gebruikt worden, maar vereisen internet voor bepaalde functionaliteit. Deze applicatiearchitectuur kunnen we zeker (nog) niet als verouderd beschouwen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_moderne_single_page_web_app"><a class="anchor" href="#_moderne_single_page_web_app"></a>Moderne Single Page Web App</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Het gros van de moderne applicaties wordt ontwikkeld met een <em>web first</em> insteek en bijgevolg aangeboden als Single Page Web App. In eerste instantie is de applicatie niet aanwezig op de computer van de gebruiker. De applicatie wordt benaderd door met een <em>web browser</em> naar een afgesproken url te navigeren, zoals bijvoorbeeld <a href="https://outlook.office.com">outlook.office.com</a>. De browser zal de nodige <em>static files</em> downloaden en de code daarin vervat uitvoeren.</p>
+</div>
+<div class="paragraph">
+<p>In zo&#8217;n architectuur staat de User Interface los van de rest van de applicatie. Er is een expliciet onderscheid tussen de <em>front-end</em> applicatie, die uitgevoerd wordt op het systeem van de gebruiker, en de <em>back-end applicatie</em>, die uitgevoerd wordt op een server.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Denk aan technologieën zoals React ("Web 3"), .Net, SQL Server en Entity Framework Core.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/spa-1.drawio.png" alt="spa 1.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>De frontend zal met de backend communiceren over HTTP, veelal gebruikmakende van een RESTful Api. Dit soort applicaties zal doorgaans niet, of slechts in beperkte mate, offline functioneren.</p>
+</div>
+<div class="paragraph">
+<p>Denk aan voorbeelden zoals</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://open.spotify.com" class="bare">https://open.spotify.com</a></p>
+</li>
+<li>
+<p><a href="https://outlook.office.com/mail" class="bare">https://outlook.office.com/mail</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze cursus is een <em>static site</em>, <strong>geen</strong> web app. Alle pagina&#8217;s werden vooraf gegenereerd.<br>
+<br>
+Op dit moment wordt er in jouw browser geen logica uitgevoerd die een notie heeft van herbruikte elementen zoals de menubalk. De menubalk is effectief in de broncode van elke pagina aanwezig.<br>
+<br>
+Ook wordt elke link gewoon door de browser gevolgd, niet onderschept door routing logica in javascript.<br>
+<br>
+Stefan is dus een gek die alles continu in het rond zit te copy-pasten? Natuurlijk <a href="https://antora.org">niet</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_worden_er_nog_desktop_apps_gebouwd"><a class="anchor" href="#_worden_er_nog_desktop_apps_gebouwd"></a>Worden Er Nog Desktop Apps Gebouwd?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ja, er worden absoluut nog desktop apps gebouwd. Dit gebeurt in een spectrum van technologieën. Deze variëren sterk in aspecten zoals platform(on)afhankelijkheid en performance.</p>
+</div>
+<div class="sect2">
+<h3 id="_web_tech_op_desktop"><a class="anchor" href="#_web_tech_op_desktop"></a>Web Tech Op Desktop</h3>
+<div class="paragraph">
+<p>Veel moderne desktop apps steunen in werkelijkheid sterk op intelligent verpakte web app technologie. Kort door de bocht wordt <a href="https://en.wikipedia.org/wiki/Chromium_(web_browser)">Chromium</a> gebruikt om de app te renderen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Denk aan technologieën zoals <a href="https://www.electronjs.org">Electron</a> en <a href="https://en.wikipedia.org/wiki/Chromium_Embedded_Framework">CEF</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/electron-app.drawio.png" alt="electron app.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Het voordeel van deze aanpak is dat</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>deze apps inherent zeer weinig platformspecifieke code bevatten.</p>
+</li>
+<li>
+<p>het meestal eenvoudig is dezelfde app als desktop- én webapp aan te bieden.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Een bedrijf hoeft de app dus, grofweg, maar één keer te bouwen en kan daarmee alle klanten op web, desktop en - jawel - smartphone ("Mobile") bedienen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Geen voordeel zonder nadeel. De prijs wordt betaald onder de vorm van suboptimaal gebruik van de hardware van de klant. Je kan rekenen op hoog CPU en RAM-gebruik.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/intro/CEF.png" alt="CEF"></span></p>
+</div>
+<div class="paragraph">
+<p>Voorbeelden van Electron desktop apps zijn Discord, Docker Desktop, GitHub Desktop, Microsoft Teams, Postman en Visual Studio Code.</p>
+</div>
+<div class="paragraph">
+<p>Voorbeelden van CEF desktop apps zijn GOG Galaxy, Steam en Spotify.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_echte_desktop_apps"><a class="anchor" href="#_echte_desktop_apps"></a>"Echte" Desktop Apps</h3>
+<div class="paragraph">
+<p>Echte desktop apps, die niet steunen op verpakte web frontend tech, worden ook nog gebouwd. Deze zijn performanter en doorgaans niet onderhevig aan de designbeperkingen van mobile-first responsive layouts.</p>
+</div>
+<div class="paragraph">
+<p>Voorbeelden van kleine en grote apps zijn Windows Calculator, DaVinci Resolve, Logic Pro en Visual Studio 2022.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_web_apis_zijn_overal"><a class="anchor" href="#_web_apis_zijn_overal"></a>Web Api&#8217;s Zijn Overal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ongeacht de details van de gebruikte frontend of backend technologie, zal in moderne web-connected applicatiearchitectuur communicatie met de backend nagenoeg altijd over een web api verlopen.</p>
+</div>
+<div class="paragraph">
+<p>Er zijn ook tal van api&#8217;s die deze technologieën gebruiken, maar strikt genomen niet aan alle voorwaarden voldoen om RESTful genoemd te worden. We zullen deze gewoon web api&#8217;s noemen.</p>
+</div>
+<div class="paragraph">
+<p>Gezien (RESTful) web api&#8217;s omnipresent zijn, is het belangrijk voor de moderne developer om dit onderwerp goed te beheersen.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ontwerp</dt>
+<dd>
+<p>Organisatie, paden en contracten van de api.</p>
+</dd>
+<dt class="hdlist1">Implementatie</dt>
+<dd>
+<p>Concrete oplevering van het ontwerp in dotnet.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Enkele interessante api&#8217;s:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview?view=graph-rest-1.0">Microsoft Teams api</a></p>
+</li>
+<li>
+<p><a href="https://developer.spotify.com/documentation/web-api">Spotify api</a></p>
+</li>
+<li>
+<p><a href="https://pokeapi.co">Pokémon Data Api</a></p>
+</li>
+<li>
+<p><a href="https://developers.giphy.com/docs/api/endpoint">Giphy Api</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_precisering_van_het_doel"><a class="anchor" href="#_precisering_van_het_doel"></a>Precisering Van Het Doel</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De backend verantwoordelijk voor het runnen van een api kan een hoge graad van architecturale complexiteit kennen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Programmeren Gevorderd 2 brengt implementatiedetails van een enkelvoudige backend onder de aandacht.</p>
+</li>
+<li>
+<p>Programmeren Gevorderd 3 brengt architecturale complexiteit van een cloud-hosted backend met meerdere services onder de aandacht.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

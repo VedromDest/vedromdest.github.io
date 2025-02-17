@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Service Layer :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Orders &amp; Service Layer :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -64,20 +64,17 @@
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront.html">Backend Api Met EF Core</a>
+    <a class="nav-link" href="02-storefront.html">Backend (Api + EF Core)</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-storefront-api.html">StoreFront Api</a>
+    <a class="nav-link" href="02-storefront-api.html">RESTful Api</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-1.html">Customers</a>
-  </li>
-      <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-2.html">Products</a>
+    <a class="nav-link" href="02-storefront-api-1.html">Customers &amp; Products</a>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="3">
-    <a class="nav-link" href="02-storefront-api-3.html">Service Layer</a>
+    <a class="nav-link" href="02-storefront-api-3.html">Orders &amp; Service Layer</a>
   </li>
 </ul>
   </li>
@@ -97,6 +94,9 @@
     <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
   </li>
 </ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
@@ -141,9 +141,9 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="02-storefront.html">Backend Api Met EF Core</a></li>
-    <li><a href="02-storefront-api.html">StoreFront Api</a></li>
-    <li><a href="02-storefront-api-3.html">Service Layer</a></li>
+    <li><a href="02-storefront.html">Backend (Api + EF Core)</a></li>
+    <li><a href="02-storefront-api.html">RESTful Api</a></li>
+    <li><a href="02-storefront-api-3.html">Orders &amp; Service Layer</a></li>
   </ul>
 </nav>
 </div>
@@ -152,9 +152,9 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Service Layer</h1>
+<h1 class="page">Orders &amp; Service Layer</h1>
 <div class="sect1">
-<h2 id="_service_layer_orders"><a class="anchor" href="#_service_layer_orders"></a>Service Layer (Orders)</h2>
+<h2 id="_orders"><a class="anchor" href="#_orders"></a>Orders</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In deze fase brengen we de <em>Customer</em> en <em>Product</em> concepten samen door een <em>Order</em> (bestelling) te introduceren. Hoewel we nog steeds aan een "eenvoudige" CRUD api werken, stijgt de complexiteit aanzienlijk.</p>
