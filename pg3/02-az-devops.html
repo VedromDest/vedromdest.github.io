@@ -654,6 +654,12 @@ namespace ShipIt.PriceQuote.Api.Controllers
 </div>
 </div>
 <div class="sect2">
+<h3 id="_postman"><a class="anchor" href="#_postman"></a>Postman</h3>
+<div class="paragraph">
+<p><span class="image"><img src="_images/az-devops/postman-local.png" alt="postman local"></span></p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_versiebeheer"><a class="anchor" href="#_versiebeheer"></a>Versiebeheer</h3>
 <div class="paragraph">
 <p>Weer ongewenste bestanden uit het git <em>repository</em>.</p>
@@ -704,19 +710,37 @@ src/ShipIt.PriceQuote.Api/appsettings.Development.json</pre>
 </div>
 <div class="sect2">
 <h3 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h3>
-<div class="paragraph">
-<p>Build en deploy het resulterende project naar Azure.</p>
-</div>
 <div class="listingblock">
+<div class="title">Azure Deployment</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">az webapp up --sku F1 --name hogent-shipit-&lt;voornaam&gt;&lt;naam&gt;-quote --os-type linux</code></pre>
 </div>
+</div>
+<div class="listingblock">
+<div class="title">Azure Feedback</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{
+  "URL": "http://hogent-shipit-stefancourteaux-quote.azurewebsites.net",
+  "appserviceplan": "stefan.courteaux_asp_6085",
+  "location": "canadacentral",
+  "name": "hogent-shipit-stefancourteaux-quote",
+  "os": "Linux",
+  "resourcegroup": "stefan.courteaux_rg_8123",
+  "runtime_version": "dotnetcore|8.0",
+  "runtime_version_detected": "8.0",
+  "sku": "FREE",
+  "src_path": "//Users//stefancourteaux//Source//PG3//Les02//ShipIt2425S2//ShipIt//ShipIt.PriceQuote.Api"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/az-devops/postman-az.png" alt="postman az"></span></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
 <div class="admonitionblock important">
 <table>
