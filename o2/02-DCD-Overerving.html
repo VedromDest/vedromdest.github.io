@@ -268,7 +268,7 @@ Ze specifieert de naam (<code>Kastelen</code>) en visibiliteit  (<code>+ &#8658;
     public int Breedte {get; private set;}
     public int Hoogte {get; private set;}
 
-    public List&lt;Kasteel&gt; kastelen {get, private set;} <i class="conum" data-value="1"></i><b>(1)</b>
+    public List&lt;Kasteel&gt; Kastelen {get, private set;} <i class="conum" data-value="1"></i><b>(1)</b>
 
     public Raster(int b, int h) {
         Breedte = b;
@@ -314,13 +314,13 @@ foreach( var k in raster.Kastelen )
 <div class="paragraph">
 <p>We breiden het scenario verder uit door toevoeging van een <code>Prinses</code>. Elk kasteel <strong>kan</strong> bewoond zijn door een <code>Prinses</code>. Een prinses heeft altijd een <code>Naam</code> en een <code>Beschrijving</code>.</p>
 </div>
-<div class="paragraph">
+<div class="paragraph text-center">
 <p><span class="image"><img src="_images/dcd/kasteel-prinses.png" alt="kasteel prinses"></span></p>
 </div>
 <div class="paragraph">
 <p>We voegen de klasse toe op het DCD, rekening houdende met de verkregen informatie.</p>
 </div>
-<div class="paragraph">
+<div class="paragraph text-center">
 <p><span class="image"><img src="_images/dcd/dcd-prinses.png" alt="dcd prinses"></span></p>
 </div>
 <div class="paragraph">
@@ -846,7 +846,7 @@ Een klasse kan veel associaties hebben, kan overerven van maximaal klassen en va
 <div class="listingblock">
 <div class="title">Klasse Ridder</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Ridder : Bewoner, Strijder { <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Ridder : Bewoner, IStrijder { <i class="conum" data-value="1"></i><b>(1)</b>
 
     public int ZwaardLengte {get; private set;}
 
@@ -922,6 +922,26 @@ Een klasse kan veel associaties hebben, kan overerven van maximaal klassen en va
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_aandachtspunt"><a class="anchor" href="#_aandachtspunt"></a>Aandachtspunt</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Let er op dat je geen <code>Bewoner</code> hoeft te zijn om een <code>IStrijder</code> te implementeren.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/dcd/interfaces-hond.png" alt="interfaces hond"></span></p>
 </div>
 </div>
 </div>
