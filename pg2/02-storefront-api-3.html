@@ -153,14 +153,28 @@
 </aside>
 <article class="doc">
 <h1 class="page">Orders &amp; Service Layer</h1>
-<div class="sect1">
-<h2 id="_orders"><a class="anchor" href="#_orders"></a>Orders</h2>
+<div id="preamble">
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze les werd <a href="https://hogent.sharepoint.com/:v:/s/ProgrammerenGevorderd2dagCURGRADPRG11866502024/EYPCUjbz8oFOqAJ9Rof9OGQBPKrM8IJBsCuG6GjgbT3goA?e=juyMiS&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">opgenomen</a> op 25 februari 2025. De code staat in het algemene <a href="https://github.com/VedromDest/pg2">PG2 repo</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>In deze fase brengen we de <em>Customer</em> en <em>Product</em> concepten samen door een <em>Order</em> (bestelling) te introduceren. Hoewel we nog steeds aan een "eenvoudige" CRUD api werken, stijgt de complexiteit aanzienlijk.</p>
 </div>
-<div class="sect2">
-<h3 id="_multipliciteit"><a class="anchor" href="#_multipliciteit"></a>Multipliciteit</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multipliciteit"><a class="anchor" href="#_multipliciteit"></a>Multipliciteit</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>De <em>Customer</em> en <em>Product</em> api&#8217;s hanteren steeds enkelvoudige concepten voor de <code>POST</code> operatie. Voor een <em>Order</em> is dit niet voldoende. We willen meerdere exemplaren van een artikel, of zelfs meerdere artikels, kunnen bestellen. Dit brengt ons tot een contract dat een lijst moet bevatten.</p>
 </div>
@@ -179,8 +193,10 @@ public class OrderProductRequestContract
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_denormalisatie"><a class="anchor" href="#_denormalisatie"></a>Denormalisatie</h3>
+</div>
+<div class="sect1">
+<h2 id="_denormalisatie"><a class="anchor" href="#_denormalisatie"></a>Denormalisatie</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>De prijs en de beschrijving van een product verandert doorheen de tijd. In de toekomst willen we met zekerheid kunnen bepalen voor welke prijs een bepaald product aan een bepaalde klant verkocht werd. Dit is nodig voor <em>user experience</em> - denk aan correcte historiek in "Mijn Bestellingen" - en legale vereisten zoals het voeren van een correcte boekhouding.</p>
 </div>
@@ -191,15 +207,29 @@ public class OrderProductRequestContract
 <p>We gaan voor elke bestelling de cruciale informatie betreffende <em>Product</em> en <em>Customer</em> bijhouden zoals deze was op het moment van de bestelling.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_veiligheid"><a class="anchor" href="#_veiligheid"></a>Veiligheid</h3>
-<div class="paragraph">
-<p>We beschouwen onze api als <em>public facing</em> en moeten dus even stilstaan bij de gevolgen van onze ontwerp beslissingen in dat kader.</p>
 </div>
-<div class="sect3">
-<h4 id="_operaties_rollen"><a class="anchor" href="#_operaties_rollen"></a>Operaties &amp; Rollen</h4>
+<div class="sect1">
+<h2 id="_veiligheid"><a class="anchor" href="#_veiligheid"></a>Veiligheid</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Niet eender wie mag eender welke <em>call</em> (api operatie) in het systeem doen. Zo willen we bijvoorbeeld dat enkel een interne medewerker producten kan aanmaken. Technisch zouden we dit kunnen afdwingen door gebruikersrollen te definiëren en de <code>POST /products</code> te beperken tot een welbepaalde rol.</p>
+<p>Laat ons even stilstaan bij de gevolgen van onze ontwerp beslissingen in het kader van api beveiliging.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Beveiliging van publieke api&#8217;s wordt besproken in Programmeren Gevorderd 3.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_operaties_rollen"><a class="anchor" href="#_operaties_rollen"></a>Operaties &amp; Rollen</h3>
+<div class="paragraph">
+<p>Niet eender wie mag eender elke api operatie in het systeem aanroepen. Zo willen we bijvoorbeeld dat enkel een interne medewerker producten kan aanmaken. Technisch zouden we dit kunnen afdwingen door accounts en gebruikersrollen te definiëren en de <code>POST /products</code> te beperken tot een welbepaalde rol.</p>
 </div>
 <div class="paragraph">
 <p>Op die manier kunnen we ervoor zorgen dat enkel een beperkt aantal vertrouwde personen aanpassingen kan maken aan, bijvoorbeeld, de prijs van een product.</p>
@@ -208,13 +238,13 @@ public class OrderProductRequestContract
 <p>We kunnen ons nu voornemen op een later moment rollen toe te voegen en dit type probleem intellectueel als opgelost te beschouwen.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_operaties_verantwoordelijkheden"><a class="anchor" href="#_operaties_verantwoordelijkheden"></a>Operaties &amp; Verantwoordelijkheden</h4>
+<div class="sect2">
+<h3 id="_operaties_verantwoordelijkheden"><a class="anchor" href="#_operaties_verantwoordelijkheden"></a>Operaties &amp; Verantwoordelijkheden</h3>
 <div class="paragraph">
 <p>We hebben eerder geconcludeerd dat een deel van de <em>Product</em> en <em>Customer</em> data gedupliceerd zal moeten worden naar een <em>Order</em>.</p>
 </div>
 <div class="paragraph">
-<p>We zouden dus onderstaand contract kunnen aanwenden voor de <code>POST</code> operatie.</p>
+<p>We <strong>zouden</strong> dus onderstaand contract <strong>kunnen</strong> aanwenden voor de <code>POST</code> operatie.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -259,8 +289,20 @@ public class OrderProductContract
 <div class="paragraph">
 <p><code>POST /orders</code> kunnen we ook toekennen aan een rol, specifiek voor klanten, maar dat lost ons probleem niet op. Het probleem ligt hier immers niet bij de <em>wie</em>, maar wel bij de <em>wat</em>. We kunnen niet vertrouwen <em>wat</em> de klant instuurt.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+We moeten dus concluderen dat het niet de verantwoordelijkheid van de client mag zijn om de prijs in te sturen.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p><strong>We moeten dus concluderen dat het niet de verantwoordelijkheid van de client mag zijn om de prijs in te sturen.</strong> Het is <strong>wel</strong> de verantwoordelijkheid van de client om te zeggen welk <strong>product</strong> er gekocht wordt (<code>ProductId</code>), maar <strong>niet</strong> wat de <strong>prijs</strong> is. Die verantwoordelijkheid ligt bij de server.</p>
+<p>Het is <strong>wel</strong> de verantwoordelijkheid van de client om te zeggen welk <strong>product</strong> er gekocht wordt (<code>ProductId</code>), maar <strong>niet</strong> wat de <strong>prijs</strong> is. Die verantwoordelijkheid ligt bij de server.</p>
 </div>
 <div class="paragraph">
 <p>We gebruiken dus een contract dat nauwer aansluit bij de verantwoordelijkheid van de client.</p>
@@ -285,8 +327,10 @@ public class OrderProductRequestContract
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h3>
+</div>
+<div class="sect1">
+<h2 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We hebben dit project gestart met een eenvoudige applicatiearchitectuur waarbij per concept een <em>Controller</em> en een <em>Repository</em> beschikbaar is.</p>
 </div>
@@ -306,7 +350,19 @@ public class OrderProductRequestContract
 <p><span class="image"><img src="_images/storefront-api/api-data-service.png" alt="api data service"></span></p>
 </div>
 <div class="paragraph">
-<p>Op dit moment is de <em>OrdersController</em> losgekoppeld van de data laag. Dit is wenselijk in nagenoeg alle scenario&#8217;s. Elke laag heeft zijn eigen verantwoordelijkheid:</p>
+<p>Zo worden de controllers losgekoppeld van de data laag.Elke laag heeft zijn eigen verantwoordelijkheid:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We hanteren hier <em>een</em> manier om dergelijke problemen op te lossen, niet <em>de</em> manier.
+</td>
+</tr>
+</table>
 </div>
 <div class="dlist">
 <dl>
@@ -351,6 +407,37 @@ public class OrderProductRequestContract
 </dd>
 </dl>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_refactoring"><a class="anchor" href="#_refactoring"></a>Refactoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De code werkt, maar de kwaliteit kan nog een stuk beter.</p>
+</div>
+<div class="sect2">
+<h3 id="_uniformiteit"><a class="anchor" href="#_uniformiteit"></a>Uniformiteit</h3>
+<div class="paragraph">
+<p>Hoewel de <em>Product</em> en <em>Customers</em> code op dit moment nog niet echt uitgebreid is, zullen we toch een refactoring moeten doorvoeren om ook daarvoor een <em>Service</em> te introduceren. Immers, wanneer je een patroon begint te volgen, pas je het best uniform toe in je project.</p>
+</div>
+<div class="paragraph">
+<p>De <code>ProductService</code> en <code>CustomerService</code> schrijf je zelf.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gebruik_api_contracten"><a class="anchor" href="#_gebruik_api_contracten"></a>Gebruik Api Contracten</h3>
+<div class="paragraph">
+<p>Op dit moment worden de api contracten gebruikt doorheen al onze lagen. Dat is een <em>Bad Practice</em>. Bij het introduceren van een relationele databank met behulp van Entity Framework, gaan we dit herbekijken.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/storefront-api/api-service-data-contracts.png" alt="api service data contracts"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -358,27 +445,107 @@ public class OrderProductRequestContract
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We hanteren hier - hoewel veelgebruikt - <em>een</em> manier om dergelijke problemen op te lossen, niet <em>de</em> manier.
+Het doel van deze oefening is niet je conceptueel begrip van het onderwerp uit te diepen, wel de praktische kant in te oefenen. De bedoeling is dat je dergelijke code stilaan uit het hoofd kan schrijven, zonder (al te veel) opzoekwerk. Gebruik eventueel eens een IDE of editor die je nog niet goed kent.
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Start met een nieuwe template en schrijf <em>from scratch</em> een api met service laag en in-memory data.</p>
 </div>
 <div class="sect2">
-<h3 id="_problemen"><a class="anchor" href="#_problemen"></a>Problemen</h3>
-<div class="sect3">
-<h4 id="_uniformiteit"><a class="anchor" href="#_uniformiteit"></a>Uniformiteit</h4>
+<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
 <div class="paragraph">
-<p>Hoewel de <em>Product</em> en <em>Customers</em> code op dit moment nog niet echt uitgebreid is, zullen we toch een refactoring moeten doorvoeren om ook daarvoor een <em>Service</em> te introduceren. Immers, wanneer je een patroon begint te volgen, pas je het best uniform toe in je project.</p>
+<p>De api beheert videogames en houdt bij welke pokemon erin voorkomen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CRUD <code>/pokemons</code></p>
+</li>
+<li>
+<p>CRUD <code>/videogames</code></p>
+</li>
+</ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_gebruik_api_contracten"><a class="anchor" href="#_gebruik_api_contracten"></a>Gebruik Api Contracten</h4>
-<div class="paragraph">
-<p>Op dit moment worden de api contracten gebruikt doorheen al onze lagen. Dat is een <em>Bad Practice</em>. Bij het introduceren van een relationele databank met behulp van Entity Framework, gaan we dit oplossen.</p>
+<div class="sect2">
+<h3 id="_model"><a class="anchor" href="#_model"></a>Model</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Als je moeite hebt om klassendiagrammen te lezen, consulteer dan het <a href="https://vedromdest.github.io/o2/02-DCD-Overerving.html">relevante hoofdstuk</a> van Softwareontwerp 2.
+</td>
+</tr>
+</table>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/storefront-api/api-service-data-contracts.png" alt="api service data contracts"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/http-apis/pokemon.png" alt="pokemon">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rules"><a class="anchor" href="#_rules"></a>Rules</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Als je daar zin in hebt, kan je het verhaal natuurlijk uitbreiden om verder te oefenen.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Een <code>Pokemon</code> die gebruikt wordt in een <code>Videogame</code> kan niet gewist worden.</p>
+</li>
+<li>
+<p>Het wissen van een <code>Videogame</code> zal geen <code>Pokemon</code> wissen.</p>
+</li>
+<li>
+<p>De <code>Naam</code> van een <code>Pokemon</code> is uniek.</p>
+</li>
+<li>
+<p>De <code>Naam</code> van een <code>Videogame</code> is uniek.</p>
+</li>
+<li>
+<p>Geldige waarden voor <code>Soort</code> zijn [Water, Gras, Elektriciteit].</p>
+</li>
+<li>
+<p>Geldige waarden voor <code>Zeldzaamheid</code> zijn [Laag, Normaal, Hoog].</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technisch"><a class="anchor" href="#_technisch"></a>Technisch</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Mogelijks stoot je op ontwerp problemen. Overweeg de technieken uit de les, maar vertrouw op jezelf en <em>make it work</em>.</p>
+</li>
+<li>
+<p>Als je besluit <code>Enums</code> te gebruiken, zal je mogelijk nood hebben aan onderstaande snippet.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Enum serialization</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">builder.Services.AddControllers().AddJsonOptions(opt =&gt; {
+    opt.JsonSerializerOptions.Converters.Add(
+        new JsonStringEnumConverter());
+});
+;</code></pre>
 </div>
 </div>
 </div>

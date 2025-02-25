@@ -157,8 +157,63 @@
 <h2 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We maken een nieuwe solution aan op basis van de web api template <strong>met</strong> <em>Controllers</em>.</p>
+<p>We maken een nieuwe solution aan op basis van de webapi template <strong>met</strong> <em>Controllers</em>.</p>
 </div>
+<div class="sect2">
+<h3 id="_templates"><a class="anchor" href="#_templates"></a>Templates</h3>
+<div class="literalblock">
+<div class="title">Welke templates heb ik?</div>
+<div class="content">
+<pre>dotnet new list</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Hoe installeer ik templates?</div>
+<div class="content">
+<pre>dotnet new install TemplatePackageNaamHier <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Template packages van Microsoft staan <a href="https://learn.microsoft.com/en-us/dotnet/core/install/templates?pivots=os-windows#install-template-packages-from-other-sdks">hier opgelijst</a>.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">Hoe gebruik ik een template?</div>
+<div class="content">
+<pre>dotnet new webapi --help</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">WebApi met controllers.</div>
+<div class="content">
+<pre>dotnet new webapi --use-controllers -o ProjectNaamHier</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+IDE&#8217;s hebben schermpjes die deze parameters voorstellen als checkboxes of vlagjes, maar in de achtergrond worden dezelfde templates gebruikt. Hoe beter je begrijpt wat er achter de schermen gebeurt, hoe minder het uitmaakt in welke tool je aan het coden bent.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/http-apis/vscode-template-1.png" alt="vscode template 1"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/http-apis/vscode-template-2.png" alt="vscode template 2"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_program_file"><a class="anchor" href="#_program_file"></a>Program File</h3>
 <div class="paragraph">
 <p><span class="image"><img src="_images/storefront-api/solution.png" alt="solution"></span></p>
 </div>
@@ -202,6 +257,7 @@
 </div>
 <div class="paragraph">
 <p>Afhankelijk van de exacte template settings die je koos, kan er ook een <code>WeatherForecastController.cs</code> aanwezig zijn. Dit voorbeeld van Microsoft is handig als referentie.</p>
+</div>
 </div>
 </div>
 </div>
