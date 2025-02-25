@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: Softwareontwerp 2 (BETA)</title>
+    <title>GRASP &amp; SSD :: Softwareontwerp 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -65,6 +65,9 @@
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="02-DCD-Overerving.html">DCD &amp; Overerving</a>
   </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="03-RDD-GRASP.html">GRASP &amp; SSD</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -88,6 +91,10 @@
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Ontwerp 2</a></li>
+    <li><a href="03-RDD-GRASP.html">GRASP &amp; SSD</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -95,17 +102,696 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
+<h1 class="page">GRASP &amp; SSD</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>ligt binnen raster staat niet op zijn plaats. mag wel static methode van de klasse worden OF verhuizen naar Raster.</p>
+<p>In de eerste twee lessen hebben we uitgebreid aandacht besteed aan  structuur, met een overzichtelijk DCD en  leesbare code als resultaat. Ook het opdelen en plaatsen van logica in het ontwerp is van groot belang. Dat bekijken we deze les.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Moderne software wordt gewoonlijk ontwikkeld aan de hand van een iteratief proces. In de praktijk zal men dus meermaals door de stappen <em>analyse - ontwerp - implementatie - test</em> lopen. Dit kan gebeuren voor kleine, grote, nieuwe of reeds bestaande functionaliteit.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rdd"><a class="anchor" href="#_rdd"></a>RDD</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wanneer we, door grondige analyse, een inzicht verworven hebben in <em>wat</em> de applicatie moet doen, proberen we dit op weloverwogen wijze te integreren in het softwareontwerp.</p>
 </div>
 <div class="paragraph">
-<p>gedrag in de klassen steken, domeincontroller etc</p>
+<p>Naarmate we ervaring opdoen als developer in verschillende probleemdomeinen, wordt het steeds gemakkelijker om dit grotendeels intuïtief in te vullen. Spijtig genoeg kan intuïtie niet aangeleerd worden.</p>
 </div>
 <div class="paragraph">
-<p>toString</p>
+<p>We kunnen wél een poging doen de gekoppelde denkpatronen te onderzoeken en neer te schrijven. Op deze manier hebben nieuwe developers een houvast bij het ontwerpen en zodoende het opbouwen van hun eigen intuïtie.</p>
 </div>
 <div class="paragraph">
-<p>is bewoond etc</p>
+<p>Wanneer je mensen efficiënt wil laten samenwerken in eender welke context (bedrijf, sport, videogame) spreek je duidelijke rollen en verantwoordelijkheden af. Indien deze intelligent bepaald zijn en vervolgens competent en volgens afspraak uitgevoerd worden, loopt alles vlot.</p>
+</div>
+<div class="paragraph">
+<p>In Responsibility Driven Design (RDD) passen we deze visie toe op softwareontwerp.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wat moet de applicatie allemaal doen?</p>
+</li>
+<li>
+<p>Welke <em>roles &amp; responsibilities</em> zien we in dat proces?</p>
+</li>
+<li>
+<p>Aan welke klassen kunnen we deze toewijzen?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We gebruiken de kracht van een OO-taal om mooie, leesbare en vooral onderhoudbare oplossingen te voorzien. We willen dus geen verwarrende langdradige procedurele logica of <em>spaghetticode</em> in ons project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grasp"><a class="anchor" href="#_grasp"></a>GRASP</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De essentie van logica integreren in een OO-ontwerp is dus het toekennen van de juiste verantwoordelijkheden aan klassen. Maar hoe doen we dat dan concreet? Het zou handig zijn moesten we beschikken over enkele richtlijnen.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+GRASP is een Engels acroniem dat staat voor Generalized Responsibility Assignment Software Principles. Het bestaat uit negen richtlijnen die kunnen worden gebruikt om in objectgeoriënteerde systemen verantwoordelijkheden toe te kennen aan klassen of objecten.
+</blockquote>
+<div class="attribution">
+&#8212; https://nl.wikipedia.org/wiki/GRASP
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We zijn uiteraard niet de eerste mensen die ons dit afvragen. Het is prima om verder te bouwen op de ideeën van anderen. Mochten we dit niet doen, zouden we nog steeds met <a href="https://www.sciencedirect.com/science/article/abs/pii/S0277379119302598">met scherpe stenen op mammoeten jagen</a>. Verder (proberen) bouwen werkt natuurlijk enkel in ons voordeel wanneer we de ideeën ook effectief begrijpen!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We kunnen deze negen richtlijnen onderverdelen in rollen (van klassen) en vuistregels voor het ontwerp.</p>
+</div>
+<div class="sect2">
+<h3 id="_controller_rol"><a class="anchor" href="#_controller_rol"></a>Controller Rol</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Probleem</dt>
+<dd>
+<p>Welk is het eerste object, achter de User Interface, dat verantwoordelijk is voor
+het ontvangen en coördineren van een systeemoperatie?</p>
+</dd>
+<dt class="hdlist1">Oplossing</dt>
+<dd>
+<p>Ken de verantwoordelijkheid toe aan een klasse die het volledige systeem
+representeert, een Controller klasse</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_information_expert_rol"><a class="anchor" href="#_information_expert_rol"></a>Information Expert Rol</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Probleem</dt>
+<dd>
+<p>Aan welke klasse kennen we een bepaalde verantwoordelijkheid toe?</p>
+</dd>
+<dt class="hdlist1">Oplossing</dt>
+<dd>
+<p>Ken de verantwoordelijkheid toe aan de klasse die de (meeste) informatie heeft om de verantwoordelijkheid te dragen.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creator_rol"><a class="anchor" href="#_creator_rol"></a>Creator Rol</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Probleem</dt>
+<dd>
+<p>Wie is er verantwoordelijk voor de creatie van een instantie van klasse A?</p>
+</dd>
+<dt class="hdlist1">Oplossing</dt>
+<dd>
+<p>Geef de verantwoordelijkheid om een instantie van klasse A te maken aan die klasse B die aan het meeste van de volgende omschrijvingen voldoet:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>B bevat A</p>
+</li>
+<li>
+<p>B houdt de toestand van A bij</p>
+</li>
+<li>
+<p>B gebruikt A veelvuldig</p>
+</li>
+<li>
+<p>B heeft de data die benodigd is voor initialisatie van A</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vuistregels"><a class="anchor" href="#_vuistregels"></a>Vuistregels</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Low Coupling</dt>
+<dd>
+<p>Reduceer de impact van wijzigingen door verantwoordelijkheden dusdanig toe te kennen dat er alleen strikt noodzakelijke associaties bestaan.</p>
+</dd>
+<dt class="hdlist1">High Cohesion</dt>
+<dd>
+<p>Houd klassen begrijpelijk en onderhoudbaar door een grote samenhang te behouden tussen de verschillende verantwoordelijkheden van een klasse.</p>
+</dd>
+<dt class="hdlist1">Polymorphism</dt>
+<dd>
+<p>In het geval van type afhankelijk gedrag, ken dan de verantwoordelijkheid toe aan specifieke types/klassen, in plaats van conditionele logica (<code>if</code>, <code>switch</code>) te gebruiken.</p>
+</dd>
+<dt class="hdlist1">Pure Fabrication</dt>
+<dd>
+<p>Als Information Expert geen uitkomst biedt zonder schending van de Low Coupling en High Cohesion richtlijnen, maak dan een nieuwe klasse om de verantwoordelijkheid te dragen.</p>
+</dd>
+<dt class="hdlist1">Indirection</dt>
+<dd>
+<p>Ontkoppel klassen door verantwoordelijkheden toe te kennen aan een tussenliggende klasse die de interactie tussen de klassen overneemt.</p>
+</dd>
+<dt class="hdlist1">Protected Variations</dt>
+<dd>
+<p>Definieer een interface voor gedrag waarin veel variatie verwacht wordt zodat de interface gelijk blijft, en de implementatie eigen is aan het type.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_drielagenmodel_introductie"><a class="anchor" href="#_drielagenmodel_introductie"></a>Drielagenmodel Introductie</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Software wordt vaak opgedeeld in lagen. Elk van deze lagen heeft een afgelijnde verantwoordelijkheid. De klassen binnen een laag vervullen op hun beurt een deel van de verantwoordelijkheid van de laag. Een klassiek voorbeeld van dit paradigma is het <em>drielagenmodel</em>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het drielagenmodel wordt uitgebreid behandeld in Programmeren Gevorderd 1. Ook in dit vak komen we er op terug. Op dit moment heb je een hoog-over begrip van de context nodig, maar de focus blijft tijdens deze les op de domeinlaag.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="_images/rdd/rol-controller.png" alt="rol controller"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In de <strong>presentatielaag</strong> vinden we klassen die instaan voor het <strong>weergeven</strong> - presenteren - van informatie aan de gebruiken. Denk aan vensters, lijstjes, veldjes en knopjes.</p>
+</li>
+<li>
+<p>In de <strong>domeinlaag</strong> bevinden zich de klassen die centraal staan in het modelleren van <strong>structuur en gedrag</strong> van de oplossing. Denk aan het <code>Kasteel</code> DCD - <strong>Domain Class Diagram</strong>.</p>
+</li>
+<li>
+<p>In de <strong>persistentielaag</strong> vinden we klassen die instaan voor het duurzaam <strong>bewaren</strong> - persisteren - van informatie. Hier zal vaak verbinding gelegd worden met een databank.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Het opdelen van software in lagen met eigen verantwoordelijkheden verhoogt de leesbaarheid en de onderhoudbaarheid van de code.</p>
+</div>
+<div class="paragraph">
+<p>Technisch gezien zou eender welke klasse uit eender welke laag een associatie kunnen hebben met eender welke klasse uit eender welke laag. We nemen ons voor dit niet te doen, want het wordt al snel een spinnenweb. Waarom? Observeer.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/3-lagen-slecht.png" alt="3 lagen slecht"></span></p>
+</div>
+<div class="paragraph">
+<p>Dit helpt ons niet verder. Of er nu lagen zijn of niet, wanneer alles alle kanten opgaat, is er geen toegevoegde waarde. We moeten de communicatie tussen de lagen onder controle krijgen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We geven in elke laag een klasse de verantwoordelijkheid aanspreekpunt te zijn van de laag. Een klasse die deze rol vervult, noemen we een <em>Controller</em> klasse.</p>
+</li>
+<li>
+<p>We laten communicatie tussen lagen maar in één richting toe. De <em>Presentatie</em> mag het <em>Domein</em> aanroepen en het Domein mag de Persistentie aanroepen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/3-lagen-beter.png" alt="3 lagen beter"></span></p>
+</div>
+<div class="paragraph">
+<p>Dit ziet er al een pak minder stresserend uit 😌</p>
+</div>
+<div class="paragraph">
+<p>In bovenstaand voorbeeld hebben het domein en de persistentie elke één grote controller, een <em>façadecontroller</em>. Vaak zullen we ondervinden dat de logica van de applicatie opgedeeld kan worden in use cases, flows of functionaliteiten. Wanneer blijkt dat niet elke domeinklasse bij elke use case betrokken is, kunnen we <em>casecontrollers</em> maken die slechts een subset van het domein aanspreken. Hetzelfde geldt voor de persistentiecontroller.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/3-lagen-nog-beter.png" alt="3 lagen nog beter"></span></p>
+</div>
+<div class="paragraph">
+<p>Het herkennen, of zelfs introduceren van klassen die de rol van <em>information expert</em> en <em>creator</em> kunnen dragen, zal de directe afhankelijkheden tussen de controller en de domeinklassen nog kunnen terugdringen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In de praktijk zullen we de persistentie vaak iets anders gaan indelen en benoemen, maar conceptueel zit het hier goed. Je leert er meer over in Programmeren Gevorderd 1 en 2.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ssd"><a class="anchor" href="#_ssd"></a>SSD</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We voelen dat het tijd wordt om een beetje functionaliteit toe te voegen aan het <code>Raster</code>-<code>Kasteel</code>-verhaal. We roepen een scenario in het leven waarbij</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>de gebruiker een nieuwe simulatie kan starten voor een raster van breedte x en hoogte y.</p>
+</li>
+<li>
+<p>de gebruiker een kasteel kan toevoegen op een gegeven postie x, y met aantal bewoners a.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Het systeem zal willekeurige bewoners genereren.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>de gebruiker een willekeurige bewoner kan laten doden.</p>
+</li>
+<li>
+<p>de gebruiker kan vragen of een kasteel op positie x,y bewoond is.</p>
+</li>
+<li>
+<p>de simulatie eindigt wanneer de gebruiker dit aangeeft.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Een Systeem Sequentie Diagram (SSD) toont interactie tussen de gebruiker en het systeem.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-ssd.png" alt="grasp ssd"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grasp_toepassen"><a class="anchor" href="#_grasp_toepassen"></a>GRASP Toepassen</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_domeincontroller"><a class="anchor" href="#_domeincontroller"></a>DomeinController</h3>
+<div class="paragraph">
+<p>We hebben nog geen domeincontroller in het ontwerp. We zullen deze moeten toevoegen. Elke vraag komende van buiten ons domein zal daarlangs moeten passeren. Ook mag de domeincontroller geen instanties van domeinklassen teruggeven naar de buitenwereld.</p>
+</div>
+<div class="paragraph">
+<p>Het SSD geeft ons inzicht in de mogelijkheden die de <code>DomeinController</code> moet bieden.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-controller-1.png" alt="grasp controller 1"></span></p>
+</div>
+<div class="paragraph">
+<p>Het starten van een simulatie impliceert het aanmaken van een nieuw <code>Raster</code>. De <code>DomeinController</code> is dus ook <em>Creator</em> van het <code>Raster</code>. De <code>DomeinController</code> zal een instantie van deze klasse als eigenschap nodig hebben. Dit mag niet gedeeld worden met de buitenwereld, dus het is <code>private</code>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-controller-2.png" alt="grasp controller 2"></span></p>
+</div>
+<div class="paragraph">
+<p>We schrijven een eerste versie van de <code>DomeinController</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DomeinController
+{
+    private Raster? _raster = null;
+
+    public void StartNieuweSimulatie(int breedte, int hoogte)
+    {
+        _raster = new Raster(breedte, hoogte);
+    }
+
+    public void StopHuidigeSimulatie()
+    {
+        _raster = null;
+    }
+
+    public void VoegKasteelToe(int x, int y, int aantalBewoners)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsKasteelBewoond(int x, int y)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DoodWillekeurigeBewoner()
+    {
+        throw new NotImplementedException();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Het starten en stoppen van een simulatie heeft een eerder vanzelfsprekende implementatie. We kennen de verantwoordelijkheid toe aan de controller zelf en hoeven niet verder in het DCD te duiken. De andere methoden vereisen meer denkwerk.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kasteel_constructor"><a class="anchor" href="#_kasteel_constructor"></a>Kasteel Constructor</h3>
+<div class="listingblock">
+<div class="title">Kasteel Constructor</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public Kasteel(Coordinate positie, int aantalV, Color kleur)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De constructor vereist drie parameters. Twee ervan kennen we niet. We zouden waarden kunnen hardcoden in de logica die de constructor zal aanroepen.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void VoegKasteelToe(int x, int y, int aantalBewoners)
+{
+    var kasteel = new Kasteel(new Coordinate(x, y), 3, Color.Aqua);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dit werkt, maar het kan beter. Als we geen info krijgen van de buitenwereld, wie zou er dan verantwoordelijk moeten zijn voor de standaardwaarden van deze klasse? De klasse <code>Kasteel</code> zelf is een betere kandidaat.</p>
+</div>
+<div class="listingblock">
+<div class="title">Bijkomende Kasteel Constructor</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Kasteel {
+
+    //...
+
+    public Kasteel(Coordinate positie)
+        : this(positie, 3, Color.Aqua) { <i class="conum" data-value="1"></i><b>(1)</b>
+    }
+
+    public Kasteel(Coordinate positie, int aantalV, Color kleur) {
+        Positie = positie;
+        AantalVlaggetjes = aantalV;
+        KleurVanDeMuren = kleur;
+        Bewoners = new();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De nieuwe constructor geeft de ontvangen positie door, alsook standaardwaarden voor <code>aantalV</code> en <code>kleur</code>.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>De controller kan hier nu gebruik van maken.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void VoegKasteelToe(int x, int y, int aantalBewoners)
+{
+    var kasteel = new Kasteel(new Coordinate(x, y));
+    _raster.Kastelen.Add(kasteel);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dat ziet er al beter uit. Nu moeten we er ook nog voor zorgen dat het gevraagde aantal willekeurige bewoners toegevoegd worden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bewonerfactory"><a class="anchor" href="#_bewonerfactory"></a>BewonerFactory</h3>
+<div class="paragraph">
+<p>We kunnen deze logica rechtstreeks in de controller schrijven, maar dat voelt niet als de juiste plaats van deze verantwoordelijkheid. Het <code>Raster</code> heeft ook geen directe kennis van bewoners. Het <code>Kasteel</code> wel, maar we hebben de moeite genomen de types bewoners te abstraheren voor <code>Kasteel</code>.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer we binnen het bestaande domeinmodel geen gepaste plaats vinden voor dergelijke creatielogica, kunnen we ervoor opteren een nieuwe klasse in het leven te roepen die deze verantwoordelijkheid zal dragen. Zo een klasse heet een <em>Factory</em>. We maken de factory static zodat de controller, of andere klassen, er geen expliciete instantie van nodig hebben om de functionaliteit te gebruiken. We voegen de methoden toe die ons handig lijken in deze context.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-creator.png" alt="grasp creator"></span></p>
+</div>
+<div class="paragraph">
+<p>We kunnen ons afvragen of we hier niet aan <em>overdesignen</em> zijn. Een volledig nieuwe klasse om wat objecten te genereren? Wel, laat ons de code eens bekijken.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Afhankelijk van je C# kennis, kan de logica binnen de BewonerFactory een beetje cryptisch lijken. Maak je hier op dit moment geen zorgen over en accepteer dat methoden doen wat ze beloven.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">BewonerFactory</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static class BewonerFactory
+{
+    public static Bewoner MaakWillekeurigeBewoner()
+    {
+        var naam = MaakWillekeurigeString(10);
+        var r = new Random();
+        return r.Next(4) switch
+        {
+            0 =&gt; new Prinses(naam, MaakWillekeurigeString(50)),
+            1 =&gt; new Ridder(v, 1),
+            2 =&gt; new Stalknecht(naam),
+            3 =&gt; new Kok(naam, MaakWillekeurigeString(30)),
+            _ =&gt; throw new Exception()
+        };
+    }
+
+    public static List&lt;Bewoner&gt; MaakWillekeurigeBewoners(int aantal)
+    {
+        return Enumerable.Repeat(0, aantal)
+            .Select(x =&gt; MaakWillekeurigeBewoner())
+            .ToList();
+    }
+
+    private static string MaakWillekeurigeString(int lengte = 10)
+    {
+        return string.Join("", Enumerable.Repeat(0, lengte)
+            .Select(n =&gt; (char)new Random().Next(32,127)));
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We kunnen de functionaliteit onmiddellijk integreren in de controller.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void VoegKasteelToe(int x, int y, int aantalBewoners)
+{
+    var kasteel = new Kasteel(new Coordinate(x, y));
+    var bewoners = BewonerFactory.MaakWillekeurigeBewoners(aantalBewoners);
+    kasteel.Bewoners.AddRange(bewoners);
+    _raster.Kastelen.Add(kasteel);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We concluderen dat het zeker de moeite waard was een nieuwe klasse in het leven te roepen. De bestaande domeinklassen, inclusief domeincontroller, houden we zo licht en leesbaar.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_isbewoond"><a class="anchor" href="#_isbewoond"></a>IsBewoond</h3>
+<div class="paragraph">
+<p>De domeincontroller voorziet een methode om te controleren of een kasteel bewoond is.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public bool IsKasteelBewoond(int x, int y)
+{
+    throw new NotImplementedException();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In dit geval moet er niets gemaakt worden, we zoeken dus geen <em>creator</em>. We zijn op zoek naar een klasse die het beste geschikt om op de vraag te antwoorden: de <em>(information) expert</em>. Het <code>Kasteel</code> lijkt de geschikte kandidaat, want die heeft een lijst van bewoners.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-expert.png" alt="grasp expert"></span></p>
+</div>
+<div class="listingblock">
+<div class="title">Kasteel</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Kasteel {
+    //...
+    public List&lt;Bewoner&gt; Bewoners {get; set;}
+    //...
+    public bool IsBewoond()
+    {
+        return Bewoners.Any();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De domeincontroller heeft geen expliciete kennis van de kastelen op het raster. We willen de associaties beperken tot het strikt noodzakelijke. De informatie zal dus door het raster naar boven moeten kunnen <em>bubbelen</em>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/rdd/grasp-expert-2.png" alt="grasp expert 2"></span></p>
+</div>
+<div class="paragraph">
+<p>We implementeren de methode in Raster.</p>
+</div>
+<div class="listingblock">
+<div class="title">Raster</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Raster {
+    //...
+    public List&lt;Kasteel&gt; Kastelen { get; private set;}
+    //...
+    public bool IsKasteelBewoond(int x, int y)
+    {
+        return Kastelen.Single(kasteel =&gt;
+            kasteel.Positie.X == x &amp;&amp; kasteel.Positie.Y == y)
+            .IsBewoond();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We roepen de methode aan in de controller.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public bool IsKasteelBewoond(int x, int y)
+{
+    return _raster.IsKasteelBewoond(x, y);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resultaat"><a class="anchor" href="#_resultaat"></a>Resultaat</h3>
+<div class="paragraph">
+<p>Dit resulteert uiteindelijk in onderstaande controller. Deze controller vervult zijn rol als <em>facade</em> van het domein, maar bevat quasi geen logica door gebruik van <em>expert</em> en <em>creator</em> insteek.</p>
+</div>
+<div class="listingblock">
+<div class="title">DomeinController</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DomeinController
+{
+    private Raster? _raster = null;
+
+    public void StartNieuweSimulatie(int breedte, int hoogte)
+    {
+        _raster = new Raster(breedte, hoogte);
+    }
+
+    public void StopHuidigeSimulatie()
+    {
+        _raster = null;
+    }
+
+    public void VoegKasteelToe(int x, int y, int aantalBewoners) <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+        var kasteel = new Kasteel(new Coordinate(x, y));
+        var bewoners = BewonerFactory.MaakWillekeurigeBewoners(aantalBewoners);
+        kasteel.Bewoners.AddRange(bewoners);
+        _raster.Kastelen.Add(kasteel);
+    }
+
+    public bool IsKasteelBewoond(int x, int y)
+    {
+        return _raster.IsKasteelBewoond(x, y);
+    }
+
+    public void DoodWillekeurigeBewoner()
+    {
+        throw new NotImplementedException(); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deze methode bevat nog net iets meer logica dan we zouden willen. Zie oefening.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Nog niet geïmplementeerd. Zie oefening.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_must"><a class="anchor" href="#_must"></a>Must</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Vertrek van je code voor het domeinmodel van de oefening uit de vorige les.</p>
+</li>
+<li>
+<p>Implementeer de aanpassingen uit deze les.</p>
+</li>
+<li>
+<p>Ontwerp en implementeer de ontbrekende methode <code>DoodWillekeurigeBewoner()</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_should"><a class="anchor" href="#_should"></a>Should</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ontwerp en implementeer een elegantere oplossing voor <code>VoegKasteelToe</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Als het goed zit, wordt ook dit een <em>oneliner</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_could"><a class="anchor" href="#_could"></a>Could</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>De huidige implementatie zal exceptions gooien of onverwacht gedrag vertonen wanneer afgeweken wordt van de <em>happy flow</em>. Probeer enkel probleempunten te identificeren en maakt de code robuuster.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </article>
   </div>
