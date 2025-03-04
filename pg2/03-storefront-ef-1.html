@@ -109,7 +109,7 @@
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="90-oefeningen.html">Oefeningen</a>
+    <a class="nav-link" href="90-oefeningen.html">Extra Oefeningen</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-01-herhaling.html">Herhaling C# en UML</a>
@@ -154,6 +154,116 @@
 <article class="doc">
 <h1 class="page">Werken Met MySQL</h1>
 <div class="sect1">
+<h2 id="_relationele_databanken"><a class="anchor" href="#_relationele_databanken"></a>Relationele Databanken</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De structuur van een Relationele Databank wordt in essentie geschapen uit <strong><em>Tables</em></strong> (tabellen) en <strong><em>Constraints</em></strong> (opgelegde beperkingen) op de data in die tabellen.</p>
+</div>
+<div class="sect2">
+<h3 id="_tables"><a class="anchor" href="#_tables"></a>Tables</h3>
+<div class="paragraph">
+<p>Een <em>Table</em> is een structuur bestaande uit rijen en kolommen, gevuld met gegevens.</p>
+</div>
+<div class="paragraph">
+<p>Elke <strong><em>Table</em></strong> heeft minstens:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Een <strong>naam</strong>, bijvoorbeeld "Klanten", "Producten" of "Spelers"</p>
+</li>
+<li>
+<p>één of meer <strong>kolomdefinities</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Elke <strong><em>Column</em></strong> wordt gedefinieerd a.d.h.v. onderstaande <strong>eigenschappen</strong>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>De hoofding van de kolom, bijvoorbeeld "Voornaam" of "Geboortedatum".</p>
+</dd>
+<dt class="hdlist1">DataType</dt>
+<dd>
+<p>Technische precisering van het type data dat opgeslagen zal worden in de kolom.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>varchar(<em>&lt;lengte&gt;</em>)</code></p>
+</li>
+<li>
+<p><code>int</code></p>
+</li>
+<li>
+<p><code>decimal(<em>&lt;positiesInTotaal&gt;,&lt;cijfersAchterDeKomma&gt;</em>)</code></p>
+</li>
+<li>
+<p><code>timestamp</code></p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Nullability</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><code>null</code> &#8594; een rij mag een waarde hebben voor deze kolom</p>
+</li>
+<li>
+<p><code>not null</code> &#8594; een rij moet altijd een waarde hebben voor deze kolom</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Default Value</dt>
+<dd>
+<p>Wanneer men bij het aanmaken van een rij deze kolom niet vermeldt, wordt een standaardwaarde toegepast, bijvoorbeeld het resultaat van de functie <code>current_timestamp</code> of de vaste waarde <code>3</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constraints"><a class="anchor" href="#_constraints"></a>Constraints</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Primary Key (Constraint)</dt>
+<dd>
+<p>De waarde van een veld in deze kolom, of combinatie van kolommen, moet uniek zijn in de tabel. Er kan maar één <em>PK</em> bestaan per tabel. Dit is dé sleutel bedoeld om een <em>record</em> (=rij) binnen de tabel ondubbelzinnig te identificeren.</p>
+</dd>
+<dt class="hdlist1">Unique Key (Constraint)</dt>
+<dd>
+<p>De waarde van een veld in deze kolom, of combinatie van kolommen, moet uniek zijn in de tabel. Er kan meer dan één <em>UK</em> bestaan per tabel. Deze zijn bedoeld om business regels rond uniciteit af te dwingen.</p>
+</dd>
+<dt class="hdlist1">Foreign Key (Constraint)</dt>
+<dd>
+<p>De waarde van een veld in een bepaalde kolom in tabel A verwijst naar een <em>Key</em> (Primary of Unique) in tabel B. Indien de gerefereerde waarde in tabel B niet bestaat, zal de database het record in tabel A verwerpen.</p>
+</dd>
+<dt class="hdlist1">Check Constraint</dt>
+<dd>
+<p>Een deterministische boolean expressie die gebruik kan maken van alle kolommen in de tabel en constanten om een record te evalueren. Indien de expressie naar <code>false</code> evalueert, zal het record niet kunnen toegevoegd of aangepast worden.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structured_query_language_sql"><a class="anchor" href="#_structured_query_language_sql"></a>Structured Query Language (SQL)</h3>
+<div class="paragraph">
+<p>Structured Query Language (SQL) is de taal die we gebruiken om een databank vorm te geven en de data te manipuleren.</p>
+</div>
+<div class="paragraph">
+<p>SQL is <strong>geen</strong> programmeertaal. In een programmeertaal beschrijf je immers hoe je iets wil doen. In SQL beschrijf je enkel wat je wil doen - het systeem bepaalt hoe dat zal gebeuren.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_mysql_opzetten"><a class="anchor" href="#_mysql_opzetten"></a>MySQL Opzetten</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -164,25 +274,41 @@
 <div class="paragraph">
 <p>Download de MySQL 8.0 Docker image</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>docker pull mysql:8.0</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker pull mysql:8.0</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Start de image als container.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>docker run --name gevorderd2-mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=WachtW00rd -d mysql:8.0</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run --name pg2-mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=WachtW00rd -d mysql:8.0</code></pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gevorderd2-mysql</code> is de naam van de nieuwe container instance</p>
+</li>
+<li>
+<p><code>3306</code> is de poort binnen de instance, <code>3307</code> buiten</p>
+</li>
+<li>
+<p><code>MYSQL_ROOT_PASSWORD</code> is een environment variable</p>
+</li>
+<li>
+<p><code>mysql:8.0</code> is de image die in de instance gebruikt wordt</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>De container logs laten weten wanneer de server klaar is om gebruikt te worden.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>/usr/sbin/mysqld: ready for connections...</pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">/usr/sbin/mysqld: ready for connections...</code></pre>
 </div>
 </div>
 </div>
@@ -488,53 +614,89 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;</code></pre>
 <div class="sect1">
 <h2 id="_dml_data_manipulation_language"><a class="anchor" href="#_dml_data_manipulation_language"></a>DML (Data Manipulation Language)</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_crud"><a class="anchor" href="#_crud"></a>CRUD</h3>
 <div class="paragraph">
 <p>We herhalen tijdens de les de CRUD basics</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>INSERT</p>
-</li>
-<li>
-<p>SELECT</p>
-</li>
-<li>
-<p>UPDATE</p>
-</li>
-<li>
-<p>DELETE</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="title">INSERT</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">insert into parentTable (
+    BusinessKey ,
+    ParentName ,
+    Counter
+)
+values (
+	'CODE123',
+    'Dit is de naam',
+    2
+);
+
+insert into childTable (
+	BusinessKey,
+    ParentId
+)
+values (
+	'CHILD123',
+    1
+);</code></pre>
 </div>
-<div class="admonitionblock tip">
+</div>
+<div class="listingblock">
+<div class="title">SELECT</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select  pt.Id, pt.BusinessKey ,ct.Id, ct.BusinessKey
+from	parentTable pt
+inner join childTable ct on pt.Id = ct.parentId; <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Het <code>MERGE</code> statement laat je toe in een enkele DML operatie verschillende CRUD operaties <strong>conditioneel</strong> uit te voeren.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Test het verschil tussen <code>left</code>, <code>right</code> en <code>inner</code> uit indien je twijfelt.</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>en de set basics</p>
+<div class="listingblock">
+<div class="title">UPDATE (Enkelvoudig)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">update parentTable
+set ParentName = 'Updated name'
+where Id = 1;</code></pre>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>UNION</p>
-</li>
-<li>
-<p>INTERSECT</p>
-</li>
-<li>
-<p>EXCEPT</p>
-</li>
-</ul>
 </div>
+<div class="listingblock">
+<div class="title">UPDATE (Meervoudig)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">update parentTable pt
+inner join childTable ct on pt.Id = ct.parentId
+set pt.ParentName = 'Nogmaals Updated',
+    ct.BusinessKey = 'CHILD1234'
+where ct.Id = 1;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">DELETE (Foreign Key Error)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">delete from parentTable
+where id = 1;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">DELETE</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">delete from childTable
+where id = 1;
+
+delete from parentTable
+where id = 1;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sets"><a class="anchor" href="#_sets"></a>SETS</h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -547,6 +709,19 @@ Set operators voeren standaard een <code>DISTINCT</code> uit. Voeg het <code>ALL
 </tr>
 </table>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select 1 as value
+union / intersect / except
+select value from
+(
+	select 1 as value
+	union all
+	select 2 as value
+) sub</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -555,7 +730,7 @@ Set operators voeren standaard een <code>DISTINCT</code> uit. Voeg het <code>ALL
 <div class="sect2">
 <h3 id="_reference_manual"><a class="anchor" href="#_reference_manual"></a>Reference Manual</h3>
 <div class="paragraph">
-<p>DDL en DML syntax gaat (zeer) ver voorbij wat er typisch op school aangeleerd wordt. In een professionele context zal je waarschijnlijk nood hebben aan gedetailleerde informatie rond gevorderde onderwerpen.</p>
+<p>De volledige DDL en DML syntax gaat (zeer) ver voorbij wat er typisch op school aangeleerd wordt. In een professionele context zal je waarschijnlijk nood hebben aan gedetailleerde informatie rond gevorderde onderwerpen.</p>
 </div>
 <div class="paragraph">
 <p>Er bestaan nog steeds boeken over het onderwerp, maar het loont om te weten dat er voor elke database een <em>(syntax) Reference Manual</em> bestaat. Ook MySQL heeft een <a href="https://dev.mysql.com/doc/refman/8.0/en/">online manual</a>.</p>
@@ -566,20 +741,13 @@ Set operators voeren standaard een <code>DISTINCT</code> uit. Voeg het <code>ALL
 </div>
 <div class="sect2">
 <h3 id="_generated_columns"><a class="anchor" href="#_generated_columns"></a>Generated Columns</h3>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>We spelen tijdens de les een beetje met <em>Generated Columns</em>. Het script  uit de les wordt als <strong>bijlage</strong> voorzien.</p>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Net zoals in Excel, kan je ook in een relationele databank berekende velden definiëren.</p>
 </div>
 <div class="listingblock">
 <div class="title">Syntax</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">column_name data_type [GENERATED ALWAYS] AS (expression)
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">column_name data_type [GENERATED ALWAYS] AS (expression)
    [VIRTUAL | STORED] [UNIQUE [KEY]]</code></pre>
 </div>
 </div>
@@ -592,28 +760,33 @@ Set operators voeren standaard een <code>DISTINCT</code> uit. Voeg het <code>ALL
 <div class="listingblock">
 <div class="title">Voorbeeld</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">create table VirtualColumnTest (
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create table VirtualColumnTest (
 	Id 			int not null auto_increment primary key,
     FirstName	varchar(30),
     LastName 	varchar(30)
 );
 
-insert into VirtualColumnTest(FirstName, LastName) values ("Stefan", "Courteaux");
+insert into VirtualColumnTest (FirstName, LastName)
+values ("Stefan", "Courteaux");
 
 select * from VirtualColumnTest;
-select *, concat(FirstName, ' ', LastName) as FullName from VirtualColumnTest;
+
+select *, concat(FirstName, ' ', LastName) as FullName
+from VirtualColumnTest;
 
 alter table VirtualColumnTest add (
-	FullName varchar(60) as (concat(FirstName, ' ', LastName)) STORED
+	FullName varchar(60) as (concat(FirstName,' ', LastName)) STORED
 );
 
-select * from VirtualColumnTest;
+select *
+from VirtualColumnTest;
 
 update VirtualColumnTest
 set FirstName = "Bartje"
 where id = 1;
 
-select * from VirtualColumnTest;
+select *
+from VirtualColumnTest;
 
 drop table VirtualColumnTest;</code></pre>
 </div>
@@ -639,7 +812,7 @@ Het is nuttig om te weten dat virtuele kolommen bestaan. Je kan ze occasioneel g
 <div class="listingblock">
 <div class="title">Syntax</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">CREATE
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE
     [OR REPLACE]
     [ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
     [DEFINER = user]
@@ -652,10 +825,9 @@ Het is nuttig om te weten dat virtuele kolommen bestaan. Je kan ze occasioneel g
 <div class="paragraph">
 <p>In de meest courante gevallen wordt slechts een klein deel van bovenstaande opties gebruikt.</p>
 </div>
-<div class="literalblock">
-<div class="title">Basis voorbeeld</div>
+<div class="listingblock">
 <div class="content">
-<pre>create or replace view vw_Report as (
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create or replace view vw_Report as (
 	select c.Id as CustomerId, c.FirstName, co.Id OrderId
     from Customer c
     left outer join CustomerOrder co on co.customerId = c.Id
@@ -663,7 +835,7 @@ Het is nuttig om te weten dat virtuele kolommen bestaan. Je kan ze occasioneel g
 
 select * from vw_Report;
 
-drop view vw_Report;</pre>
+drop view vw_Report;</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -747,7 +919,8 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select * from VirtualColumnTest; -- FTS</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select *
+from VirtualColumnTest; -- FTS</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -755,7 +928,9 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select * from VirtualColumnTest where FirstName = "Bartje"; -- FTS</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select *
+from VirtualColumnTest
+where FirstName = "Bartje"; -- FTS</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -763,7 +938,8 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">create index ix_VirtualColumnTest_FirstName on VirtualColumnTest(FirstName);</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create index ix_VirtualColumnTest_FirstName
+on VirtualColumnTest(FirstName);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -771,7 +947,8 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select FirstName from VirtualColumnTest; -- Index Lookup</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select FirstName
+from VirtualColumnTest; -- Index Lookup</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -779,7 +956,9 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select * from VirtualColumnTest where FirstName = "Bartje"; -- Index Lookup</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select *
+from VirtualColumnTest
+where FirstName = "Bartje"; -- Index Lookup</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -787,7 +966,9 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select * from VirtualColumnTest where lower(FirstName) = lower("bartje"); -- FTS</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select *
+from VirtualColumnTest
+where lower(FirstName) = lower("bartje"); -- FTS</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -795,7 +976,8 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">create index ix_VirtualColumnTest_FirstNameLower on VirtualColumnTest((lower(FirstName)));</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">create index ix_VirtualColumnTest_FirstNameLower
+on VirtualColumnTest((lower(FirstName)));</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -803,7 +985,9 @@ In een academisch voorbeeld met een paar tientallen, of honderden, rijen maakt d
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">select * from VirtualColumnTest where lower(FirstName) = lower("bartje"); -- Index lookup</code></pre>
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">select *
+from VirtualColumnTest
+where lower(FirstName) = lower("bartje"); -- Index lookup</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -823,148 +1007,26 @@ Een index kan ook meerdere kolommen bevatten.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_storefront_erd"><a class="anchor" href="#_storefront_erd"></a>StoreFront ERD</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Stel zelf een ERD op voor de StoreFront app gebruikmakende van MySQL Workbench.</p>
+<p>Stel zelf een ERD op voor de StoreFront api gebruikmakende van MySQL Workbench. Als resultaat wil je</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>PNG export van model.</p>
+<p>afbeelding van het model als diagram</p>
 </li>
 <li>
-<p>DDL Script.</p>
+<p>DDL script van het model</p>
 </li>
-</ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Werk op papier tot je grofweg zeker bent van het geheel.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
 <li>
-<p><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">MySQL Data Types Documentatie</a></p>
+<p>test data</p>
+</li>
+<li>
+<p>overweeg welke indexen nutig zouden kunnen zijn</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_bijlagen"><a class="anchor" href="#_bijlagen"></a>Bijlagen</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_spelen_met_virtual_columns"><a class="anchor" href="#_spelen_met_virtual_columns"></a>Spelen Met Virtual Columns</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-mysql hljs" data-lang="mysql">use gevorderd2demo;
-
-/********************************************************************************
- * basic demo
- ********************************************************************************/
-
-create table VirtualColumnTest (
-	Id 			int not null auto_increment primary key,
-    FirstName	varchar(30),
-    LastName 	varchar(30)
-);
-
-insert into VirtualColumnTest(FirstName, LastName) values ("Stefan", "Courteaux");
-
-select * from VirtualColumnTest;
-select *, concat(FirstName, ' ', LastName) as FullName from VirtualColumnTest;
-
-alter table VirtualColumnTest add (
-	FullName varchar(60) as (concat(FirstName, ' ', LastName)) STORED
-);
-
-select * from VirtualColumnTest;
-
-update VirtualColumnTest
-set FirstName = "Bartje"
-where id = 1;
-
-select * from VirtualColumnTest;
-
-/********************************************************************************
- * advanced demo - bv licentie voor een jaar ofzo kopen, of accounts in systeem
- ********************************************************************************/
-
--- begint als nullable want er zijn al records
-alter table VirtualColumnTest add (
-	Email varchar(60)
-);
-
-update VirtualColumnTest
-set Email = "adres@domain.tld"
-where id = 1;
-
-select * from VirtualColumnTest;
-
--- kan nu not null worden
-alter table VirtualColumnTest modify email varchar(60) not null;
-
--- nieuwe user
-insert into VirtualColumnTest(FirstName, LastName, Email) values ("Jantje", "Baptiste", "jb@bla.blu");
-select * from VirtualColumnTest;
-
--- account vergeten
-insert into VirtualColumnTest(FirstName, LastName, Email) values ("Jantje", "Baptiste", "jb@bla.blu");
-select * from VirtualColumnTest;
-
--- desambigueren
-alter table VirtualColumnTest add (
-	IsActive bool not null default true
-);
-
-select * from VirtualColumnTest;
-
-update VirtualColumnTest
-set IsActive = false
-where id = 2;
-
-select * from VirtualColumnTest;
-
--- geen dubbele emails meer toelaten
-
-alter table VirtualColumnTest add constraint uk_VirtualColumnTest_email unique (email);
-
--- ola da gaat niet
--- geen dubbele !actieve! meer toestaan
-
-alter table VirtualColumnTest add (
-	ActiveEmail varchar(60) as (case IsActive when true then Email else null end) stored
-);
-
-select * from VirtualColumnTest;
-
-alter table VirtualColumnTest add constraint uk_VirtualColumnTest_ActiveEmail unique (ActiveEmail);
-
-select * from VirtualColumnTest;
-select * from VirtualColumnTest where ActiveEmail = "adres@domain.tld"; -- explain plan doen
-
-insert into VirtualColumnTest(FirstName, LastName, Email, IsActive) values ("Jantje", "Baptiste", "jb@bla.blu", 1); -- nope
-insert into VirtualColumnTest(FirstName, LastName, Email, IsActive) values ("Jantje", "Baptiste", "jb@bla.blu", 0); -- yes
-
-select * from VirtualColumnTest;
-
-drop table VirtualColumnTest;</code></pre>
-</div>
-</div>
 </div>
 </div>
 </div>
