@@ -200,7 +200,7 @@
 <p>Voorzie een GET endpoint.</p>
 </li>
 <li>
-<p>Een aparte domeinlaag is niet nodig, er is weinig logica, gebruik wel aparte modellen.</p>
+<p>Refactor de oplossing om Api-, Service- en Storagelaag te gebruiken.</p>
 </li>
 <li>
 <p>Let er op geen connectionstrings te committen!</p>
@@ -229,7 +229,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Kies een logische naam en maak je resource in Europa. De andere settings staan normaal vanzelf goed.</p>
+<p>Kies een logische naam. Maak je resource in Europa indien beschikbaar. Aligneer andere settings met onderstaand voorbeeld.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -237,49 +237,125 @@
 </div>
 </div>
 <div class="paragraph">
-<p>We kunnen vanuit ons project met de database verbinden via een <em>CosmosClient</em>, beschikbaar gesteld door de nuget package <code>Microsoft.Azure.Cosmos</code>. De connectionstring kunnen we vinden onder de <em>Keys</em> sectie van de resource in Azure.</p>
+<p>Maak een database <code>shipit</code> en een container <code>pricequotes</code>. Gebruik <code>/id</code> als <em>partition key</em>.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/cosmos/cosmosconn.png" alt="cosmosconn">
+<div class="paragraph">
+<p><span class="image"><img src="_images/cosmos/create-db.png" alt="create db"></span></p>
 </div>
+<div class="paragraph">
+<p>We kunnen de connectionstring vinden onder de <em>Keys</em> sectie van de resource in Azure.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/cosmos/get-conn-string.png" alt="get conn string"></span></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
-<div class="sect3">
-<h4 id="_storage_layer"><a class="anchor" href="#_storage_layer"></a>Storage Layer</h4>
+<h3 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h3>
 <div class="paragraph">
-<p>Voeg een project <code>ShipIt.PriceQuotes.Storage</code> toe aan de Solution.</p>
+<p>We maken gebruik van deze kans om de structuur van de solution verder uit te diepen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Api</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Api.Contracts (Immutable Record Types)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Services</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Uitsplitsen naar eigen layer.</p>
+</li>
+<li>
+<p>Services.Models &#8594; Mutable Class Types</p>
+</li>
+<li>
+<p>Mapping: Api.Contracts &#8592;&#8594; Services.Models &#8592;&#8594; Storage.Contracts</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Storage</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Layer toevoegen</p>
+</li>
+<li>
+<p>Storage.Contracts (Immutable Record Types)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Shared</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project toevoegen (voor Enum).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Voeg nuget package <code>Microsoft.Azure.Cosmos</code> toe aan het nieuwe project.</p>
+<p><span class="image"><img src="_images/cosmos/solution.png" alt="solution"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Op dit moment zou je zeker kunnen stellen dat de oplossing <em>overengineered</em> is. Deze nieuwe solution structuur houdt steek <strong>als</strong> je weet dat het project nog sterk zal groeien.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storage_layer"><a class="anchor" href="#_storage_layer"></a>Storage Layer</h3>
+<div class="paragraph">
+<p>Voeg nuget package <code>Microsoft.Azure.Cosmos</code> en <code>Newtonsoft.Json</code> toe aan dit nieuwe project.</p>
 </div>
 <div class="paragraph">
-<p>Definieer een <em>Repository</em> interface en een <em>Model</em>.</p>
+<p>We hebben een <em>Repository</em> interface en een <em>Contract</em> (DAO/DTO/POCO&#8230;&#8203; what&#8217;s in a name) nodig.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteModel.cs</div>
+<div class="title">ShipIt.PriceQuote.Storage.Contracts/PriceQuoteStorageContract.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteModel
-{
-    public string id { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
-    public int LengthCm { get; set; }
-    public int WidthCm { get; set; }
-    public int HeightCm { get; set; }
-    public int WeightKg { get; set; }
-    public CountryEnum OriginCountry { get; set; }
-    public CountryEnum DestinationCountry { get; set; }
-    public double PriceEuro { get; set; }
-    public DateTime ValidUntil { get; set; }
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public record PriceQuoteStorageContract( <i class="conum" data-value="1"></i><b>(1)</b>
+    string id, // cosmos key <i class="conum" data-value="2"></i><b>(2)</b>
+    int width,
+    int height,
+    int depth,
+    double weight,
+    CountryEnum from,
+    CountryEnum to,
+    double price,
+    DateTime validUntil
+);</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Gebruik een lowercase id om automatisch te mappen op de key in Cosmos.</td>
+<td>Immutable record (reference type) is de logische keuze voor een datastructuur die enkel dient om informatie over te dragen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Cosmos verwaht een lowercase <code>id</code>.</td>
 </tr>
 </table>
 </div>
@@ -287,12 +363,12 @@
 <p>De <em>CosmosClient</em> gebruikt <em>Async</em> operaties. Dit wil zeggen dat we het async-await-task paradigma in onze code moeten verwerken.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Storage/IPriceQuoteRepository.cs</div>
+<div class="title">ShipIt.PriceQuote.Storage/IPriceQuoteRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPriceQuoteRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IPriceQuoteRepository
 {
-    Task&lt;PriceQuoteModel?&gt; GetAsync(string id);
-    Task CreateAsync(PriceQuoteModel model);
+    Task&lt;PriceQuoteStorageContract&gt; CreateAsync(PriceQuoteStorageContract storageContract);
+    Task&lt;PriceQuoteStorageContract?&gt; GetAsync(string id);
 }</code></pre>
 </div>
 </div>
@@ -300,37 +376,43 @@
 <p>De implementatie van het <em>Repository</em> steunt volledig op de <em>CosmosClient</em>.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepository.cs</div>
+<div class="title">ShipIt.PriceQuote.Storage/PriceQuoteRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">using Microsoft.Azure.Cosmos;
-
-public class PriceQuoteRepository : IPriceQuoteRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class PriceQuoteRepository : IPriceQuoteRepository
 {
-    //...
-    public async Task CreateAsync(PriceQuoteModel model)
+    public async Task&lt;PriceQuoteStorageContract&gt; CreateAsync(
+        PriceQuoteStorageContract storageContract)
     {
-        await GetCosmosContainer().CreateItemAsync(
-            item: model,
-            partitionKey: new PartitionKey(model.id)
+        var itemResponse = await GetCosmosContainer().CreateItemAsync(
+            item: storageContract,
+            partitionKey: new PartitionKey(storageContract.id)
         );
+
+        return itemResponse.Resource;
     }
 
-    public async Task&lt;PriceQuoteModel?&gt; GetAsync(string id)
+    public async Task&lt;PriceQuoteStorageContract?&gt; GetAsync(
+        string id)
     {
-        var itemResponse = await GetCosmosContainer().ReadItemAsync&lt;PriceQuoteModel&gt;(
+        var itemResponse = await GetCosmosContainer().ReadItemAsync&lt;PriceQuoteStorageContract&gt;(
             id: id,
             partitionKey: new PartitionKey(id)
         );
 
-        var dbQuote = itemResponse.Resource;
-        return dbQuote;
+        return itemResponse.Resource;
     }
 
-    private Container? GetCosmosContainer() <i class="conum" data-value="1"></i><b>(1)</b>
+    private static Container GetCosmosContainer() <i class="conum" data-value="1"></i><b>(1)</b>
     {
-        var client = new CosmosClient("connstring");
-        var database = client.GetDatabase("dbname");
-        var container = database.GetContainer("dbname");
+        var client = new CosmosClient("&lt;connectionstring&gt;");
+        var database = client.GetDatabase("shipit");
+        var container = database.GetContainer("pricequotes");
+
+        if (container is null)
+        {
+            throw new Exception("Could not obtain cosmos container.");
+        }
+
         return container;
     }
 }</code></pre>
@@ -357,15 +439,21 @@ Er valt meer te vertellen over <em>PartitionKeys</em>. Dat leer je wel op het we
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h4>
+<div class="sect2">
+<h3 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h3>
+<div class="paragraph">
+<p>De service ondergaat refactoring om niet alleen de prijs te berekenen, maar ook een PriceQuote op te slaan en later op te vragen.</p>
+</div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/Services/IPriceQuoteService.cs</div>
+<div class="title">ShipIt.PriceQuote.Services/IPriceQuoteService.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPriceQuoteService
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IPriceQuoteService
 {
-    Task&lt;PriceQuoteResponseContract&gt; CreateQuoteAsync(PriceQuoteRequestContract priceQuoteRequest);<i class="conum" data-value="1"></i><b>(1)</b>
-    Task&lt;PriceQuoteFullResponseContract&gt; GetQuoteAsync(string id); <i class="conum" data-value="2"></i><b>(2)</b>
+    Task&lt;PriceQuoteResponseContract&gt; CreatePriceQuoteAsync(
+        PriceQuoteRequestContract priceQuoteRequestContract); <i class="conum" data-value="1"></i><b>(1)</b>
+    Task&lt;PriceQuoteResponseContract?&gt; GetPriceQuoteAsync(
+        string id); <i class="conum" data-value="2"></i><b>(2)</b>
+
 }</code></pre>
 </div>
 </div>
@@ -373,7 +461,7 @@ Er valt meer te vertellen over <em>PartitionKeys</em>. Dat leer je wel op het we
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>De bestaande create methode wordt <em>async</em>.</td>
+<td>De bestaande create methode wordt <em>async</em> en krijgt een nieuwe naam.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -382,75 +470,105 @@ Er valt meer te vertellen over <em>PartitionKeys</em>. Dat leer je wel op het we
 </table>
 </div>
 <div class="paragraph">
-<p>De concrete implementatie van de interface zal de mapping tussen data model en api contract verzorgen.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_api_layer"><a class="anchor" href="#_api_layer"></a>Api Layer</h4>
-<div class="paragraph">
-<p>Om te kunnen voldoen aan de <em>CreatedAt</em> requirement, breiden we het <code>PriceQuoteResponseContract</code> uit met <em>Quote</em> Id.</p>
+<p>De concrete implementatie van de interface zal de business logica en de mapping tussen data model en api contract verzorgen.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api.Contracts/PriceQuoteResponseContract.cs</div>
+<div class="title">ShipIt.PriceQuote.Services/PriceQuoteService.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteResponseContract
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class PriceQuoteService(IPriceQuoteRepository priceQuoteRepository)
+    : IPriceQuoteService
 {
-    public string Id { get; set; }
-    public double PriceEuro { get; set; }
-    public DateTime ValidUntil { get; set; }
+    public async Task&lt;PriceQuoteResponseContract&gt; CreatePriceQuoteAsync(
+        PriceQuoteRequestContract priceQuoteRequestContract)
+    {
+        // Map to model
+        var quoteModel = priceQuoteRequestContract.AsModel();
+
+        // Execute business logic
+        if(quoteModel is { CountryFrom: CountryEnum.NL, WeightKg: &gt; 10 })
+            throw new Exception("Package from NL exceeds max weight of 10kg.");
+
+        quoteModel.Price = CalculatePrice(quoteModel);
+        quoteModel.ValidUntil = DateTime.Now.AddHours(48);
+
+        // Store data
+        var quoteRecord = quoteModel.AsRecord();
+        var createdQuoteRecord = await priceQuoteRepository
+            .CreateAsync(quoteRecord);
+        quoteModel = createdQuoteRecord.AsModel();
+
+        // Map to contract and return
+        return quoteModel.AsResponseContract();
+    }
+
+    public async Task&lt;PriceQuoteResponseContract?&gt; GetPriceQuoteAsync(
+        string id)
+    {
+        var quoteRecord = await priceQuoteRepository.GetAsync(id);
+        return quoteRecord?.AsModel().AsResponseContract();
+    }
+
+    private double CalculatePrice(PriceQuoteModel model)
+    {
+        // ...
+    }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Om te nieuwe Get operatie te ondersteunen, voegen we een nieuw contract toe. Dit is rijker: het bevat de originele vraag en het resultaat van de berekening.</p>
+<p>De mapping gebeurt in een aparte klasse in de service layer, die we bijvoorbeeld <code>PriceQuoteMappingExtensions</code> noemen. Deze bevat de nodige extension methods.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_layer"><a class="anchor" href="#_api_layer"></a>Api Layer</h3>
+<div class="paragraph">
+<p>Om te kunnen voldoen aan de <em>CreatedAt</em> requirement, breiden we het <code>PriceQuoteResponseContract</code> uit. Ook dit wordt een immutable reference type.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api.Contracts/PriceQuoteFullResponseContract.cs</div>
+<div class="title">ShipIt.PriceQuote.Api.Contracts/PriceQuoteResponseContract.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteFullResponseContract
-{
-    public string Id { get; set; }
-    public int LengthCm { get; set; }
-    public int WidthCm { get; set; }
-    public int HeightCm { get; set; }
-    public int WeightKg { get; set; }
-    public CountryEnum OriginCountry { get; set; }
-    public CountryEnum DestinationCountry { get; set; }
-    public double PriceEuro { get; set; }
-    public DateTime ValidUntil { get; set; }
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public record PriceQuoteResponseContract(
+    string Id,
+    int WidthCm,
+    int HeightCm,
+    int DepthCm,
+    double WeightKg,
+    CountryEnum CountryFrom,
+    CountryEnum CountryTo,
+    double Price,
+    DateTime ValidUntil
+);</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>De <em>Controller</em> heeft een nieuwe methode nodig om de Get operatie te ondersteunen.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/Controllers/PriceQuotesController.cs/GetQuoteAsync()</div>
+<div class="title">ShipIt.PriceQuote.Api/Controllers/PriceQuoteController.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpGet]
-[Route("{quoteId}")]
-public async Task&lt;ActionResult&lt;PriceQuoteFullResponseContract&gt;&gt; GetQuoteAsync([FromRoute]string quoteId)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">[Route("api/pricequotes")]
+[ApiController]
+public class PriceQuoteController(IPriceQuoteService priceQuoteService): ControllerBase
 {
-    var quote = await _priceQuoteService.GetQuoteAsync(quoteId);
-    return Ok(quote);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>De bestaande <em>POST</em> operatie wordt aangepast om een <em>CreatedAtAction</em> result te gebruiken.</p>
-</div>
-<div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/Controllers/PriceQuotesController.cs/CreateQuoteAsync()</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpPost]
-public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreateQuoteAsync(
-    [FromBody] PriceQuoteRequestContract priceQuoteRequest)
-{
-    if (priceQuoteRequest.OriginCountry == CountryEnum.NL &amp;&amp; priceQuoteRequest.WeightKg &gt; 10)
-        return BadRequest();
+    [HttpPost]
+    public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreatePriceQuoteAsync(
+        [FromBody]PriceQuoteRequestContract priceQuoteRequestContract)
+    {
+        var created = await priceQuoteService.CreatePriceQuoteAsync(priceQuoteRequestContract);
+        return CreatedAtAction(nameof(GetPriceQuote), new { id = created.Id}, created); <i class="conum" data-value="1"></i><b>(1)</b>
+    }
 
-    var quoteResponse = await _priceQuoteService.CreateQuoteAsync(priceQuoteRequest);
-    return CreatedAtAction(nameof(GetQuoteAsync), new {quoteId = quoteResponse.Id}, quoteResponse); <i class="conum" data-value="1"></i><b>(1)</b>
+    [HttpGet("{id}")]
+    public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; GetPriceQuoteAsync(
+        [FromRoute] string id)
+    {
+        var result = await priceQuoteService.GetPriceQuoteAsync(id);
+
+        if (result is null)
+            return NotFound();
+
+        return Ok(result);
+    }
 }</code></pre>
 </div>
 </div>
@@ -458,23 +576,24 @@ public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreateQu
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Dit zal de <em>Location Header</em> correct invullen op de <em>Response</em>.</td>
+<td>De bestaande <em>POST</em> operatie wordt aangepast om een <em>CreatedAtAction</em> result te gebruiken.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Om de <code>nameof(GetQuoteAsync)</code> te kunnen resolven in de context van een <em>CreatedAtAction</em>, moeten we .Net vertellen de Async suffix van methode namen wel in rekening te brengen.</p>
+<p>Om de <code>nameof(GetPriceQuoteAsync)</code> te kunnen resolven in de context van een <em>CreatedAtAction</em>, moeten we .Net vertellen de Async suffix van methode namen wel in rekening te brengen.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/Program.cs</div>
+<div class="title">ShipIt.PriceQuote.Api/Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
-    builder.Services.AddControllers().AddJsonOptions(opt =&gt; { <i class="conum" data-value="1"></i><b>(1)</b>
-         opt.JsonSerializerOptions.Converters.Add(
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">//...
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =&gt; {
+    opt.JsonSerializerOptions.Converters.Add(
         new JsonStringEnumConverter());
-    }).AddMvcOptions(options =&gt;
-    {
-        options.SuppressAsyncSuffixInActionNames = false; <i class="conum" data-value="2"></i><b>(2)</b>
+    })
+    .AddMvcOptions(options =&gt; {
+        options.SuppressAsyncSuffixInActionNames = false; <i class="conum" data-value="1"></i><b>(1)</b>
     });
 //...</code></pre>
 </div>
@@ -483,10 +602,6 @@ public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreateQu
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Reeds aanwezige configuratie om <em>Enums</em> als string te serializen.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Nieuwe setting om Async suffix van methode namen in rekening te brengen.</td>
 </tr>
 </table>
@@ -498,34 +613,34 @@ public async Task&lt;ActionResult&lt;PriceQuoteResponseContract&gt;&gt; CreateQu
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we de naam van de methode veranderen bij refactoring.
+Het alternatief is de naam hardcoden, maar dat is minder elegant.
 </td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_options_pattern"><a class="anchor" href="#_options_pattern"></a>Options Pattern</h4>
+<div class="sect2">
+<h3 id="_options_pattern"><a class="anchor" href="#_options_pattern"></a>Options Pattern</h3>
 <div class="paragraph">
-<p>Een handige manier om settings niet te hardcoden is een strongly typed configuratie (klasse) te definieren en data uit <code>appsettings.(Development).json</code> daar op te mappen. Zoals altijd kan je dit zelf implementeren, maar is het verstandiger een gepaste Nuget van Microsoft te gebruiken.</p>
+<p>Een handige manier om settings niet te hardcoden is een strongly typed configuratie (klasse) te definiëren en data uit <code>appsettings.(Development).json</code> daar op te mappen. Zoals altijd kan je dit zelf implementeren, maar is het verstandiger een gepaste Nuget van Microsoft te gebruiken.</p>
 </div>
-<div class="sect4">
-<h5 id="_definitie"><a class="anchor" href="#_definitie"></a>Definitie</h5>
+<div class="sect3">
+<h4 id="_definitie"><a class="anchor" href="#_definitie"></a>Definitie</h4>
 <div class="paragraph">
-<p>Voeg toe aan <em>Persistence</em> en <em>Api</em> projecten: <code>Microsoft.Extensions.Options</code></p>
+<p>Voeg toe aan <em>Storage</em> en <em>Api</em> projecten: <code>Microsoft.Extensions.Options</code></p>
 </div>
 <div class="paragraph">
 <p>Definieer de settings.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/appsettings.json</div>
+<div class="title">ShipIt.PriceQuote.Api/appsettings.json</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
   ...
   "AllowedHosts": "*",
   "PriceQuoteRepositoryOptions": {
     "Connectionstring" : "",
-    "DatabaseName" : "pricequotes",
+    "DatabaseName" : "shipit",
     "ContainerName" : "pricequotes"
   }
 }</code></pre>
@@ -535,10 +650,10 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 <p><code>appsettings.json</code> hoort thuis in git. De file mag <strong>geen</strong> gevoelige settings bevatten.</p>
 </div>
 <div class="paragraph">
-<p>Gevoelige settings bewaar je in <code>appsettings.Development.json</code>. Deze file hoort <strong>niet</strong> thuis in Git. De waarden in <code>appsettings.Development.json</code> override <code>appsettings.json</code> bij lokaal uitvoeren van de code.</p>
+<p>Gevoelige settings bewaar je eventueel wel in <code>appsettings.Development.json</code>. Deze file hoort <strong>niet</strong> thuis in Git. De waarden in <code>appsettings.Development.json</code> overriden <code>appsettings.json</code> bij lokaal uitvoeren van de code.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/appsettings.Development.json</div>
+<div class="title">ShipIt.PriceQuote.Api/appsettings.Development.json</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
   ...
@@ -555,9 +670,9 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 <p>Definieer een klasse voor de <em>Repository</em> settings.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepositoryOptions.cs</div>
+<div class="title">ShipIt.PriceQuote.Storage/PriceQuoteRepositoryOptions.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteRepositoryOptions
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class PriceQuoteRepositoryOptions
 {
     public string Connectionstring { get; set; }
     public string DatabaseName { get; set; }
@@ -566,38 +681,35 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_gebruik"><a class="anchor" href="#_gebruik"></a>Gebruik</h5>
+<div class="sect3">
+<h4 id="_gebruik"><a class="anchor" href="#_gebruik"></a>Gebruik</h4>
 <div class="paragraph">
 <p>Voeg deze toe aan de constructor van het repo en spreek het object aan in de code.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Storage/PriceQuoteRepository.cs</div>
+<div class="title">PriceQuoteRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class PriceQuoteRepository : IPriceQuoteRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">using Microsoft.Azure.Cosmos;
+using Microsoft.Extensions.Options;
+using ShipIt.PriceQuote.Storage.Records;
+
+namespace ShipIt.PriceQuote.Storage;
+
+public class PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; options) : IPriceQuoteRepository
 {
-    private readonly PriceQuoteRepositoryOptions _options;
+    // ...
 
-    public PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; options)
+    private Container GetCosmosContainer()
     {
-        _options = options.Value;
-    }
+        var client = new CosmosClient(options.Value.Connectionstring); <i class="conum" data-value="1"></i><b>(1)</b>
+        var database = client.GetDatabase(options.Value.DatabaseName); <i class="conum" data-value="1"></i><b>(1)</b>
+        var container = database.GetContainer(options.Value.ContainerName); <i class="conum" data-value="1"></i><b>(1)</b>
 
-    public async Task CreateAsync(PriceQuoteModel model)
-    {
-        //...
-    }
+        if (container is null)
+        {
+            throw new Exception("Could not obtain cosmos container.");
+        }
 
-    public async Task&lt;PriceQuoteModel?&gt; GetAsync(string id)
-    {
-        //...
-    }
-
-    private Container? GetCosmosContainer()
-    {
-        var client = new CosmosClient(_options.Connectionstring); <i class="conum" data-value="1"></i><b>(1)</b>
-        var database = client.GetDatabase(_options.DatabaseName); <i class="conum" data-value="1"></i><b>(1)</b>
-        var container = database.GetContainer(_options.ContainerName); <i class="conum" data-value="1"></i><b>(1)</b>
         return container;
     }
 }</code></pre>
@@ -613,17 +725,19 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_dependency_injection"><a class="anchor" href="#_dependency_injection"></a>Dependency Injection</h4>
+<div class="sect2">
+<h3 id="_dependency_injection"><a class="anchor" href="#_dependency_injection"></a>Dependency Injection</h3>
 <div class="paragraph">
 <p>Nu moeten we enkel nog het systeem vertellen de juiste sectie te mappen en klaar te houden voor injectie.</p>
 </div>
 <div class="listingblock">
-<div class="title">ShipIt.PriceQuotes.Api/Program.cs</div>
+<div class="title">ShipIt.PriceQuote.Api/Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">//...
     builder.Services.Configure&lt;PriceQuoteRepositoryOptions&gt;(
-        builder.Configuration.GetSection(nameof(PriceQuoteRepositoryOptions)) <i class="conum" data-value="1"></i><b>(1)</b>
+        builder.Configuration.GetSection(
+            nameof(PriceQuoteRepositoryOptions) <i class="conum" data-value="1"></i><b>(1)</b>
+        )
     );
 
     builder.Services.AddScoped&lt;IPriceQuoteRepository, PriceQuoteRepository&gt;(); <i class="conum" data-value="2"></i><b>(2)</b>
@@ -643,46 +757,26 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h4>
+<div class="sect2">
+<h3 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h3>
 <div class="listingblock">
 <div class="title">Alles ineens</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
-  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
-  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --name hogent-pg3-stefancourteaux-shipit-quote ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --plan hogent-pg3-stefancourteaux-shipit-plan `
+  --resource-group hogent-pg3-stefancourteaux-shipit `
   --location westeurope `
   --os-type linux</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_huidige_deployment"><a class="anchor" href="#_huidige_deployment"></a>Huidige Deployment</h3>
-<div class="paragraph">
-<p>De service is beschikbaar op Azure.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Documentatie als HTML page.</p>
-</li>
-<li>
-<p>Api bereikbaar via Postman etc.</p>
-</li>
-<li>
-<p>Systeem bewaart informatie in Azure Cosmos DB.</p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="_swagger_ui"><a class="anchor" href="#_swagger_ui"></a>Swagger UI</h4>
-<div class="imageblock">
-<div class="content">
-<img src="_images/cosmos/swagger.png" alt="swagger">
-</div>
-</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Backtick is het escape character in powershell. <code>\</code> is equivalent in Linux, macOS en vele programmeertalen.</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_api"><a class="anchor" href="#_api"></a>Api</h4>
@@ -704,7 +798,7 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 </div>
 </div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
@@ -713,7 +807,7 @@ Het alternatief is de naam hardcoden, maar dat zal niet meer werken wanneer we d
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
+Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
 </td>
 </tr>
 </table>
