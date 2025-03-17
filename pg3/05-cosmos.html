@@ -383,10 +383,11 @@ Op dit moment zou je zeker kunnen stellen dat de oplossing <em>overengineered</e
     public async Task&lt;PriceQuoteStorageContract&gt; CreateAsync(
         PriceQuoteStorageContract storageContract)
     {
-        var itemResponse = await GetCosmosContainer().CreateItemAsync(
-            item: storageContract,
-            partitionKey: new PartitionKey(storageContract.id)
-        );
+        var itemResponse = await GetCosmosContainer()
+            .CreateItemAsync(
+                item: storageContract,
+                partitionKey: new PartitionKey(storageContract.id)
+            );
 
         return itemResponse.Resource;
     }
@@ -394,10 +395,11 @@ Op dit moment zou je zeker kunnen stellen dat de oplossing <em>overengineered</e
     public async Task&lt;PriceQuoteStorageContract?&gt; GetAsync(
         string id)
     {
-        var itemResponse = await GetCosmosContainer().ReadItemAsync&lt;PriceQuoteStorageContract&gt;(
-            id: id,
-            partitionKey: new PartitionKey(id)
-        );
+        var itemResponse = await GetCosmosContainer()
+            .ReadItemAsync&lt;PriceQuoteStorageContract&gt;(
+                id: id,
+                partitionKey: new PartitionKey(id)
+            );
 
         return itemResponse.Resource;
     }
@@ -760,7 +762,6 @@ public class PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; op
 <div class="sect2">
 <h3 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h3>
 <div class="listingblock">
-<div class="title">Alles ineens</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
   --name hogent-pg3-stefancourteaux-shipit-quote ` <i class="conum" data-value="1"></i><b>(1)</b>
@@ -774,7 +775,7 @@ public class PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; op
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Backtick is het escape character in powershell. <code>\</code> is equivalent in Linux, macOS en vele programmeertalen.</td>
+<td>Backtick <code>`</code> is het escape character in powershell. Backslash <code>\</code> is equivalent in Linux, macOS en vele programmeertalen.</td>
 </tr>
 </table>
 </div>
@@ -800,17 +801,8 @@ public class PriceQuoteRepository(IOptions&lt;PriceQuoteRepositoryOptions&gt; op
 <div class="sect1">
 <h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </div>
 </div>
 </div>

@@ -272,7 +272,7 @@
 <div class="sect2">
 <h3 id="_storage_account"><a class="anchor" href="#_storage_account"></a>Storage Account</h3>
 <div class="paragraph">
-<p>Navigeer naar de Azure Portal om de <em>Storage Account Services</em> weer te geven.</p>
+<p>Navigeer naar de Azure Portal om de <em>Storage Account Services</em> (Opslagaccounts)weer te geven.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -307,6 +307,29 @@
 </div>
 </div>
 <div class="paragraph">
+<p>De connection string die onze eigen applicatie nodig heeft, kunnen we ophalen onder de <em>Access Keys</em> sectie.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/blob/keys.png" alt="keys">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storage_explorer"><a class="anchor" href="#_storage_explorer"></a>Storage Explorer</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+De storage explorer functionaliteit in de Azure Portal wordt steeds beter. Voor basisoperaties, zoals de files oplijsten, wissen en downloaden, heb je de desktop applicatie niet nodig.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p>Start de <em>Azure Storage Explorer</em> op en log in met je Hogent account.</p>
 </div>
 <div class="imageblock">
@@ -330,19 +353,14 @@
 <img src="_images/blob/asecontainer.png" alt="asecontainer">
 </div>
 </div>
-<div class="paragraph">
-<p>De connection string die onze eigen applicatie nodig heeft, kunnen we ophalen onder de <em>Access Keys</em> sectie.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/blob/keys.png" alt="keys">
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_implementatie"><a class="anchor" href="#_implementatie"></a>Implementatie</h3>
-<div class="sect3">
-<h4 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h4>
+<h3 id="_solution"><a class="anchor" href="#_solution"></a>Solution</h3>
 <div class="paragraph">
 <p>We voegen een aantal nieuwe projecten toe aan de solution om de label functionaliteiten in onder te brengen. Zoals vermeld in de story, maken we deze keer een (compacte) domeinlaag. We willen de logica immers later hergebruiken in een niet-webapi project.</p>
 </div>
@@ -352,83 +370,36 @@
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_shipit_labels_domain_models"><a class="anchor" href="#_shipit_labels_domain_models"></a>ShipIt.Labels.Domain.Models</h4>
+<div class="sect2">
+<h3 id="_shipit_label_persistence"><a class="anchor" href="#_shipit_label_persistence"></a>ShipIt.Label.Persistence</h3>
 <div class="paragraph">
-<p>We voorzien domeinklassen. We hebben uiteraard een Label nodig. Het lijkt ook nuttig om voor het adres een klasse te voorzien.</p>
+<p>Hier gaan we verbinding maken de nieuwe <em>Azure Blob Storage Account</em> om de pdf-bestanden weg te schrijven en in te lezen. We hebben nuget <code>Azure.Storage.Blobs</code> nodig.</p>
+</div>
+<div class="paragraph">
+<p>We voorzien een interface. We gaan de blobs (Binary Large OBjects) overdragen als een array van bytes.</p>
 </div>
 <div class="listingblock">
-<div class="title">Address.cs</div>
+<div class="title">ILabelRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Address
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface ILabelRepository
 {
-    public string Name { get; set; }
-    public string AddressLine1 { get; set; }
-    public string AddressLine2 { get; set; }
-    public string Country { get; set; }
+    Task WriteAsync(byte[] content, string trackingNumber);
+    Task&lt;byte[]&gt; ReadAsync(string trackingNumber);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We weten dat het label een pdf representatie nodig heeft. QuestPDF voorziet een <em>IDocument</em> interface. Door deze te implementeren kunnen we gemakkelijk ons model als pdf weergeven. Door dit te doen, hebben we impliciet gekozen voor een "rijk" model, dwz er zit logica/gedrag in.</p>
-</div>
-<div class="listingblock">
-<div class="title">LabelModel.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Label : IDocument
-{
-    public Address Address { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
-    public string TrackingNumber { get; set; }
-    public double Price { get; set; }
-
-    public Label(Address address, double price)
-    {
-        Address = address;
-        Price = price;
-        TrackingNumber = Guid.NewGuid().ToString(); <i class="conum" data-value="2"></i><b>(2)</b>
-    }
-
-    public void Compose(IDocumentContainer container) <i class="conum" data-value="3"></i><b>(3)</b>
-    {
-        // Pdf creatie
-    }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Het adres zit vervat in een aparte klasse.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Het model kent zichzelf een uniek trackingnummer toe.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Hier gebruiken we QuestPDF om de pdf layout te maken.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>De QuestPDF nuget zal er ook voor zorgen dat de methode <em>GeneratePdf()</em> beschikbaar wordt op instanties van onze klasse die <em>IDocument</em> implementeert.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_shipit_labels_persistence"><a class="anchor" href="#_shipit_labels_persistence"></a>ShipIt.Labels.Persistence</h4>
-<div class="paragraph">
-<p>Hier gaan we verbinding maken de nieuwe <em>Azure Blob Storage Account</em> om de pdf-bestanden weg te schrijven en in te lezen.</p>
-</div>
-<div class="paragraph">
-<p>De basics om te verbinden wanneer je wil lezen of schrijven, zijn dezelfde.</p>
+<p>De basics om een <em>handle</em> op een blob file te krijgen, zijn dezelfde bij lezen of schrijven.</p>
 </div>
 <div class="listingblock">
 <div class="title">LabelRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var client = new BlobServiceClient(_options.BlobConnectionString); <i class="conum" data-value="1"></i><b>(1)</b>
-var containerClient = client.GetBlobContainerClient("shipitlabels"); <i class="conum" data-value="2"></i><b>(2)</b>
-return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">private BlobClient GetBlobClient(string fileName)
+{
+    var client = new BlobServiceClient(_options.ConnectionString); <i class="conum" data-value="1"></i><b>(1)</b>
+    var containerClient = client.GetBlobContainerClient(_options.Container); <i class="conum" data-value="2"></i><b>(2)</b>
+    return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3"></i><b>(3)</b>
+}</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -450,35 +421,20 @@ return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3">
 <div class="paragraph">
 <p>Om files uit te lezen, gebruik je de <em>Download</em> methodes op de <em>BlobClient</em>. Om files te (over)schrijven, gebruik je de <em>Upload</em> methodes.</p>
 </div>
-<div class="paragraph">
-<p>We voorzien een interface.</p>
-</div>
-<div class="listingblock">
-<div class="title">ILabelRepository.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface ILabelRepository
-{
-    Task SaveLabelAsPdfAsync(Label label);
-    Task&lt;MemoryStream&gt; ReadLabelAsPdfAsync(string trackingNumber);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>De implementatie van <code>SaveLabelAsPdfAsync</code> zal het "rijke" domeinmodel vragen om diens pdf representatie.</p>
-</div>
 <div class="listingblock">
 <div class="title">LabelRepository.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public async Task SaveLabelAsPdfAsync(Label label)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public async Task&lt;byte[]&gt; ReadAsync(string trackingNumber)
 {
-    var blob = GetBlobClient($"{label.TrackingNumber}.pdf");
+    var blob = GetBlobClient($"{trackingNumber}.pdf"); <i class="conum" data-value="1"></i><b>(1)</b>
+    var download = await blob.DownloadContentAsync();
+    return download.Value.Content.ToArray();
+}
 
-    var stream = new MemoryStream();
-    label.GeneratePdf(stream); <i class="conum" data-value="1"></i><b>(1)</b>
-    stream.Position = 0;
-
-    await blob.UploadAsync(stream);
-    stream.Close();
+public async  Task WriteAsync(byte[] content, string trackingNumber)
+{
+    var blob = GetBlobClient($"{trackingNumber}.pdf"); <i class="conum" data-value="1"></i><b>(1)</b>
+    await blob.UploadAsync(new BinaryData(content));
 }</code></pre>
 </div>
 </div>
@@ -486,69 +442,153 @@ return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Hier zal onze <em>Compose()</em> implementatie impliciet aangeroepen worden, en het resultaat expliciet naar een stream geschreven worden.</td>
+<td>Onze eigen methode die een blob handle teruggeeft.</td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_shipit_labels_domain"><a class="anchor" href="#_shipit_labels_domain"></a>ShipIt.Labels.Domain</h4>
+<div class="sect2">
+<h3 id="_shipit_label_domain_dto"><a class="anchor" href="#_shipit_label_domain_dto"></a>ShipIt.Label.Domain(.DTO)</h3>
 <div class="paragraph">
-<p>We maken een DomeinController waar de buitenwereld (de web api dus) kan mee spreken. De interne werking van het domein wordt verborgen. We voorzien een Interface.</p>
+<p>We voorzien domeinklassen. We hebben uiteraard een <code>Label</code> nodig. Het lijkt ook nuttig om een <code>Adress</code> klasse te voorzien. Deze klassen behoren toe aan het domein en mogen niet door de api of ui gebruikt worden. We voegen dus ook een <code>DomainController</code> en een <code>DTO</code> toe om het geheel mooi te scheiden.</p>
+</div>
+<div class="sect3">
+<h4 id="_interactie_met_bovenliggende_lagen"><a class="anchor" href="#_interactie_met_bovenliggende_lagen"></a>Interactie met bovenliggende lagen</h4>
+<div class="listingblock">
+<div class="title">ShipIt.Label.Domain.DTO/LabelCreation.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class LabelCreation
+{
+    public string RecipientName { get; set; }
+    public string RecipientAddressLine1 { get; set; }
+    public string RecipientAddressLine2 { get; set; }
+    public string RecipientCountry { get; set; }
+    public double ShipmentPrice { get; set; }
+}</code></pre>
+</div>
 </div>
 <div class="listingblock">
-<div class="title">IDomainController</div>
+<div class="title">IDomainController.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IDomainController
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IDomainController
 {
-    Task&lt;string&gt; CreateLabelAsync(
-        double price,
-        string recipientName,
-        string RecipientAddressLine1,
-        string RecipientAddressLine2,
-        string RecipientCountry);
+    Task&lt;string&gt; CreateLabelAsync(LabelCreation labelCreation);
 
-    Task&lt;MemoryStream&gt; GetLabelAsync(string trackingNumber);
+    Task&lt;byte[]&gt; GetLabelAsync(string trackingNumber);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_intern_domein"><a class="anchor" href="#_intern_domein"></a>Intern Domein</h4>
+<div class="paragraph">
+<p>De interne klassen van het domein zijn rijker.</p>
+</div>
+<div class="listingblock">
+<div class="title">Address.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">internal class Address
+{
+    public string Name { get; set; }
+    public string AddressLine1 { get; set; }
+    public string AddressLine2 { get; set; }
+    public string Country { get; set; }
+
+    public Address(){
+
+    }
+
+    public Address(LabelCreation labelCreation)
+    {
+        Name = labelCreation.RecipientName;
+        AddressLine1 = labelCreation.RecipientAddressLine1;
+        AddressLine2 = labelCreation.RecipientAddressLine2;
+        Country = labelCreation.RecipientCountry;
+    }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We implementeren de interface. De domeincontroller maakt intern gebruik van de domeinmodellen en het repository.</p>
+<p>We weten dat het label een pdf representatie nodig heeft. QuestPDF voorziet een <em>IDocument</em> interface. Door deze te implementeren kunnen we gemakkelijk ons model als pdf weergeven. Door dit te doen, hebben we impliciet gekozen voor een "rijk" model, dwz er zit logica/gedrag in.</p>
+</div>
+<div class="listingblock">
+<div class="title">Label.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
+namespace ShipIt.Label.Domain;
+
+internal class Label : IDocument
+{
+    public Address Address { get; set; }
+    public string TrackingNumber { get; set; }
+    public double Price { get; set; }
+
+    public Label(Address address, double price)
+    {
+        Address = address;
+        Price = price;
+        TrackingNumber = Guid.NewGuid().ToString();
+    }
+
+    public void Compose(IDocumentContainer container)
+    {
+        container.Page(page =&gt;
+		{
+			page.Size(PageSizes.A4);
+			page.Margin(4.0f, Unit.Centimetre);
+
+
+			page.Header()
+				.Text($"ShipIt Label {TrackingNumber}")
+				.FontSize(28)
+				.Bold()
+				.FontColor(Colors.Red.Darken2);
+
+			page.Content()
+				.PaddingVertical(8)
+				.Column(column =&gt;
+				{
+ 					column.Item().Text(Address.Name);
+                    column.Item().Text(Address.AddressLine1);
+                    column.Item().Text(Address.AddressLine2);
+                    column.Item().Text(Address.Country);
+                    column.Item().Text(Price.ToString());
+				});
+
+			page.Footer()
+				.AlignCenter()
+				.Text("De kleine lettertjes");
+		});
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De QuestPDF nuget zal er ook voor zorgen dat de methode <em>GeneratePdf()</em> beschikbaar wordt op instanties van onze klasse die <em>IDocument</em> implementeert.</p>
 </div>
 <div class="listingblock">
 <div class="title">DomainController</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class DomainController : IDomainController
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DomainController(ILabelRepository repo) : IDomainController <i class="conum" data-value="1"></i><b>(1)</b>
 {
-    private readonly ILabelRepository _repo;
+    private readonly ILabelRepository _repo = repo;
 
-    public DomainController(ILabelRepository repo) <i class="conum" data-value="1"></i><b>(1)</b>
+    public async Task&lt;string&gt; CreateLabelAsync(LabelCreation labelCreation) <i class="conum" data-value="2"></i><b>(2)</b>
     {
-        _repo = repo;
-    }
+        var label = new Label(
+            new Address(labelCreation), labelCreation.ShipmentPrice); <i class="conum" data-value="3"></i><b>(3)</b>
 
-    public async Task&lt;string&gt; CreateLabelAsync( <i class="conum" data-value="2"></i><b>(2)</b>
-        double price,
-        string recipientName,
-        string recipientAddressLine1,
-        string recipientAddressLine2,
-        string recipientCountry)
-    {
-        var address = new Address(){
-            Name = recipientName,
-            AddressLine1 = recipientAddressLine1,
-            AddressLine2 = recipientAddressLine2,
-            Country = recipientCountry
-        };
-
-        var label = new Label(address, price); <i class="conum" data-value="3"></i><b>(3)</b>
-        await _repo.SaveLabelAsPdfAsync(label);
+        await _repo.WriteAsync(
+            label.GeneratePdf(), label.TrackingNumber);
 
         return label.TrackingNumber;
     }
 
-    public Task&lt;MemoryStream&gt; GetLabelAsync(string trackingNumber){
-        return _repo.ReadLabelAsPdfAsync(trackingNumber);
+    public Task&lt;byte[]&gt; GetLabelAsync(string trackingNumber){
+        return _repo.ReadAsync(trackingNumber);
     }
 }</code></pre>
 </div>
@@ -561,27 +601,40 @@ return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3">
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Deze domeincontroller gebruikt geen DTO, maar een lijst van parameters.</td>
+<td>DTO komt binnen.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Op dit moment is het label model volwaardig, maar de pdf bestaat nog niet. Deze wordt pas aangemaakt wanneer de <em>Compose()</em> methode (impliciet) aangeroepen wordt.</td>
+<td>Op dit moment is het <code>Label</code> volwaardig, maar de pdf bestaat nog niet. Deze wordt pas aangemaakt wanneer de <code>Compose()</code> methode aangeroepen wordt door <code>GeneratePDF()</code>. Deze methode geeft de pdf terug als een eenvoudige <code>byte[]</code>.</td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_shipit_labels_presentation_api"><a class="anchor" href="#_shipit_labels_presentation_api"></a>Shipit.Labels.Presentation.Api</h4>
+</div>
+<div class="sect2">
+<h3 id="_shipit_label_api"><a class="anchor" href="#_shipit_label_api"></a>ShipIt.Label.Api</h3>
 <div class="paragraph">
-<p>We willen de label functionaliteit als api blootstellen. Gezien alle logica in het domein vervat zit, gaan we geen service laag maken in het api project. We maken een <em>minimal api</em> en schrijven alle api code in Program.cs. Dit kan een geldige keuze in bepaalde scenario&#8217;s en is niet per definitie "beter" of "slechter" dan een api met api controllers.</p>
+<p>We willen de label functionaliteit als api blootstellen. Gezien alle logica in het domein vervat zit, gaan we geen service laag maken in het api project. We maken een <em>minimal api</em> en schrijven alle api code in <code>Program.cs</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Dit kan een geldige keuze in bepaalde scenario&#8217;s en is niet per definitie "beter" of "slechter" dan een api met api controllers. Hier doen we dit vooral om het eens gedaan te hebben ✅
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>We voorzien een basic DTO klasse om het Request voor te stellen.</p>
+<p>We voorzien een basic contract om het Request voor te stellen.</p>
 </div>
 <div class="listingblock">
 <div class="title">LabelRequestContract</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class LabelRequestContract
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public record LabelRequestContract
 {
     public string QuoteId { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
     public string RecipientName { get; set; }
@@ -595,17 +648,17 @@ return containerClient.GetBlobClient(fileName); <i class="conum" data-value="3">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>We krijgen een referentie naar een Quote mee. De prijs zal hieruit komen. We geven de gebruiker niet de kans om de prijs zelf mee te geven in deze request klasse - ze zouden immers durven liegen!</td>
+<td>We krijgen een referentie naar een Quote mee. We gaan aan de hand daarvan zelf de prijs opzoeken. We geven de gebruiker de kans niet om de prijs zelf mee te geven in deze request klasse - ze zouden immers durven liegen!</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Zoals vermeld in de story, zal deze api een call moeten doen naar de Quote api om de prijs op te halen. Om http calls te doen vanuit onze eigen code, gebruiken we <code>HttpClient</code>. Er zijn vele manieren om clients te instantiëren en te gebruiken, dit is maar een van die manieren.</p>
+<p>D api zal een call moeten doen naar de Quote api om de prijs op te halen. Om http calls te doen vanuit onze eigen code, gebruiken we <code>HttpClient</code>. Er zijn vele manieren om clients te instantiëren en te gebruiken, dit is maar een van die manieren.</p>
 </div>
 <div class="listingblock">
 <div class="title">Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure&lt;LabelRepositoryOptions&gt;(
     builder.Configuration.GetSection(
@@ -620,15 +673,26 @@ QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community; <i cl
 
 var app = builder.Build();
 
-app.MapPost("api/labels", async (IHttpClientFactory clientFactory, [FromBody] LabelRequestContract contract, IDomainController domain) =&gt; {
-    // Post Logica
+app.MapPost("api/labels", async Task&lt;CreatedAtRoute&lt;string&gt;&gt; (
+    IHttpClientFactory clientFactory,
+    [FromBody] LabelRequestContract contract,
+    IDomainController domain) =&gt; {
+
+    // get price
+
+    // create label
+
+    // return trackingNumber / resource identifier
+
 });
 
 app.MapGet("api/labels/{trackingnumber}",
-async Task&lt;Results&lt;Ok&lt;string&gt;, FileStreamHttpResult, BadRequest&gt;&gt;
-([FromRoute] string trackingNumber, [FromHeader(Name = "Accept")] string acceptValue, IDomainController domain) =&gt;
+async Task&lt;Results&lt;Ok&lt;string&gt;, BadRequest, FileContentHttpResult&gt;&gt;(
+    [FromRoute] string trackingNumber,
+    [FromHeader(Name = "Accept")] string acceptValue,
+    IDomainController domain) =&gt;
 {
-    // get Logica
+    // TODO
 }).WithName("GetLabel"); <i class="conum" data-value="5"></i><b>(5)</b>
 
 app.Run();</code></pre>
@@ -659,35 +723,40 @@ app.Run();</code></pre>
 </table>
 </div>
 <div class="paragraph">
-<p>Laat ons de Post van dichterbij bekijken</p>
+<p>Laat ons de <code>Post()</code> van dichterbij bekijken</p>
 </div>
 <div class="listingblock">
 <div class="title">Program.cd/Post()</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">app.MapPost("api/labels", async (
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">app.MapPost("api/labels", async Task&lt;CreatedAtRoute&lt;string&gt;&gt; (
     IHttpClientFactory clientFactory, <i class="conum" data-value="1"></i><b>(1)</b>
     [FromBody] LabelRequestContract contract, <i class="conum" data-value="2"></i><b>(2)</b>
     IDomainController domain) =&gt; {
 
+    // get price
     var httpClient = clientFactory.CreateClient();
-    var quoteResponse = await httpClient
-        .GetFromJsonAsync&lt;PriceQuoteResponseContract(
-            $"https://server/api/pricequotes/{contract.QuoteId}"); <i class="conum" data-value="3"></i><b>(3)</b>
+    var baseUrl = builder.Configuration.GetValue&lt;string&gt;("QuoteApiBaseUrl");
+    var url = $"{baseUrl}/api/pricequotes/{contract.QuoteId}";
 
-    if(quoteResponse.ValidUntil &lt; DateTime.UtcNow)
-        throw new Exception("quote too old.");
+    var options = new JsonSerializerOptions();
+    options.Converters.Add(new JsonStringEnumConverter());
+    options.PropertyNameCaseInsensitive = true;
+    var response = await httpClient
+        .GetFromJsonAsync&lt;PriceQuoteResponseContract&gt;(url, options); <i class="conum" data-value="3"></i><b>(3)</b>
 
-    var trackingNumber = await domain.CreateLabelAsync( <i class="conum" data-value="4"></i><b>(4)</b>
-        quoteResponse.PriceEuro,
-        contract.RecipientName,
-        contract.RecipientAddressLine1,
-        contract.RecipientAddressLine2,
-        contract.RecipientCountry);
+    // create label
+    var creation = new LabelCreation{
+        RecipientAddressLine1 = contract.RecipientAddressLine1,
+        RecipientAddressLine2 = contract.RecipientAddressLine2,
+        RecipientCountry = contract.RecipientCountry,
+        RecipientName = contract.RecipientName,
+        ShipmentPrice = response.Price <i class="conum" data-value="4"></i><b>(4)</b>
+    };
+    var trackingNumber = await domain.CreateLabelAsync(creation); <i class="conum" data-value="4"></i><b>(4)</b>
 
+    // return trackingNumber / resource identifier
     return TypedResults.CreatedAtRoute( <i class="conum" data-value="5"></i><b>(5)</b>
-        trackingNumber,
-        "GetLabel",
-        new { trackingnumber = trackingNumber});
+        trackingNumber, "GetLabel", new { trackingnumber = trackingNumber});
 });</code></pre>
 </div>
 </div>
@@ -695,7 +764,7 @@ app.Run();</code></pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>We verkrijgen een HttpClient.</td>
+<td>We verkrijgen een HttpClientFactory.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -716,25 +785,38 @@ app.Run();</code></pre>
 </table>
 </div>
 <div class="paragraph">
-<p>Laat ons de Get van dichterbij bekijken. De story vertelt ons dat de partij die onze api oproept via een <code>Accept</code> header kan meegeven welke representatie deze van het label wil: json of pdf. Op dit moment geven we voor de json representatie gewoon een <em>stub</em> terug.</p>
+<p>Laat ons de <code>Get()</code> van dichterbij bekijken. De story vertelt ons dat de partij die onze api oproept via een <code>Accept</code> header kan meegeven welke representatie deze van het label wil: json of pdf.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het kan handig zijn een resource in meerdere representaties beschikbaar te hebben. Denk bijvoorbeeld aan een <code>svg</code> bestand - je zou dit kunnen opvragen als <code>xml</code> of als <code>png</code> resource. Hier doen we dit vooral om het eens gedaan te hebben ✅
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="title">Program.cs/Get()</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">app.MapGet("api/labels/{trackingnumber}",
-    async Task&lt;Results&lt;Ok&lt;string&gt;, FileStreamHttpResult, BadRequest&gt;&gt;(
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">app.MapGet("api/labels/{trackingnumber}",
+async Task&lt;Results&lt;Ok&lt;string&gt;, BadRequest, FileContentHttpResult&gt;&gt;( <i class="conum" data-value="0"></i><b>(0)</b>
     [FromRoute] string trackingNumber, <i class="conum" data-value="1"></i><b>(1)</b>
     [FromHeader(Name = "Accept")] string acceptValue, <i class="conum" data-value="2"></i><b>(2)</b>
     IDomainController domain) =&gt;
 {
     if(acceptValue == "text/json") <i class="conum" data-value="3"></i><b>(3)</b>
     {
+        // Dummy implementatie
         return TypedResults.Ok(trackingNumber);
     }
     else if (acceptValue == "application/octet-stream") <i class="conum" data-value="4"></i><b>(4)</b>
     {
         var pdfStream = await domain.GetLabelAsync(trackingNumber);
-        return TypedResults.Stream(
+        return TypedResults.Bytes(
             pdfStream,
             "application/octet-stream",
             $"{trackingNumber}.pdf");
@@ -745,30 +827,13 @@ app.Run();</code></pre>
 }).WithName("GetLabel");</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Deze input wordt uit de route gelezen.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Deze input wordt uit een header gelezen.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>De client vraagt json.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>De client vraagt pdf, we voeren dat uit. We geven een filename mee. Dit staat los van de filename op blob storage.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>De inhoud van de Accept header is niet ondersteund.</td>
-</tr>
-</table>
-</div>
+<div class="paragraph">
+<p>&lt;O&gt; De verschillende return types worden opgelijst.
+&lt;1&gt; Deze input wordt uit de route gelezen.
+&lt;2&gt; Deze input wordt uit een header gelezen.
+&lt;3&gt; De client vraagt json.
+&lt;4&gt; De client vraagt pdf, we voeren dat uit. We geven een filename mee. Dit staat los van de filename op blob storage.
+&lt;5&gt; De inhoud van de Accept header is niet ondersteund door dit endpoint.</p>
 </div>
 </div>
 <div class="sect2">
@@ -796,9 +861,9 @@ app.Run();</code></pre>
 <div class="title">Quote</div>
 <div class="content">
 <pre>az webapp up `
-  --name hogent-web4-avond-stefancourteaux-shipit-quote `
-  --plan hogent-web4-avond-stefancourteaux-shipit-plan `
-  --resource-group hogent-web4-avond-stefancourteaux-shipit `
+  --name hogent-pg3-stefancourteaux-shipit-quote `
+  --plan hogent-pg3-stefancourteaux-shipit-plan `
+  --resource-group hogent-pg3-stefancourteaux-shipit `
   --location westeurope `
   --os-type linux</pre>
 </div>
@@ -807,12 +872,27 @@ app.Run();</code></pre>
 <div class="title">Label</div>
 <div class="content">
 <pre>az webapp up `
-  --name hogent-web4-avond-stefancourteaux-shipit-label `
-  --plan hogent-web4-avond-stefancourteaux-shipit-plan `
-  --resource-group hogent-web4-avond-stefancourteaux-shipit `
+  --name hogent-pg3-stefancourteaux-shipit-label `
+  --plan hogent-pg3-stefancourteaux-shipit-plan `
+  --resource-group hogent-pg3-stefancourteaux-shipit `
   --location westeurope `
   --os-type linux</pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Linux targets vereisen eventueel extra dependencies voor QuestPDF. Indien de Azure deployment erover klaagt in de logs, voegen we deze toe.<br>
+<br>
+<code>HarfBuzzSharp.NativeAssets.Linux</code><br>
+<code>SkiaSharp.NativeAssets.Linux.NoDependencies</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="_images/blob/deploy.png" alt="deploy"></span></p>
@@ -821,19 +901,27 @@ app.Run();</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
+</li>
+<li>
+<p>Probeer zelf een herimplementatie van de quote api te maken waar alles gebeurt in één laag in één minimal api file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beschouw de http endpoints als "handlers" die verantwoordelijk zijn voor alles wat binnen de scope van een api call moet gebeuren. Geen lagen, geen abstracties, enkel strikt noodzakelijke mapping. <em>Straight to the point.</em></p>
+</li>
+<li>
+<p>Je zal eindigen met drastisch minder lijnen code (en een piepkleine solution) voor het quote gedeelte. Het is een totaal andere aanpak. Beter? Slechter? Hangt ervan af 😊</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
