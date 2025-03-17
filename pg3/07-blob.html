@@ -803,17 +803,17 @@ Het kan handig zijn een resource in meerdere representaties beschikbaar te hebbe
 <div class="title">Program.cs/Get()</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">app.MapGet("api/labels/{trackingnumber}",
-async Task&lt;Results&lt;Ok&lt;string&gt;, BadRequest, FileContentHttpResult&gt;&gt;( <i class="conum" data-value="0"></i><b>(0)</b>
-    [FromRoute] string trackingNumber, <i class="conum" data-value="1"></i><b>(1)</b>
-    [FromHeader(Name = "Accept")] string acceptValue, <i class="conum" data-value="2"></i><b>(2)</b>
+async Task&lt;Results&lt;Ok&lt;string&gt;, BadRequest, FileContentHttpResult&gt;&gt;( <i class="conum" data-value="1"></i><b>(1)</b>
+    [FromRoute] string trackingNumber, <i class="conum" data-value="2"></i><b>(2)</b>
+    [FromHeader(Name = "Accept")] string acceptValue, <i class="conum" data-value="3"></i><b>(3)</b>
     IDomainController domain) =&gt;
 {
-    if(acceptValue == "text/json") <i class="conum" data-value="3"></i><b>(3)</b>
+    if(acceptValue == "text/json") <i class="conum" data-value="4"></i><b>(4)</b>
     {
         // Dummy implementatie
         return TypedResults.Ok(trackingNumber);
     }
-    else if (acceptValue == "application/octet-stream") <i class="conum" data-value="4"></i><b>(4)</b>
+    else if (acceptValue == "application/octet-stream") <i class="conum" data-value="5"></i><b>(5)</b>
     {
         var pdfStream = await domain.GetLabelAsync(trackingNumber);
         return TypedResults.Bytes(
@@ -822,18 +822,38 @@ async Task&lt;Results&lt;Ok&lt;string&gt;, BadRequest, FileContentHttpResult&gt;
             $"{trackingNumber}.pdf");
     }
 
-    return TypedResults.BadRequest(); <i class="conum" data-value="5"></i><b>(5)</b>
+    return TypedResults.BadRequest(); <i class="conum" data-value="6"></i><b>(6)</b>
 
 }).WithName("GetLabel");</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>&lt;O&gt; De verschillende return types worden opgelijst.
-&lt;1&gt; Deze input wordt uit de route gelezen.
-&lt;2&gt; Deze input wordt uit een header gelezen.
-&lt;3&gt; De client vraagt json.
-&lt;4&gt; De client vraagt pdf, we voeren dat uit. We geven een filename mee. Dit staat los van de filename op blob storage.
-&lt;5&gt; De inhoud van de Accept header is niet ondersteund door dit endpoint.</p>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>De verschillende return types worden opgelijst.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deze input wordt uit de route gelezen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Deze input wordt uit een header gelezen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>De client vraagt json.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>De client vraagt pdf, we voeren dat uit. We geven een filename mee. Dit staat los van de filename op blob storage.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>De inhoud van de Accept header is niet ondersteund door dit endpoint.</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -896,6 +916,18 @@ Linux targets vereisen eventueel extra dependencies voor QuestPDF. Indien de Azu
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="_images/blob/deploy.png" alt="deploy"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Je kan de pdf in dit geval niet downloaden met een gewone web browser omdat de gepaste Accept header niet gezet wordt. Dit resulteert in een BadRequest.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
