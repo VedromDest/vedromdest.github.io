@@ -115,6 +115,9 @@
     <a class="nav-link" href="90-01-herhaling.html">Herhaling C# en UML</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-03-pokemons.html">Backend (Api + In-Memory)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-02-backend.html">Backend (Api + EF Core)</a>
   </li>
 </ul>
@@ -434,122 +437,6 @@ We hanteren hier <em>een</em> manier om dergelijke problemen op te lossen, niet 
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="_images/storefront-api/api-service-data-contracts.png" alt="api service data contracts"></span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Het doel van deze oefening is niet je conceptueel begrip van het onderwerp uit te diepen, wel de praktische kant in te oefenen. De bedoeling is dat je dergelijke code stilaan uit het hoofd kan schrijven, zonder (al te veel) opzoekwerk. Gebruik eventueel eens een IDE of editor die je nog niet goed kent.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Start met een nieuwe template en schrijf <em>from scratch</em> een api met service laag en in-memory data.</p>
-</div>
-<div class="sect2">
-<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
-<div class="paragraph">
-<p>De api beheert videogames en houdt bij welke pokemon erin voorkomen.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>CRUD <code>/pokemons</code></p>
-</li>
-<li>
-<p>CRUD <code>/videogames</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_model"><a class="anchor" href="#_model"></a>Model</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Als je moeite hebt om klassendiagrammen te lezen, consulteer dan het <a href="https://vedromdest.github.io/o2/02-DCD-Overerving.html">relevante hoofdstuk</a> van Softwareontwerp 2.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/http-apis/pokemon.png" alt="pokemon">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_rules"><a class="anchor" href="#_rules"></a>Rules</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Als je daar zin in hebt, kan je het verhaal natuurlijk uitbreiden om verder te oefenen.
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Een <code>Pokemon</code> die gebruikt wordt in een <code>Videogame</code> kan niet gewist worden.</p>
-</li>
-<li>
-<p>Het wissen van een <code>Videogame</code> zal geen <code>Pokemon</code> wissen.</p>
-</li>
-<li>
-<p>De <code>Naam</code> van een <code>Pokemon</code> is uniek.</p>
-</li>
-<li>
-<p>De <code>Naam</code> van een <code>Videogame</code> is uniek.</p>
-</li>
-<li>
-<p>Geldige waarden voor <code>Soort</code> zijn [Water, Gras, Elektriciteit].</p>
-</li>
-<li>
-<p>Geldige waarden voor <code>Zeldzaamheid</code> zijn [Laag, Normaal, Hoog].</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_technisch"><a class="anchor" href="#_technisch"></a>Technisch</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Mogelijks stoot je op ontwerp problemen. Overweeg de technieken uit de les, maar vertrouw op jezelf en <em>make it work</em>.</p>
-</li>
-<li>
-<p>Als je besluit <code>Enums</code> te gebruiken, zal je mogelijk nood hebben aan onderstaande snippet.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Enum serialization</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">builder.Services.AddControllers().AddJsonOptions(opt =&gt; {
-    opt.JsonSerializerOptions.Converters.Add(
-        new JsonStringEnumConverter());
-});
-;</code></pre>
-</div>
 </div>
 </div>
 </div>
