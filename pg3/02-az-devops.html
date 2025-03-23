@@ -740,6 +740,122 @@ src/ShipIt.PriceQuote.Api/appsettings.Development.json</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_azure_deployment_resources"><a class="anchor" href="#_azure_deployment_resources"></a>Azure Deployment &amp; Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tot op heden hebben we zeer kort door de bocht gedeployed naar Azure. Deze manier van deployen is handig, maar doet veel impliciet werk dat na herhaalde deployments ongewenste resources achterlaat in Azure. We kunnen dit beter doen door expliciet te zijn en resources te hergebruiken.</p>
+</div>
+<div class="paragraph">
+<p>Indien er nog resources bestaan, wissen we deze eerst via de Azure Portal. De handigste manier is vertrekken vanuit Resource Groups.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/rgroups.png" alt="rgroups">
+</div>
+</div>
+<div class="paragraph">
+<p>Dan kunnen we een Resource Group en de inhoud ineens wissen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/middleware/rgdelete.png" alt="rgdelete">
+</div>
+</div>
+<div class="paragraph">
+<p>Nu kunnen we stap voor stap de nodige resources aanmaken en expliciet benoemen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Resource Group</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az group create ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --location westeurope <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Je kan PowerShell commands splitsen over meerdere lijnen door een backtick <strong>`</strong> te gebruiken.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We deployen naar Azure in Europa.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">App Service Plan</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az appservice plan create `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --is-linux `
+  --sku F1</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De naam die je gekozen hebt in de eerste stap.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">App Service</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote ` <i class="conum" data-value="1"></i><b>(1)</b>
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="3"></i><b>(3)</b>
+  --os-type linux</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kies een naam die duidelijk en logisch voelt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De naam die je gekozen hebt in de eerste stap.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De naam die je gekozen hebt in de vorige stap.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We kunnen een nieuwe versie van de app deployen door bovenstaand commando opnieuw uit te voeren. Op deze manier worden er niet elke keer bijkomende resources aangemaakt.</p>
+</div>
+<div class="paragraph">
+<p>Nu we de hiërarchie begrijpen, is het interessant om weten dat we dit allemaal in een enkel statement kunnen inrichten. We moeten er gewoon op letten telkens exact hetzelfde statement uit te voeren om een bepaalde service te deployen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Alles ineens</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
+  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
+  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
+  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+  --location westeurope `
+  --os-type linux</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_opdracht"><a class="anchor" href="#_opdracht"></a>Opdracht</h2>
 <div class="sectionbody">
 <div class="admonitionblock important">
@@ -749,7 +865,7 @@ src/ShipIt.PriceQuote.Api/appsettings.Development.json</pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Maak zelf een Organization <code>hg-pg3-{naam}-{voornaam}</code> en Project aan in Azure DevOps.
+Maak zelf een Organization <code>hg-pg3-naam-voornaam</code> en Project aan in Azure DevOps.
 </td>
 </tr>
 </table>

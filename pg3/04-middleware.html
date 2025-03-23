@@ -176,7 +176,7 @@
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>AS A</strong> api user, <strong>I WANT</strong> to receive clear feedback when the system is experiencing high load, <strong>SO THAT</strong> I can take it into account when working on our system integration.</p>
+<p><strong>AS A</strong> api user, <strong>I WANT</strong> to receive clear feedback when the system is experiencing high load creating quotes, <strong>SO THAT</strong> I can take it into account when working on our system integration.</p>
 </div>
 </div>
 </div>
@@ -227,14 +227,14 @@
 <div class="listingblock">
 <div class="title">Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
 //...
 builder.Services.AddRateLimiter(_ =&gt; _
-	.AddFixedWindowLimiter(policyName: "gevorderd3fixed", options =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+	.AddFixedWindowLimiter(policyName: "quote-creation-limiter", options =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
 	{
 		options.PermitLimit = 3; <i class="conum" data-value="2"></i><b>(2)</b>
 		options.Window = TimeSpan.FromSeconds(10); <i class="conum" data-value="3"></i><b>(3)</b>
-		options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+		options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst; <i class="conum" data-value="4"></i><b>(4)</b>
 		options.QueueLimit = 2; <i class="conum" data-value="5"></i><b>(5)</b>
 	}));
 //...
@@ -267,6 +267,10 @@ app.Run();</code></pre>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Maximaal aantal requests in de queue.</td>
 </tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>We activeren rate limiting.</td>
+</tr>
 </table>
 </div>
 <div class="paragraph">
@@ -278,8 +282,8 @@ app.Run();</code></pre>
 <div class="listingblock">
 <div class="title">QuotesController</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[HttpPost]
-[EnableRateLimiting("gevorderd3fixed")] <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">[HttpPost]
+[EnableRateLimiting("quote-creation-limiter")] <i class="conum" data-value="1"></i><b>(1)</b>
 public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
     [FromBody] PriceQuoteRequestContract priceQuoteRequest)
 {
@@ -295,6 +299,21 @@ public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Zoals je in de <a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-8.0">documentatie</a> kan lezen, is het ook mogelijk een globale rate limiter te maken. Dit kan nuttig zijn, maar ligt niet exact in lijn met wat we in dit voorbeeld willen doen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In een minimal api kan je op gelijklopende wijze rate limiting introduceren. Een policy toewijzen aan een endpoint gebeurt met <code>.RequireRateLimiting("policy")</code> op de <code>Map()</code> definitie.</p>
+</div>
 </div>
 </div>
 </div>
@@ -304,7 +323,7 @@ public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>AS A</strong> api user, <strong>I WANT</strong> to access documentation, <strong>SO THAT</strong> I can integrate my system.</p>
+<p><strong>AS A</strong> api user, <strong>I WANT</strong> to access technical api documentation, <strong>SO THAT</strong> I can integrate my system.</p>
 </div>
 </div>
 </div>
@@ -315,7 +334,7 @@ public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
 <div class="ulist">
 <ul>
 <li>
-<p>Voorzie self service documenatie voor api gebruikers. Wij willen geen kostenoverhead om uitleg te geven over onze api&#8217;s.</p>
+<p>Voorzie <em>self service</em> documentatie voor api gebruikers. Wij willen geen kostenoverhead om uitleg te geven over onze api&#8217;s.</p>
 </li>
 </ul>
 </div>
@@ -329,25 +348,33 @@ public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
 <div class="ulist">
 <ul>
 <li>
-<p>Gebruik NSwag.AspNetCore om documentatie te genereren.</p>
+<p>Api Spec Doc</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.openapis.org/what-is-openapi">OpenAPI</a> document creatie werd in de afgelopen jaren gefaciliteerd door <code>Swashbuckle.AspNetCore</code>. Deze library wordt niet goed meer onderhouden en Microsoft <a href="https://devblogs.microsoft.com/dotnet/dotnet9-openapi/">distantieert er zich van</a> met de introductie van .Net 9.</p>
 </li>
 <li>
-<p>Documenteer alle response codes.</p>
+<p>Migreer het <code>PriceQuote.Api</code> project naar .Net 9.</p>
 </li>
 <li>
-<p>Verberg de /error endpoints.</p>
+<p>Gebruik de nieuwe <code>Microsoft.AspNetCore.OpenApi</code> om het OpenAPI document te genereren.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Koppel expliciet response types aan codes.</p>
+<p>Api Spec Doc Visualisatie</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Hoewel SwaggerUI via nuget <code>Swashbuckle.AspNetCore.SwaggerUi</code> nog steeds gebruikt kan worden op basis van (eender welk) OpenAPI document, opteren we ervoor volledig afstand te doen van de Swashbuckle dependencies.</p>
 </li>
 <li>
-<p>Voeg een titel toe.</p>
+<p>Gebruik <code>Scalar.AspNetCore</code>.</p>
 </li>
-<li>
-<p>Voeg een beschrijving toe.</p>
-</li>
-<li>
-<p>Voeg een contactpersoon toe.</p>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -355,21 +382,45 @@ public ActionResult&lt;QuoteResponseDTO&gt; CreateQuote(
 </div>
 </div>
 <div class="sect2">
-<h3 id="_implementatie_2"><a class="anchor" href="#_implementatie_2"></a>Implementatie</h3>
-<div class="paragraph">
-<p>We voegen de nodige referenties toe.</p>
+<h3 id="_implementatie_pricequote"><a class="anchor" href="#_implementatie_pricequote"></a>Implementatie PriceQuote</h3>
+<div class="listingblock">
+<div class="title">We targeten .Net 9 door dit aan te geven in <code>ShipIt.PriceQuote.Api.csproj</code>.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;Project Sdk="Microsoft.NET.Sdk.Web"&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net9.0&lt;/TargetFramework&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+  &lt;/PropertyGroup&gt;
+  ...
+&lt;/Project&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Nieuwe versie dotnet aanduiden.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">We voegen nuget <code>Microsoft.AspNetCore.OpenApi</code> toe aan <code>ShipIt.PriceQuote.Api</code>.</div>
+<div class="content">
+<pre>dotnet add package Microsoft.AspNetCore.OpenApi</pre>
+</div>
 </div>
 <div class="listingblock">
-<div class="title">Program.cs</div>
+<div class="title">We maken de nodige referenties in Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var builder = WebApplication.CreateBuilder(args);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
 //...
-builder.Services.AddOpenApiDocument(); <i class="conum" data-value="1"></i><b>(1)</b>
+builder.Services.AddOpenApi(); <i class="conum" data-value="1"></i><b>(1)</b>
 //...
 var app = builder.Build();
 //...
-app.UseOpenApi(); <i class="conum" data-value="2"></i><b>(2)</b>
-app.UseSwaggerUi(); <i class="conum" data-value="3"></i><b>(3)</b>
+app.MapOpenApi(); <i class="conum" data-value="2"></i><b>(2)</b>
 //...
 app.Run();</code></pre>
 </div>
@@ -382,77 +433,124 @@ app.Run();</code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Voorzie api spec in json formaat. Beschikbaar op <code><a href="https://&lt;host&gt;:&lt;port&gt;/swagger/v1/swagger.json" class="bare">https://&lt;host&gt;:&lt;port&gt;/swagger/v1/swagger.json</a></code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Voorzie interactieve web ui op basis van json api spec. Beschikbaar op <code><a href="https://&lt;host&gt;:&lt;port&gt;/swagger" class="bare">https://&lt;host&gt;:&lt;port&gt;/swagger</a></code></td>
+<td>Genereer een api doc in json formaat.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>De interactieve web ui is bedoeld om de api te verkennen. Het is <strong>geen</strong> volwaardige user interface. Verwar deze interactieve documentatie van de api ook niet met de api zelf.</p>
+<p>De openapi spec is beschikbaar op <code><a href="https://&lt;host&gt;:&lt;port&gt;/openapi/v1.json" class="bare">https://&lt;host&gt;:&lt;port&gt;/openapi/v1.json</a></code>. Indien gewenst, kunnen we de naam van de json file sturen door deze mee te geven aan <code>.AddOpenApi("file-naam")</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We kunnen de inhoud van het OpenAPI document uiteraard fijnmazig controleren. Dit gaat voorbij de scope van de lessen. Je consulteert gewoon de <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/include-metadata?view=aspnetcore-9.0&amp;tabs=minimal-apis">documentatie</a> wanneer je iets specifiek nodig hebt.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Nu de api documentatie gegenereerd wordt, zullen we de nodige aanpassingen maken om te voldoen aan de requirements van de story.</p>
+<p>Nu hebben we een OpenAPI spec document, maar nog geen visualisatie.</p>
+</div>
+<div class="literalblock">
+<div class="title">We voegen nuget <code>Scalar.AspNetCore</code> toe aan <code>ShipIt.PriceQuote.Api</code>.</div>
+<div class="content">
+<pre>dotnet add package Scalar.AspNetCore</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">We maken de nodige referenties in Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+//...
+builder.Services.AddOpenApi();
+//...
+var app = builder.Build();
+//...
+app.MapOpenApi();
+app.MapScalarApiReference(); <i class="conum" data-value="1"></i><b>(1)</b>
+//...
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Genereer een UI op basis van het OpenAPI doc.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>De globale changes kunnen we maken op het moment dat we het OpenApiDocument toevoegen.</p>
+<p>De Scalar UI is beschikbaar op <code><a href="https://localhost:&lt;port&gt;/scalar/v1" class="bare">https://localhost:&lt;port&gt;/scalar/v1</a></code>;</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/middleware/scalar.png" alt="scalar"></span></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+De interactieve web ui is bedoeld om de api te verkennen. Het is documentatie. Het is <strong>geen</strong> volwaardige user interface. Verwar deze interactieve documentatie van de api ook niet met het OpenAPI document of de api zelf.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Standaard zal de CountryEnum gedocumenteerd worden als een <code>int</code>. Dit is onwenselijk gezien de ApiController een <code>string</code> verwacht. We kunnen de enum globaal annoteren voor alle gebruikers van <code>System.Text.Json</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CountryEnum</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bijgevolg zal de OpenAPI spec dit als <code>string</code> bevatten en zal het ook zo getoond worden in de Scalar UI.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/middleware/scalar-enum.png" alt="scalar enum"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implementatie_label"><a class="anchor" href="#_implementatie_label"></a>Implementatie Label</h3>
+<div class="literalblock">
+<div class="title">ShipIt.Label.Api</div>
+<div class="content">
+<pre>dotnet add package Microsoft.AspNetCore.OpenApi
+dotnet add package Scalar.AspNetCore</pre>
+</div>
 </div>
 <div class="listingblock">
 <div class="title">Program.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">builder.Services.AddOpenApiDocument(options =&gt; {
-	options.PostProcess = document =&gt;
-	{
-		document.Info = new OpenApiInfo
-		{
-			Title = "ShipIt Api",
-            Description = "Public ShipIt Api for price quotes, label creation, etc...",
-			Contact = new OpenApiContact
-			{
-				Name = "Stefan Courteaux",
-				Email = "stefan.courteaux@hogent.be"
-			}
-		};
-	};
-});</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>De response codes en types kunnen we per endpoint toevoegen in de Controller. We vermelden de types expliciet wanneer ze gekend zijn.</p>
-</div>
-<div class="listingblock">
-<div class="title">QuoteController.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
-[HttpPost]
-[EnableRateLimiting("gevorderd3fixed")]
-[ProducesResponseType&lt;PriceQuoteResponseContract&gt;(StatusCodes.Status200OK)]
-[ProducesResponseType(StatusCodes.Status400BadRequest)]
-public ActionResult&lt;PriceQuoteResponseContract&gt; CreateQuote(
-    [FromBody] PriceQuoteRequestContract priceQuoteRequest)
-{
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">//...
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+app.MapOpenApi();
+app.MapScalarApiReference();
 //...</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We gebruiken ook een attribuut om bepaalde endpoints niet op te nemen in de documentatie.</p>
+<p>De Scalar UI voor de Label (minimal) api is beschikbaar op <code><a href="https://localhost:&lt;port&gt;/scalar/v1" class="bare">https://localhost:&lt;port&gt;/scalar/v1</a></code>.</p>
 </div>
-<div class="listingblock">
-<div class="title">ErrorController.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
-[ApiExplorerSettings(IgnoreApi = true)]
-public IActionResult HandleError()
-//...</code></pre>
-</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/middleware/scalar-minimal.png" alt="scalar minimal"></span></p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_service_collection_extensions"><a class="anchor" href="#_service_collection_extensions"></a>Service Collection Extensions</h2>
+<h2 id="_tech_debt_service_collection_extensions"><a class="anchor" href="#_tech_debt_service_collection_extensions"></a>Tech Debt - Service Collection Extensions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>De Program.cs van de Quote api is snel uitgegroeid tot een grote file. We gaan dit leesbaarder maken door de file uit te splitsen. Een veelgebruikte manier om dit te doen, is extension methods op de ServiceCollection.</p>
@@ -460,18 +558,13 @@ public IActionResult HandleError()
 <div class="listingblock">
 <div class="title">ServiceCollectionExtensions</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public static class ServiceCollectionExtensions
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddShipItRateLimiter(
-        this IServiceCollection services)
+    public static IServiceCollection AddShipitServices(this IServiceCollection services)
     {
-        services.AddRateLimiter(_ =&gt; _
-            .AddFixedWindowLimiter(policyName: "gevorderd3fixed", options =&gt; {
-                options.PermitLimit = 3;
-                options.Window = TimeSpan.FromSeconds(10);
-                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                options.QueueLimit = 0;
-            }));
+        services.AddScoped&lt;IPriceQuoteRepository, PriceQuoteRepository&gt;();
+        services.AddScoped&lt;IPriceQuoteService, PriceQuoteService&gt;();
+
         return services;
     }
     // etc...
@@ -483,20 +576,20 @@ public IActionResult HandleError()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
-    var builder = WebApplication.CreateBuilder(args);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddControllers().AddJsonOptions(opt =&gt; {
-         opt.JsonSerializerOptions.Converters.Add(
-        new JsonStringEnumConverter());
-    });;
+builder.Services.Configure&lt;PriceQuoteRepositoryOptions&gt;(
+    builder.Configuration.GetSection(
+        nameof(PriceQuoteRepositoryOptions)
+    )
+);
 
-    builder.Services.AddScoped&lt;IPriceQuoteService, PriceQuoteService&gt;();
+builder.Services.AddShipItRateLimiter(); <i class="conum" data-value="1"></i><b>(1)</b>
+builder.Services.AddOpenApi();
+builder.Services.AddShipitServices();
+builder.Services.AddShipItControllers();
 
-    builder.Services.AddShipItRateLimiter(); <i class="conum" data-value="1"></i><b>(1)</b>
-    builder.Services.AddShipItOpenApi(); <i class="conum" data-value="2"></i><b>(2)</b>
-
-    var app = builder.Build();
+var app = builder.Build();
 //...</code></pre>
 </div>
 </div>
@@ -506,192 +599,43 @@ public IActionResult HandleError()
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Deze extension method encapsuleert ShipIt rate limiting settings.</td>
 </tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Deze extension method encapsuleert de ShipIt openapi (doc) settings.</td>
-</tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Iemand die de Program.cs leest, ziet in een oogopslag dat deze functionaliteiten gebruikt worden, maar wordt niet overspoeld met details. Wie nood heeft aan details te zien of aan te passen, kan naar de implementatie navigeren.</p>
+<p>Iemand die de <code>Program.cs</code> leest, ziet in een oogopslag dat deze functionaliteiten gebruikt worden, maar wordt niet overspoeld met details. Wie nood heeft aan details te zien of aan te passen, kan naar de implementatie navigeren.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_azure_deployment_resources"><a class="anchor" href="#_azure_deployment_resources"></a>Azure Deployment &amp; Resources</h2>
+<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Tot op heden hebben we zeer kort door de bocht gedeployed naar Azure. Deze manier van deployen is handig, maar doet veel impliciet werk dat na herhaalde deployments ongewenste resources acherlaat in Azure. We kunnen dit beter doen door expliciet te zijn en resources te hergebruiken.</p>
-</div>
-<div class="paragraph">
-<p>Indien er nog resources bestaan, wissen we deze eerst via de Azure Portal. De handigste manier is vetrekken vanuit Resource Groups.</p>
-</div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="_images/middleware/rgroups.png" alt="rgroups">
+<pre>az webapp up `
+--name pg3-shipit-stefanc-quote-api `
+--plan pg3-shipit-stefanc-plan `
+--resource-group pg3-shipit-stefanc `
+--location westeurope `
+--os-type Linux</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Dan kunnen we een Resource Group en de inhoud ineens wissen.</p>
-</div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="_images/middleware/rgdelete.png" alt="rgdelete">
-</div>
-</div>
-<div class="paragraph">
-<p>Nu kunnen we stap voor stap de nodige resources aanmaken en expliciet benoemen.</p>
-</div>
-<div class="listingblock">
-<div class="title">Resource Group</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az group create ` <i class="conum" data-value="1"></i><b>(1)</b>
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
-  --location westeurope <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Je kan PowerShell commands splitsen over meerdere lijnen door een backtick <strong>`</strong> te gebruiken.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Kies een naam die duidelijk en logisch voelt.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>We deployen naar Azure in Europa.</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">App Service Plan</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az appservice plan create `
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="1"></i><b>(1)</b>
-  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
-  --is-linux `
-  --sku F1</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Kies een naam die duidelijk en logisch voelt.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>De naam die je gekozen hebt in de eerste stap.</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">App Service</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote ` <i class="conum" data-value="1"></i><b>(1)</b>
-  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit ` <i class="conum" data-value="2"></i><b>(2)</b>
-  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan ` <i class="conum" data-value="3"></i><b>(3)</b>
-  --os-type linux</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Kies een naam die duidelijk en logisch voelt.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>De naam die je gekozen hebt in de eerste stap.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>De naam die je gekozen hebt in de vorige stap.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>We kunnen een nieuwe versie van de app deployen door bovenstaand commando opnieuw uit te voeren. Op deze manier worden er niet elke keer bijkomende resources aangemaakt.</p>
-</div>
-<div class="paragraph">
-<p>Nu we de hiërarchie begrijpen, is het interessant om weten dat we dit allemaal in een enkel statement kunnen inrichten. We moeten er gewoon op letten telkens exact hetzelfde statement uit te voeren om een bepaalde service te deployen.</p>
-</div>
-<div class="listingblock">
-<div class="title">Alles ineens</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ps hljs" data-lang="ps">az webapp up `
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit-quote `
-  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
-  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+<pre>az webapp up `
+  --name pg3-shipit-stefanc-label-api `
+  --plan pg3-shipit-stefanc-plan `
+  --resource-group pg3-shipit-stefanc `
   --location westeurope `
-  --os-type linux</code></pre>
+  --os-type linux</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_huidige_deployment"><a class="anchor" href="#_huidige_deployment"></a>Huidige Deployment</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>De service is beschikbaar <strong>op Azure</strong>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Documentatie als HTML page.</p>
-</li>
-<li>
-<p>Api bereikbaar via Postman etc.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_swagger_ui"><a class="anchor" href="#_swagger_ui"></a>Swagger UI</h3>
-<div class="imageblock">
-<div class="content">
-<img src="_images/middleware/deploy-s.png" alt="deploy s">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
-<div class="imageblock">
-<div class="content">
-<img src="_images/middleware/deploy-p.png" alt="deploy p">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
-<div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0">Middleware</a></p>
-</div>
-<div class="paragraph">
-<p><a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag?view=aspnetcore-8.0&amp;tabs=visual-studio">Swagger</a></p>
+<p>Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </div>
 </div>
 </div>
