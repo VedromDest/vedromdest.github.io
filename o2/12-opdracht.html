@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Groepswerk :: Softwareontwerp 2 (BETA)</title>
+    <title>Groepswerk Refactoring &amp; Design Patterns :: Softwareontwerp 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -79,7 +79,7 @@
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">Design Patterns</span>
+    <span class="nav-text">Design Patterns &amp; Refactoring</span>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="11-patterns-game.html">State Pattern (2 Lessen)</a>
@@ -117,7 +117,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Ontwerp 2</a></li>
-    <li>Design Patterns</li>
+    <li>Design Patterns &amp; Refactoring</li>
     <li><a href="12-opdracht.html">Groepswerk</a></li>
   </ul>
 </nav>
@@ -127,8 +127,173 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Groepswerk</h1>
-
+<h1 class="page">Groepswerk Refactoring &amp; Design Patterns</h1>
+<div class="sect1">
+<h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Vorm een groepje van [2-5] personen.</p>
+</li>
+<li>
+<p>Kies één van de onderstaande opdrachten.</p>
+</li>
+<li>
+<p>Ontwerp en implementeer samen een oplossing.</p>
+</li>
+<li>
+<p>Bereid een mini-les voor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Leg probleem en oplossing uit.</p>
+</li>
+<li>
+<p>Ongeveer 20 minuten ondersteund door code/ppt/demo/tekst/&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Presenteer jullie werk in de klas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beantwoord vragen van medestudenten.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Dien je materiaal in op Chamilo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keuze_1_design_pattern_presenteren"><a class="anchor" href="#_keuze_1_design_pattern_presenteren"></a>Keuze 1: Design Pattern Presenteren</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Onderzoek en presenteer één van onderstaande Design Patterns. Implementeer een voorbeeld met en zonder het pattern, of refactor live.</p>
+</div>
+<div class="paragraph">
+<p>Spreek af met je medestudenten, bijvoorbeeld in de Teams chat, zodat elke groep een eigen pattern bespreekt.</p>
+</div>
+<div class="paragraph">
+<p>Zoek een zinnig voorbeeld zodat je medestudenten effectief zien <strong>waarom</strong> het pattern bestaat. Als je het zelf niet inziet, ga je het niet gestructureerd kunnen uitleggen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Observer</p>
+</li>
+<li>
+<p>Command</p>
+</li>
+<li>
+<p>Composite</p>
+</li>
+<li>
+<p>Proxy</p>
+</li>
+<li>
+<p>Decorator</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Hoewel design patterns taal-agnostisch zijn, zitten sommige patterns (ongeveer) ingebakken in frameworks zoals, bijvoorbeeld, .Net. In de context van het vak Softwareontwerp 2, mag je het gekozen pattern gerust "artisanaal" volledig zelf implementeren.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keuze_2_refactoring_videogame"><a class="anchor" href="#_keuze_2_refactoring_videogame"></a>Keuze 2: Refactoring Videogame</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Werk verder aan het spelletje uit de les.</p>
+</div>
+<div class="paragraph">
+<p>Introduceer <strong>drie nieuwe functionaliteiten</strong>. Probeer elegante oplossingen te bedenken.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Elke nieuwe haai die aangemaakt wordt, krijgt een willekeurige snelheid.</p>
+</li>
+<li>
+<p>De speler kan springen met <code>Spatie</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tijdens het springen kan men links/rechts bijsturen, maar niet boven/onder.</p>
+</li>
+<li>
+<p>Men kan pas opnieuw springen wanneer de vorige sprong afgerond is.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>De achtergrond kan eindeloos lang (lijken te) scrollen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Refactor</strong> gaandeweg de bestaande code. Pas aangeleerde OO ontwerp- en refactoringtechnieken toe waar nuttig.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Semantische rijkdom</strong>. Gebruiken van sprekende klassenamen.</p>
+</li>
+<li>
+<p><strong>Encapsuleren</strong> van logica in klassen en uitsplitsen in methodes.</p>
+</li>
+<li>
+<p><strong>Design Patterns</strong></p>
+</li>
+<li>
+<p><strong>Overerving</strong>.</p>
+</li>
+<li>
+<p>Etc.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keuze_3_eigen_videogame"><a class="anchor" href="#_keuze_3_eigen_videogame"></a>Keuze 3: Eigen Videogame</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bedenk, ontwerp en implementeer zelf een MonoGame videospel.</p>
+</div>
+<div class="paragraph">
+<p>Pas aangeleerde OO ontwerp- en refactoringtechnieken toe waar nuttig.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Semantische rijkdom</strong>. Gebruiken van sprekende klassenamen.</p>
+</li>
+<li>
+<p><strong>Encapsuleren</strong> van logica in klassen en uitsplitsen in methodes.</p>
+</li>
+<li>
+<p><strong>Design Patterns</strong></p>
+</li>
+<li>
+<p><strong>Overerving</strong>.</p>
+</li>
+<li>
+<p>Etc.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
