@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Products :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Fototoestellen (EF Core Code First) :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -115,7 +115,13 @@
     <a class="nav-link" href="90-01-herhaling.html">Herhaling C# en UML</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-03-pokemons.html">Backend (Api + In-Memory)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-02-backend.html">Backend (Api + EF Core)</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="2">
+    <a class="nav-link" href="90-04-fototoestellen.html">EF Core (Code First)</a>
   </li>
 </ul>
   </li>
@@ -144,7 +150,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="02-storefront-api-2.html">Products</a></li>
+    <li><a href="90-oefeningen.html">Extra Oefeningen</a></li>
+    <li><a href="90-04-fototoestellen.html">EF Core (Code First)</a></li>
   </ul>
 </nav>
 </div>
@@ -153,8 +160,46 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Products</h1>
-
+<h1 class="page">Fototoestellen (EF Core Code First)</h1>
+<div class="sect1">
+<h2 id="_fase_1"><a class="anchor" href="#_fase_1"></a>Fase 1</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Implementeer onderstaand model, maak een migration en voer deze uit op jouw databank.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/oefeningen/fototoestel.png" alt="fototoestel"></span></p>
+</div>
+<div class="paragraph">
+<p>Schrijf een testprogramma dat een beetje data maakt, uitleest en print in de console.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fase_2"><a class="anchor" href="#_fase_2"></a>Fase 2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Voeg het concept <code>Fotograaf</code> toe. Deze heeft een lijst van <code>FotoToestel</code> en een lijst van <code>Lens</code> in zijn <code>Inventaris</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ontwerp en implementeer een gepaste oplossing.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gebruikt EF Core Migrations.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Breid het testprogramma uit.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
