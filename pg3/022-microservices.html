@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Microservices :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="022-microservices.html">Microservices</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Gebruik</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="022-microservices.html">Microservices</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Microservices</h1>
+<div class="sect1">
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Microservices wat &amp; waarom (niet)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_monolithische_applicaties"><a class="anchor" href="#_monolithische_applicaties"></a>Monolithische Applicaties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Een traditionele applicatie bestaat uit een enkel uitvoerbaar bestand. De volledige broncode is verweven. Builden, deployen, uitvoeren en beschikbaarheid is een alles-of-niets-verhaal. Dit noemen we <em>monolithische</em> (≈ bestaande uit één steen) applicaties.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="_images/microservices/monolith.drawio.png" alt="monolith.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Voordelen van een dergelijke applicatiearchitectuur zijn onder andere:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Je kan tijdens het ontwikkelen gemakkelijk door de volledige codebase navigeren met Ctrl/Command+Click.</p>
+</li>
+<li>
+<p>Je hoeft tijdens deployment slechts één applicatie te installeren.</p>
+</li>
+<li>
+<p>Er is geen (netwerk)overhead op de communicatie tussen modules binnen dezelfde app.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>De hoge graad van verwevenheid van het geheel heeft ook nadelen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>De volledige app is <em>up</em> of <em>down</em>.</p>
+</li>
+<li>
+<p>Schalen om meer load te verwerken, kent geen granulariteit</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Vertical Scaling</em>: krachtigere server.</p>
+</li>
+<li>
+<p><em>Horizontal Scaling</em>: de gehele app n keer deployen.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_microservices"><a class="anchor" href="#_microservices"></a>Microservices</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wanneer voor een IT-project aspecten zoals granulaire schaalbaarheid, verschillende soorten databanken, verschillend onderhoudsinterval van componenten, verschillende (kritieke) impact van componenten op de business,&#8230;&#8203; van toepassing zijn, is het opsplitsen van de applicatie in meerdere kleine aparte applicaties een logisch gevolg.</p>
+</div>
+<div class="paragraph">
+<p>Een microservice is niet meer dan een deel van een applicatie of IT-systeem dat code- en deploygewijs volledig losgetrokken wordt en verantwoordelijk is voor een duidelijk afgelijnde business functie.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het kan interessant zijn een zijsprong te maken naar <a href="https://www.geeksforgeeks.org/domain-driven-design-ddd/">DDD</a> en <a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice">DDD Microservice Design</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Een microservice kan op zichzelf staan, maar zal veelal dienen als bouwsteen van een groter systeem.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>De bouwstenen kunnen onderling met elkaar spreken over een netwerk.</p>
+</li>
+<li>
+<p>Bouwstenen die zwaar belast worden kunnen apart geschaald worden - horizontaal of verticaal, al naargelang de context.</p>
+</li>
+<li>
+<p>Bouwstenen die problemen ondervinden zullen de functionaliteit van het geheel impacteren, maar niet vanzelf globale downtime betekenen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="_images/totaal/PG3Totaal.drawio.png" alt="PG3Totaal.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>In het voorbeeld dat doorheen de lessen gebruikt wordt, hebben we een viertal bouwstenen met een duidelijk afgebakende verantwoordelijkheid.</p>
+</div>
+<div class="paragraph">
+<p>Mogelijke scenario&#8217;s:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Het genereren van 1 label duurt te lang &#8594; Verticaal schalen LabelApi</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Aan de andere service deployments verandert er niets.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>We willen meer labels tegelijk genereren &#8594; Horizontaal schalen LabelApi</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Aan de andere service deployments verandert er niets.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>De databank die de quotes bevat is overbelast &#8594; Cosmos opschalen</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Aan de andere databases verandert er niets</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>De QuoteApi is down &#8594; Je kan geen quotes maken of uitlezen.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Je kan bestaande labels zonder probleem blijven uitlezen</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Blob Storage is onbeschikbaar &#8594; Geen labels lezen of schrijven.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>De rest van het systeem blijft werken zonder interventie of speciale flows in de code die hier rekening mee houden.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>We willen migreren naar andere cloud provider &#8594; Graduele overgang</p>
+<div class="ulist">
+<ul>
+<li>
+<p>We kunnen 1 microservice verhuizen den configuratie van verwijzende services aanpassen. Het geheel zal cross-cloud blijven werken.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Requirements rond backups van user database veranderen &#8594; SQL DB duurder.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Andere services gebruiken hun eigen database dus de kostenverhoging is daar niet van toepassing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Etc&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Lees meer over microservice architectuur bij <a href="https://learn.microsoft.com/en-us/azure/architecture/microservices/">Microsoft Docs</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_valkuilen"><a class="anchor" href="#_valkuilen"></a>Valkuilen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enkele valkuilen van microservices zijn</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wanneer je de grenzen, en dus de verantwoordelijkheid, van microservices niet correct bepaalt, kan het geheel een zeer <em>chatty</em> spinnenweb worden.</p>
+</li>
+<li>
+<p>Wanneer je de impact van service downtime wil beperken, kan je opteren om data van service X in service Y te cachen. Indien je hier niet zorgvuldig mee omgaat, kopieer je weldra alles in het rond.</p>
+</li>
+<li>
+<p>Wanneer je applicatie opgesplitst is in microservices, maar er geen functionaliteit beschikbaar is tenzij alle services up zijn, heb je een <em>distributed monolith</em> gebouwd. Dan heb je alle nadelen van een monolithische app én de complexiteit van een microservice oplossing.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_trends"><a class="anchor" href="#_trends"></a>Trends</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Zoals elke industrie is ook IT gevoelig aan mode en trends. Probeer geen emotionele hechting te vormen met bepaalde architecturen, filosofieën of trends. Volg het geheel een beetje op, begrijp high level wat de sterktes en zwaktes van bepaalde ideeën zijn, verdiep je wanneer nodig en kies wanneer mogelijk de aanpak die zich het beste leent tot jouw specifiek probleem. Keep IT Simple.</p>
+</div>
+<div class="paragraph">
+<p>Voor elke beweging, is er een tegenbeweging, bijvoorbeeld:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>You can think of <strong>SpacetimeDB</strong> as both a <strong>database and server combined into one</strong>.</p>
+</div>
+<div class="paragraph">
+<p><strong>It is a relational database system that lets you upload your application logic directly into the database</strong> by way of fancy stored procedures called "modules."</p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>This means that you can write your entire application in a single language, Rust, and deploy it as a single binary. <strong>No more microservices, no more containers, no more Kubernetes, no more Docker, no more VMs, no more DevOps, no more infrastructure, no more ops, no more servers</strong>.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; https://github.com/ClockworkLabs/SpacetimeDB
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
