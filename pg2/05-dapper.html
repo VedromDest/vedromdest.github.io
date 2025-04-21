@@ -123,6 +123,9 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-04-fototoestellen.html">EF Core (Code First)</a>
   </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-05-backend-dapper.html">Dapper</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -276,10 +279,13 @@
 </dd>
 </dl>
 </div>
-<div class="sect2">
-<h3 id="_databank"><a class="anchor" href="#_databank"></a>Databank</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_databank"><a class="anchor" href="#_databank"></a>Databank</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Gezien deze les niet rechtstreeks verbonden is aan de StoreFront app, is het een goed idee deze scheiding ook op databaseniveau te maken.</p>
+<p>Maak een nieuwe databank.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -331,8 +337,9 @@ CREATE TABLE Pets (
     DateOfDeath timestamp null
 );
 
-ALTER TABLE Pets ADD CONSTRAINT FK_Pet_Owner FOREIGN KEY (OwnerId) REFERENCES Owners(OwnerId);
-
+ALTER TABLE Pets
+ADD CONSTRAINT FK_Pet_Owner
+FOREIGN KEY (OwnerId) REFERENCES Owners(OwnerId);
 
 insert into Owners (FirstName, LastName, Email)
 values ("Test", "TestLast", "tist@test.com");
@@ -351,8 +358,10 @@ select * from Pets;</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_net_project"><a class="anchor" href="#_net_project"></a>.Net Project</h3>
+</div>
+<div class="sect1">
+<h2 id="_net_project"><a class="anchor" href="#_net_project"></a>.Net Project</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Maak een nieuw <em>Console</em> project.</p>
 </div>
@@ -370,15 +379,15 @@ select * from Pets;</code></pre>
 dotnet add package Dapper</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_c_model"><a class="anchor" href="#_c_model"></a>C# Model</h4>
+<div class="sect2">
+<h3 id="_model"><a class="anchor" href="#_model"></a>Model</h3>
 <div class="paragraph">
 <p>We maken een klasse voor elke tabel.</p>
 </div>
 <div class="listingblock">
 <div class="title">Model</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Owner
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Owner
 {
     public int OwnerId { get; set; }
 
@@ -402,12 +411,12 @@ public class Pet
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_owner_repo"><a class="anchor" href="#_owner_repo"></a>Owner Repo</h4>
+<div class="sect2">
+<h3 id="_interfaces"><a class="anchor" href="#_interfaces"></a>Interfaces</h3>
 <div class="listingblock">
 <div class="title">IOwnerRepository</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IOwnerRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IOwnerRepository
 {
     void Create(Owner owner);
     Owner GetById(int id);
@@ -416,13 +425,33 @@ public class Pet
 }</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">IPetRepository</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IPetRepository
+{
+    void Create(Pet pet);
+    Pet GetById(int id);
+    Pet GetByIdIncludeOwner(int id);
+    List&lt;Pet&gt; GetAll();
+    void Update(Pet pet);
+    void Delete(Pet pet);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_owner_repo"><a class="anchor" href="#_owner_repo"></a>Owner Repo</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We implementeren eerst de globale <code>GetAll()</code> methode.</p>
 </div>
 <div class="listingblock">
 <div class="title">OwnerRepository.GetAll()</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OwnerRepository : IOwnerRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class OwnerRepository : IOwnerRepository
 {
     //...
 
@@ -478,31 +507,21 @@ public class Pet
 <div class="listingblock">
 <div class="title">OwnerRepository.Create(Owner owner)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public void Create(Owner owner)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void Create(Owner owner)
 {
-    const string query = "INSERT INTO Owners (FirstName, LastName, Email) VALUES (@FirstName, @LastName, @Email)";
+    const string query =
+        "INSERT INTO Owners (FirstName, LastName, Email)
+         VALUES (@FirstName, @LastName, @Email)";
     using var connection = new MySqlConnection(ConnectionString);
     connection.Execute(query, owner);
 }</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_pet_repo"><a class="anchor" href="#_pet_repo"></a>Pet Repo</h4>
-<div class="listingblock">
-<div class="title">IPetRepository</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public interface IPetRepository
-{
-    void Create(Pet pet);
-    Pet GetById(int id);
-    Pet GetByIdIncludeOwner(int id);
-    List&lt;Pet&gt; GetAll();
-    void Update(Pet pet);
-    void Delete(Pet pet);
-}</code></pre>
 </div>
-</div>
+<div class="sect1">
+<h2 id="_pet_repo"><a class="anchor" href="#_pet_repo"></a>Pet Repo</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>De <code>Get</code> en <code>GetAll</code> methodes zijn analoog aan die voor Owners.</p>
 </div>
@@ -515,7 +534,7 @@ public class Pet
 <div class="listingblock">
 <div class="title">Pet</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class Pet
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Pet
 {
     //...
     public Owner Owner { get; set; }
@@ -534,9 +553,11 @@ public class Pet
 <div class="listingblock">
 <div class="title">PetRepository.Create()</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">    public void Create(Pet pet)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">    public void Create(Pet pet)
     {
-        const string query = "INSERT INTO Pets (Name, DateOfBirth, DateOfDeath, OwnerId) VALUES (@Name, @DateOfBirth, @DateOfDeath, @OwnerId)";
+        const string query =
+            "INSERT INTO Pets (Name, DateOfBirth, DateOfDeath, OwnerId)
+             VALUES (@Name, @DateOfBirth, @DateOfDeath, @OwnerId)";
         using var connection = new MySqlConnection(_connectionstring);
         connection.Execute(sql: query, param: pet);
     }</code></pre>
@@ -546,8 +567,10 @@ public class Pet
 <p>Delete en Update methodes verlopen analoog aan Create. Het is een <code>Execute()</code> Dapper call, geen <code>Query()</code> call.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_includes"><a class="anchor" href="#_includes"></a>Includes</h4>
+</div>
+<div class="sect1">
+<h2 id="_eén_op_één_query"><a class="anchor" href="#_eén_op_één_query"></a>Eén-op-één Query</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We willen een <code>Pet</code> inclusief ingevuld <code>Owner</code> object bekomen uit het repository.</p>
 </div>
@@ -557,7 +580,7 @@ public class Pet
 <div class="listingblock">
 <div class="title">PetRepository.GetByIdIncludeOwner(int id)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Pet GetByIdIncludeOwner(int id)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public Pet GetByIdIncludeOwner(int id)
 {
     const string query = @"SELECT  o.OwnerId, o.FirstName, o.LastName, o.Email,
         p.PetId, p.Name, p.DateOfBirth, p.DateOfDeath
@@ -607,6 +630,11 @@ public class Pet
 <div class="paragraph">
 <p>Veel artisanaler dan dit wordt het niet.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eén_op_veel_query"><a class="anchor" href="#_eén_op_veel_query"></a>Eén-op-veel Query</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Laten we de <code>Owner</code> eens uitlezen met alle <code>Pets</code> ingevuld. Daarnet had elke <code>Pet</code> maar één <code>Owner</code>. Nu ligt het lastiger: een <code>Owner</code> heeft een lijst van <code>Pets</code>.</p>
 </div>
@@ -630,7 +658,7 @@ WHERE   o.OwnerId = @OwnerId</code></pre>
 <div class="listingblock">
 <div class="title">OwnerRepository.GetByIdIncludePets(int id)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Owner GetByIdIncludePets(int id)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public Owner GetByIdIncludePets(int id)
 {
     using var connection = new MySqlConnection(ConnectionString);
     var result = connection.Query&lt;Owner, Pet, Owner&gt;(<i class="conum" data-value="1"></i><b>(1)</b>
@@ -670,7 +698,7 @@ WHERE   o.OwnerId = @OwnerId</code></pre>
 <div class="listingblock">
 <div class="title">MapToManyPets(IEnumerable&lt;Owner&gt; ownerRecords)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">private Owner MapToManyPets(IEnumerable&lt;Owner&gt; ownerRecords)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">private Owner MapToManyPets(IEnumerable&lt;Owner&gt; ownerRecords)
 {
     var singleOwner = ownerRecords.First();<i class="conum" data-value="1"></i><b>(1)</b>
 
@@ -711,7 +739,7 @@ WHERE   o.OwnerId = @OwnerId</code></pre>
 <div class="listingblock">
 <div class="title">Method call</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var ownerWithPets = ownerRepo.GetByIdIncludePets(1);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var ownerWithPets = ownerRepo.GetByIdIncludePets(1);
 Console.WriteLine(ownerWithPets);
 foreach (var pet in ownerWithPets.Pets)
 {
@@ -742,8 +770,9 @@ Als je een <code>GetAllOwnersIncludePets()</code> zou willen implementeren, moet
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_queries_out_of_line_bewaren"><a class="anchor" href="#_queries_out_of_line_bewaren"></a>Queries Out-Of-Line Bewaren</h3>
+<div class="sect1">
+<h2 id="_queries_out_of_line_bewaren"><a class="anchor" href="#_queries_out_of_line_bewaren"></a>Queries Out-Of-Line Bewaren</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Tot op heden staan de SQL queries inline in de C# code. Dat is niet inherent verkeerd, maar het kan ook anders. We kunnen elke query in een sql file bewaren.</p>
 </div>
@@ -771,7 +800,7 @@ Als je een <code>GetAllOwnersIncludePets()</code> zou willen implementeren, moet
 <div class="listingblock">
 <div class="title">QueryRepository</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class QueryRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class QueryRepository
 {
     private string? _getOwnerByIdIncludePetsQuery;
     private string? _getOwnerById;
@@ -779,7 +808,8 @@ Als je een <code>GetAllOwnersIncludePets()</code> zou willen implementeren, moet
     private const string QueryRoot = "Repositories/Queries/SQL/";
 
     public string GetOwnerByIdIncludePetsQuery =&gt;
-        _getOwnerByIdIncludePetsQuery ??= GetQuery(nameof(GetOwnerByIdIncludePetsQuery));
+        _getOwnerByIdIncludePetsQuery ??=
+            GetQuery(nameof(GetOwnerByIdIncludePetsQuery));
     public string GetOwnerById =&gt;
         _getOwnerById ??= GetQuery(nameof(GetOwnerById));
 
@@ -806,7 +836,7 @@ Deze implementatie bevat twee queries als voorbeeld. In een echt project ga je n
 <div class="listingblock">
 <div class="title">OwnerRepository</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public Owner GetByIdIncludePets(int id)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public Owner GetByIdIncludePets(int id)
 {
     using var connection = new MySqlConnection(_connectionstring);
     var query = _queryRepository.GetOwnerByIdIncludePetsQuery();
@@ -814,6 +844,23 @@ Deze implementatie bevat twee queries als voorbeeld. In een echt project ga je n
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_voorbeeld_afwerken"><a class="anchor" href="#_voorbeeld_afwerken"></a>Voorbeeld Afwerken</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Implementeer zelf de resterende methoden op analoge wijze.</p>
+</li>
+<li>
+<p>Bewaar alle queries out-of-line.</p>
+</li>
+<li>
+<p>Refactor naar een console app met DI/Lifecycle/Settings (zie <a href="https://github.com/VedromDest/pg2/tree/main/VoorbeeldOplossingen/Fototoestellen">voorbeeld</a>).</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

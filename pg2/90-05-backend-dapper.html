@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welkom bij Programmeren Gevorderd 2! :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Dapper :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
-  <body class="article home">
+  <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
@@ -123,7 +123,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-04-fototoestellen.html">EF Core (Code First)</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+      <li class="nav-item is-active is-current-page" data-depth="2">
     <a class="nav-link" href="90-05-backend-dapper.html">Dapper</a>
   </li>
 </ul>
@@ -153,7 +153,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="index.html">Welkom bij Programmeren Gevorderd 2!</a></li>
+    <li><a href="90-oefeningen.html">Extra Oefeningen</a></li>
+    <li><a href="90-05-backend-dapper.html">Dapper</a></li>
   </ul>
 </nav>
 </div>
@@ -162,134 +163,33 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Welkom bij Programmeren Gevorderd 2!</h1>
-<div id="preamble">
+<h1 class="page">Dapper</h1>
+<div class="sect1">
+<h2 id="_programmeren"><a class="anchor" href="#_programmeren"></a>Programmeren</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Alle noemenswaardige broncode uit de lessen is <a href="https://github.com/VedromDest/pg2">online beschikbaar</a>.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Herwerk je oplossing voor <a href="90-02-backend.html" class="xref page">Herhalingsoefening Backend (Api + EF Core)</a> en vervang EF Core door Dapper.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
+<h2 id="_nadenken"><a class="anchor" href="#_nadenken"></a>Nadenken</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In dit vak worden enkele belangrijke technieken aangeleerd die essentieel zijn in het werkveld. Er ligt een grote focus op het verhogen van efficiëntie en productiviteit.</p>
+<p>Bekijk onderstaande EF Core <a href="https://learn.microsoft.com/en-us/ef/core/querying/sql-queries?tabs=sqlserver">mogelijkheden</a> en begrijp waarin deze functionaliteit (niet) op Dapper lijkt.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>RESTful HTTP Api&#8217;s</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationalqueryableextensions.fromsql?view=efcore-9.0">FromSQL</a></p>
 </li>
 <li>
-<p>Meerlagige Backends</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.sqlquery?view=efcore-9.0">SQLQuery</a></p>
 </li>
 <li>
-<p>Entity Framework Core</p>
-</li>
-<li>
-<p>Refactoring</p>
-</li>
-<li>
-<p>Dapper Micro ORM</p>
-</li>
-<li>
-<p>Asynchroon &amp; Parallel Programmeren</p>
-</li>
-<li>
-<p>Document Database</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.executesql?view=efcore-9.0">ExecuteSQL</a></p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_studiemateriaal"><a class="anchor" href="#_studiemateriaal"></a>Studiemateriaal</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Alle studiemateriaal wordt online beschikbaar gesteld.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Code zal na elke les beschikbaar gesteld worden</p>
-</li>
-<li>
-<p>Deze online cursus is altijd integraal beschikbaar.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Het wordt sterk aangemoedigd de online <a href="https://dotnet.microsoft.com/en-us/">documentatie</a> van Microsoft te raadplegen om zich te verdiepen.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_aanpak"><a class="anchor" href="#_aanpak"></a>Aanpak</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Lessen worden gegeven als een mix van theorie en live coding tutorial. Alle code komt integraal online.</p>
-</div>
-<div class="paragraph">
-<p>Je wordt <strong>niet</strong> verondersteld mee te volgen op je eigen laptop.</p>
-</div>
-<div class="paragraph">
-<p>Er worden optionele oefeningen beschikbaar gesteld voor studenten die materie willen inoefenen.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_evaluatie"><a class="anchor" href="#_evaluatie"></a>Evaluatie</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tooling"><a class="anchor" href="#_tooling"></a>Tooling</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Visual Studio / VS Code / Rider</p>
-</li>
-<li>
-<p>GitHub</p>
-</li>
-<li>
-<p>Meest recente <strong>LTS</strong> .NET SDK</p>
-</li>
-<li>
-<p>Docker Desktop</p>
-</li>
-<li>
-<p>Postman</p>
-</li>
-<li>
-<p>MySQL Workbench</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_broncode_in_deze_cursus"><a class="anchor" href="#_broncode_in_deze_cursus"></a>Broncode In Deze Cursus</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Tijdens de lessen wordt er aan live coding gedaan. Dit heeft als gevolg dat de code uit de les niet exact overeen zal komen met deze cursus.</p>
-</div>
-<div class="paragraph">
-<p>Laat je hierdoor niet in de war brengen. Je zal snel ondervinden dat deze afwijkingen zeer oppervlakkig zijn en het geheel conceptueel identiek is aan de cursus. Immers: <strong>de lessen volgen de cursus, niet omgekeerd</strong>.</p>
 </div>
 </div>
 </div>
