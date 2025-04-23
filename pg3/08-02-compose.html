@@ -208,6 +208,42 @@ info: Microsoft.Hosting.Lifetime[0]
 Hello World!</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Unieke Responses + CORS (Handig voor straks)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =&gt;
+{
+    options.AddDefaultPolicy(
+        policy =&gt;
+        {
+            policy.SetIsOriginAllowed(origin =&gt;
+                new Uri(origin).Host == "localhost"); <i class="conum" data-value="1"></i><b>(1)</b>
+        });
+});
+
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; $"Hello World! {Guid.NewGuid()}"); <i class="conum" data-value="2"></i><b>(2)</b>
+
+app.UseCors();
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Localhost toegelaten ongeacht port/verb etc</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Responses uniek maken</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_dockerizen"><a class="anchor" href="#_dockerizen"></a>Dockerizen</h3>
@@ -282,49 +318,6 @@ info: Microsoft.Hosting.Lifetime[14]
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="_images/open-data-docker/demo/container-running.png" alt="container running"></span></p>
-</div>
-<div class="literalblock">
-<div class="title">Testen</div>
-<div class="content">
-<pre>stefancourteaux@MPB ~ % curl localhost:7777
-Hello World!</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Unieke Responses + CORS</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddCors(options =&gt;
-{
-    options.AddDefaultPolicy(
-        policy =&gt;
-        {
-            policy.SetIsOriginAllowed(origin =&gt;
-                new Uri(origin).Host == "localhost"); <i class="conum" data-value="1"></i><b>(1)</b>
-        });
-});
-
-var app = builder.Build();
-
-app.MapGet("/", () =&gt; $"Hello World! {Guid.NewGuid()}"); <i class="conum" data-value="2"></i><b>(2)</b>
-
-app.UseCors();
-
-app.Run();</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Localhost toegelaten ongeacht port/verb etc</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Responses uniek maken</td>
-</tr>
-</table>
 </div>
 <div class="literalblock">
 <div class="content">
