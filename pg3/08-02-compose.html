@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Docker (Compose) Gebruiken :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="022-microservices.html">Microservices ⭐️</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Gebruik</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+<ul class="nav-list">
+      <li class="nav-item is-active is-current-page" data-depth="2">
+    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose ⭐️</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="08-open-data-docker.html">Open Data &amp; Docker</a></li>
+    <li><a href="08-02-compose.html">Dockerfiles &amp; Compose ⭐️</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Docker (Compose) Gebruiken</h1>
+<div class="sect1">
+<h2 id="_backend_in_docker"><a class="anchor" href="#_backend_in_docker"></a>Backend in Docker</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_project_maken"><a class="anchor" href="#_project_maken"></a>Project Maken</h3>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo
+
+stefancourteaux@MBP DockerComposeDemo % mkdir backend
+stefancourteaux@MBP DockerComposeDemo % cd backend</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Api Maken</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet new web -o MiniApi
+The template "ASP.NET Core Empty" was created successfully.
+
+Processing post-creation actions...
+Restoring /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi/MiniApi.csproj:
+Restore succeeded.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Solution (Optioneel)</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet new sln --name Backend
+The template "Solution File" was created successfully.
+
+stefancourteaux@MBP backend % dotnet sln add MiniApi/MiniApi.csproj
+Project `MiniApi/MiniApi.csproj` added to the solution.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Project Runnen</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet run --project MiniApi/MiniApi.csproj
+Using launch settings from MiniApi/Properties/launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5021
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Test Run Api</div>
+<div class="content">
+<pre>stefancourteaux@MBP ~ % curl localhost:5021
+Hello World!</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dockerizen"><a class="anchor" href="#_dockerizen"></a>Dockerizen</h3>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Dockerfile</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /App
+
+# Copy everything
+COPY . ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
+WORKDIR /App
+COPY --from=build /App/out .
+ENTRYPOINT ["dotnet", "MiniApi.dll"]</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Image Maken</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker build -t mini-api-image -f Dockerfile .
+[+] Building 58.9s (14/14) FINISHED</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker image ls
+REPOSITORY                      TAG    IMAGE ID     CREATED
+mini-api-image                  latest 2d92b4e1dfd6 2 minutes ago <i class="conum" data-value="1"></i><b>(1)</b>
+mcr.microsoft.com/dotnet/aspnet 9.0    c3aee4ea4f51 2 weeks ago
+mysql                           8.0    bf577825b52a 3 months ago</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Daar staat ie dan.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">Container Runnen (Op Basis Van Image)</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker run -p 7777:8080 --name api-container mini-api-image <i class="conum" data-value="1"></i><b>(1)</b>
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:8080
+      Application started. Press Ctrl+C to shut down.
+      Content root path: /App</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>8080 is standaard poort in .net container</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/container-running.png" alt="container running"></span></p>
+</div>
+<div class="literalblock">
+<div class="title">Testen</div>
+<div class="content">
+<pre>stefancourteaux@MPB ~ % curl localhost:7777
+Hello World!</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Unieke Responses + CORS</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =&gt;
+{
+    options.AddDefaultPolicy(
+        policy =&gt;
+        {
+            policy.SetIsOriginAllowed(origin =&gt;
+                new Uri(origin).Host == "localhost"); <i class="conum" data-value="1"></i><b>(1)</b>
+        });
+});
+
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; $"Hello World! {Guid.NewGuid()}"); <i class="conum" data-value="2"></i><b>(2)</b>
+
+app.UseCors();
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Localhost toegelaten ongeacht port/verb etc</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Responses uniek maken</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % curl http://localhost:7777
+Hello World! 88f75ce8-97f2-4446-ab5b-1103e5380509%</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_frontend_in_docker"><a class="anchor" href="#_frontend_in_docker"></a>Frontend in Docker</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_project_maken_2"><a class="anchor" href="#_project_maken_2"></a>Project Maken</h3>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo
+
+stefancourteaux@MBP DockerComposeDemo % ls
+backend
+
+stefancourteaux@MBP DockerComposeDemo % mkdir frontend
+stefancourteaux@MBP DockerComposeDemo % cd frontend
+
+stefancourteaux@MBP frontend % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">React Project Maken</div>
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % npm create vite@latest mini-fe -- --template react-ts
+&gt; npx
+&gt; create-vite mini-fe --template react-ts
+
+Scaffolding project in /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend/mini-fe
+
+Done. Now run:
+
+  cd mini-fe
+  npm install
+  npm run dev</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % cd mini-fe</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % npm install
+added 185 packages, and audited 186 packages in 12s</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % npm run dev
+&gt; mini-fe@0.0.0 dev
+&gt; vite
+
+
+  VITE v6.3.2  ready in 839 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help....</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app.png" alt="react app"></span></p>
+</div>
+<div class="literalblock">
+<div class="title">Axios Toevoegen</div>
+<div class="content">
+<pre>npm install axios</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Api Call Naar Backend</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescriptjsx hljs" data-lang="typescriptjsx">import { useState } from 'react'
+import axios from 'axios'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [miniApiResponse, setResponse] = useState('nog niets ontvangen')
+
+
+  const fetchData = async () =&gt; {
+    try {
+      const response = await axios.get('http://localhost:7777');
+      setResponse(response.data);
+    } catch (error) {
+      console.error('MiniApi call mislukt:', error);
+    }
+  };
+
+
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;a href="https://vite.dev" target="_blank"&gt;
+          &lt;img src={viteLogo} className="logo" alt="Vite logo" /&gt;
+        &lt;/a&gt;
+        &lt;a href="https://react.dev" target="_blank"&gt;
+          &lt;img src={reactLogo} className="logo react" alt="React logo" /&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;h1&gt;Vite + React&lt;/h1&gt;
+      &lt;div className="card"&gt;
+        &lt;button onClick={fetchData}&gt;
+          Laatste api response is {miniApiResponse}
+        &lt;/button&gt;
+        &lt;p&gt;
+          Edit &lt;code&gt;src/App.tsx&lt;/code&gt; and save to test HMR
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;p className="read-the-docs"&gt;
+        Click on the Vite and React logos to learn more
+      &lt;/p&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De react app is nu verbonden met de backend in Docker.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app-connected.png" alt="react app connected"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dockerizen_2"><a class="anchor" href="#_dockerizen_2"></a>Dockerizen</h3>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend/mini-fe</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Dockerfile</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># Build Stage
+FROM node:lts-alpine AS build
+WORKDIR /app
+COPY ./package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Production Stage
+FROM nginx:stable-alpine AS production
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Image Maken</div>
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % docker build -t mini-fe-image -f Dockerfile .</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Container Runnen</div>
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % docker run -p 8008:80 --name fe-container mini-fe-image</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De react app die nu ook uit docker geserved wordt, spreekt met success tegen de api die ook uit docker geserved wordt.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app-docker.png" alt="react app docker"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker_compose"><a class="anchor" href="#_docker_compose"></a>Docker Compose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Op dit moment staan front- en backend wel in docker, maar de relatie tussen de 2 containers is niet duidelijk. Wij weten dat ze samen horen, maar docker weet dat niet.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/docker-duo.png" alt="docker duo"></span></p>
+</div>
+<div class="paragraph">
+<p>We kunnen dit expliciet maken. We kunnen een app samenstellen ofte <em>composen</em> uit meerdere docker images.</p>
+</div>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: '3.8'
+
+services:
+  mini-api:
+    build:
+      context: ./backend/MiniApi
+      dockerfile: Dockerfile
+    ports:
+      - "7777:8080"
+
+  mini-fe:
+    build:
+      context: ./frontend/mini-fe
+      dockerfile: Dockerfile
+    ports:
+      - "8008:80"</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Up</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % docker compose up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker weet nu wel dat de containers samen horen.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/composed-docker.png" alt="composed docker"></span></p>
+</div>
+<div class="paragraph">
+<p>De App werkt nog steeds naar behoren.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/composed-running.png" alt="composed running"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Je kan uiteraard nog veel complexere scenario&#8217;s opzetten en dieper ingaan op (virtual) networking. Dat ondervind je wel in de praktijk indien je terecht komt in een omgeving waar Docker (intensief) gebruikt wordt. Dat wordt ook stilaan een verhaal voor de collega&#8217;s van <em>Systemen en Netwerken</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Dit voorbeeld gebruikt geen cleane React environment settings. Bekijk de aanbevelingen daaromtrent in de cursus <em>Web 3</em>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
