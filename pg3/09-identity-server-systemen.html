@@ -495,7 +495,7 @@ public class QuoteController : ControllerBase
 <p>Nu gaan we in de label api een token moeten ophalen voor we de call naar de quote api met succes maken.</p>
 </div>
 <div class="paragraph">
-<p>Voeg nuget package <code>IdentityModel</code> aan de Labels Api.</p>
+<p>Voeg nuget package <code>Duende.IdentityModel</code> toe aan de Label Api.</p>
 </div>
 <div class="listingblock">
 <div class="title">ShipIt.Labels.Api/Program.cs</div>
@@ -813,7 +813,7 @@ De label api authenticeert zich tov de Quote api, maar dwingt zelf (nog) geen se
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deployen"><a class="anchor" href="#_deployen"></a>Deployen</h2>
+<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We kunnen de Identity Server deployen naar Azure zoals gewoonlijk, het is ook <em>gewoon</em> een web api.</p>
@@ -821,9 +821,29 @@ De label api authenticeert zich tov de Quote api, maar dwingt zelf (nog) geen se
 <div class="literalblock">
 <div class="content">
 <pre>az webapp up `
-  --name hogent-gevorderd3-dag-stefancourteaux-shipit-identity `
-  --plan hogent-gevorderd3-dag-stefancourteaux-shipit-plan `
-  --resource-group hogent-gevorderd3-dag-stefancourteaux-shipit `
+--name pg3-shipit-stefanc-identity-api `
+--plan pg3-shipit-stefanc-plan `
+--resource-group pg3-shipit-stefanc `
+--location westeurope `
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up `
+--name pg3-shipit-stefanc-quote-api `
+--plan pg3-shipit-stefanc-plan `
+--resource-group pg3-shipit-stefanc `
+--location westeurope `
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up `
+  --name pg3-shipit-stefanc-label-api `
+  --plan pg3-shipit-stefanc-plan `
+  --resource-group pg3-shipit-stefanc `
   --location westeurope `
   --os-type linux</pre>
 </div>
@@ -871,19 +891,10 @@ builder.Services.AddAuthentication()
 </div>
 </div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </div>
 </div>
 </div>

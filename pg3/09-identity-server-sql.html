@@ -165,10 +165,8 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_azure_sql_als_identity_server_opslag"><a class="anchor" href="#_azure_sql_als_identity_server_opslag"></a>Azure SQL als Identity Server opslag</h2>
+<h2 id="_azure_sql_database_aanmaken"><a class="anchor" href="#_azure_sql_database_aanmaken"></a>Azure SQL Database Aanmaken</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_sql_database_aanmaken"><a class="anchor" href="#_sql_database_aanmaken"></a>SQL Database Aanmaken</h3>
 <div class="paragraph">
 <p>SQL Server is een van de meest gebruikte relationele databanken. Microsoft biedt dit product ook aan op Azure onder de vorm van <a href="https://azure.microsoft.com/en-us/products/azure-sql/">Azure SQL</a>.</p>
 </div>
@@ -212,8 +210,6 @@
 <img src="_images/identity-server-sql/sql-create-db.png" alt="sql create db">
 </div>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -225,8 +221,6 @@ Als je reeds een Azure SQL database gebruikt voor jouw project, hoef je geen nie
 </td>
 </tr>
 </table>
-</div>
-</div>
 </div>
 <div class="paragraph">
 <p>Idealiter maak je de SQL Server Resource in Europa, maar de beschikbaarheid varieert met Azure For Students. De naam van de server is heel specifiek omdat dit de publieke naam van de SQL Instance zal worden en dus uniek moet zijn.</p>
@@ -293,8 +287,54 @@ Als je reeds een Azure SQL database gebruikt voor jouw project, hoef je geen nie
 </div>
 <div style="page-break-after: always;"></div>
 </div>
-<div class="sect2">
-<h3 id="_als_developer_verbinden_met_azure_sql"><a class="anchor" href="#_als_developer_verbinden_met_azure_sql"></a>Als Developer Verbinden met Azure SQL</h3>
+</div>
+<div class="sect1">
+<h2 id="_verbinden_vs_code"><a class="anchor" href="#_verbinden_vs_code"></a>Verbinden (VS Code)</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+De <a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server (mssql) plugin</a> vervangt Azure Data Studio. Bepaalde features zijn nog in <em>preview</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Het installeren van deze plugin zal de nodige dependencies meebrengen om je Azure resource te bekijken vanuit VS Code.</p>
+</div>
+<div class="paragraph">
+<p>Maak een geldige configuratie en sla deze op.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-sql/sql-vscode-connection.png" alt="sql vscode connection"></span></p>
+</div>
+<div class="paragraph">
+<p>Je kan naar wens queries uitvoeren. Let op! Op dit moment ben je hoogst waarschijnlijk met admin privileges verbonden.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-sql/sql-vscode-query.png" alt="sql vscode query"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verbinden_azure_data_studio"><a class="anchor" href="#_verbinden_azure_data_studio"></a>Verbinden (Azure Data Studio)</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Azure data studio wordt officieel ondersteund <a href="https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall">tot februari 2026</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p><a href="https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall">Azure Data Studio</a> is een handige tool om met de nieuwe databank te verbinden. Verbind je Azure account.</p>
 </div>
@@ -312,16 +352,16 @@ Als je reeds een Azure SQL database gebruikt voor jouw project, hoef je geen nie
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_identity_server_sql_credentials"><a class="anchor" href="#_identity_server_sql_credentials"></a>Identity Server SQL Credentials</h3>
+</div>
+<div class="sect1">
+<h2 id="_sql_credentials_voor_is"><a class="anchor" href="#_sql_credentials_voor_is"></a>SQL Credentials voor IS</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Op dit moment word je persoonlijke Azure identiteit gebruikt om te authenticeren bij de SQL Server. Het is ook mogelijk in Azure identiteiten te definiëren voor applicaties en op die manier niet alleen de rechten van mensen, maar ook die van applicaties/services te beheren. Azure For Students heeft hier beperkingen, dus we gaan onze applicatie toch dmv een klassieke connectionstring met SQL user en wachtwoord laten verbinden.</p>
 </div>
 <div class="paragraph">
 <p>Dit wil niet zeggen dat we elke notie van security overboord gaan gooien. We gaan dus de SQL admin user <strong>niet</strong> door de applicatie laten gebruiken. We gaan een aparte user maken voor onze applicatie, nl Identity Server, en de gepaste rechten toekennen.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -333,8 +373,6 @@ Je kan deze administratieve statements uitvoeren op de SQL Server omdat je tijde
 </td>
 </tr>
 </table>
-</div>
-</div>
 </div>
 <div class="listingblock">
 <div class="title">Als admin op de master database</div>
@@ -362,12 +400,7 @@ GO</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Test de credentials die je voor IS gemaakt hebt door een nieuwe <strong>database  server connectie</strong> toe te voegen in Data Studio. Je kan de connectionstring terugvinden in de Azure Portal.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/identity-server-sql/data-studio-is-conn.png" alt="data studio is conn">
-</div>
+<p>Test de credentials die je voor IS gemaakt hebt door een nieuwe <strong>database  server connectie</strong> toe te voegen in Data Studio of VS Code. Je kan de connectionstring terugvinden in de Azure Portal.</p>
 </div>
 <div class="paragraph">
 <p>Je hebt nu in Data Studio twee verschillende connecties die naar dezelfde SQL Server verwijzen, maar met andere credentials.</p>
@@ -378,13 +411,15 @@ GO</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_code_wijzigingen"><a class="anchor" href="#_code_wijzigingen"></a>Code Wijzigingen</h3>
+</div>
+<div class="sect1">
+<h2 id="_ef_core"><a class="anchor" href="#_ef_core"></a>EF Core</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Voeg onderstaande nuget packages toe aan het IdentityServer project. Je kan dit ook doen via de Visual Studio UI.</p>
+<p>Voeg onderstaande nuget packages toe aan het IdentityServer project.</p>
 </div>
 <div class="literalblock">
-<div class="title">src\ShipIt\ShipIt.IdentityServer</div>
+<div class="title">ShipIt.IdentityServer</div>
 <div class="content">
 <pre>dotnet add package Duende.IdentityServer.EntityFramework
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -392,7 +427,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design</pre>
 </div>
 </div>
 <div class="literalblock">
-<div class="title">src\ShipIt\ShipIt.IdentityServer</div>
+<div class="title">ShipIt.IdentityServer</div>
 <div class="content">
 <pre>dotnet tool install --global dotnet-ef</pre>
 </div>
@@ -446,7 +481,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design</pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Zet de <code>MigrationsHistory</code> in <code>pg3is</code>.</td>
+<td>Zet de <code>MigrationsHistory</code> in schema <code>pg3is</code>.</td>
 </tr>
 </table>
 </div>
@@ -576,21 +611,11 @@ left outer join pg3is.ClientScopes csc on csc.ClientId = c.Id</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </div>
 </div>
 </div>
