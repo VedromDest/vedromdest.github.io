@@ -825,8 +825,26 @@ De label api authenticeert zich tov de Quote api, maar dwingt zelf (nog) geen se
 --plan pg3-shipit-stefanc-plan `
 --resource-group pg3-shipit-stefanc `
 --location westeurope `
---os-type Linux</pre>
+--os-type Linux
+
+{
+  "URL": "http://pg3-shipit-stefanc-identity-api.azurewebsites.net", <i class="conum" data-value="1"></i><b>(1)</b>
+  "appserviceplan": "pg3-shipit-stefanc-plan",
+  "location": "westeurope",
+  "name": "pg3-shipit-stefanc-identity-api",
+  "os": "Linux",
+  "resourcegroup": "pg3-shipit-stefanc",
+  ...
+}</pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We gaan dit in de configuratie van de andere services moeten opnemen.</td>
+</tr>
+</table>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -850,43 +868,28 @@ De label api authenticeert zich tov de Quote api, maar dwingt zelf (nog) geen se
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/identity-server/token-azure.png" alt="token azure">
+<img src="_images/identity-server/azure-secured.png" alt="azure secured">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_verdere_testen"><a class="anchor" href="#_verdere_testen"></a>Verdere Testen</h2>
+<h2 id="_authority_testen"><a class="anchor" href="#_authority_testen"></a>Authority Testen</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Laten we de Quote api eens doen verwijzen naar de Azure identity server <code>hogent-gevorderd3-dag-stefancourteaux-shipit-identity.azurewebsites.net</code>.</p>
-</div>
-<div class="listingblock">
-<div class="title">ShipIt.Labels.Api/Program.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">...
-builder.Services.AddAuthentication()
-    .AddJwtBearer(options =&gt;
-    {
-        options.Authority = "hogent-gevorderd3-dag-stefancourteaux-shipit-identity.azurewebsites.net"; <i class="conum" data-value="1"></i><b>(1)</b>
-        options.TokenValidationParameters.ValidateAudience = false;
-    });
-...</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>De Azure url.</td>
-</tr>
-</table>
+<p>Laat de lokale Quote api verwijzen naar de Identity Server op Azure.</p>
 </div>
 <div class="paragraph">
-<p>De quote service zal de tokens van onze lokale identity service niet langer accepteren. We moeten een token halen bij de Identity Server op Azure want dat is de provider die nu vertrouwd wordt door de quote api.</p>
+<p>Vraag een token aan de lokale Identity Server.</p>
 </div>
 <div class="paragraph">
-<p>Desgewenst kunnen we ook de settings van de Label api aanpassen om de Identity Server op Azure te gebruiken. Eenmaal dat gebeurd is, kunnen de drie services perfect samenwerken op Azure.</p>
+<p>Doe een call naar de lokale Quote api met het lokaal verkregen token.</p>
+</div>
+<div class="paragraph">
+<p>Dit geeft een exception.</p>
+</div>
+<div class="paragraph">
+<p>De quote service zal de tokens van onze lokale identity service niet langer accepteren. We moeten een token halen bij de Identity Server op Azure want dat is de provider die nu vertrouwd wordt.</p>
 </div>
 </div>
 </div>
