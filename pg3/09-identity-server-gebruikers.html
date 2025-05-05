@@ -63,7 +63,7 @@
     <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="022-microservices.html">Microservices ⭐️</a>
+    <a class="nav-link" href="02-microservices.html">Microservices</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="02-az-devops.html">Azure DevOps</a>
@@ -88,7 +88,7 @@
     <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
-    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose ⭐️</a>
+    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose</a>
   </li>
 </ul>
   </li>
@@ -99,16 +99,22 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
   </li>
+      <li class="nav-item is-active is-current-page" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Test Users (OIDC)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-shipitapp.html">Web App Verbinden</a>
+  </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="2">
-    <a class="nav-link" href="09-identity-server-gebruikers.html">Users (OIDC)</a>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a>
   </li>
 </ul>
   </li>
       <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="10-totaalplaatje.html">Totaalplaatje</a>
+    <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
@@ -139,7 +145,7 @@
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
     <li><a href="09-auth.html">Authenticatie en Autorisatie</a></li>
-    <li><a href="09-identity-server-gebruikers.html">Users (OIDC)</a></li>
+    <li><a href="09-identity-server-gebruikers.html">Test Users (OIDC)</a></li>
   </ul>
 </nav>
 </div>
@@ -162,7 +168,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_user_accounts_activeren_in_identity_server"><a class="anchor" href="#_user_accounts_activeren_in_identity_server"></a>User Accounts Activeren in Identity Server</h2>
+<h2 id="_is_ui_toevoegen"><a class="anchor" href="#_is_ui_toevoegen"></a>IS UI Toevoegen</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Identity Server biedt een implementatie van OpenID Connect die we kunnen gebruiken om user auth te doen.</p>
@@ -171,7 +177,7 @@
 <p>Om mensen door de login flow te loodsen hebben we schermen nodig.Je kan deze volledig zelf ontwikkelen of vertrekken van de Identity Server templates.</p>
 </div>
 <div class="paragraph">
-<p>Gezien dit een backend cursus is, zullen we de ingebouwde  ui-templates gebruiken.</p>
+<p>We gebruiken de ingebouwde ui-template van Identity Server. Indien gewenst, kan je deze restylen.</p>
 </div>
 <div class="literalblock">
 <div class="title">src\ShipIt\ShipIt.IdentityServer</div>
@@ -180,19 +186,24 @@
 </div>
 </div>
 <div class="paragraph">
+<p>Het is mogelijk dat nuget <code>Duende.IdentityModel</code>. Voeg deze toe en fix de refernces indien nodig.</p>
+</div>
+<div class="paragraph">
 <p>De nodige calls om de user interface te activeren staan al in de code, maar moeten uit commentaar gezet worden.</p>
 </div>
 <div class="listingblock">
 <div class="title">ShipIt.IdentityServer\HostingExtensions.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(
+    this WebApplicationBuilder builder)
 {
     // uncomment if you want to add a UI
     builder.Services.AddRazorPages();
     ...
 }
 
-public static WebApplication ConfigurePipeline(this WebApplication app)
+public static WebApplication ConfigurePipeline(
+    this WebApplication app)
 {
     ...
 	// uncomment if you want to add a UI
@@ -206,13 +217,19 @@ public static WebApplication ConfigurePipeline(this WebApplication app)
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_users_activeren"><a class="anchor" href="#_test_users_activeren"></a>Test Users Activeren</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Identity Server biedt een aantal ingebouwde test gebruikers. Deze zijn zeer handig om de concepten te demonstreren zonder effectief user storage te moeten definiëren.</p>
 </div>
 <div class="listingblock">
 <div class="title">ShipIt.IdentityServer\HostingExtensions.cs</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(
+    this WebApplicationBuilder builder)
 {
     //...
     builder.Services.AddIdentityServer(options =&gt;
@@ -239,53 +256,51 @@ public static WebApplication ConfigurePipeline(this WebApplication app)
 <div class="paragraph">
 <p>Het kan interessant zijn de definities van Bob en Alice van naderbij te bekijken.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_testen"><a class="anchor" href="#_testen"></a>Testen</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Start het IdentityServer project op en surf naar <a href="https://localhost:5001/Account/Login" class="bare">https://localhost:5001/Account/Login</a>. Log in met een van de test users bob/bob of alice/alice.</p>
+<p>Start het IdentityServer project op en surf naar <a href="https://localhost:5001" class="bare">https://localhost:5001</a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/identity-server-sql/is-login.png" alt="is login">
+<img src="_images/identity-server-users/is-launch.png" alt="is launch">
 </div>
 </div>
 <div class="paragraph">
-<p>Na het inloggen verschijnt bovenaan in de navigatiebalk een menu item dat dient als bevestiging dat je ingelogd bent. Je kan ook uitloggen.</p>
+<p>Klik op "Click here to see the claims of your current session."</p>
+</div>
+<div class="paragraph">
+<p>Log in met een van de test users bob/bob of alice/alice.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/identity-server-sql/is-logged-in.png" alt="is logged in">
+<img src="_images/identity-server-users/is-login.png" alt="is login">
 </div>
+</div>
+<div class="paragraph">
+<p>De web pagina zal de informatie uit het huidige token weergeven.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-users/is-token.png" alt="is token">
+</div>
+</div>
+<div class="paragraph">
+<p>Bovenaan in de navigatiebalk staat een menu item dat dient als bevestiging dat je ingelogd bent. Je kan daar ook uitloggen.</p>
 </div>
 <div class="paragraph">
 <p>De user interface van Identity Server is nu operationeel. We kunnen deze users gebruiken in een  eigen front-end applicatie.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Voor de scope van dit vak zijn de test users voldoende. Indien je interesse hebt om een realistisch front-end project te bouwen met een user subscription flow en bijhorende database, kan je je verdiepen in <a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&amp;tabs=visual-studio">ASP.NET Core Identity</a> en de samenwerking met <a href="https://identityserver8.readthedocs.io/en/latest/quickstarts/6_aspnet_identity.html">IdentityServer</a>, alsook <a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-8.0">claims based authorization</a>.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_opdracht_tegen_volgende_les"><a class="anchor" href="#_opdracht_tegen_volgende_les"></a>Opdracht tegen volgende les</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </div>
 </div>
 </div>
@@ -294,9 +309,6 @@ Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar 
 <div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>
-<p><a href="https://azure.microsoft.com/en-us/products/azure-sql/">Azure SQL</a></p>
-</li>
 <li>
 <p><a href="https://duendesoftware.com/products/identityserver">Identity Server</a></p>
 </li>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ASP Identity :: Programmeren Gevorderd 3 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 3 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg3" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-microservices.html">Microservices</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="02-az-devops.html">Azure DevOps</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-git.html">Git Gebruik</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="07-blob.html">Blob Storage</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-middleware.html">Middleware</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-gebruikers.html">Test Users (OIDC)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-shipitapp.html">Web App Verbinden</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="2">
+    <a class="nav-link" href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 3</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 3</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 3</a></li>
+    <li><a href="09-auth.html">Authenticatie en Autorisatie</a></li>
+    <li><a href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">ASP Identity</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Dit cursusonderdeel is nog niet volledig uitgeschreven. De pagina bevat wel alle notities die je nodig hebt om de aanpassingen door te voeren.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_db_schema"><a class="anchor" href="#_db_schema"></a>DB Schema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Maak apart SQL Server schema om Users in the bewaren.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE SCHEMA pg3users
+GO
+GRANT ALTER ON SCHEMA :: pg3users TO IdentityServer
+GO
+GRANT INSERT, UPDATE, DELETE, SELECT, REFERENCES ON SCHEMA :: pg3users TO IdentityServer
+GO</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dotnet_project"><a class="anchor" href="#_dotnet_project"></a>Dotnet Project</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_nuget"><a class="anchor" href="#_nuget"></a>Nuget</h3>
+<div class="paragraph">
+<p>Voeg nugets toe <code>ShipIt.IdentityServer</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Duende.IdentityServer.AspNetIdentity</code></p>
+</li>
+<li>
+<p><code>Microsoft.AspNetCore.Identity.EntityFrameworkCore</code> v8.x</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_users_folder"><a class="anchor" href="#_users_folder"></a>Users Folder</h3>
+<div class="paragraph">
+<p>Maak een folder <code>Users</code> in IS project.</p>
+</div>
+<div class="paragraph">
+<p>Maak daarin klasse <code>ShipItUser</code> en <code>UserDbContext</code> (naam vrij te kiezen).</p>
+</div>
+<div class="listingblock">
+<div class="title">Users/ShipItUser.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">namespace ShipIt.IdentityServer.Users;
+
+public class ShipItUser : IdentityUser
+{
+    public string MijnCustomVeld { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Users/UserDbContext.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace ShipIt.IdentityServer.Users;
+
+public class UserDbContext : IdentityDbContext&lt;ShipItUser&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+{
+    public UserDbContext(DbContextOptions&lt;UserDbContext&gt; options)
+        : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.HasDefaultSchema("pg3users");
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Inheritance brengt de nodige user management tabellen mee.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aanpassing_configureservices"><a class="anchor" href="#_aanpassing_configureservices"></a>Aanpassing ConfigureServices</h3>
+<div class="listingblock">
+<div class="title">HostingExtensions.cs/ConfigureServices</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+{
+    builder.Services.AddRazorPages();
+
+    var connectionString = builder.Configuration.GetConnectionString("ShipItIdentityServerDb");
+
+    builder.Services.AddDbContext&lt;UserDbContext&gt;(options =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        options.UseSqlServer(
+            connectionString,
+            sql =&gt; sql.MigrationsAssembly(
+                typeof(Program).Assembly.GetName().Name)
+                    .MigrationsHistoryTable(
+                        "__MyMigrationsHistory",
+                        "pg3users")));
+
+    builder.Services.AddIdentity&lt;ShipItUser, IdentityRole&gt;() <i class="conum" data-value="2"></i><b>(2)</b>
+        .AddEntityFrameworkStores&lt;UserDbContext&gt;()
+        .AddDefaultTokenProviders();
+
+    builder.Services.AddIdentityServer(options =&gt;
+        {
+            options.EmitStaticAudienceClaim = true;
+        })
+        .AddConfigurationStore(options =&gt;
+        {
+            options.DefaultSchema = "pg3is";
+            options.ConfigureDbContext = b =&gt;
+            b.UseSqlServer(
+                connectionString,
+                sql =&gt; sql.MigrationsAssembly(
+                    typeof(Program).Assembly.GetName().Name)
+                        .MigrationsHistoryTable(
+                            "__MyMigrationsHistory",
+                            "pg3is"));
+        })
+        .AddAspNetIdentity&lt;ShipItUser&gt;(); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    return builder.Build();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>UserDbContext registreren</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>AspNetIdentity aan user db koppelen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>AspNetIdentity users gebruiken in IS</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_migration"><a class="anchor" href="#_migration"></a>Migration</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="title">Migration voor user db</div>
+<div class="content">
+<pre>dotnet ef migrations add initial_users `
+-c UserDbContext `
+-o Data/Migrations/ASPIdentity/UserDb</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-asp-identity/user-db-migration.png" alt="user db migration"></span></p>
+</div>
+<div class="literalblock">
+<div class="title">User db migration uitvoeren</div>
+<div class="content">
+<pre>dotnet ef database update -c UserDbContext</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-asp-identity/user-db-created.png" alt="user db created"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_run_fail"><a class="anchor" href="#_test_run_fail"></a>Test Run (Fail)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Je kan IS nu starten, maar het inloggen zal falen wanneer je klikt op "Click here to see the claims for your current session."</p>
+</div>
+<div class="sect2">
+<h3 id="_callbacklogin_handling"><a class="anchor" href="#_callbacklogin_handling"></a>Callback/Login handling</h3>
+<div class="paragraph">
+<p>De login/callback implementatie van de IS template waaruit we vertrokken zijn steunt op de in-memory test users. We hebben nu de implementatie nodig die steunt op de AspNetIdentity functionaliteit.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+De nodige aanpassingen zijn beperkt, maar hieronder werden (voorlopig) de klassen volledig geplaatst.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.IdentityServer/Pages/ExternalLogin/Callback.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">// Copyright (c) Duende Software. All rights reserved.
+// See LICENSE in the project root for license information.
+
+[AllowAnonymous]
+[SecurityHeaders]
+public class Callback : PageModel
+{
+    private readonly UserManager&lt;ShipItUser&gt; _userManager;
+    private readonly SignInManager&lt;ShipItUser&gt; _signInManager;
+    private readonly IIdentityServerInteractionService _interaction;
+    private readonly ILogger&lt;Callback&gt; _logger;
+    private readonly IEventService _events;
+
+    public Callback(
+        IIdentityServerInteractionService interaction,
+        IEventService events,
+        ILogger&lt;Callback&gt; logger,
+        UserManager&lt;ShipItUser&gt; userManager,
+        SignInManager&lt;ShipItUser&gt; signInManager)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _interaction = interaction;
+        _logger = logger;
+        _events = events;
+    }
+
+    public async Task&lt;IActionResult&gt; OnGet()
+    {
+        // read external identity from the temporary cookie
+        var result = await HttpContext.AuthenticateAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+        if (result.Succeeded != true)
+        {
+            throw new InvalidOperationException($"External authentication error: { result.Failure }");
+        }
+
+        var externalUser = result.Principal ??
+            throw new InvalidOperationException("External authentication produced a null Principal");
+
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            var externalClaims = externalUser.Claims.Select(c =&gt; $"{c.Type}: {c.Value}");
+            _logger.ExternalClaims(externalClaims);
+        }
+
+        // lookup our user and external provider info
+        // try to determine the unique id of the external user (issued by the provider)
+        // the most common claim type for that are the sub claim and the NameIdentifier
+        // depending on the external provider, some other claim type might be used
+        var userIdClaim = externalUser.FindFirst(JwtClaimTypes.Subject) ??
+                          externalUser.FindFirst(ClaimTypes.NameIdentifier) ??
+                          throw new InvalidOperationException("Unknown userid");
+
+        var provider = result.Properties.Items["scheme"] ?? throw new InvalidOperationException("Null scheme in authentiation properties");
+        var providerUserId = userIdClaim.Value;
+
+        // find external user
+        var user = await _userManager.FindByLoginAsync(provider, providerUserId);
+        if (user == null)
+        {
+            // this might be where you might initiate a custom workflow for user registration
+            // in this sample we don't show how that would be done, as our sample implementation
+            // simply auto-provisions new external user
+            user = await AutoProvisionUserAsync(provider, providerUserId, externalUser.Claims);
+        }
+
+        // this allows us to collect any additional claims or properties
+        // for the specific protocols used and store them in the local auth cookie.
+        // this is typically used to store data needed for signout from those protocols.
+        var additionalLocalClaims = new List&lt;Claim&gt;();
+        var localSignInProps = new AuthenticationProperties();
+        CaptureExternalLoginContext(result, additionalLocalClaims, localSignInProps);
+
+        // issue authentication cookie for user
+        await _signInManager.SignInWithClaimsAsync(user, localSignInProps, additionalLocalClaims);
+
+        // delete temporary cookie used during external authentication
+        await HttpContext.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+
+        // retrieve return URL
+        var returnUrl = result.Properties.Items["returnUrl"] ?? "~/";
+
+        // check if external login is in the context of an OIDC request
+        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
+        await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id, user.UserName, true, context?.Client.ClientId));
+        Telemetry.Metrics.UserLogin(context?.Client.ClientId, provider!);
+
+        if (context != null)
+        {
+            if (context.IsNativeClient())
+            {
+                // The client is native, so this change in how to
+                // return the response is for better UX for the end user.
+                return this.LoadingPage(returnUrl);
+            }
+        }
+
+        return Redirect(returnUrl);
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1851:Possible multiple enumerations of 'IEnumerable' collection", Justification = "&lt;Pending&gt;")]
+    private async Task&lt;ShipItUser&gt; AutoProvisionUserAsync(string provider, string providerUserId, IEnumerable&lt;Claim&gt; claims)
+    {
+        var sub = Guid.NewGuid().ToString();
+
+        var user = new ShipItUser
+        {
+            Id = sub,
+            UserName = sub, // don't need a username, since the user will be using an external provider to login
+        };
+
+        // email
+        var email = claims.FirstOrDefault(x =&gt; x.Type == JwtClaimTypes.Email)?.Value ??
+                    claims.FirstOrDefault(x =&gt; x.Type == ClaimTypes.Email)?.Value;
+        if (email != null)
+        {
+            user.Email = email;
+        }
+
+        // create a list of claims that we want to transfer into our store
+        var filtered = new List&lt;Claim&gt;();
+
+        // user's display name
+        var name = claims.FirstOrDefault(x =&gt; x.Type == JwtClaimTypes.Name)?.Value ??
+                   claims.FirstOrDefault(x =&gt; x.Type == ClaimTypes.Name)?.Value;
+        if (name != null)
+        {
+            filtered.Add(new Claim(JwtClaimTypes.Name, name));
+        }
+        else
+        {
+            var first = claims.FirstOrDefault(x =&gt; x.Type == JwtClaimTypes.GivenName)?.Value ??
+                        claims.FirstOrDefault(x =&gt; x.Type == ClaimTypes.GivenName)?.Value;
+            var last = claims.FirstOrDefault(x =&gt; x.Type == JwtClaimTypes.FamilyName)?.Value ??
+                       claims.FirstOrDefault(x =&gt; x.Type == ClaimTypes.Surname)?.Value;
+            if (first != null &amp;&amp; last != null)
+            {
+                filtered.Add(new Claim(JwtClaimTypes.Name, first + " " + last));
+            }
+            else if (first != null)
+            {
+                filtered.Add(new Claim(JwtClaimTypes.Name, first));
+            }
+            else if (last != null)
+            {
+                filtered.Add(new Claim(JwtClaimTypes.Name, last));
+            }
+        }
+
+        var identityResult = await _userManager.CreateAsync(user);
+        if (!identityResult.Succeeded) throw new InvalidOperationException(identityResult.Errors.First().Description);
+
+        if (filtered.Count != 0)
+        {
+            identityResult = await _userManager.AddClaimsAsync(user, filtered);
+            if (!identityResult.Succeeded) throw new InvalidOperationException(identityResult.Errors.First().Description);
+        }
+
+        identityResult = await _userManager.AddLoginAsync(user, new UserLoginInfo(provider, providerUserId, provider));
+        if (!identityResult.Succeeded) throw new InvalidOperationException(identityResult.Errors.First().Description);
+
+        return user;
+    }
+
+    // if the external login is OIDC-based, there are certain things we need to preserve to make logout work
+    // this will be different for WS-Fed, SAML2p or other protocols
+    private static void CaptureExternalLoginContext(AuthenticateResult externalResult, List&lt;Claim&gt; localClaims, AuthenticationProperties localSignInProps)
+    {
+        ArgumentNullException.ThrowIfNull(externalResult.Principal, nameof(externalResult.Principal));
+
+        // capture the idp used to login, so the session knows where the user came from
+        localClaims.Add(new Claim(JwtClaimTypes.IdentityProvider, externalResult.Properties?.Items["scheme"] ?? "unknown identity provider"));
+
+        // if the external system sent a session id claim, copy it over
+        // so we can use it for single sign-out
+        var sid = externalResult.Principal.Claims.FirstOrDefault(x =&gt; x.Type == JwtClaimTypes.SessionId);
+        if (sid != null)
+        {
+            localClaims.Add(new Claim(JwtClaimTypes.SessionId, sid.Value));
+        }
+
+        // if the external provider issued an id_token, we'll keep it for signout
+        var idToken = externalResult.Properties?.GetTokenValue("id_token");
+        if (idToken != null)
+        {
+            localSignInProps.StoreTokens(new[] { new AuthenticationToken { Name = "id_token", Value = idToken } });
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.IdentityServer/Pages/Account/Login/Index.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">// Copyright (c) Duende Software. All rights reserved.
+// See LICENSE in the project root for license information.
+
+[SecurityHeaders]
+[AllowAnonymous]
+public class Index : PageModel
+{
+    private readonly UserManager&lt;ShipItUser&gt; _userManager;
+    private readonly SignInManager&lt;ShipItUser&gt; _signInManager;
+    private readonly IIdentityServerInteractionService _interaction;
+    private readonly IEventService _events;
+    private readonly IAuthenticationSchemeProvider _schemeProvider;
+    private readonly IIdentityProviderStore _identityProviderStore;
+
+    public ViewModel View { get; set; } = default!;
+
+    [BindProperty]
+    public InputModel Input { get; set; } = default!;
+
+    public Index(
+        IIdentityServerInteractionService interaction,
+        IAuthenticationSchemeProvider schemeProvider,
+        IIdentityProviderStore identityProviderStore,
+        IEventService events,
+        UserManager&lt;ShipItUser&gt; userManager,
+        SignInManager&lt;ShipItUser&gt; signInManager)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _interaction = interaction;
+        _schemeProvider = schemeProvider;
+        _identityProviderStore = identityProviderStore;
+        _events = events;
+    }
+
+    public async Task&lt;IActionResult&gt; OnGet(string? returnUrl)
+    {
+        await BuildModelAsync(returnUrl);
+
+        if (View.IsExternalLoginOnly)
+        {
+            // we only have one option for logging in and it's an external provider
+            return RedirectToPage("/ExternalLogin/Challenge", new { scheme = View.ExternalLoginScheme, returnUrl });
+        }
+
+        return Page();
+    }
+
+    public async Task&lt;IActionResult&gt; OnPost()
+    {
+        // check if we are in the context of an authorization request
+        var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
+
+        // the user clicked the "cancel" button
+        if (Input.Button != "login")
+        {
+            if (context != null)
+            {
+                // This "can't happen", because if the ReturnUrl was null, then the context would be null
+                ArgumentNullException.ThrowIfNull(Input.ReturnUrl, nameof(Input.ReturnUrl));
+
+                // if the user cancels, send a result back into IdentityServer as if they
+                // denied the consent (even if this client does not require consent).
+                // this will send back an access denied OIDC error response to the client.
+                await _interaction.DenyAuthorizationAsync(context, AuthorizationError.AccessDenied);
+
+                // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
+                if (context.IsNativeClient())
+                {
+                    // The client is native, so this change in how to
+                    // return the response is for better UX for the end user.
+                    return this.LoadingPage(Input.ReturnUrl);
+                }
+
+                return Redirect(Input.ReturnUrl ?? "~/");
+            }
+            else
+            {
+                // since we don't have a valid context, then we just go back to the home page
+                return Redirect("~/");
+            }
+        }
+
+        if (ModelState.IsValid)
+        {
+            var result = await _signInManager.PasswordSignInAsync(Input.Username!, Input.Password!, Input.RememberLogin, lockoutOnFailure: true);
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(Input.Username!);
+                await _events.RaiseAsync(new UserLoginSuccessEvent(user!.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
+                Telemetry.Metrics.UserLogin(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider);
+
+                if (context != null)
+                {
+                    // This "can't happen", because if the ReturnUrl was null, then the context would be null
+                    ArgumentNullException.ThrowIfNull(Input.ReturnUrl, nameof(Input.ReturnUrl));
+
+                    if (context.IsNativeClient())
+                    {
+                        // The client is native, so this change in how to
+                        // return the response is for better UX for the end user.
+                        return this.LoadingPage(Input.ReturnUrl);
+                    }
+
+                    // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
+                    return Redirect(Input.ReturnUrl ?? "~/");
+                }
+
+                // request for a local page
+                if (Url.IsLocalUrl(Input.ReturnUrl))
+                {
+                    return Redirect(Input.ReturnUrl);
+                }
+                else if (string.IsNullOrEmpty(Input.ReturnUrl))
+                {
+                    return Redirect("~/");
+                }
+                else
+                {
+                    // user might have clicked on a malicious link - should be logged
+                    throw new ArgumentException("invalid return URL");
+                }
+            }
+
+            const string error = "invalid credentials";
+            await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, error, clientId:context?.Client.ClientId));
+            Telemetry.Metrics.UserLoginFailure(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider, error);
+            ModelState.AddModelError(string.Empty, LoginOptions.InvalidCredentialsErrorMessage);
+        }
+
+        // something went wrong, show form with error
+        await BuildModelAsync(Input.ReturnUrl);
+        return Page();
+    }
+
+    private async Task BuildModelAsync(string? returnUrl)
+    {
+        Input = new InputModel
+        {
+            ReturnUrl = returnUrl
+        };
+
+        var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
+        if (context?.IdP != null &amp;&amp; await _schemeProvider.GetSchemeAsync(context.IdP) != null)
+        {
+            var local = context.IdP == Duende.IdentityServer.IdentityServerConstants.LocalIdentityProvider;
+
+            // this is meant to short circuit the UI and only trigger the one external IdP
+            View = new ViewModel
+            {
+                EnableLocalLogin = local,
+            };
+
+            Input.Username = context.LoginHint;
+
+            if (!local)
+            {
+                View.ExternalProviders = new[] { new ViewModel.ExternalProvider ( authenticationScheme: context.IdP ) };
+            }
+
+            return;
+        }
+
+        var schemes = await _schemeProvider.GetAllSchemesAsync();
+
+        var providers = schemes
+            .Where(x =&gt; x.DisplayName != null)
+            .Select(x =&gt; new ViewModel.ExternalProvider
+            (
+                authenticationScheme: x.Name,
+                displayName: x.DisplayName ?? x.Name
+            )).ToList();
+
+        var dynamicSchemes = (await _identityProviderStore.GetAllSchemeNamesAsync())
+            .Where(x =&gt; x.Enabled)
+            .Select(x =&gt; new ViewModel.ExternalProvider
+            (
+                authenticationScheme: x.Scheme,
+                displayName: x.DisplayName ?? x.Scheme
+            ));
+        providers.AddRange(dynamicSchemes);
+
+
+        var allowLocal = true;
+        var client = context?.Client;
+        if (client != null)
+        {
+            allowLocal = client.EnableLocalLogin;
+            if (client.IdentityProviderRestrictions != null &amp;&amp; client.IdentityProviderRestrictions.Count != 0)
+            {
+                providers = providers.Where(provider =&gt; client.IdentityProviderRestrictions.Contains(provider.AuthenticationScheme)).ToList();
+            }
+        }
+
+        View = new ViewModel
+        {
+            AllowRememberLogin = LoginOptions.AllowRememberLogin,
+            EnableLocalLogin = allowLocal &amp;&amp; LoginOptions.AllowLocalLogin,
+            ExternalProviders = providers.ToArray()
+        };
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_run_ok"><a class="anchor" href="#_test_run_ok"></a>Test Run (Ok)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Start IS en test dat je</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>via postman client token kan ophalen</p>
+</li>
+<li>
+<p>via de UI uitgenodigd wordt om in te loggen wanneer je klikt op "Click here to see the claims for your current session."</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Je hebt geen geldige user credentials. Dat is normaal op dit moment.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_users_toevoegen"><a class="anchor" href="#_users_toevoegen"></a>Users Toevoegen</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Users/SeedUserDb.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">using System.Security.Claims;
+using Duende.IdentityModel;
+using Microsoft.AspNetCore.Identity;
+using Serilog;
+
+namespace ShipIt.IdentityServer.Users;
+
+public class SeedUserDb
+{
+    public static void EnsureSeedData(WebApplication app)
+    {
+        using (var scope = app.Services.GetRequiredService&lt;IServiceScopeFactory&gt;().CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService&lt;UserDbContext&gt;();
+            //context.Database.Migrate();
+
+            var userMgr = scope.ServiceProvider.GetRequiredService&lt;UserManager&lt;ShipItUser&gt;&gt;();
+            var alice = userMgr.FindByNameAsync("alice").Result;
+            if (alice == null)
+            {
+                alice = new ShipItUser
+                {
+                    UserName = "alice",
+                    Email = "AliceSmith@email.com",
+                    EmailConfirmed = true,
+                    MijnCustomVeld = "PakjesDief"
+                };
+                var result = userMgr.CreateAsync(alice, "Pass123$").Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                result = userMgr.AddClaimsAsync(alice, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                            new Claim(JwtClaimTypes.GivenName, "Alice"),
+                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                        }).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+                Log.Debug("alice created");
+            }
+            else
+            {
+                Log.Debug("alice already exists");
+            }
+
+            var bob = userMgr.FindByNameAsync("bob").Result;
+            if (bob == null)
+            {
+                bob = new ShipItUser
+                {
+                    UserName = "bob",
+                    Email = "BobSmith@email.com",
+                    EmailConfirmed = true,
+                    MijnCustomVeld = "EerlijkeVinder"
+                };
+                var result = userMgr.CreateAsync(bob, "Pass123$").Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                result = userMgr.AddClaimsAsync(bob, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Bob Smith"),
+                            new Claim(JwtClaimTypes.GivenName, "Bob"),
+                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
+                            new Claim("location", "somewhere")
+                        }).Result;
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+                Log.Debug("bob created");
+            }
+            else
+            {
+                Log.Debug("bob already exists");
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Seed uivoeren at startup</p>
+</div>
+<div class="listingblock">
+<div class="title">HostingExtensions.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">    public static WebApplication ConfigurePipeline(this WebApplication app)
+    {
+        app.UseSerilogRequestLogging();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+
+        InitializeDatabase(app);
+        SeedUserDb.EnsureSeedData(app); <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Users Seeden</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Start IS. Controleer DB.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-asp-identity/users-in-db.png" alt="users in db"></span></p>
+</div>
+<div class="paragraph">
+<p>Je kan deze credentials nu gebruiken.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy"><a class="anchor" href="#_deploy"></a>Deploy</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-webapp \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-identity-api \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Redirect urls voor <code>webapp-client</code> in <code>shipit-identity</code> (Azure SQL).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">update [pg3isles].[ClientRedirectUris]
+set [RedirectUri] = 'https://pg3-shipit-stefanc-webapp.azurewebsites.net/signin-oidc'
+where [Id] = 1 -- !Gebruik de juiste Id!</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">UPDATE [pg3isles].[ClientPostLogoutRedirectUris]
+SET [PostLogoutRedirectUri] = 'https://pg3-shipit-stefanc-webapp.azurewebsites.net/signout-callback-oidc'
+WHERE [Id] = 1 -- !Gebruik de juiste Id!
+go</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De ShipIt WebApp is bereikbaar op Azure en werkt samen met Identity Server. Alle Identity configuratie komt uit Azure SQL.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-asp-identity/azurewebapp.png" alt="azurewebapp"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://docs.duendesoftware.com/identityserver/quickstarts/5-aspnetid/" class="bare">https://docs.duendesoftware.com/identityserver/quickstarts/5-aspnetid/</a></p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
