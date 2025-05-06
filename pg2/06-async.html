@@ -169,7 +169,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Verschil tussen Asynchroon en Parallel begrijpen.</p>
+<p>Verschil tussen Asynchroon en Parallel begrijpen</p>
+</li>
+<li>
+<p>Raakpunt tussen hardware (CPU) en software abstracties (OS/.Net) inzien</p>
 </li>
 <li>
 <p>Asynchroon programmeren in .Net</p>
@@ -228,6 +231,86 @@ Iets met <em>async</em> en <em>threads</em> ofzo.
 <div class="paragraph">
 <p>Elke bakker weet natuurlijk dat het <strong>interessanter</strong> is om <strong>100 pistolets <em>parallel</em></strong> (tegelijk) te bakken.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context"><a class="anchor" href="#_context"></a>Context</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Tijdens de les werd context geschetst voor het Parallel en Async verhaal door hardware, scheduling, threads, hyperthreading, cache, swap, verschil tussen thread en task binnen .Net etc te bespreken. Dit hoef je niet in detail te kennen, maar het helpt enorm om te begrijpen wat we hier proberen te doen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Een kleine vergelijking van drie processoren:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Eigenschap</th>
+<th class="tableblock halign-left valign-top">Intel i486 (1989 - Desktop)</th>
+<th class="tableblock halign-left valign-top">AMD Ryzen 9 9800X3D (2024 - Desktop)</th>
+<th class="tableblock halign-left valign-top">AMD Epyc 9965 (2025 - Server)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cores</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">192</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Threads</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">384</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cache</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 KB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">96 MB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">384 MB</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transistors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1,6 miljoen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8,3 miljard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">130 miljard</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transistor Grootte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">600 nm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 nm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 nm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max Klok</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">33 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5200 MHz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3700 MHz</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Typisch Verbruik</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 W</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">120 W</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">500 W</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -726,168 +809,13 @@ Verstreken tijd 0:07:37:00,0000000 (Realiteit).</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_praktijkvoorbeeld"><a class="anchor" href="#_praktijkvoorbeeld"></a>Praktijkvoorbeeld</h2>
+<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pistolets en ambtenaren zijn goed en wel om de concepten uit te leggen, maar laten we het even dichter bij de praktijk brengen.</p>
+<p>Er staat bij deze les op GitHub een extra project met Async/Parallel demo waar je mee kan spelen.</p>
 </div>
 <div class="paragraph">
-<p>Beschouw een kleine applicatie die twee discrete databronnen samenbrengt in het kader van een informatiebeheerssysteem voor dierenartsen.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>SQL Database met alle dieren en hun chipnummer.</p>
-</li>
-<li>
-<p>Een web service die een lijst van chipnummers met een contactpersoon teruggeeft.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>We gebruiken deze data sets om een overzicht te bouwen van dier-chip-contactpersoon.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public async Task Run()
-{
-    var stopWatch = new Stopwatch();
-    stopWatch.Start();
-
-    var dieren = await new DierenRepositoryDB().GetAllDierenAsync(1000);<i class="conum" data-value="1"></i><b>(1)</b>
-    var chips = await new ChipsWebService().GetAllChipsAsync(1000);<i class="conum" data-value="1"></i><b>(1)</b>
-
-    //logica om chips en dieren samen te brengen tot DierMetChipEnContactModel
-    var dierMetChipEnContactModel = new List&lt;DierMetChipEnContactModel&gt;();
-    foreach (var dier in dieren)
-    {
-        await Task.Delay(1); <i class="conum" data-value="2"></i><b>(2)</b>
-        var result = new DierMetChipEnContactModel()
-        {
-            DierNaam = dier.Naam,
-            ChipId = dier.ChipId,
-            ContactInfo = chips.FirstOrDefault(chip =&gt; chip.ChipId == dier.ChipId)?.ContactInfo
-        };
-        dierMetChipEnContactModel.Add(result);
-    }
-
-    // update lokaal systeem
-
-    Console.WriteLine($"Het aantal verwerkte records is {dierMetChipEnContactModel.Count}");
-
-    stopWatch.Stop();
-    Console.WriteLine($"De verstreken tijd is {stopWatch.Elapsed:G} (.Net)");
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>De methodes zijn Async, maar we wachten op het resultaat vooraleer verder te gaan.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>We simuleren extra werk door 1ms te wachten.</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Het aantal verwerkte records is 1000
-De verstreken tijd is 0:00:00:03,2018062 (.Net)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Laten we async, parallel en ConcurrentDictionary aanwenden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public async Task RunSneller()
-{
-    var stopWatch = new Stopwatch();
-    stopWatch.Start();
-
-    var dieren = new DierenRepositoryDB().GetAllDierenAsync(1000); <i class="conum" data-value="1"></i><b>(1)</b>
-    var chips = new ChipsWebService().GetAllChipsAsync(1000); <i class="conum" data-value="1"></i><b>(1)</b>
-
-    //logica om chips en dieren samen te brengen tot DierMetChipEnContactModel
-    var dierMetChipEnContactModel = new ConcurrentBag&lt;DierMetChipEnContactModel&gt;();
-
-    await chips; <i class="conum" data-value="2"></i><b>(2)</b>
-    var chipsDictionary = new Dictionary&lt;string, string&gt;(
-        chips.Result.Select( chip =&gt; new KeyValuePair&lt;string, string&gt;(chip.ChipId, chip.ContactInfo))); <i class="conum" data-value="6"></i><b>(6)</b>
-
-    await dieren; <i class="conum" data-value="3"></i><b>(3)</b>
-    await Parallel.ForEachAsync(dieren.Result, async (dier,token) =&gt; <i class="conum" data-value="4"></i><b>(4)</b>
-    {
-        await Task.Delay(1, token); <i class="conum" data-value="5"></i><b>(5)</b>
-        var result = new DierMetChipEnContactModel()
-        {
-            DierNaam = dier.Naam,
-            ChipId = dier.ChipId,
-            ContactInfo = chipsDictionary[dier.ChipId]
-        };
-        dierMetChipEnContactModel.Add(result);
-    });
-
-    // update lokaal systeem
-
-    Console.WriteLine($"Het aantal verwerkte records is {dierMetChipEnContactModel.Count}");
-
-    stopWatch.Stop();
-    Console.WriteLine($"De verstreken tijd is {stopWatch.Elapsed:G} (.Net)");
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>De methodes zijn Async, we wachten hier niet op het resultaat.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Hier wachten op het resultaat van <code>chips</code>, want ik ga het gebruiken in het volgende statement.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Hier wachten we op het resultaat van <code>dieren</code>, want ik ga het gebruiken in het volgende statement.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>We verwerken een set van async taken in parallel.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>We simuleren extra werk door 1ms te wachten.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>De <em>overhead</em> om een Dictionary te maken van de data zullen we terugverdienen tijdens het zoeken, zeker bij grote datasets.</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>Het aantal verwerkte records is 1000
-De verstreken tijd is 0:00:00:01,1153239</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>De herwerkte code is duidelijk sneller!</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Er valt uiteraard meer te leren over async, parallel en andere performance tuning opportuniteiten in .Net, maar met de basics kom je heel ver.
-</td>
-</tr>
-</table>
+<p>Bedenk enkele sync/async/parallel functionaliteiten om te voegen aan de codebase. Schrijf scenarios in Program.cs en controleer of ze zich gedragen zoals je verwacht.</p>
 </div>
 </div>
 </div>
