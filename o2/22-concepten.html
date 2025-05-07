@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Oefening Scheepvaart :: Softwareontwerp 2 (BETA)</title>
+    <title>Kleine Topics :: Softwareontwerp 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -72,7 +72,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="03-RDD-GRASP.html">GRASP &amp; SSD</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="2">
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="04-opdracht.html">Oefening Scheepvaart</a>
   </li>
 </ul>
@@ -105,7 +105,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="21-restful.html">RESTful API&#8217;s</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+      <li class="nav-item is-active is-current-page" data-depth="2">
     <a class="nav-link" href="22-concepten.html">Concepten</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
@@ -138,8 +138,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Ontwerp 2</a></li>
-    <li>Basis OO Ontwerp</li>
-    <li><a href="04-opdracht.html">Oefening Scheepvaart</a></li>
+    <li>Architectuur</li>
+    <li><a href="22-concepten.html">Concepten</a></li>
   </ul>
 </nav>
 </div>
@@ -148,9 +148,62 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Oefening Scheepvaart</h1>
+<h1 class="page">Kleine Topics</h1>
+<div class="sect1">
+<h2 id="_solid"><a class="anchor" href="#_solid"></a>SOLID</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Tijdens de vierde les werd de oefening "Scheepvaart" van Tom Vande Wiele klassikaal (grotendeels) gemaakt.</p>
+<p>SOLID is een acroniem dat vijf principes beschrijft die een basis vormen voor object-georiënteerd softwareontwerp.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">S</dt>
+<dd>
+<p>Single Responsibility: Een klasse heeft één duidelijke verantwoordelijkheid en plaats in het ontwerp.</p>
+</dd>
+<dt class="hdlist1">O</dt>
+<dd>
+<p>Open/Closed: Klassen en methodes moeten open zijn voor uitbreiding, maar gesloten voor wijzigingen. Je moet gedrag van een klasse kunnen uitbreiden zonder de bestaande code te veranderen.</p>
+</dd>
+<dt class="hdlist1">L</dt>
+<dd>
+<p>Liskov Substitution: Objecten van een overkoepelende klasse moeten kunnen worden vervangen door objecten van afgeleide types zonder dat de correctheid van het programma in gevaar komt. <strong>ChatGPT heeft dit vaak fout</strong></p>
+</dd>
+<dt class="hdlist1">I</dt>
+<dd>
+<p>Interface Segregation: Afhankelijke code mag niet gedwongen worden om interfaces te implementeren die ze niet gebruikt. Maak meerdere specifieke interfaces ipv een algemene.</p>
+</dd>
+<dt class="hdlist1">D</dt>
+<dd>
+<p>Dependency Injection: Koppel dependencies los door ze te injecteren. Programmeer tegen interfaces.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dry"><a class="anchor" href="#_dry"></a>DRY</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Don&#8217;t Repeat Yourself</dt>
+<dd>
+<p>Herhaal code of logica niet onnodig. Functionaliteit slechts op één plaats in de code implementeren bevordert hergebruik en onderhoudbaarheid. Er is minder kans op fouten en de codebase is overzichtelijker.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_yagni"><a class="anchor" href="#_yagni"></a>YAGNI</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">You Aren&#8217;t Gonna Need It</dt>
+<dd>
+<p>Voeg geen functionaliteit toe  voordat deze echt nodig is. Voorkom onnodige complexiteit en verspilling van tijd en middelen door alleen te bouwen wat op dat moment vereist is.</p>
+</dd>
+</dl>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -159,23 +212,65 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Deze oefening werd gegeven als voorbereiding op de eerste individuele opdracht.
+"wat echt nodig is" staat open voor interpretatie en zal anders ingevuld al naargelang mindset en context. In de les Ontwerp durven we wel eens overengineered oplossingen te bouwen voor eenvoudige problemen. Dit doen we omdat de boodschap anders verloren zou gaan in de complexiteit van het probleem.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Je kan het materiaal uit de les vinden op Chamilo</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://chamilo.hogent.be/index.php?go=CourseViewer&amp;application=Chamilo%5CApplication%5CWeblcms&amp;course=59982&amp;tool=Document&amp;publication_category=347758&amp;browser=Table&amp;tool_action=Browser">Documenten</a> Gent</p>
-</li>
-<li>
-<p><a href="https://chamilo.hogent.be/index.php?go=CourseViewer&amp;application=Chamilo%5CApplication%5CWeblcms&amp;course=62372&amp;tool=Document">Documenten</a> Aalst</p>
-</li>
-</ul>
+</div>
+<div class="sect1">
+<h2 id="_cqrs"><a class="anchor" href="#_cqrs"></a>CQRS</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Command Query Responsibility Segregation</dt>
+<dd>
+<p>De lees- en schrijfoperaties van een datamodel worden gescheiden in verschillende interfaces.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Dit betekent dat een commando (dat een verandering van de toestand van het systeem veroorzaakt) en een query (dat de huidige toestand van het systeem opvraagt) niet dezelfde gegevensbronnen of methoden hoeven te delen.</p>
+</div>
+<div class="paragraph">
+<p>Door deze scheiding kunnen de lees- en schrijfsystemen onafhankelijk van elkaar worden geoptimaliseerd, en zelfs op aparte servers staan, wat leidt tot betere prestaties en schaalbaarheid.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/archi/cqrs.drawio.png" alt="cqrs.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>CQRS wordt vaak gebruikt in combinatie met Event Sourcing, waar alle veranderingen als events worden opgeslagen, en de huidige toestand van het systeem wordt opgebouwd door deze events te ordenen, filteren en interpreteren. Dit biedt voordelen zoals nauwkeurige audit logs, eenvoudige rollback-mogelijkheden, en flexibiliteit in het bouwen van verschillende leesmodellen voor uiteenlopende doeleinden.</p>
+</div>
+<div class="paragraph">
+<p>Al met al helpt CQRS om complexe domeinen te beheren door het aanpakken van de verschillende vereisten voor lees- en schrijfoperaties op een efficiënte manier.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ddd"><a class="anchor" href="#_ddd"></a>DDD</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Domain-Driven Design</dt>
+<dd>
+<p>Aanpak voor het ontwerpen en ontwikkelen van complexe software door nauw samen te werken met domeindeskundigen om een gemeenschappelijk begrip van het probleemgebied te bereiken.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Het doel van DDD is om de software te structureren rond de kernonderdelen van het bedrijfsdomein. De taal en concepten van dat domein worden gebruikt om modellen te creëren die nauw aansluiten bij de werkelijke bedrijfsprocessen.</p>
+</div>
+<div class="paragraph">
+<p>DDD bevordert het gebruik van een gemeenschappelijke taal, de <strong>Ubiquitous Language</strong>, door ontwikkelaars én domeindeskundigen wordt begrepen. Dit verbetert de communicatie en verkleint het risico op misverstanden.</p>
+</div>
+<div class="paragraph">
+<p>Het domein wordt opgedeeld in <strong>bounded contexts</strong>, gebieden waarin specifieke modellen en terminologie van kracht zijn. Elke bounded context kan apart worden ontworpen en ontwikkeld.</p>
+</div>
+<div class="paragraph">
+<p>Men organiseert de code binnen een bounded context veelal in <strong>entiteiten, services en repositories</strong>.</p>
+</div>
+</div>
 </div>
 </article>
   </div>
