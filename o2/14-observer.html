@@ -85,7 +85,7 @@
     <a class="nav-link" href="11-patterns-game.html">State Pattern (2 Lessen)</a>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="2">
-    <a class="nav-link" href="14-observer.html">Observer Pattern</a>
+    <a class="nav-link" href="14-observer.html">Observer Pattern 🌟</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="12-opdracht.html">Groepswerk</a>
@@ -139,7 +139,7 @@
   <ul>
     <li><a href="index.html">Ontwerp 2</a></li>
     <li>Design Patterns &amp; Refactoring</li>
-    <li><a href="14-observer.html">Observer Pattern</a></li>
+    <li><a href="14-observer.html">Observer Pattern 🌟</a></li>
   </ul>
 </nav>
 </div>
@@ -235,9 +235,9 @@
 <div class="listingblock">
 <div class="title">AbstractObserver</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public abstract class AbstractObserver
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IObserver
 {
-    public abstract void Update(); <i class="conum" data-value="1"></i><b>(1)</b>
+    public abstract void Update();<i class="conum" data-value="1"></i><b>(1)</b>
 }</code></pre>
 </div>
 </div>
@@ -245,7 +245,7 @@
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Een klasse die erft van AbstractObserver zal <code>Update()</code> moeten implementeren.<br>
+<td>Een klasse die IObserver implementeert, zal <code>Update()</code> moeten implementeren.<br>
 Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>, <code>B</code>, <code>C</code> etc.</td>
 </tr>
 </table>
@@ -255,21 +255,21 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public abstract class AbstractObservable
 {
-    private List&lt;AbstractObserver&gt; _observers = []; <i class="conum" data-value="1"></i><b>(1)</b>
+    private List&lt;IObserver&gt; _observers = []; <i class="conum" data-value="1"></i><b>(1)</b>
 
-    public void RegisterObserver(AbstractObserver observer) <i class="conum" data-value="1"></i><b>(1)</b>
+    public void RegisterObserver(IObserver observer)
     {
-        _observers.Add(observer);
+        _observers.Add(observer); <i class="conum" data-value="1"></i><b>(1)</b>
     }
 
-    public void RemoveObserver(AbstractObserver observer) <i class="conum" data-value="1"></i><b>(1)</b>
+    public void RemoveObserver(IObserver observer)
     {
-        _observers.Remove(observer);
+        _observers.Remove(observer); <i class="conum" data-value="1"></i><b>(1)</b>
     }
 
-    public void NotifyObservers() <i class="conum" data-value="2"></i><b>(2)</b>
+    public void NotifyObservers()
     {
-        foreach (var observer in _observers)
+        foreach (var observer in _observers) <i class="conum" data-value="2"></i><b>(2)</b>
         {
             observer.Update();
         }
@@ -285,7 +285,7 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Wanneer de toestand van het <em>subject</em> (= de <em>observable) verandert, zal deze alle _observers</em> verwittigen aan de hand van de <code>Update()</code> methode.</td>
+<td>Wanneer de toestand van het <em>subject</em> (= de <em>observable</em>) verandert, zal deze alle <em>observers</em> verwittigen aan de hand van de <code>Update()</code> methode.</td>
 </tr>
 </table>
 </div>
@@ -317,7 +317,7 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 <div class="listingblock">
 <div class="title">B</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class B : AbstractObserver
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class B : IObserver
 {
     public override void Update()
     {
@@ -334,7 +334,7 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 <div class="listingblock">
 <div class="title">C</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class C : AbstractObserver
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class C : IObserver
 {
     public override void Update()
     {
@@ -351,7 +351,7 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 <div class="listingblock">
 <div class="title">D</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class D : AbstractObserver
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class D : IObserver
 {
     public override void Update()
     {
@@ -365,6 +365,41 @@ Wat die methode concreet zal doen, kan (en zal) verschillen voor <code>A</code>,
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_informatie_delen"><a class="anchor" href="#_informatie_delen"></a>Informatie Delen 🌟</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Je kan er ook voor kiezen (optionele) informatie mee te geven aan de <code>Observer</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Event
+{
+    public string IkBenEenVoorbeeldProperty { get; set; }
+}
+
+public interface IObserver
+{
+    public abstract void Update(Event? e = null);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_voorbeeld_leeuw"><a class="anchor" href="#_voorbeeld_leeuw"></a>Voorbeeld Leeuw 🌟</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><span class="image"><img src="_images/observer/observer-leeuw.png" alt="observer leeuw"></span></p>
+</div>
+<div class="paragraph">
+<p>Wanneer de leeuw brult <code>Brul()</code>, zal dit de <code>Observers</code> waarschuwen <code>Update()</code>. Deze kunnen van verschillende concrete types zijn, met totaal andere reacties op de gebeurtenis.</p>
+</div>
+<div class="paragraph">
+<p>Deze reacties zijn interne keuken <code>private</code> methodes die niet gekend zijn door de <code>Observable</code> gezien we tegen <code>IObserver</code> interface programmeren. Dit is een voorbeeld van loose Coupling.</p>
 </div>
 </div>
 </div>
@@ -389,12 +424,13 @@ a.AddObserver(b);
 a.AddObserver(c);
 a.AddObserver(c);
 a.AddObserver(d);
-
 // ...
-
+a.VeranderIets();
+//...
 a.RemoveObserver(c);
-
-// ...</code></pre>
+// ...
+a.VeranderIets();
+//...</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -408,7 +444,7 @@ a.RemoveObserver(c);
 <div class="ulist">
 <ul>
 <li>
-<p>Microsoft voorziet een opinionated <a href="https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern">implementatie</a>.</p>
+<p><strong>Microsoft voorziet een opinionated <a href="https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern">implementatie</a>.</strong></p>
 </li>
 <li>
 <p>UI broncode zal vaak steunen op het observer pattern voor het synchroniseren van databound elementen in, bijvoorbeeld, <a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm?view=net-maui-9.0">MVVM context</a>.</p>
@@ -424,7 +460,7 @@ a.RemoveObserver(c);
 <p>Door het observer pattern toe te passen kunnen we het conceptuele verschil tussen instructies (<em>commands</em>) en meldingen (<em>events</em>) introduceren.</p>
 </div>
 <div class="paragraph">
-<p>De originele <code>A</code> besliste expliciet om <code>b.DoeDit()</code> aan te roepen. "Jij moet nu dit doen"_.</p>
+<p>De originele <code>A</code> besliste expliciet om <code>b.DoeDit()</code> aan te roepen. "Jij moet nu dit doen".</p>
 </div>
 <div class="paragraph">
 <p>De nieuwe <code>A</code> zegt tegen de observers (ongeacht het concrete type) <em>"Weet dat ik geüpdatet ben - just saying"</em>.</p>
