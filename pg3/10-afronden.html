@@ -111,10 +111,16 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a>
   </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="09-identity-sql-server-docker.html">SQL Server Docker</a>
+  </li>
 </ul>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="1">
     <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="99-tips.html">Tips</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
@@ -154,8 +160,729 @@
 </aside>
 <article class="doc">
 <h1 class="page">Totaalplaatje Afronden</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze sectie is nog niet volledig uitgeschreven, maar bevat alle notities om de implementatie te doen.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Denk eraan tijdens het testen tijdig een nieuw token te vragen. Database-driven configuratie changes zullen bijvoorbeeld geen impact hebben op reeds bestaande tokens.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cookie_wissen_logout"><a class="anchor" href="#_cookie_wissen_logout"></a>Cookie Wissen @ Logout</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>🏗️</p>
+<p>De logout lijkt te werken, maar toch blijft de user ingelogd.
+Je zal zien dat de relevante Cookies niet gewist worden.
+We moeten dit oplossen.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.IdentityServer/Pages/Account/Logout/Index.cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class Index : PageModel
+{
+    //...
+    private readonly SignInManager&lt;ShipItUser&gt; _signInManager; <i class="conum" data-value="1"></i><b>(1)</b>
+    //...
+    public Index(
+        IIdentityServerInteractionService interaction,
+        IEventService events,
+        SignInManager&lt;ShipItUser&gt; signInManager <i class="conum" data-value="2"></i><b>(2)</b>
+    ) {
+        _interaction = interaction;
+        _events = events;
+        _signInManager = signInManager; <i class="conum" data-value="3"></i><b>(3)</b>
+    }
+    //...
+    public async Task&lt;IActionResult&gt; OnPost()
+    {
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            //...
+            // delete local authentication cookie
+            await _signInManager.SignOutAsync(); <i class="conum" data-value="4"></i><b>(4)</b>
+            //...
+        }
+        return RedirectToPage("/Account/Logout/LoggedOut",
+            new { logoutId = LogoutId });
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We hebben de SingInManager nodig die gekoppeld is aan AspNetIdentity. We deden dit vorige keer voor de <code>Login</code> flow, maar hier natuurlijk ook nodig.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Brengen deze binnen in constructor (via DI).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Assignen de referentie.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Gebruiken (in plaats van default HttpContext).</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quote_maken_via_web_app"><a class="anchor" href="#_quote_maken_via_web_app"></a>Quote Maken Via Web App</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h3>
+<div class="paragraph">
+<p>Referentie van web app project naar quote contracts.</p>
+</div>
+<div class="paragraph">
+<p>Bij het maken van een Quote via web app, zullen we requestcontract gebruiken.
+Bij het lezen van een Quote, response contract.</p>
+</div>
+<div class="paragraph">
+<p>Referentie naar nuget duende.identitymodel</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pagina"><a class="anchor" href="#_pagina"></a>Pagina</h3>
+<div class="paragraph">
+<p>Maak nieuwe razor page "Quotes".
+Voeg pagina toe aan menu zoals vorige keer.</p>
+</div>
+<div class="literalblock">
+<div class="title">Quotes.cshtml</div>
+<div class="content">
+<pre>@page
+@model ShipIt.WebApp.Pages.QuotesModel
+@{
+    &lt;h2&gt;@Model.DemoProp&lt;/h2&gt;
+}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Quotes.cshtml.cs</div>
+<div class="content">
+<pre>using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace ShipIt.WebApp.Pages
+{
+    public class QuotesModel : PageModel
+    {
+        public string DemoProp { get; set; }
+
+        public void OnGet()
+        {
+            DemoProp = "Ik ben de quotes pagina";
+        }
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/afronden/wa-quotes-start.png" alt="wa quotes start"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_viewmodel"><a class="anchor" href="#_viewmodel"></a>ViewModel</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public record PriceQuoteViewmodel
+{
+    public string Id { get; set; }
+    public decimal WidthCm { get; set; }
+    public decimal HeightCm { get; set; }
+    public decimal DepthCm { get; set; }
+    public decimal WeightKg { get; set; }
+    public string CountryFrom { get; set; }
+    public string CountryTo { get; set; }
+    public decimal Price { get; set; }
+    public DateTime ValidUntil { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">appsettings entry</div>
+<div class="content">
+<pre>  "QuoteApiHost" : "https://localhost:7146"</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_get"><a class="anchor" href="#_get"></a>GET</h3>
+<div class="listingblock">
+<div class="title">cshtml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">@page
+@model ShipIt.WebApp.Pages.ReadQuoteModel
+@{
+    &lt;form method="POST" asp-page-handler="Search"&gt;
+        &lt;legend&gt;Read Quote&lt;/legend&gt;
+        &lt;p&gt;
+            &lt;label for="txtQuoteId" class="form-label"&gt;Quote Id:&lt;/label&gt;
+            &lt;input asp-for="PriceQuoteViewmodel.Id" type="text" class="form-control" id="txtQuoteId" /&gt;
+        &lt;/p&gt;
+        &lt;button type="submit" class="btn btn-primary"&gt;Opzoeken&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;p&gt;
+        &lt;label for="p" class="form-label"&gt;Price:&lt;/label&gt;
+        &lt;input asp-for="PriceQuoteViewmodel.Price" type="text" class="form-control" id="p" /&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;label for="f" class="form-label"&gt;From:&lt;/label&gt;
+        &lt;input asp-for="PriceQuoteViewmodel.CountryFrom" type="text" class="form-control" id="f" /&gt;
+    &lt;/p&gt;
+        &lt;p&gt;
+        &lt;label for="t" class="form-label"&gt;To:&lt;/label&gt;
+        &lt;input asp-for="PriceQuoteViewmodel.CountryTo" type="text" class="form-control" id="t" /&gt;
+    &lt;/p&gt;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">cshtml.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">    public class ReadQuoteModel : PageModel
+    {
+        [BindProperty]
+        public PriceQuoteViewmodel PriceQuoteViewmodel { get; set; }
+
+        public void OnPostSearch()
+        {
+            // token uit de session halen
+            var token = HttpContext.GetTokenAsync("access_token").Result;
+
+            // token meegeven
+            var client = new HttpClient();
+            client.SetBearerToken(token);
+
+            // call naar quote api (GET /{quoteId})
+            var quoteId = PriceQuoteViewmodel.Id;
+            // TODO lees dit uit appsettings
+            var response = client.GetAsync($"https://localhost:7146/api/pricequotes/{quoteId}").Result;
+
+            // response evalueren
+            if(!response.IsSuccessStatusCode)
+            {
+                // error afhandelen
+                throw new Exception($"Error retrieving quote: {response.StatusCode}");
+            }
+
+            // response deserialiseren
+            var options = new JsonSerializerOptions();
+            options.PropertyNameCaseInsensitive = true;
+            options.Converters.Add(new JsonStringEnumConverter());
+
+            var content = response.Content.ReadFromJsonAsync&lt;PriceQuoteResponseContract&gt;(options).Result;
+
+            // resultaat mappen
+            PriceQuoteViewmodel = new PriceQuoteViewmodel
+            {
+                Id = content.Id,
+                WidthCm = content.WidthCm,
+                HeightCm = content.HeightCm,
+                DepthCm = content.DepthCm,
+                WeightKg = content.WeightKg,
+                CountryFrom = content.CountryFrom.ToString(),
+                CountryTo = content.CountryTo.ToString(),
+                Price = content.Price,
+                ValidUntil = content.ValidUntil
+            };
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_auth"><a class="anchor" href="#_auth"></a>Auth</h3>
+<div class="paragraph">
+<p>Dit zal niet werken zolang de webapp client de rechten niet heeft om een read op de quote api te doen. Dit staat los van user roles!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- read rechten aan app geven (los van users)
+insert into pg3isles.ClientScopes (ClientId, Scope)
+values (
+    (select Id from pg3isles.Clients where ClientId = 'webapp-client'),
+    'shipit.pricequote.api.read'
+)
+go</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Scopes aanvragen in WebApp Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">//...
+options.Scope.Clear();
+options.Scope.Add("openid");
+options.Scope.Add("profile");
+options.Scope.Add("shipit.pricequote.api.read");
+//...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_test"><a class="anchor" href="#_test"></a>Test</h3>
+<div class="paragraph">
+<p><span class="image"><img src="_images/afronden/wa-quotes-search-result-full.png" alt="wa quotes search result full"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_roles"><a class="anchor" href="#_user_roles"></a>User Roles</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_overzicht"><a class="anchor" href="#_overzicht"></a>Overzicht</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Web App authenticated check ✅</p>
+</li>
+<li>
+<p>Web App authorized check ✅</p>
+</li>
+<li>
+<p>User authenticated check ✅</p>
+</li>
+<li>
+<p>User authorized check ❌</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_database"><a class="anchor" href="#_database"></a>Database</h3>
+<div class="listingblock">
+<div class="title">Roles maken</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">insert into pg3usersles.AspNetRoles (Id, Name, NormalizedName)
+values
+(NEWID(), 'QuoteAdmin', 'QUOTEADMIN'),
+(NEWID(), 'User', 'USER')
+go</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Roles toewijzen</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">insert into pg3usersles.AspNetUserRoles (UserId, RoleId)
+-- bob wordt admin
+values (
+    (select id from pg3usersles.AspNetUsers where UserName = 'bob'),
+    (select id from pg3usersles.AspNetRoles where NormalizedName = 'QUOTEADMIN')
+),
+-- alice wordt user
+(
+    (select id from pg3usersles.AspNetUsers where UserName = 'alice'),
+    (select id from pg3usersles.AspNetRoles where NormalizedName = 'USER')
+)
+go</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Via Identity Server WebUI auth cookie uitlezen (cleane tab). Rol zal zichtbaar zijn als <code>role</code> claim (dankzij Asp.Net Identity) .
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_shipit_pricequote_api"><a class="anchor" href="#_shipit_pricequote_api"></a>Shipit.PriceQuote.Api</h3>
+<div class="paragraph">
+<p>Auth scenario: GET /quote toegestaan voor</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>systeem</strong> met claim <code>shipit.pricequote.api.read</code>, zoals voorheen.</p>
+</li>
+<li>
+<p><strong>persoon</strong> met <code>QuoteAdmin</code> rol via systeem met <code>shipit.pricequote.api.read</code> claim.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Voeg nuget <code>duende.identitymodel</code> toe.</p>
+</div>
+<div class="literalblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre>//...
+.AddJwtBearer(options =&gt;
+{
+    //...
+    options.MapInboundClaims = false; <i class="conum" data-value="1"></i><b>(1)</b>
+});
+//...</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Geen automapping van claims op properties met andere namen. We willen alles volledig transparant en duidelijk opvolgen.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("QuoteReadPolicy", policy =&gt;
+        policy.Requirements.Add(
+            new ClaimOrRoleRequirement( <i class="conum" data-value="1"></i><b>(1)</b>
+                "shipit.pricequote.api.read",
+                "QuoteAdmin")));</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We verwijzen naar een nieuwe IAuthorizationRequirement implementatie. Deze is generiek, dus we moeten de scope en expliciet rol meegeven.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">ClaimRoleRequirement</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class ClaimOrRoleRequirement : IAuthorizationRequirement
+{
+    public string ClaimType { get; }
+    public string Role { get; }
+
+    public ClaimOrRoleRequirement(string claimType, string role)
+    {
+        ClaimType = claimType;
+        Role = role;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De auth redenering / logica voor de <code>QuoteReadPolicy</code> wordt sterk aangepast.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipItAuthHandler</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class ShipItAuthHandler : AuthorizationHandler&lt;ClaimOrRoleRequirement&gt;
+{
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public ShipItAuthHandler(IHttpContextAccessor httpContextAccessor)
+    {
+        _httpContextAccessor = httpContextAccessor;
+    }
+
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        ClaimOrRoleRequirement requirement)
+    {
+        var claims = context.User.Claims.ToList();
+
+        // Als de app client de juiste _apiscope_ niet heeft...
+        if (!claims.Exists(c =&gt; c.Value == requirement.ClaimType))
+        {
+            // ...is het NOT OK.
+            context.Fail();
+        }
+        // Als de app client de juiste scope wel heeft...
+        else
+        {
+            var userId = claims.FirstOrDefault(c =&gt; c.Type == "sub")?.Value;
+
+            // ...en de call gebeurt door een _persoon_...
+            if (userId is not null)
+            {
+                // ... dan vragen we meer info aan identity server...
+                var client = new HttpClient();
+                var disco = client
+                    .GetDiscoveryDocumentAsync("https://localhost:5001").Result;
+
+                var token = _httpContextAccessor
+                    .HttpContext.GetTokenAsync("access_token").Result;
+
+                var request = new UserInfoRequest
+                {
+                    Address = disco.UserInfoEndpoint,
+                    Token = token,
+
+                };
+
+                var userInfo = client.GetUserInfoAsync(request).Result;
+
+                // ... en de persoon heeft de juiste _rol_...
+                if (userInfo.Claims.ToList()
+                    .Exists(c =&gt; c.Type == "role" &amp;&amp; c.Value == requirement.Role))
+                {
+                    // ...dan is het OK.
+                    context.Succeed(requirement);
+                }
+                // ... en de persoon heeft de juiste _rol_ niet
+                else
+                {
+                    // ...dan is het NOT OK.
+                    context.Fail();
+                }
+            }
+            // ...en de call gebeurt door een _systeem_...
+            else
+            {
+                // ...dan is het OK.
+                context.Succeed(requirement);
+            }
+        }
+
+        return Task.CompletedTask;
+    }</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">DI</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton&lt;IAuthorizationHandler, ShipItAuthHandler&gt;();
+//...</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Je kan de user/sub en/of extra userinfo gebruiken in de backend gebruiken. Je kan bijvoorbeeld bewaren welke data van wie is, of door wie aangepast werd etc.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_idenity_server"><a class="anchor" href="#_idenity_server"></a>Idenity Server</h3>
+<div class="paragraph">
+<p>We voegen de nodige configuratie toe zodat de <code>role</code> claim van een user door app clients opgevraagd kan worden. Dit zal lopen via de <code>openid</code> scope.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">insert into pg3isles.IdentityResourceClaims (IdentityResourceId, Type)
+values (
+    (select Id from pg3isles.IdentityResources where Name = 'openid'),
+    'role'
+)
+go</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testen"><a class="anchor" href="#_testen"></a>Testen</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Probeer een Quote via Postman te lezen &#8594; ok</p>
+</li>
+<li>
+<p>Probeer een Quote via WebApp als Bob te lezen &#8594; ok</p>
+</li>
+<li>
+<p>Probeer een Quote via Webapp als Alice te lezen &#8594; forbidden</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_in_pipeline"><a class="anchor" href="#_test_in_pipeline"></a>Test in Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add xunit test project <code>ShipIt.Label.Domain.Tests</code> to solution.</p>
+</div>
+<div class="paragraph">
+<p>Maak project reference naar <code>ShipIt.Label.Domain</code>.</p>
+</div>
+<div class="paragraph">
+<p>We willen de <code>Address</code> klasse testen, maar deze is internal. Dat is goed, maar we willen de klasse wel kunnen testen. We registreren een uitzondering.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.Label.Domain/Properties/AssemblyInfo.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">using System.Runtime.CompilerServices;
+[assembly:InternalsVisibleTo("ShipIt.Label.Domain.Tests")]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We maken een test</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Given-When-Then</p>
+</li>
+<li>
+<p>Arrange-Act-Assert</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">LabelTests.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">namespace ShipIt.Label.Domain.Tests;
+
+public class LabelTests
+{
+    [Fact]
+    public void GivenValidAddress_WhenCreatingLabel_ThenTrackingNumberExists()
+    {
+        // Arrange
+        var address = new Address{
+            Name = "John Doe",
+            AddressLine1 = "123 Main St",
+            AddressLine2 = "Apt 4B",
+            Country = "USA"
+        };
+        var price = 19.99;
+        var label = new Label(address, price);
+
+        // Act
+        var result = label.TrackingNumber;
+
+        // Assert
+        Assert.NotNull(result);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dotnet build</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP % dotnet test
+...
+[xUnit.net 00:00:00.19]   Discovering: ShipIt.Label.Domain.Tests
+[xUnit.net 00:00:00.25]   Discovered:  ShipIt.Label.Domain.Tests
+[xUnit.net 00:00:00.25]   Starting:    ShipIt.Label.Domain.Tests
+[xUnit.net 00:00:00.43]   Finished:    ShipIt.Label.Domain.Tests
+  ShipIt.Label.Domain.Tests test succeeded (1.7s)
+
+Test summary: total: 1, failed: 0, succeeded: 1, skipped: 0, duration: 1.7s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Of in VS Code</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/afronden/vscode-test.png" alt="vscode test"></span></p>
+</div>
+<div class="listingblock">
+<div class="title">azure-pipelines.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">...
+- task: DotNetCoreCLI@2
+  displayName: Test ShipIt Projects
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+zie hoofdstuk "Pipelines" voor meer info en beelden.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy"><a class="anchor" href="#_deploy"></a>Deploy</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-webapp \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-identity-api \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-quote-api \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>az webapp up \
+--name pg3-shipit-stefanc-label-api \
+--plan pg3-shipit-stefanc-plan \
+--resource-group pg3-shipit-stefanc \
+--location westeurope \
+--os-type Linux</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/afronden/alles-op-azure.png" alt="alles op azure"></span></p>
+</div>
+</div>
 </div>
 </article>
   </div>

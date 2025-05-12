@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Users (OIDC) :: Programmeren Gevorderd 3 (BETA)</title>
+    <title>SQL Server Docker :: Programmeren Gevorderd 3 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -99,7 +99,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="2">
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-gebruikers.html">Test Users (OIDC)</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
@@ -111,7 +111,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+      <li class="nav-item is-active is-current-page" data-depth="2">
     <a class="nav-link" href="09-identity-sql-server-docker.html">SQL Server Docker</a>
   </li>
 </ul>
@@ -151,7 +151,7 @@
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
     <li><a href="09-auth.html">Authenticatie en Autorisatie</a></li>
-    <li><a href="09-identity-server-gebruikers.html">Test Users (OIDC)</a></li>
+    <li><a href="09-identity-sql-server-docker.html">SQL Server Docker</a></li>
   </ul>
 </nav>
 </div>
@@ -160,165 +160,125 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Users (OIDC)</h1>
-<div class="sect1">
-<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
+<h1 class="page">SQL Server Docker</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>User Accounts (met Identity Server) Activeren</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_is_ui_toevoegen"><a class="anchor" href="#_is_ui_toevoegen"></a>IS UI Toevoegen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Identity Server biedt een implementatie van OpenID Connect die we kunnen gebruiken om user auth te doen.</p>
-</div>
-<div class="paragraph">
-<p>Om mensen door de login flow te loodsen hebben we schermen nodig.Je kan deze volledig zelf ontwikkelen of vertrekken van de Identity Server templates.</p>
-</div>
-<div class="paragraph">
-<p>We gebruiken de ingebouwde ui-template van Identity Server. Indien gewenst, kan je deze restylen.</p>
-</div>
-<div class="literalblock">
-<div class="title">src\ShipIt\ShipIt.IdentityServer</div>
-<div class="content">
-<pre>dotnet new isui</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Het is mogelijk dat nuget <code>Duende.IdentityModel</code>. Voeg deze toe en fix de refernces indien nodig.</p>
-</div>
-<div class="paragraph">
-<p>De nodige calls om de user interface te activeren staan al in de code, maar moeten uit commentaar gezet worden.</p>
-</div>
-<div class="listingblock">
-<div class="title">ShipIt.IdentityServer\HostingExtensions.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(
-    this WebApplicationBuilder builder)
-{
-    // uncomment if you want to add a UI
-    builder.Services.AddRazorPages();
-    ...
-}
-
-public static WebApplication ConfigurePipeline(
-    this WebApplication app)
-{
-    ...
-	// uncomment if you want to add a UI
-	app.UseStaticFiles();
-	app.UseRouting();
-	...
-	// uncomment if you want to add a UI
-	app.UseAuthorization();
-	app.MapRazorPages().RequireAuthorization();
-	...
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_test_users_activeren"><a class="anchor" href="#_test_users_activeren"></a>Test Users Activeren</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Identity Server biedt een aantal ingebouwde test gebruikers. Deze zijn zeer handig om de concepten te demonstreren zonder effectief user storage te moeten definiëren.</p>
-</div>
-<div class="listingblock">
-<div class="title">ShipIt.IdentityServer\HostingExtensions.cs</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(
-    this WebApplicationBuilder builder)
-{
-    //...
-    builder.Services.AddIdentityServer(options =&gt;
-        {
-            //...
-        })
-        .AddConfigurationStore(options =&gt;
-        {
-            //...
-        })
-        .AddTestUsers(TestUsers.Users); <i class="conum" data-value="1"></i><b>(1)</b>
-    //...
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Injectie van de test users.</td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Deze sectie is nog niet volledig uitgeschreven, maar bevat alle notities om de implementatie te doen.
+</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Het kan interessant zijn de definities van Bob en Alice van naderbij te bekijken.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_testen"><a class="anchor" href="#_testen"></a>Testen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Start het IdentityServer project op en surf naar <a href="https://localhost:5001" class="bare">https://localhost:5001</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/identity-server-users/is-launch.png" alt="is launch">
-</div>
-</div>
-<div class="paragraph">
-<p>Klik op "Click here to see the claims of your current session."</p>
-</div>
-<div class="paragraph">
-<p>Log in met een van de test users bob/bob of alice/alice.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/identity-server-users/is-login.png" alt="is login">
-</div>
-</div>
-<div class="paragraph">
-<p>De web pagina zal de informatie uit het huidige token weergeven.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/identity-server-users/is-token.png" alt="is token">
-</div>
-</div>
-<div class="paragraph">
-<p>Bovenaan in de navigatiebalk staat een menu item dat dient als bevestiging dat je ingelogd bent. Je kan daar ook uitloggen.</p>
-</div>
-<div class="paragraph">
-<p>De user interface van Identity Server is nu operationeel. We kunnen deze users gebruiken in een  eigen front-end applicatie.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<h2 id="_waarom"><a class="anchor" href="#_waarom"></a>Waarom?</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://duendesoftware.com/products/identityserver">Identity Server</a></p>
+<p>Free limit bereikt op Azure &#8594; Alternatief nodig</p>
+</li>
+<li>
+<p>Lokaal SQL server testen zonder impact op OS/installatie.</p>
+</li>
+<li>
+<p>Er bestaat <strong>geen</strong> native SQL Server voor macOS, wel voor Windows en Linux.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installeren"><a class="anchor" href="#_installeren"></a>Installeren</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>docker pull mcr.microsoft.com/mssql/server:2022-latest</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Wachtw00rd1" `
+-p 1433:1433 --name sql1 --hostname sql1 `
+-d `
+mcr.microsoft.com/mssql/server:2022-latest</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>De server admin username is <code>sa</code>.</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shipit_db_maken"><a class="anchor" href="#_shipit_db_maken"></a>ShipIt DB maken</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>connect (met VS Code ofzo)</p>
+</div>
+<div class="literalblock">
+<div class="title">Op master DB</div>
+<div class="content">
+<pre>CREATE DATABASE [shipit-identity]
+go
+
+CREATE LOGIN IdentityServer WITH PASSWORD = 'WachtW00rd'
+go</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Op shipit-identity DB</div>
+<div class="content">
+<pre>CREATE USER IdentityServer FOR LOGIN IdentityServer;
+GO
+GRANT CREATE TABLE TO IdentityServer
+GO
+
+CREATE SCHEMA pg3is
+GO
+GRANT ALTER ON SCHEMA :: pg3is TO IdentityServer
+GO
+GRANT INSERT, UPDATE, DELETE, SELECT, REFERENCES ON SCHEMA :: pg3is TO IdentityServer
+GO
+
+CREATE SCHEMA pg3users
+GO
+GRANT ALTER ON SCHEMA :: pg3users TO IdentityServer
+GO
+GRANT INSERT, UPDATE, DELETE, SELECT, REFERENCES ON SCHEMA :: pg3users TO IdentityServer
+GO</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_migrations"><a class="anchor" href="#_migrations"></a>Migrations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>in IS project</p>
+</div>
+<div class="literalblock">
+<div class="title">connectionstring</div>
+<div class="content">
+<pre>Server=tcp:localhost,1433;Initial Catalog=shipit-identity;Persist Security Info=False;User ID=IdentityServer;Password=WachtW00rd;MultipleActiveResultSets=False;Encrypt=Optional;TrustServerCertificate=True;Connection Timeout=30;</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Migrations</div>
+<div class="content">
+<pre>dotnet ef database update -c ConfigurationDbContext</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dotnet ef database update -c UserDbContext</pre>
+</div>
 </div>
 </div>
 </div>
