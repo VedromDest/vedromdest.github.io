@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MongoDB :: Programmeren Gevorderd 2 (BETA)</title>
+    <meta name="generator" content="Antora 3.1.10">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">Programmeren Gevorderd 2 (BETA)</a>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+      
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Producten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://learn.microsoft.com/en-us/cli/azure/">Azure CLI</a>
+                  <a class="navbar-item" target="_blank" href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://desktop.github.com/download">GitHub Desktop</a>
+                  <a class="navbar-item" target="_blank" href="https://www.mysql.com/products/workbench">MySQL Workbench</a>
+                  <a class="navbar-item" target="_blank" href="https://www.postman.com/downloads/">Postman</a>
+                  <a class="navbar-item" target="_blank" href="https://www.jetbrains.com/rider/download">Rider</a>
+                  <a class="navbar-item" target="_blank" href="https://code.visualstudio.com/download">VS Code</a>
+              </div>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="#">Diensten</a>
+              <div class="navbar-dropdown">
+                  <a class="navbar-item" target="_blank" href="https://dev.azure.com/hogent-web4-stefancourteaux/">Azure DevOps</a>
+                  <a class="navbar-item" target="_blank" href="https://portal.azure.com">Azure Portal</a>
+                  <a class="navbar-item" target="_blank" href="https://chamilo.hogent.be">Chamilo</a>
+                  <a class="navbar-item" target="_blank" href="https://github.com">GitHub</a>
+                  <a class="navbar-item" target="_blank" href="https://jwt.io">JWT.io</a>                  
+                  <a class="navbar-item" target="_blank" href="https://dotnet.microsoft.com">MS Docs</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="pg2" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">Gevorderd 2</a></h3>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="0">
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="01-http-apis.html">RESTful HTTP Api</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront.html">Backend (Api + EF Core)</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-storefront-api.html">RESTful Api</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-1.html">Customers &amp; Products</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="02-storefront-api-3.html">Orders &amp; Service Layer</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-storefront-ef.html">Database</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
+  </li>
+      <li class="nav-item is-active" data-depth="3">
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="03-storefront-refactoring.html">Refactoring</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+  </li>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="07-mongo.html">MongoDB</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="90-oefeningen.html">Extra Oefeningen</a>
+<ul class="nav-list">
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-01-herhaling.html">Herhaling C# en UML</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-03-pokemons.html">Backend (Api + In-Memory)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-02-backend.html">Backend (Api + EF Core)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-04-fototoestellen.html">EF Core (Code First)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-05-backend-dapper.html">Dapper</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-06-mongo.html">Api + MongoDB</a>
+  </li>
+</ul>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="03-opdracht-feedback.html">Feedback Notities ⭐️</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Gevorderd 2</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">Gevorderd 2</a></div>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Gevorderd 2</a></li>
+    <li><a href="07-mongo.html">MongoDB</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">MongoDB</h1>
+<div class="sect1">
+<h2 id="_terminologie"><a class="anchor" href="#_terminologie"></a>Terminologie</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">NoSQL DB</dt>
+<dd>
+<p>Overkoepelende term voor database systemen die de traditionele rigide structuur van een relationele databank niet kennen. Dit wil niet zeggen dat elke vorm van structuur overboord gegooid wordt, maar er ligt geen nadruk op relaties en de bijhorende <code>join</code> operaties. We noemen dit ook <em>Document Databases</em>.</p>
+</dd>
+<dt class="hdlist1">MongoDB</dt>
+<dd>
+<p>Op dit moment de meest gebruikte NoSQL database.</p>
+</dd>
+<dt class="hdlist1">Document</dt>
+<dd>
+<p>Een JSON document met een eigen <code>id</code>. <em>vb: klant nr 1</em></p>
+</dd>
+<dt class="hdlist1">Collection</dt>
+<dd>
+<p>Een verzameling van documenten. <em>vb: klanten</em></p>
+</dd>
+<dt class="hdlist1">JSON Schema</dt>
+<dd>
+<p>Een gestandaardiseerd JSON-document dat beschrijft waaraan een JSON-document moet voldoen om geldig te zijn. Dit is een optioneel aspect dat niet altijd toegepast wordt. Het is analoog aan een XML Schema. <em>vb: definitie klant document</em></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mongodb_installeren"><a class="anchor" href="#_mongodb_installeren"></a>MongoDB Installeren</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Installeer de huidige versie van MongoDB in Docker.</p>
+</div>
+<div class="literalblock">
+<div class="title">Pull</div>
+<div class="content">
+<pre>docker pull mongodb/mongodb-community-server:latest</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Run</div>
+<div class="content">
+<pre>docker run --name mongodbdocker `
+-p 27017:27017 `
+-d mongodb/mongodb-community-server:latest</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-docker.png" alt="mongo docker"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_compass_gebruiken"><a class="anchor" href="#_compass_gebruiken"></a>Compass Gebruiken</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download en installeer <a href="https://www.mongodb.com/products/tools/compass">MongoDB Compass</a>.</p>
+</div>
+<div class="paragraph">
+<p>We gebruiken tijdens deze introductie alleen de Compass UI. Indien MongoDB een integraal onderdeel van je werkomgeving wordt, zal het lonen de <a href="https://www.mongodb.com/docs/mongodb-shell/">MongoDB Shell</a> te leren kennen.</p>
+</div>
+<div class="sect2">
+<h3 id="_verbinden"><a class="anchor" href="#_verbinden"></a>Verbinden</h3>
+<div class="paragraph">
+<p>Voeg de lokale connectie toe.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-compas-conn.png" alt="mongo compas conn"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_database_toevoegen"><a class="anchor" href="#_database_toevoegen"></a>Database Toevoegen</h3>
+<div class="paragraph">
+<p>Klik op de <code>+</code> naast de locale MongoDB server om een nieuwe database te maken. Noem deze <code>pg2</code> en voeg een <code>testcolletion</code> toe.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-new-db.png" alt="mongo new db"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_toevoegen"><a class="anchor" href="#_data_toevoegen"></a>Data Toevoegen</h3>
+<div class="paragraph">
+<p>Voeg een nieuw document toe via de query editor.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-query-new.png" alt="mongo query new"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-query-new-2.png" alt="mongo query new 2"></span></p>
+</div>
+<div class="listingblock">
+<div class="title">Document</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "_id": {
+    "$oid": "68206b337308722b71cf4222"
+  },
+  "mijnVeldText" : "Tekst",
+  "mijnVeldNumber" : 4.2,
+  "mijnVeldBool" : true,
+  "mijnVeldLeeg" : null,
+  "mijnVeldArray" : [1,2,3],
+  "mijnVeldObject" : {
+    "mijnObjectVeld" : "Hallo"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_lezen"><a class="anchor" href="#_data_lezen"></a>Data Lezen</h3>
+<div class="paragraph">
+<p>Voeg filtercriteria toe om de database aan het werk te zetten.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-query-filter.png" alt="mongo query filter"></span></p>
+</div>
+<div class="paragraph">
+<p>Je kan de data voorstellen als document, maar ook als tabel.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_aanpassen"><a class="anchor" href="#_data_aanpassen"></a>Data Aanpassen</h3>
+<div class="paragraph">
+<p>Je kan velden rechtstreeks in het result view aanpassen.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/mongo/mongo-query-edit.png" alt="mongo query edit"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_verwijderen"><a class="anchor" href="#_data_verwijderen"></a>Data Verwijderen</h3>
+<div class="paragraph">
+<p>Klik op het vuilbakje in de result view om een document te wissen.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_net_mongodb"><a class="anchor" href="#_net_mongodb"></a>.Net MongoDB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>De MongoDB driver wordt - uiteraard - aangeleverd als een <a href="https://www.nuget.org/packages/MongoDB.Driver">nuget package</a>, genaamd <code>MongoDB.Driver</code>.</p>
+</div>
+<div class="paragraph">
+<p>Deze voorziet een <code>MongoClient</code> om te verbinden met een DB. Eenmaal verbonden, kan je de collections manipuleren.</p>
+</div>
+<div class="listingblock">
+<div class="title">Collection Aanspreken</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var client = new MongoClient("mongodb://localhost:27017");
+
+var db = client.GetDatabase("pg2");
+if(db is null)
+    throw new Exception("Database not found");
+
+var coll = db.GetCollection&lt;DemoModel&gt;("testcollection");
+if(coll is null)
+    throw new Exception("Collection not found");</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_crud"><a class="anchor" href="#_crud"></a>CRUD</h3>
+<div class="listingblock">
+<div class="title">Model</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DemoModel
+{
+    public ObjectId Id { get; set; } <i class="conum" data-value="1"></i><b>(1)</b>
+    public required string MijnVeldText { get; set; }
+    public required double MijnVeldNumber { get; set; }
+    public required bool MijnVeldBool { get; set; }
+    public string? MijnVeldLeeg { get; set; }
+    public required int[] MijnVeldArrayInts { get; set; }
+    public required DemoModelObjectProp MijnVeldObject { get; set; }
+}
+
+public class DemoModelObjectProp
+{
+    public required string MijnObjectVeld { get; set; }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ObjectId eigen aan MongoDB.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Stap met de debugger doorheen de CRUD operaties en bekijk de evolutie van de collection met Compass.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Create</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var toCreate = new DemoModel
+{
+    MijnVeldText = "Tekst",
+    MijnVeldNumber = 4.2,
+    MijnVeldBool = true,
+    MijnVeldLeeg = null,
+    MijnVeldArrayInts = [1, 2, 3],
+    MijnVeldObject = new DemoModelObjectProp
+    {
+        MijnObjectVeld = "Hallo"
+    }
+};
+
+coll.InsertOne(toCreate);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Read</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var read = coll.Find(d =&gt; d.MijnVeldText == "Tekst").Single();</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Update Document</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">read.MijnVeldText = "Tekst Updated";
+coll.ReplaceOne(d =&gt; d.Id == read.Id, read);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Delete</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">coll.DeleteOne(f =&gt; f.Id == read.Id);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fine_grained_update"><a class="anchor" href="#_fine_grained_update"></a>Fine-Grained Update</h3>
+<div class="listingblock">
+<div class="title">Update Veld(en)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">coll.UpdateOne( f =&gt;
+    // welk document
+    f.Id == read.Id,
+    // welke operatie
+    Builders&lt;DemoModel&gt;.Update.Set( d =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        d.MijnVeldText, "Tekst Updated 2"));</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Je kan een ketting van <code>Set()</code> maken.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_filter"><a class="anchor" href="#_filter"></a>Filter</h3>
+<div class="paragraph">
+<p>We kunnen expliciet een <code>Filter</code> bouwen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Expliciete Filter</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var simpleFilter = Builders&lt;DemoModel&gt;.Filter.Eq(d =&gt;
+    d.MijnVeldText, "Tekst Updated 2");
+
+var result= coll.Find(simpleFilter).ToList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We kunnen ook een rijkere <code>Filter</code> opbouwen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Samengestelde Filter</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var compositeFilter = Builders&lt;DemoModel&gt;.Filter.And(
+    Builders&lt;DemoModel&gt;.Filter.Eq(d =&gt; d.MijnVeldText, "Tekst Updated 2"),
+    Builders&lt;DemoModel&gt;.Filter.Lt(d =&gt; d.MijnVeldNumber, 100)
+);
+
+var resultComposite= coll.Find(compositeFilter).ToList();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De samengestelde filters, zijn zelf ook <em>gewoon</em> filters, dus je kan ze nesten.</p>
+</div>
+<div class="listingblock">
+<div class="title">Geneste Filter</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var nestedFilter = Builders&lt;DemoModel&gt;.Filter.And(
+    Builders&lt;DemoModel&gt;.Filter.Eq(d =&gt; d.MijnVeldText, "Tekst Updated 2"),
+    Builders&lt;DemoModel&gt;.Filter.Lt(d =&gt; d.MijnVeldNumber, 100),
+    Builders&lt;DemoModel&gt;.Filter.Or(
+        Builders&lt;DemoModel&gt;.Filter.Eq(d =&gt; d.MijnVeldArrayInts[1], 1),
+        Builders&lt;DemoModel&gt;.Filter.Gt(d =&gt; d.MijnVeldNumber, 2)
+    )
+);
+
+var resultNested= coll.Find(nestedFilter).ToList();</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het is mogelijk om filters te schrijven die wel compileren, maar een runtime exception veroorzaken omdat de Mongo driver bepaalde LINQ-functionaliteit nog niet implementeert. Wat niet is, kan nog komen.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_entity_framework_core"><a class="anchor" href="#_entity_framework_core"></a>Entity Framework Core</h3>
+<div class="paragraph">
+<p>Models, Mapping, LINQ, Builders, Filters&#8230;&#8203; Hoe dicht zijn we dan al bij een EF Core implementatie? 🤔</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.mongodb.com/docs/entity-framework/current/">Sinds kort bestaat het gewoonweg</a> - <em>the future is now</em>!</p>
+</div>
+<div class="paragraph">
+<p>Voeg <code>MongoDB.EntityFrameworkCore</code> toe aan het project. De rest is <em>business as usual</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">DbContext Voorbeeld</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DemoDbContext : DbContext
+{
+    public DbSet&lt;DemoModel&gt; DemoModels { get; init; } <i class="conum" data-value="1"></i><b>(1)</b>
+
+    public DemoDbContext(DbContextOptions options)
+        : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity&lt;DemoModel&gt;().ToCollection("testcollection"); <i class="conum" data-value="2"></i><b>(2)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>DbSet voor het <code>DemoModel</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Expliciet mapping van <code>DemoModel</code> <code>DbSet</code> op de bestaande collection.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Web Api Setup</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMongoDB&lt;DemoDbContext&gt;(
+    new MongoClient("mongodb://localhost:27017"), "pg2");
+
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; "Hello World!");
+app.MapGet("/models", (DemoDbContext ctx) =&gt; ctx.DemoModels);
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="paragraph text-center">
+<p>Fin</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using a customized version of the Antora default UI.</p>
+  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

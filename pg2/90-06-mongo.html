@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Oefeningen :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Api + MongoDB :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -110,7 +110,7 @@
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="07-mongo.html">MongoDB</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="1">
+      <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="90-oefeningen.html">Extra Oefeningen</a>
 <ul class="nav-list">
@@ -129,7 +129,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-05-backend-dapper.html">Dapper</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+      <li class="nav-item is-active is-current-page" data-depth="2">
     <a class="nav-link" href="90-06-mongo.html">Api + MongoDB</a>
   </li>
 </ul>
@@ -163,6 +163,7 @@
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
     <li><a href="90-oefeningen.html">Extra Oefeningen</a></li>
+    <li><a href="90-06-mongo.html">Api + MongoDB</a></li>
   </ul>
 </nav>
 </div>
@@ -171,37 +172,83 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Oefeningen</h1>
+<h1 class="page">Api + MongoDB</h1>
+<div class="sect1">
+<h2 id="_fase_1"><a class="anchor" href="#_fase_1"></a>Fase 1</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>De cursus nodigt de lezer regelmatig uit leerstof toe te passen en zelf een taak uit te voeren. De "oplossingen" van deze taken staan steeds verderop in de cursus of in de code op <a href="https://github.com/VedromDest/pg2">GitHub</a> die hoort bij de lessen.</p>
+<p>Bouw een piepkleine web api voor het beheren van gebruikersprofielen met reviews. Denk bijvoorbeeld aan eBay.</p>
 </div>
 <div class="paragraph">
-<p>De oefeningen in de sectie waar je je nu bevindt, staan los van de cursus. Ze worden beschikbaar gesteld voor studenten die de relevante materie extra willen inoefenen.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Van sommige oefeningen zijn <a href="https://github.com/VedromDest/pg2/tree/main/VoorbeeldOplossingen">voorbeeldoplossingen</a> beschikbaar op GitHub.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Indien je feedback over jouw oplossingen wenst, kan je dit vragen</p>
+<p>Functionaliteit</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>na afloop van de les.</p>
+<p>Profiel toevoegen</p>
 </li>
 <li>
-<p>via duidelijke e-mail, met referentie naar code repository zoals GitHub, Azure DevOps etc.</p>
+<p>Profiel updaten</p>
+</li>
+<li>
+<p>Review toevoegen</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Model</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Profiel</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Naam</p>
+</li>
+<li>
+<p>Email</p>
+</li>
+<li>
+<p>Beschrijving</p>
+</li>
+<li>
+<p>Reviews[ ]</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Review</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Datum</p>
+</li>
+<li>
+<p>Score 1..5/5</p>
+</li>
+<li>
+<p>Tekst</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Implementeer dit met een <em>Repository</em> gebaseerd op <code>MongoDB.Driver</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fase_2"><a class="anchor" href="#_fase_2"></a>Fase 2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Herwerk de oplossing naar EF Core, gebruik makende van <code>MongoDB.EntityFrameworkCore</code>.</p>
+</div>
+</div>
 </div>
 </article>
   </div>
