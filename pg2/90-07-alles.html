@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Tussentijdse Evaluatie :: Programmeren Gevorderd 2 (BETA)</title>
+    <title>Event Planner :: Programmeren Gevorderd 2 (BETA)</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -95,7 +95,7 @@
   </li>
 </ul>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="1">
+      <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
@@ -132,7 +132,7 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-06-mongo.html">Api + MongoDB</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+      <li class="nav-item is-active is-current-page" data-depth="2">
     <a class="nav-link" href="90-07-alles.html">Cover-All</a>
   </li>
 </ul>
@@ -165,7 +165,8 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="03-opdracht.html">Tussentijdse Evaluatie</a></li>
+    <li><a href="90-oefeningen.html">Extra Oefeningen</a></li>
+    <li><a href="90-07-alles.html">Cover-All</a></li>
   </ul>
 </nav>
 </div>
@@ -174,200 +175,228 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Tussentijdse Evaluatie</h1>
+<h1 class="page">Event Planner</h1>
 <div class="sect1">
 <h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Ontwerp en implementeer een beknopt systeem voor het beheer van voetbalploegen.</p>
+<p>Bouw een backend webapi-systeem voor het beheer van taken ter voorbereiding van een evenement.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/oefeningen/voetbalploegen.png" alt="voetbalploegen">
+<img src="_images/oefeningen/partyplanner.jpeg" alt="partyplanner">
 </div>
-<div class="title"><a href="https://www.youtube.com/watch?v=fJeJuc27ggE">België - Japan op 2 juli 2018</a></div>
+<div class="title">Twijfelachtige AI Art, 2025</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concepten"><a class="anchor" href="#_concepten"></a>Concepten</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Locatie</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Id</p>
+</li>
+<li>
+<p>Naam</p>
+</li>
+<li>
+<p>Beschrijving</p>
+</li>
+<li>
+<p>GpsLat (Z-N) [-90,90]</p>
+</li>
+<li>
+<p>GpsLon (O-W) [-180, 180]</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Evenement</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Id</p>
+</li>
+<li>
+<p>Locatie</p>
+</li>
+<li>
+<p>Naam</p>
+</li>
+<li>
+<p>StartDateTime</p>
+</li>
+<li>
+<p>EindDateTime</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Taak</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Id</p>
+</li>
+<li>
+<p>Evenement</p>
+</li>
+<li>
+<p>Naam</p>
+</li>
+<li>
+<p>Beschrijving</p>
+</li>
+<li>
+<p>Belangrijkheid (must/should/could)</p>
+</li>
+<li>
+<p>Status (todo/doing/done/cancelled)</p>
+</li>
+<li>
+<p>DeadlineDateTime</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deliverables"><a class="anchor" href="#_deliverables"></a>Deliverables</h2>
+<h2 id="_functionaliteit"><a class="anchor" href="#_functionaliteit"></a>Functionaliteit</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>MySQL DDL/DML script</p>
+<p><strong>CRUD</strong> Api Locatie</p>
 </li>
 <li>
-<p>Werkende dotnet solution</p>
+<p><strong>CRUD</strong> Api Evenement</p>
 </li>
 <li>
-<p>Postman collection die je gebruikt hebt om te testen</p>
+<p><strong>CRUD</strong> Api Taak</p>
+<div class="ulist">
+<ul>
+<li>
+<p>+ <code>PATCH</code> op status</p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
+</li>
+<li>
+<p><strong>R</strong> <em>Audit Trail</em> met entry voor elke operatie</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Inhoud van één entry</p>
+<div class="ulist">
+<ul>
+<li>
+<p>DateTime</p>
+</li>
+<li>
+<p>Onderwerp (Locatie/Evenement/Taak)</p>
+</li>
+<li>
+<p>Actie (C,R,U,D)</p>
+</li>
+<li>
+<p>Oude waarde object</p>
+</li>
+<li>
+<p>Nieuwe waarde object</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Filter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optioneel zoeken op onderwerp en/of actie</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>R</strong> Overzicht Rapport</p>
+<div class="ulist">
+<ul>
+<li>
+<p>één record bevat</p>
+<div class="ulist">
+<ul>
+<li>
+<p>EvenementId</p>
+</li>
+<li>
+<p>EvenementNaam</p>
+</li>
+<li>
+<p>LocatieId</p>
+</li>
+<li>
+<p>LocatieNaam</p>
+</li>
+<li>
+<p>PercentageTakenVoltooid</p>
+</li>
+<li>
+<p>Aantal "Must" taken in "Todo"</p>
+</li>
+<li>
+<p>Laatste update aan evenement of een van de onderliggende taken</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
+<h2 id="_technisch"><a class="anchor" href="#_technisch"></a>Technisch</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_business"><a class="anchor" href="#_business"></a>Business</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Een speler</p>
-<div class="ulist">
-<ul>
-<li>
-<p>heeft altijd een naam, voornaam, geboortedatum en uniek e-mail adres</p>
+<p>Api + Logica in .Net web api met apicontrollers</p>
 </li>
 <li>
-<p>kan lid zijn van één of meer ploegen</p>
+<p><code>Locatie-Evenement-Taak</code> in MySQL (Docker!) + EF Core Migrations</p>
+</li>
+<li>
+<p>Audit trail van elke CRUD-operatie in MongoDB</p>
+</li>
+<li>
+<p>Volledig async</p>
+</li>
+<li>
+<p>Als de api response content heeft, is het <strong>altijd</strong> json</p>
+</li>
+<li>
+<p>Filter op audit trail gebruikt <code>[FromQuery]</code> inputs</p>
+</li>
+<li>
+<p>De reporting query wordt via Dapper uitgevoerd</p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p>Een lidmaatschap is geldig</p>
-<div class="ulist">
-<ul>
-<li>
-<p>voor een bepaalde periode (datum van - datum tot)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>datum van is verplicht</p>
-</li>
-<li>
-<p>datum tot is niet altijd gekend</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Een ploeg heeft</p>
-<div class="ulist">
-<ul>
-<li>
-<p>unieke naam</p>
-</li>
-<li>
-<p>naam van de trainer</p>
-</li>
-<li>
-<p>niveau: Regionaal, Nationaal, Internationaal</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Een speler kan bij een specifieke ploeg maximaal 1 lidmaatschap hebben met onbekende einddatum.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_domein_model"><a class="anchor" href="#_domein_model"></a>Domein Model</h3>
-<div class="paragraph">
-<p><span class="image"><img src="_images/oefeningen/domeinvoetbal.drawio.png" alt="domeinvoetbal.drawio"></span></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_technisch"><a class="anchor" href="#_technisch"></a>Technisch</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Gebruik MySQL</p>
-</li>
-<li>
-<p>Gebruik Entity Framework Core scaffolding</p>
-</li>
-<li>
-<p>Gebruik een drielagen backend architectuur</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Api</p>
-<div class="ulist">
-<ul>
-<li>
-<p>gebruik aparte request en response contracten ~ DTO&#8217;s</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Service ~ BL</p>
-</li>
-<li>
-<p>Storage ~ DAL</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-<div class="sect2">
-<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
-<div class="literalblock">
-<div class="title">Spelers</div>
-<div class="content">
-<pre>POST /players      -&gt; 1 maken
-GET  /players      -&gt; lijst van alle <i class="conum" data-value="1"></i><b>(1)</b>
-GET  /players/{id} -&gt; 1 specifieke <i class="conum" data-value="1"></i><b>(1)</b></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Het response contract bevat alle velden van een speler, inclusief het Id.<br>
-De lidmaatschappen worden <strong>niet</strong> bijgevoegd.</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="title">Lidmaatschappen</div>
-<div class="content">
-<pre>POST /memberships      -&gt; 1 maken
-GET  /memberships      -&gt; lijst van alle <i class="conum" data-value="1"></i><b>(1)</b>
-GET  /memberships/{id} -&gt; 1 specifieke <i class="conum" data-value="1"></i><b>(1)</b>
-PUT  /memberships/{id} -&gt; update 1 specifieke <i class="conum" data-value="2"></i><b>(2)</b></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Het response contract bevat ook naam en leeftijd van de speler én naam van de ploeg.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Enkel de einddatum mag aangepast worden, als deze nog niet gekend was.</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="title">Ploegen</div>
-<div class="content">
-<pre>POST /teams      -&gt; 1 maken
-GET  /teams/{id} -&gt; 1 specifieke <i class="conum" data-value="1"></i><b>(1)</b></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Bevat ook een lijst met de namen van de spelers.</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 </div>
