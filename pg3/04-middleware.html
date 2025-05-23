@@ -568,6 +568,84 @@ app.MapScalarApiReference();
 <p><span class="image"><img src="_images/middleware/scalar-minimal.png" alt="scalar minimal"></span></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_openapi_doc_uitbreiden"><a class="anchor" href="#_openapi_doc_uitbreiden"></a>OpenApi Doc Uitbreiden</h3>
+<div class="paragraph">
+<p>Je kan attributes (klassiek) of fluent api (voor minimal api) gebruiken.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[EndpointSummary]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WithSummary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[EndpointDescription]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WithDescription</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Tags]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WithTags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[EndpointName]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WithName</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[FromQuery],[FromRoute],[FromHeader],[FromForm]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Description]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[FromBody]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Produces]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Produces, ProducesProblem	TypedResults</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[ExcludeFromDescription]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ExcludeFromDescription</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Globale velden kunnen vertrekkende van deze filter template gezet worden.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">builder.Services.AddOpenApi(options =&gt;
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =&gt;
+    {
+        // Contact zoals in Demo Microsoft
+        document.Info.Contact = new OpenApiContact
+        {
+            Name = "Contoso Support",
+            Email = "support@contoso.com"
+        };
+        // Description aanpassen
+        document.Info.Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis lacus accumsan, rhoncus ante nec, porttitor neque. Mauris congue, justo ac fringilla vehicula, arcu tortor elementum metus, nec pellentesque nunc tortor ut ipsum. Curabitur posuere diam felis, id efficitur leo fermentum nec. Integer hendrerit ipsum non urna congue dignissim. Praesent id sagittis odio. Proin pulvinar porta porttitor. Integer auctor sagittis imperdiet. Praesent molestie sapien sit amet blandit tincidunt. Vivamus tincidunt metus eget turpis dignissim viverra. Ut non ex at diam cursus porttitor. Integer a augue et magna egestas consectetur. Aenean malesuada augue tellus, et dignissim diam vestibulum eget. Cras sed pulvinar nisl. Suspendisse nec sem eu mauris luctus placerat ac et augue. Donec sit amet urna ut sem viverra pellentesque. Proin et nisl egestas, lobortis nunc nec, mollis lectus.";
+        return Task.CompletedTask;
+    });
+});</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -663,6 +741,17 @@ var app = builder.Build();
 <div class="sectionbody">
 <div class="paragraph">
 <p>Probeer zelf de taak van de week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referenties"><a class="anchor" href="#_referenties"></a>Referenties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/include-metadata?view=aspnetcore-9.0&amp;tabs=minimal-apis" class="bare">https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/include-metadata?view=aspnetcore-9.0&amp;tabs=minimal-apis</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://devblogs.microsoft.com/dotnet/dotnet9-openapi/" class="bare">https://devblogs.microsoft.com/dotnet/dotnet9-openapi/</a></p>
 </div>
 </div>
 </div>
