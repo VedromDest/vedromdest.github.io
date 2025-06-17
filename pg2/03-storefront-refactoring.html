@@ -96,9 +96,6 @@
 </ul>
   </li>
       <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="03-opdracht.html">Tussentijdse Evaluatie</a>
-  </li>
-      <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-ef-code-first.html">EF Core (Code First)</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
@@ -112,7 +109,7 @@
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="90-oefeningen.html">Extra Oefeningen</a>
+    <a class="nav-link" href="90-oefeningen.html">Oefeningen</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-01-herhaling.html">Herhaling C# en UML</a>
@@ -122,6 +119,9 @@
   </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-02-backend.html">Backend (Api + EF Core)</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-02-backend-voetbal.html">Backend (Api + EF Core)</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-04-fototoestellen.html">EF Core (Code First)</a>
@@ -136,9 +136,6 @@
     <a class="nav-link" href="90-07-alles.html">Cover-All</a>
   </li>
 </ul>
-  </li>
-      <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="03-opdracht-feedback.html">Feedback Notities</a>
   </li>
 </ul>
   </li>
@@ -182,10 +179,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Begrijpen wat refactoring inhoud.</p>
+<p>Begrijpen wat refactoring is.</p>
 </li>
 <li>
-<p>Een aantal aspecten van de applicatie refactoren.</p>
+<p>Elementen van de applicatie <em>refactoren</em>.</p>
 </li>
 </ul>
 </div>
@@ -220,13 +217,17 @@ In academische context is het belangrijk de dingen expliciet te benoemen, dus la
 <div class="sect2">
 <h3 id="_service_layer"><a class="anchor" href="#_service_layer"></a>Service Layer</h3>
 <div class="paragraph">
-<p>Op dit moment bestaat er enkel een <em>OrderService</em>. De <em>Api Controllers</em> voor <em>Customers</em> en <em>Products</em> spreken nog rechtstreeks tegen <em>Repositories</em>. Dergelijke inconsistenties zijn onwenselijk. <strong>We moeten een <em>CustomerService</em> en een <em>ProductService</em> introduceren.</strong></p>
+<p>Op dit moment bestaat er enkel een <em>OrderService</em>. De <em>Api Controllers</em> voor <em>Customers</em> en <em>Products</em> spreken nog rechtstreeks tegen <em>Repositories</em>. Dergelijke inconsistenties zijn onwenselijk.<br>
+<br>
+<strong>We moeten een <em>CustomerService</em> en een <em>ProductService</em> introduceren.</strong></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_connectionstring"><a class="anchor" href="#_connectionstring"></a>ConnectionString</h3>
 <div class="paragraph">
-<p>Op dit moment bevat de gegenereerde <em>DbContext</em> een vaste, leesbare <em>Connectionstring</em> naar onze MySQL databank. <em>Access Credentials</em> bewaren in broncode is niet veilig. Het is ook inflexibel - wat als we met een andere databaseserver willen verbinden? <strong>We moeten de <em>Connectionstring</em> verhuizen naar een configuratiebestand.</strong></p>
+<p>Op dit moment bevat de gegenereerde <em>DbContext</em> een vaste, leesbare <em>Connectionstring</em> naar onze MySQL databank. <em>Access Credentials</em> bewaren in broncode is niet veilig. Het is ook inflexibel - wat als we met een andere databaseserver willen verbinden?<br>
+<br>
+<strong>We moeten de <em>Connectionstring</em> verhuizen naar een configuratiebestand.</strong></p>
 </div>
 <div class="listingblock">
 <div class="title">AppSettings.json</div>
@@ -274,16 +275,13 @@ builder.Services.AddDbContext&lt;StorefrontContext&gt;(options =&gt;
 <p><em>Is dat waardevol?</em></p>
 </div>
 <div class="paragraph">
-<p>We zouden dit kunnen zien als abstractie/encapsulatie van alles wat specifiek is aan <em>Entity Framework</em>. Abstractie is goed. Toch? Een extra <a href="https://en.wikipedia.org/wiki/Indirection"><em>level of indirection</em></a> kan nooit kwaad. Toch? Wat als we niet langer <em>Entity Framework</em> willen gebruiken? Misschien kunnen we zelf een soort <em>Generic Repository</em> uitvinden, dynamisch configureerbaar etc&#8230;&#8203;? Hooguit een paar weken werk. Toch?</p>
+<p>We zouden dit kunnen zien als abstractie/encapsulatie van alles wat specifiek is aan <em>Entity Framework</em>. Abstractie is goed. Toch? Een extra <a href="https://en.wikipedia.org/wiki/Indirection"><em>level of indirection</em></a> kan nooit kwaad. Toch? Wat als we niet langer <em>Entity Framework</em> willen gebruiken?</p>
 </div>
 <div class="paragraph">
-<p><em>Efkes serieus!</em></p>
+<p><em>Is dat een realistisch scenario?</em></p>
 </div>
 <div class="paragraph">
-<p>We moeten voorzichtig zijn met dit soort redeneringen. Wat begonnen is als een terechte overweging, is ontspoord tot een theoretische oefening waarbij we met behulp van moeilijke woorden en het misrepresenteren van kernconcepten komen tot een situatie waarin we op alles voorbereid zouden zijn en om een of andere reden het Noorden kwijt zijn.</p>
-</div>
-<div class="paragraph">
-<p>We hebben - tijdens de ontwerpfase, als het even kan - beslist dat de applicatie gebouwd wordt met <em>Entity Framework Core</em>, en dat gaan we dus gewoon doen. De <em>DbSets</em> vervullen de rol (<em>ORM</em> en <em>CRUD</em>) van <em>Repositories</em>. <strong>We moeten de <em>DbCOntext</em> in de <em>Services</em> injecteren en onze bestaande <em>Repositories</em> verwijderen. Simpel.</strong></p>
+<p>We moeten voorzichtig zijn met dit soort redeneringen. Wat begint als een terechte overweging, kan snel ontsporen tot een compleet hypothetische situatie waarin we op <em>alles</em> voorbereid zouden moeten zijn.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -292,22 +290,25 @@ builder.Services.AddDbContext&lt;StorefrontContext&gt;(options =&gt;
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Probeer dergelijke situaties in professionele context te herkennen. Laat je niet te snel meeslepen. Probeer steeds de reële, tastbare, aantoonbare meerwaarde van een aanpassing in kaart te brengen en af te wegen. Vind het warm water niet opnieuw uit, en al zeker niet het alles-is-mogelijk-we-weten-het-ook-niet-meer-en-rommelen-maar-wat-in-de-marge-water. De kans dat iemand paars lauw water wil dat smaakt naar tuinkabouters en vierkante bubbels heeft, is klein. Keep IT Simple.
+Probeer dergelijke situaties in professionele context te herkennen. Laat je niet te snel meeslepen. Probeer steeds de reële, tastbare, aantoonbare meerwaarde van een aanpassing in kaart te brengen en af te wegen. Vind het warm water niet opnieuw uit en <em>Keep IT Simple</em>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Kunnen we concluderen dat we nooit meer een <em>Repository</em> moeten maken? Neen, dat is zeker de conclusie niet. De conclusie is dat we voor elk probleem dat zich aandient een gepaste oplossing moeten kiezen die aantoonbare meerwaarde creëert en we steeds het doel voor ogen moeten houden.</p>
+<p>We hebben tijdens de ontwerpfase beslist dat de applicatie gebouwd wordt met <em>Entity Framework Core</em>, en dat gaan we dus gewoon doen. De <em>DbSets</em> vervullen de rol (<em>ORM</em> en <em>CRUD</em>) van <em>Repositories</em>. <strong>We kunnen de <em>DbCOntext</em> in de <em>Services</em> injecteren en onze bestaande <em>Repositories</em> verwijderen. Simpel.</strong></p>
 </div>
-<div class="admonitionblock tip">
+<div class="paragraph">
+<p>Kunnen we dan concluderen dat we nooit meer een <em>Repository</em> moeten maken? <strong>Neen, dat is zeker de conclusie niet.</strong> Database interactie die de complexiteit van eenvoudige CRUD overtijgt, hoort absoluut thuis in een Repository. De conclusie is dat we voor elk probleem dat zich aandient een gepaste oplossing moeten kiezen die aantoonbare meerwaarde creëert en we steeds het doel voor ogen moeten houden.</p>
+</div>
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Hier is een bepaalde graad van bescheidenheid op zijn plaats: <strong>programmeren</strong> is een (van de) <strong>middel</strong>(en), het <strong>doel</strong> is een correct werkende <strong>applicatie</strong> die bestaat om een <strong>bedrijfsproces te ondersteunen</strong>. IT&#8217;ers die dat begrijpen en er naar handelen, kunnen rekenen op mooie carrière opportuniteiten.
+<strong>Programmeren</strong> is een (van de) <strong>middel</strong>(en). Het <strong>doel</strong> is een correct werkende <strong>applicatie</strong> die bestaat om een <strong>bedrijfsproces te ondersteunen</strong>. IT&#8217;ers die dat begrijpen en pragmatisch handelen, kunnen rekenen op mooie carrière opportuniteiten.
 </td>
 </tr>
 </table>
@@ -315,20 +316,11 @@ Hier is een bepaalde graad van bescheidenheid op zijn plaats: <strong>programmer
 <div class="paragraph">
 <p>Wat we bekijken tijdens de lessen is <em>een</em> soort probleem dat op <em>een</em> manier opgelost wordt. Er bestaan eindeloos veel problemen, maar we kunnen ze veelal groeperen per soort of type. Elk soort probleem heeft een paar frequent gebruikte oplossingen. Problemen herkennen en vervolgens een passende geijkte oplossing kunnen kiezen en implementeren is een van de belangrijkste <em>tools</em> die een developer op zak kan hebben.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-I&#8217;m a pro, what about unit tests, bro? Zonder een <em>Interface</em> voor de repositories kan ik toch geen <em>fake</em> implementatie maken om mee te testen? Een probleem is zelden uniek en dus gewoonlijk ook al opgelost. De 7+ miljoen downloads van <a href="https://github.com/MichalJankowskii/Moq.EntityFrameworkCore">Moq.EntityFrameworkCore</a> bevestigen dit.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Daarom is het nuttig op de hoogte te zijn van design- en architectuur <em>patterns</em>.</p>
 </div>
 <div class="paragraph">
-<p>Er zijn zeker nog andere verbeterpunten te vinden in onze solution. Daar komen we, in de mate van het mogelijke, nog op terug.</p>
+<p>Er zijn zeker nog andere verbeterpunten te vinden in onze solution. Idealiter komen we daar op terug wanneer we verder zouden werken aan de applicatie. We proberen de <a href="https://iq.opengenus.org/boy-scout-rule/">Boy Scout Rule</a> toe te passen.</p>
 </div>
 </div>
 </div>
