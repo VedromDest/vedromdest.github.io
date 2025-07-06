@@ -536,11 +536,16 @@ Er valt - uiteraard - <strong>veel</strong> meer te leren over de modelbinding e
 <div class="listingblock">
 <div class="title">CRUD</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">_dbContext.Products.Add(product);
-_dbContext.Products.Find(id);
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">// Create
+_dbContext.Products.Add(product);
+// Read
+var trackedProduct = _dbContext.Products.Find(id);
 _dbContext.Products.Where(p =&gt; p.Name.Contains("xyz"));
-_dbContext.Products.Update(product);
+// Update (via change tracking)
+trackedProduct.Price = 2.0;
+// Delete
 _dbContext.Products.Remove(product);
+// Save
 _dbContext.SaveChanges(); <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
@@ -561,7 +566,7 @@ _dbContext.SaveChanges(); <i class="conum" data-value="1"></i><b>(1)</b></code><
 <div class="listingblock">
 <div class="title">LINQ Query</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var dbProducts = _dbContext.Products
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var dbProducts = _dbContext.Products
     .Where(p =&gt; p.Name.Contains(nameContains ?? p.Name))
     .Take(resultCount)
     .OrderBy(p =&gt; p.Name);</code></pre>
