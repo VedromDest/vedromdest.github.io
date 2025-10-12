@@ -348,7 +348,8 @@ Entity Framework is a modern object-relation mapper that lets you build a clean,
 <pre class="highlightjs highlight"><code class="language-zsh hljs" data-lang="zsh">dotnet ef dbcontext scaffold ` <i class="conum" data-value="1"></i><b>(1)</b>
 "server=127.0.0.1;port=3307;database=schemadag;user=userdag;password=userdag" ` <i class="conum" data-value="2"></i><b>(2)</b>
 Pomelo.EntityFrameworkCore.MySql ` <i class="conum" data-value="3"></i><b>(3)</b>
--t Products ` <i class="conum" data-value="4"></i><b>(4)</b>
+--output-dir MijnMapke ` <i class="conum" data-value="4"></i><b>(4)</b>
+-t Products ` <i class="conum" data-value="5"></i><b>(5)</b>
 -t Customers `
 -t Orders `
 -t OrderProducts</code></pre>
@@ -370,6 +371,10 @@ Pomelo.EntityFrameworkCore.MySql ` <i class="conum" data-value="3"></i><b>(3)</b
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Drop de gegenereerde bestanden in een specifieke folder.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>Lijst (optioneel) de specifieke tabellen op die je in scope wil brengen.</td>
 </tr>
 </table>
