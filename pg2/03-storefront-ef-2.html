@@ -86,7 +86,7 @@
     <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="3">
-    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First) 🌟</a>
   </li>
 </ul>
   </li>
@@ -164,7 +164,7 @@
     <li><a href="index.html">Gevorderd 2</a></li>
     <li><a href="02-storefront.html">Backend (Api + EF Core)</a></li>
     <li><a href="03-storefront-ef.html">Database</a></li>
-    <li><a href="03-storefront-ef-2.html">EF Core (SQL First)</a></li>
+    <li><a href="03-storefront-ef-2.html">EF Core (SQL First) 🌟</a></li>
   </ul>
 </nav>
 </div>
@@ -408,14 +408,14 @@ Je kan als developer de gegenereerde code aanpassen, uitbreiden, of zelfs <em>fr
 </div>
 </div>
 <div class="sect2">
-<h3 id="_entities"><a class="anchor" href="#_entities"></a>Entities</h3>
+<h3 id="_entities"><a class="anchor" href="#_entities"></a>Entities 🌟</h3>
 <div class="paragraph">
 <p>Op basis van elke tabel wordt een klasse gegenereerd. Dit zijn <em>POCO&#8217;s</em> (Plain Old C# Objects): eenvoudige klassen zonder gedrag. Ze zijn bedoeld om een record uit de relevante tabel voor te stellen in C#. Een record zal in geheugen geladen worden als een instantie van deze klasse.</p>
 </div>
 <div class="listingblock">
 <div class="title">Voorbeeld</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public partial class Customer
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public partial class Customer <i class="conum" data-value="1"></i><b>(1)</b>
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = null!;
@@ -431,9 +431,21 @@ Je kan als developer de gegenereerde code aanpassen, uitbreiden, of zelfs <em>fr
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+EF Core genereert <code>partial</code> klassen. Bij compilatie worden alle partial klassen met zelfde naam én namespace samengevoegd tot één geheel, ongeacht in welk bestand ze staan. Op deze manier kan jij de EF klassen uitbreiden met eigen code zonder dat dit werk verloren gaat wanneer je, bijvoorbeeld na datamodelwijzigingen, de <code>entities</code> opnieuw genereert.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_dbcontext"><a class="anchor" href="#_dbcontext"></a>DbContext</h3>
+<h3 id="_dbcontext"><a class="anchor" href="#_dbcontext"></a>DbContext 🌟</h3>
 <div class="paragraph">
 <p>Verantwoordelijk voor database toegang en beschrijving van data mapping, inclusief relaties.</p>
 </div>
@@ -480,6 +492,18 @@ Je kan als developer de gegenereerde code aanpassen, uitbreiden, of zelfs <em>fr
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Het <em>Entity</em> type <em>Customer</em> wordt beschreven. Dit stuurt het <em>ORM</em> gebeuren.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+EF Core genereert altijd <code>virtual</code> properties voor <code>reference types</code>. Zo kan EF Core at runtime de schijnbaar eenvoudige klassen waartegen jij programmeert, vervangen door proxies die de change tracking etc voorzien. Je hoorde misschien al eens van een <em>Proxy Pattern</em>?
+</td>
 </tr>
 </table>
 </div>
@@ -534,7 +558,7 @@ Er valt - uiteraard - <strong>veel</strong> meer te leren over de modelbinding e
 </div>
 </div>
 <div class="sect2">
-<h3 id="_crud"><a class="anchor" href="#_crud"></a>CRUD</h3>
+<h3 id="_crud"><a class="anchor" href="#_crud"></a>CRUD 🌟</h3>
 <div class="paragraph">
 <p>De <em>DbSets</em> bieden standaard ondersteuning voor CRUD-operaties.</p>
 </div>
@@ -543,9 +567,10 @@ Er valt - uiteraard - <strong>veel</strong> meer te leren over de modelbinding e
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">// Create
 _dbContext.Products.Add(product);
-// Read
+// Read One
 var trackedProduct = _dbContext.Products.Find(id);
-_dbContext.Products.Where(p =&gt; p.Name.Contains("xyz"));
+// Read Multiple
+var myList = _dbContext.Products.Where(p =&gt; p.Name.Contains("xyz"));
 // Update (via change tracking)
 trackedProduct.Price = 2.0;
 // Delete
@@ -559,6 +584,18 @@ _dbContext.SaveChanges(); <i class="conum" data-value="1"></i><b>(1)</b></code><
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
 <td>Nodig om <em>CUD</em> operaties te persisteren.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Merk op dat we hier de <code>.Update()</code> methode niet gebruikt hebben. Deze zal immers de volledige entity, alsook alle properties van alle references in scope markeren als changed. Bijgevolg zullen al deze objecten in de database volledig overschreven worden. Dit heeft zijn nut, maar kan gemakkelijk zorgen voor onbedoelde aanpassingen.
+</td>
 </tr>
 </table>
 </div>
@@ -629,16 +666,33 @@ De volgorde van je LINQ bouwstenen heeft absoluut impact op de gegeneerde SQL. W
 </div>
 </div>
 <div class="sect2">
-<h3 id="_joins"><a class="anchor" href="#_joins"></a>Joins</h3>
+<h3 id="_joins"><a class="anchor" href="#_joins"></a>Joins 🌟</h3>
 <div class="paragraph">
 <p>Je kan gerelateerde <em>Entities</em> in scope brengen met het <em>Include</em> statement.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var orders = _dbContext.Orders
-    .Include(o =&gt; o.Customer)
-    .Include(o =&gt; o.OrderProducts);</code></pre>
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">var orders = _dbContext.Orders <i class="conum" data-value="1"></i><b>(1)</b>
+    .Include(o =&gt; o.Customer) <i class="conum" data-value="2"></i><b>(2)</b>
+    .Include(o =&gt; o.OrderProducts) <i class="conum" data-value="2"></i><b>(2)</b>
+    .ThenInclude(op =&gt; op.Product); <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Order is leading</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Customer en OrderProducts tabellen worden gejoined op Order</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Product wordt gejoined aan de set via OrderProducts</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

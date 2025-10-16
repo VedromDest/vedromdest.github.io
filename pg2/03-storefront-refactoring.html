@@ -86,7 +86,7 @@
     <a class="nav-link" href="03-storefront-ef-1.html">Werken Met MySQL</a>
   </li>
       <li class="nav-item is-active" data-depth="3">
-    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First)</a>
+    <a class="nav-link" href="03-storefront-ef-2.html">EF Core (SQL First) 🌟</a>
   </li>
 </ul>
   </li>
@@ -287,20 +287,26 @@ builder.Services.AddDbContext&lt;StorefrontContext&gt;(options =&gt;
 <div class="paragraph">
 <p>We moeten ook <strong>kiezen</strong> hoe de mapping tussen Services en Repositories zal lopen.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Repo gebruikt intern <strong>data</strong> model, maar haar publieke methodes werken met <strong>domein</strong> model<br>
-&#8594; Mapping gebeurt in Persistence</p>
-</li>
-<li>
-<p>Repo gebruikt intern <strong>data</strong> model, haar publieke methodes werken met diezelfde <strong>data</strong> model klassen<br>
-&#8594; Mapping gebeurt in Service</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Optie 1: Repo gebruikt intern <strong>data</strong> model, maar haar publieke methodes werken met <strong>domein</strong> model<br>
+ &#8594; Mapping gebeurt in Persistence</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/storefront-ef/lagenmodel-repo.jpg" alt="lagenmodel repo">
+</div>
 </div>
 <div class="paragraph">
-<p>We kiezen voor de tweede optie en refactoren de codebase.</p>
+<p>Optie 2: Repo gebruikt intern <strong>data</strong> model, haar publieke methodes werken met diezelfde <strong>data</strong> model klassen<br>
+ &#8594; Mapping gebeurt in Service</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/storefront-ef/lagenmodel-service.jpg" alt="lagenmodel service">
+</div>
+</div>
+<div class="paragraph">
+<p>We <strong>kiezen</strong> voor de tweede optie en refactoren de codebase.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -352,13 +358,10 @@ builder.Services.AddDbContext&lt;StorefrontContext&gt;(options =&gt;
 <p><a href="https://learn.microsoft.com/en-us/ef/core/">EF Core</a></p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/MichalJankowskii/Moq.EntityFrameworkCore">Moq.EntityFrameworkCore</a></p>
-</div>
-<div class="paragraph">
 <p><a href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql">Pomelo.EntityFrameworkCore.MySql</a></p>
 </div>
 <div class="paragraph">
-<p><a href="https://en.wikipedia.org/wiki/Indirection">level of indirection</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Indirection">Level of Indirection</a></p>
 </div>
 <div class="paragraph">
 <p><a href="https://en.wikipedia.org/wiki/Code_refactoring">Refactoring</a></p>
