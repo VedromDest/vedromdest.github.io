@@ -189,8 +189,18 @@
 <p>Bovenstaand ERD resulteert in onderstaand script. Dit is manueel geschreven om <em>clutter</em> te minimaliseren, maar een gegenereerd script is ook prima om mee verder te werken.</p>
 </div>
 <div class="listingblock">
+<div class="title">Schema en User voorzien via SQL statements</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">use schemadag;
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">-- Voer uit als root in sys schema
+CREATE SCHEMA ShopGent;
+CREATE USER 'shopgent' IDENTIFIED BY 'shopgent';
+GRANT ALL PRIVILEGES ON ShopGent.* TO 'shopgent';</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Datamodel aanmaken</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">use ShopGent;
 
 drop table if exists OrderProducts;
 drop table if exists Orders;
