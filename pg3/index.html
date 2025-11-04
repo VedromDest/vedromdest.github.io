@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Welkom bij Programmeren Gevorderd 3! :: Programmeren Gevorderd 3 (BETA)</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
   <body class="article home">
@@ -81,7 +81,10 @@
     <a class="nav-link" href="04-middleware.html">Middleware</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-02-secret-management.html">Secret Management ⭐️</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -184,13 +187,10 @@
 <div class="ulist">
 <ul>
 <li>
+<p>Code zal na elke les beschikbaar gesteld worden in het Azure DevOps repository.</p>
+</li>
+<li>
 <p>Deze online cursus is altijd integraal beschikbaar.</p>
-</li>
-<li>
-<p><a href="https://dev.azure.com/hogent-web4-stefancourteaux/_git/ShipIt2425S2/branches">Code</a> is beschikbaar in Azure DevOps</p>
-</li>
-<li>
-<p><a href="80-lesopnames-2425S2.html" class="xref page">Lesopnames 📺</a> zijn beschikbaar.</p>
 </li>
 </ul>
 </div>
@@ -201,7 +201,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Vind je weg naar de <a href="https://dotnet.microsoft.com/en-us/">online documentatie</a> van Microsoft.
+Het wordt sterk aangemoedigd de <a href="https://dotnet.microsoft.com/en-us/">online documentatie</a> van Microsoft te raadplegen.
 </td>
 </tr>
 </table>
@@ -214,14 +214,20 @@ Vind je weg naar de <a href="https://dotnet.microsoft.com/en-us/">online documen
 <div class="paragraph">
 <p>De rode draad doorheen de lessen is de ontwikkeling van een klein systeem voor een bedrijf dat pakjes levert, zoals PostNL of UPS.</p>
 </div>
-<div class="paragraph">
-<p>Gestaag zullen er nieuwe business en technische requirements aangebracht worden. Het eindresultaat is een cloud applicatie met beknopte functionaliteit.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Bouw in parallel met de lessen mee aan dezelfde app om het materiaal in te oefenen voor je aan je eigen project begint.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Tijdens de les zal regelmatig theorie en een aanzet van de bijhorende code gegeven worden. Het blijft steeds duidelijk waar we zijn in de cursus.</p>
-</div>
-<div class="paragraph">
-<p>Jij bouwt gedurende de lessen (en thuis) mee aan de app om de technologie onder de knie te krijgen. Dit valt onder <em>oefenen</em> en staat <strong>niet</strong> op punten. Er zijn geen testen. Niks moet, alles mag, zolang je het kan uitleggen op de laatste dag.</p>
+<p>Gestaag zullen er nieuwe business en technische requirements aangebracht worden. De implementatie zal besproken en getoond worden tijdens de les. Het eindresultaat is een cloud applicatie met beknopte functionaliteit.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="_images/totaal/PG3Totaal.drawio.png" alt="PG3Totaal.drawio"></span></p>
@@ -232,22 +238,7 @@ Vind je weg naar de <a href="https://dotnet.microsoft.com/en-us/">online documen
 <h2 id="_evaluatie"><a class="anchor" href="#_evaluatie"></a>Evaluatie</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Je kiest een onderwerp waarrond je zelf <strong>een cloud project zal bouwen én deployen</strong> op de Azure Cloud omgeving. Je zoekt interessante opportuniteiten om de aangeleerde technologie toe te passen.</p>
-</div>
-<div class="paragraph">
-<p>Je presenteert het eindresultaat mondeling voor de lesgever, eventueel vergezeld van zeer beperkt publiek. Je beantwoordt een aantal vragen over jouw project en kan aantonen de inzichten en technologie uit de les onder de knie te hebben.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Kom <strong>niet</strong> aanzetten met een <strong>pakjesbedrijf of architecturale copy-paste van het project uit de lessen</strong>!
-</td>
-</tr>
-</table>
+<p>De student kiest een onderwerp waarrond deze <strong>individueel een cloud project zal bouwen en deployen</strong>. <strong>Geen pakjesbedrijf of architecturale copy-paste van het project uit de lessen</strong>, maar iets grofweg equivalent qua complexiteit.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -256,7 +247,7 @@ Kom <strong>niet</strong> aanzetten met een <strong>pakjesbedrijf of architectur
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie. Deze verschijnt op Chamilo.
+Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie.
 </td>
 </tr>
 </table>
@@ -286,16 +277,14 @@ Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie. Deze v
 </dd>
 </dl>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Indien je jouw Azure For Students Benefits in het verleden al activeerde (via de Azure Portal), kan het zijn dat deze rechten verlopen zijn. Zolang je student bent, kan je deze benefits <a href="https://go.microsoft.com/fwlink/?linkid=2244463">verlengen</a>.<br>
-<br>
-Als je er niet in slaagt een werkende Azure account te bemachtigen, komt dit dan tijdens de eerste lessen melden. De doorlooptijd van een helpdeskrequest is doorgans heel lang!
+Indien je jouw Azure For Students Benefits in het verleden al activeerde (via de Azure Portal), kan het zijn dat deze rechten verlopen zijn. Zolang je student bent, kan je deze benefits <a href="https://go.microsoft.com/fwlink/?linkid=2244463">verlengen</a>.
 </td>
 </tr>
 </table>
@@ -342,11 +331,7 @@ Als je er niet in slaagt een werkende Azure account te bemachtigen, komt dit dan
 </dd>
 <dt class="hdlist1">Waarom geen klassieke Visual Studio?</dt>
 <dd>
-<p>Deze moderne tools verschijnen steeds vaker in het werkveld. Ze leren gebruiken is belangrijk om jouw kansen op de arbeidsmarkt te verhogen.</p>
-</dd>
-<dt class="hdlist1">Maar ik wil toch klassieke Visual Studio gebruiken?!</dt>
-<dd>
-<p>Ok, <em>bro</em> - ik ga dat niet controleren, maar vergeet niet dat je hier bent om te leren.</p>
+<p>Deze moderne tools verschijnen steeds vaker in het werkveld. Ze leren  gebruiken is belangrijk om de kansen van de student op de arbeidsmarkt te verhogen.</p>
 </dd>
 </dl>
 </div>
@@ -356,7 +341,7 @@ Als je er niet in slaagt een werkende Azure account te bemachtigen, komt dit dan
 <h2 id="_broncode_in_deze_cursus"><a class="anchor" href="#_broncode_in_deze_cursus"></a>Broncode In Deze Cursus</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Tijdens de lessen wordt er aan live coding gedaan. Dit heeft als gevolg dat de code uit de les, en dus in het code repository, niet identiek zal zijn aan deze in de cursus.</p>
+<p>Tijdens de lessen wordt er aan live coding gedaan. Dit heeft als gevolg dat de code uit de les, en dus in het code repository, niet identiek zal zijn aan deze in de scursus.</p>
 </div>
 <div class="paragraph">
 <p>Laat je hierdoor niet in de war brengen. Je zal snel ondervinden dat deze afwijkingen zeer oppervlakkig zijn en het geheel conceptueel identiek is aan de cursus. Immers: <strong>de lessen volgen de cursus, niet omgekeerd</strong>.</p>
