@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Azure DevOps Pipelines :: Programmeren Gevorderd 3 (BETA)</title>
-    <meta name="generator" content="Antora 3.1.12">
+    <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
   <body class="article">
@@ -80,8 +80,11 @@
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-middleware.html">Middleware</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="1">
-    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines</a>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines-placeholder.html">DevOps Pipelines️ 🚧</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-02-secret-management.html">Secret Management ⭐️</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -150,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
-    <li><a href="06-pipelines.html">DevOps Pipelines</a></li>
+    <li><a href="06-pipelines.html">Azure DevOps Pipelines</a></li>
   </ul>
 </nav>
 </div>
@@ -160,6 +163,22 @@
 </aside>
 <article class="doc">
 <h1 class="page">Azure DevOps Pipelines</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Dit hoofdstuk werd vernieuwd. Bijgevolg is de beschikbare opname verouderd. De tekst neemt voorrang op de opname.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
 <div class="sectionbody">
@@ -167,6 +186,12 @@
 <ul>
 <li>
 <p>Azure Pipelines leren kennen.</p>
+</li>
+<li>
+<p>Testing Pyramid leren kennen.</p>
+</li>
+<li>
+<p>Automated Testing inrichten.</p>
 </li>
 </ul>
 </div>
@@ -236,6 +261,8 @@ Deze concepten zijn <strong>niet</strong> uniek aan Azure, er bestaat equivalent
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="_yaml"><a class="anchor" href="#_yaml"></a>YAML</h3>
 <div class="listingblock">
 <div class="title">azure-pipelines.yml</div>
 <div class="content">
@@ -277,10 +304,8 @@ steps:
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_pipeline_trigger"><a class="anchor" href="#_pipeline_trigger"></a>Pipeline Trigger</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pipeline_trigger"><a class="anchor" href="#_pipeline_trigger"></a>Pipeline Trigger</h3>
 <div class="paragraph">
 <p>Nu de pipeline beschikbaar is, willen we deze laten uitvoeren bij elke PR naar de <em>main</em> branch. Om dit te doen, maken we een policy op de main branch. De pipeline moet runnen en slagen voor elke PR naar <em>main</em>.</p>
 </div>
@@ -288,10 +313,8 @@ steps:
 <p>Project Settings &#8594; Repositories &#8594; Policies &#8594; Add &#8594; Build Validation</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_pipeline_executie_impact"><a class="anchor" href="#_pipeline_executie_impact"></a>Pipeline Executie Impact</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_pipeline_executie_impact"><a class="anchor" href="#_pipeline_executie_impact"></a>Pipeline Executie Impact</h3>
 <div class="paragraph">
 <p>Het resultaat van onze <em>Build Validation Policy</em> zal nu een impact hebben op de mogelijkheid om een PR te completen.</p>
 </div>
@@ -327,6 +350,7 @@ Indien je geen rechten hebt om build agents te gebruiken, kan je bij Microsoft t
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_automated_testing"><a class="anchor" href="#_automated_testing"></a>Automated Testing</h2>
 <div class="sectionbody">
@@ -335,6 +359,14 @@ Indien je geen rechten hebt om build agents te gebruiken, kan je bij Microsoft t
 </div>
 <div class="paragraph">
 <p>Een volgende verantwoordelijkheid van de pipeline zal het automatisch uitvoeren van testen zijn.</p>
+</div>
+<div class="paragraph">
+<p>We voorzien een voorbeeld voor elke laag van de <a href="https://martinfowler.com/articles/practical-test-pyramid.html">testing pyramid</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_unit"><a class="anchor" href="#_unit"></a>Unit</h3>
+<div class="paragraph">
+<p>TODO isolated - 1 klein ding testen.</p>
 </div>
 <div class="paragraph">
 <p>Voeg een project toe op basis van de MSTest template. <code>ShipIt.PriceQuotes.Api.Contracts.Tests</code> is een duidelijke naam. Het nieuwe project zal een referentie naar het project <code>ShipIt.PriceQuotes.Api.Contracts</code> nodig hebben.</p>
@@ -409,6 +441,21 @@ public class PriceQuoteResponseContractTests <i class="conum" data-value="2"></i
 <img src="_images/pipelines/tests.png" alt="tests">
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_integration"><a class="anchor" href="#_integration"></a>Integration</h3>
+<div class="paragraph">
+<p>TODO interactie met externe componenten testen, maar in isolatie, dus mocked dbs etc</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_end_to_end"><a class="anchor" href="#_end_to_end"></a>End To End</h3>
+<div class="paragraph">
+<p>TODO een flow door een story van A-Z valideren, bv POST quote</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_yaml_2"><a class="anchor" href="#_yaml_2"></a>YAML</h3>
 <div class="paragraph">
 <p>Nu gaan we de pipeline aanpassen om de tests uit te voeren.</p>
 </div>
@@ -458,6 +505,12 @@ steps:
 <div class="paragraph">
 <p>Een PR triggert nu build + tests. De PR kan alleen gecomplete worden wanneer alles er goed uitziet. Daarmee is het Continuous Integration luik rond.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -469,6 +522,10 @@ De volgende stap in het CI/CD verhaal, is Deployment. We hebben tot op heden man
 </td>
 </tr>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_todo"><a class="anchor" href="#_todo"></a>TODO</h3>
+
 </div>
 </div>
 </div>
