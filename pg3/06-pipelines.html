@@ -81,23 +81,26 @@
     <a class="nav-link" href="04-middleware.html">Middleware</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="06-pipelines-placeholder.html">DevOps Pipelines️ 🚧</a>
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker ⭐️</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="06-02-secret-management.html">Secret Management ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
-<ul class="nav-list">
-      <li class="nav-item is-active" data-depth="2">
-    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose</a>
-  </li>
-</ul>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️ ⭐️</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-afronden2526.html">Afronden ⭐️</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="99-tips.html">Tips</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie AJ2425</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
@@ -117,13 +120,10 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-sql-server-docker.html">SQL Server Docker</a>
   </li>
-</ul>
-  </li>
-      <li class="nav-item is-active" data-depth="1">
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="99-tips.html">Tips</a>
+</ul>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
@@ -153,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
-    <li><a href="06-pipelines.html">Azure DevOps Pipelines</a></li>
+    <li><a href="06-pipelines.html">DevOps Pipelines️ ⭐️</a></li>
   </ul>
 </nav>
 </div>
@@ -172,7 +172,7 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Dit hoofdstuk werd vernieuwd. Bijgevolg is de beschikbare opname verouderd. De tekst neemt voorrang op de opname.
+Dit hoofdstuk werd vernieuwd. Bijgevolg is de beschikbare opname deels verouderd.
 </td>
 </tr>
 </table>
@@ -228,17 +228,8 @@ Dit hoofdstuk werd vernieuwd. Bijgevolg is de beschikbare opname verouderd. De t
 <div class="paragraph">
 <p>Er zijn nagenoeg geen geldige redenen om zelf een Agent te configureren. Toch zal je zien dat sommige bedrijven zelf VM&#8217;s opzetten. Meestal is dit het gevolg van een gebrek aan kennis of van security policies die onthecht zijn van de realiteit.</p>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Deze concepten zijn <strong>niet</strong> uniek aan Azure, er bestaat equivalente CI/CD-technologie van andere (cloud)leveranciers. De conrete voorbeelden uit de les zijn <strong>wel</strong> specifiek voor Azure.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Deze concepten zijn <strong>niet</strong> uniek aan Azure. Er bestaat equivalente CI/CD-technologie van andere (cloud)leveranciers. De concrete voorbeelden uit de les zijn <strong>wel</strong> specifiek voor Azure. Alternatieven zijn bijvoorbeeld <a href="https://docs.github.com/en/actions">GitHub Actions</a> en <a href="https://www.atlassian.com/software/bamboo">Atlassian Bamboo</a>.</p>
 </div>
 </div>
 </div>
@@ -262,33 +253,69 @@ Deze concepten zijn <strong>niet</strong> uniek aan Azure, er bestaat equivalent
 </ul>
 </div>
 <div class="sect2">
+<h3 id="_aanmaken"><a class="anchor" href="#_aanmaken"></a>Aanmaken</h3>
+<div class="paragraph">
+<p>Voeg een pipeline toe aan het project in Azure DevOps.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/pipelines/pl-add.png" alt="pl add"></span></p>
+</div>
+<div class="paragraph">
+<p>Kies het platform waarop de broncode zich bevindt.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/pipelines/pl-source.png" alt="pl source"></span></p>
+</div>
+<div class="paragraph">
+<p>Kies het repository waar de broncode zit die je wil builden.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/pipelines/pl-repo.png" alt="pl repo"></span></p>
+</div>
+<div class="paragraph">
+<p>Kies de <em>starter pipeline</em> template.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/pipelines/pl-type.png" alt="pl type"></span></p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_yaml"><a class="anchor" href="#_yaml"></a>YAML</h3>
 <div class="listingblock">
 <div class="title">azure-pipelines.yml</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># ShipIt CI Pipeline
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># Demo CI/CD Pipeline
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-latest <i class="conum" data-value="1"></i><b>(1)</b>
 
 steps:
+# Build
 - task: DotNetCoreCLI@2
-  displayName: Build ShipIt Projects
+  displayName: Build Projects
   inputs:
-    command: build
+    command: build <i class="conum" data-value="2"></i><b>(2)</b>
     projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'</code></pre>
+    arguments: '--configuration $(buildConfiguration)'<i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>OS van de server die de software zal builden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Dotnet CLI instructie</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Het argument <em>buildConfiguration</em> (wordt door ons vastgelegd).</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Het argument <em>buildConfiguration</em> gaan we manueel meegeven via de DevoOps website. Navigeer naar de pipeline en klik op <em>Variables</em>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/pipelines/prvars.png" alt="prvars">
-</div>
-</div>
-<div class="paragraph">
-<p>Klik op <em>New Variable</em>.</p>
+<p>Navigeer naar de pipeline en klik op <em>Variables</em>. Klik op <em>New Variable</em>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -296,11 +323,23 @@ steps:
 </div>
 </div>
 <div class="paragraph">
-<p>Stel juiste naam en waarde in. We zien hier de optie om een variabele <em>secret</em> te maken. Dit kunnen we gebruiken om gevoelige variabelen, die men niet zomaar mag lezen, mee te geven. We komen er later op terug.</p>
+<p>Stel juiste naam en waarde in. We zien hier de optie om een variabele <em>secret</em> te maken. Dit kunnen we gebruiken om gevoelige variabelen mee te geven zonder een link te moeten leggen naar Key Vault.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipelines/prvarsbuild.png" alt="prvarsbuild">
+</div>
+</div>
+<div class="paragraph">
+<p>Het kan zijn dat je een nieuwere versie van de .Net SDK nodig hebt dan er standaard op de Build Agent <a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&amp;tabs=linux-images%2Cyaml#software">geïnstalleerd staat</a>. Je kan deze expliciet laten installeren voor het builden.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.203'
+    installationPath: '$(Agent.ToolsDirectory)/dotnet'</code></pre>
 </div>
 </div>
 </div>
@@ -310,7 +349,14 @@ steps:
 <p>Nu de pipeline beschikbaar is, willen we deze laten uitvoeren bij elke PR naar de <em>main</em> branch. Om dit te doen, maken we een policy op de main branch. De pipeline moet runnen en slagen voor elke PR naar <em>main</em>.</p>
 </div>
 <div class="paragraph">
-<p>Project Settings &#8594; Repositories &#8594; Policies &#8594; Add &#8594; Build Validation</p>
+<p>Project Settings &#8594; Repositories &#8594; <em>jouw repo</em> &#8594; Policies &#8594; Branch Policies &#8594; &#8230;&#8203;</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="_images/pipelines/pl-policy-h265.mp4" controls>
+Your browser does not support the video tag.
+</video>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -357,84 +403,77 @@ Indien je geen rechten hebt om build agents te gebruiken, kan je bij Microsoft t
 <div class="paragraph">
 <p>We hebben er reeds voor gezorgd dat Pull Requests naar /main onze pipeline uitvoeren. Nu gaan we de <em>azure_pipelines.yaml</em> file uitbreiden om niet alleen te builden, maar ook tests uit te voeren.</p>
 </div>
+<div class="sect2">
+<h3 id="_testing_pyramid"><a class="anchor" href="#_testing_pyramid"></a>Testing Pyramid</h3>
 <div class="paragraph">
-<p>Een volgende verantwoordelijkheid van de pipeline zal het automatisch uitvoeren van testen zijn.</p>
+<p>Hier zouden we ons kunnen voornemen een test te schrijven voor elke laag van de <em>Testing Pyramid</em>. Klinkt goed, maar zoals we intussen gewend zijn van softwareontwerp en architectuur is dit een vaag begrip dat door verschillende guru&#8217;s in de IT-wereld anders ingevuld wordt.</p>
 </div>
 <div class="paragraph">
-<p>We voorzien een voorbeeld voor elke laag van de <a href="https://martinfowler.com/articles/practical-test-pyramid.html">testing pyramid</a>.</p>
+<p>Naargelang het materiaal dat je raadpleegt, zal deze pyramide meer of minder lagen hebben die anders afgelijnd zijn. Occasioneel is men zelfs zo creatief mensen, wolken en euro&#8217;s bij de pyramide te tekenen. <em>It`s a free world.</em> Laat ons eerlijk zijn met onszelf en niet spreken van dé <em>Testing Pyramid</em>, maar wel van een <em>Testing Pyramid</em>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Onderaan de pyramide organiseren we testen met hoge granulariteit. Denk aan fijnmazige unit tests die één enkele methode in isolatie testen.</p>
+</li>
+<li>
+<p>Bovenaan de pyramide plaatsen we api testen. Deze hebben een lage granulariteit.</p>
+</li>
+<li>
+<p>Tussenin voorzien we component of component-integratie testen. Daarin zal <em>mocking</em> gebeuren. Hoeveel, hangt af van hoe je de grenzen van de lagen van de pyramide bepaalt.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Het lanceren van een test onderaan de pyramide, zal zeer weinig code coveren. Het lanceren van een test bovenaan de pyramide, zal veel code coveren.</p>
+</div>
+<div class="paragraph">
+<p>Je ziet dat we de test coverage van een solution snel kunnen opkrikken door api tests te schrijven, gezien deze impliciet veel code coveren. Is dat een geldige aanpak om de coverage hoog te krijgen? Hangt ervan af aan wie je het vraagt, maar ik neig naar "nope".</p>
+</div>
+<div class="paragraph">
+<p>De api tests <em>hitten</em> de code strik genomen wel, maar unit tests dekken snel meer (edge) cases af.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Een <code>[Theory]</code> set zal zeer veel variaties voor een unit test voorzien.</p>
+</li>
+<li>
+<p>We voorzien meerdere unit test invalshoeken per methode.</p>
+</li>
+<li>
+<p>Hogerop in de pyramide gaat men typisch niet de nodige variaties (kunnen) voorzien om alle individuele methode edge cases in de stack te controleren.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_unit"><a class="anchor" href="#_unit"></a>Unit</h3>
+<h3 id="_voorbeeldsolution"><a class="anchor" href="#_voorbeeldsolution"></a>Voorbeeldsolution</h3>
 <div class="paragraph">
-<p>TODO isolated - 1 klein ding testen.</p>
+<p>Een voorbeeldsolution is beschikbaar in het PG3 Azure DevOps repo.</p>
 </div>
-<div class="paragraph">
-<p>Voeg een project toe op basis van de MSTest template. <code>ShipIt.PriceQuotes.Api.Contracts.Tests</code> is een duidelijke naam. Het nieuwe project zal een referentie naar het project <code>ShipIt.PriceQuotes.Api.Contracts</code> nodig hebben.</p>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-We verzinnen hier een test. Deze is niet al te nuttig. We hebben gewoon iets nodig om het concept te demonstreren in academische context.
+Het systeem dat getest wordt (SUT - System Under Test) bevat <strong>geen</strong> code paden die specifiek bedoeld zijn om gebruikt te worden tijdens het uitvoeren van testen.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>ShipIt.PriceQuotes.Api.Contracts.Tests/PriceQuoteResponseContractTests.cs</p>
-</div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">namespace ShipIt.PriceQuotes.Api.Contracts.Tests;
-
-[TestClass] <i class="conum" data-value="1"></i><b>(1)</b>
-public class PriceQuoteResponseContractTests <i class="conum" data-value="2"></i><b>(2)</b>
-{
-    [TestMethod] <i class="conum" data-value="3"></i><b>(3)</b>
-    public void GivenCompleteContract_WhenUpdatingPrice_ThenPriceIsChanged() <i class="conum" data-value="4"></i><b>(4)</b>
-    {
-        // arrange
-        var contract = new PriceQuoteResponseContract{
-            Id = Guid.NewGuid().ToString(),
-            PriceEuro = 2,
-            ValidUntil = DateTime.Now
-        };
-
-        // act
-        contract.PriceEuro = 3;
-
-        // assert
-        Assert.AreEqual(3, contract.PriceEuro);
-
-    }
-}</code></pre>
+<img src="_images/pipelines/pyramid.png" alt="pyramid">
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Zorgt ervoor dat de klasse opgepikt wordt door MSTest Runner.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Naam van de test klasse. Beschrijft welke klasse we testen.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Zorgt ervoor dat de methode opgepikt wordt door MSTest Runner.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Naam van de test. Gebruikt <a href="https://martinfowler.com/bliki/GivenWhenThen.html">Given-When-Then</a> patroon.</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
-<p>De logica in de test volgt het <a href="https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/">Arrange-Act-Assert</a> patroon.</p>
+<p>De meest gebruikte test libraries voor .Net zijn <em>XUnit</em>, <em>NUnit</em> en <em>MSTest</em>. Je zou kunnen stellen dat <em>MSTest</em> de standaard is gezien dit aangeleverd wordt door Microsoft, maar in de praktijk gebruiken de meeste teams XUnit.</p>
+</div>
+<div class="paragraph">
+<p>VS Code heeft prima ondersteuning voor het visualiseren van test runs.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -443,15 +482,307 @@ public class PriceQuoteResponseContractTests <i class="conum" data-value="2"></i
 </div>
 </div>
 <div class="sect2">
-<h3 id="_integration"><a class="anchor" href="#_integration"></a>Integration</h3>
+<h3 id="_unit_tests"><a class="anchor" href="#_unit_tests"></a>Unit Tests</h3>
 <div class="paragraph">
-<p>TODO interactie met externe componenten testen, maar in isolatie, dus mocked dbs etc</p>
+<p>Het project <code>StefanPipelinesDemo.Services.Models.Tests</code> bevat voorbeeld unit tests. Dit werd gebouwd op de <code>xunit</code> dotnet template.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DemoModelTests_Unit
+{
+    [Theory] <i class="conum" data-value="1"></i><b>(1)</b>
+    [InlineData("Test", "TestTest")]
+    [InlineData("123", "123123")]
+    [InlineData("Chloorfluorkoolwaterstofverbinding", "ChloorfluorkoolwaterstofverbindingChloorfluorkoolwaterstofverbinding")]
+    public void GivenAnyInputString_WhenInitializingModel_ThenDuplicatedValueMatches <i class="conum" data-value="2"></i><b>(2)</b>
+    (string input, string expected)
+    {
+        // Arrange <i class="conum" data-value="3"></i><b>(3)</b>
+        var model = new DemoModel
+        {
+            SomeProp = input
+        };
+
+        // Act <i class="conum" data-value="3"></i><b>(3)</b>
+        var actual = model.GetDuplicatedPropValue();
+
+        // Assert <i class="conum" data-value="3"></i><b>(3)</b>
+        Assert.Equal(expected, actual);
+    }
+
+    // ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Test zal meerdere keren runnen met andere data.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Naam van de test. Gebruikt <a href="https://martinfowler.com/bliki/GivenWhenThen.html">Given-When-Then</a> naamgeving.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De test volgt het <a href="https://automationpanda.com/2020/07/07/arrange-act-assert-a-pattern-for-writing-good-tests/">Arrange-Act-Assert</a> patroon.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class DemoModelTests_Unit
+{
+    // ...
+
+    [Fact]
+    public void GivenModelWithoutId_WhenMappingToContract_ShouldThrow()
+    {
+        // Arrange
+        var model = new DemoModel
+        {
+            SomeProp = "breakme"
+        };
+
+        // Act
+        void action() =&gt; model.AsContract(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+        // Assert
+        Assert.Throws&lt;IdExpectedMappingException&gt;(action);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dit is geen "echte" act, wel een declaratie van de act logica. Alternatief is Act &amp; Assert in één stap doen. Let op: dit is <em>gewoon</em> een lokale inline methode die <code>action</code> heet en de expression syntax gebruikt. Dit is geen specifieke xunit of testing syntax.</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_end_to_end"><a class="anchor" href="#_end_to_end"></a>End To End</h3>
+<h3 id="_component"><a class="anchor" href="#_component"></a>Component</h3>
 <div class="paragraph">
-<p>TODO een flow door een story van A-Z valideren, bv POST quote</p>
+<p>Het project <code>StefanPipelinesDemo.Services.Tests</code> bevat voorbeeld component tests. Dit werd gebouwd op de <code>xunit</code> dotnet template en <a href="https://github.com/devlooped/moq">Moq</a>.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer je het gedrag van een component, typisch een <em>service</em> of <em>manager</em>, wil testen, zal je snel ondervinden dat je impliciet al de dependencies van die service ook aan het testen bent. Dit opzetten en correct beheren is niet evident, en schiet het doel voorbij. We willen enkel de relevante code <em>hitten</em>.</p>
+</div>
+<div class="paragraph">
+<p>Een handige manier om de service is te isoleren, is de dependencies te vervangen door <em>fake</em> versies. De <code>DemoService</code> verwacht een object dat de <code>IDemoRepository</code> interface respecteert. Dit laat een opening om een zelfgeschreven implementatie-variant te voorzien die we gebruiken tijdens het testen.</p>
+</div>
+<div class="paragraph">
+<p>Een <em>fake</em> implementatie bouwen en meegeven, heet <em>mocking</em>, "imiteren" in het Nederlands. Denk aan <em>mockingbird</em> ofte <em>spotlijster</em>, die de zang van andere vogels imiteert. Gezien we verre van de eerste dotnet developers zijn die nood hebben aan mocking, kunnen wij steunen op de indrukwekkende <code>Moq</code> nuget.</p>
+</div>
+<div class="paragraph">
+<p>Moq laat ons toe te vertrekken van een bestaande interface (of klasse) en deze te (her)implementeren naar wens, zonder expliciet nieuwe klassen te moeten schrijven. De implementatie kan zeer high level of zeer gedetailleerd zijn. Ook kunnen we aan een Moq vragen of een bepaalde methode aangeroepen werd.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void GivenANonExistingId_WhenGettingAnObject_ThenReturnsNullGracefully()
+{
+    // Arrange
+    var repositoryMock = new Mock&lt;IDemoRepository&gt;(); <i class="conum" data-value="1"></i><b>(1)</b>
+    repositoryMock.Setup(m =&gt; m.Read(It.IsAny&lt;int&gt;())) <i class="conum" data-value="2"></i><b>(2)</b>
+        .Returns((DemoStorageModel?)null); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    var service = new DemoService(repositoryMock.Object); <i class="conum" data-value="4"></i><b>(4)</b>
+
+    const int id = 1337;
+
+    // Act
+    var result = service.GetDemo(id); <i class="conum" data-value="5"></i><b>(5)</b>
+
+    // Assert 1 - Is het resultaat wel degelijk null?
+    Assert.Null(result); <i class="conum" data-value="6"></i><b>(6)</b>
+    // Assert 2 - Heeft de service exact 1 call gemaakt naar de repo?
+    repositoryMock.Verify(m =&gt; m.Read(id), Times.Exactly(1)); <i class="conum" data-value="7"></i><b>(7)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Nieuwe mock op basis bestaand type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>De <code>Read(int id)</code> methode wordt geïmplementeerd. Alle input ok zolang het een <code>int</code> is.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Return type is <code>DemoStorageModel?</code> en waarde <code>null</code>. Bij ingevulde return waardes kan het type vanzelf afgeleid worden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>De <code>DemoService</code>, klasse die we willen testen, wordt aangemaakt. Deze krijgt het mock <strong>object</strong> mee.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>De service methode wordt aangeroepen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Standaard assert controleert of de return waarde inderdaad leeg is.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Controleren of service die getest wordt wel degelijk de repository exact 1 keer aanriep.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Moq kent veel mogelijkheden. Bekijk zeker de documentatie wanneer je iets complexer wil doen. De kans is zeer groot dat je ingebouwde functionaliteit kan gebruiken om je doel te bereiken.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api"><a class="anchor" href="#_api"></a>Api</h3>
+<div class="paragraph">
+<p>In het verleden was Api testing inrichting geen evidentie. Tegenwoordig is het <em>gemakkelijk</em> dankzij <code>Microsoft.AspNetCore.Mvc.Testing</code> dewelke <code>WebApplicationFactory</code> aanlevert. Deze factory laat ons toe ad hoc een api service te starten op basis van elders gedefinieerde, op <code>WebApplicationBuilder</code> gebaseerde, api bootstrapping.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Het is perfect mogelijk dat je op stage merkt dat men in het bedrijf <code>Microsoft.AspNetCore.Mvc.Testing</code> (nog) niet gebruikt. Men zal desgevallend absolute draken van code geschreven hebben om hetzelfde resultaat te bekomen. F🫡
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class ApiTests(WebApplicationFactory&lt;Program&gt; factory) :
+    IClassFixture&lt;WebApplicationFactory&lt;Program&gt;&gt;
+{
+    [Fact]
+    public async Task GivenId1_WhenGettingSingle_ShouldReturnExpectedEquivalent()
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var expected = new DemoResponseContract(1, "SomeValue");
+
+        // Act
+        var response = await client.GetAsync("/demos/1");
+        var responseCode = response.StatusCode;
+        var responseContent = await response.Content
+            .ReadFromJsonAsync&lt;DemoResponseContract&gt;();
+
+        // Assert
+        Assert.Equal(System.Net.HttpStatusCode.OK, responseCode);
+        Assert.Equivalent(expected, responseContent);
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_databases"><a class="anchor" href="#_databases"></a>Database(s)?</h3>
+<div class="paragraph">
+<p>Horen we de database te betrekken bij geautomatiseerde testen? Een online zoekopdracht of Copilot prompt zal al snel resulteren in een blokje code om een <code>DbContext</code> te overschrijven met een <code>InMemoryDatabase</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Microsoft.EntityFrameworkCore.InMemory</code> nugetje,</p>
+</li>
+<li>
+<p><code>Ctrl+C</code>, <code>Ctrl-V</code>,</p>
+</li>
+<li>
+<p>&#8230;&#8203;en het is klaar.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Maar is dat wel logisch? Wat zegt een <a href="https://learn.microsoft.com/en-us/ef/core/testing/">primaire bron</a> daarover?</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The <strong>in-memory provider</strong> will not behave like your real database in many important ways. Some features cannot be tested with it at all (e.g. transactions, raw SQL..), while other features may behave differently than your production database (e.g. case-sensitivity in queries). While in-memory can work for simple, constrained query scenarios, it is highly limited and <strong>we discourage its use</strong>.
+<strong>Mocking DbSet</strong> for querying is complex and difficult, and suffers from the same disadvantages as the in-memory approach; <strong>we discourage this as well</strong>.</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; https://learn.microsoft.com/en-us/ef/core/testing/
+</div>
+</div>
+<div class="paragraph">
+<p>Het gebruik van <code>InMemoryDatabase</code> om een applicatie te testen die in werkelijkheid op een persistente database (MS SQL Server, MySQL, etc.) steunt, wordt ten stelligste afgeraden.</p>
+</div>
+<div class="paragraph">
+<p>Wanneer men dit advies in de wind slaat, zal er code in het project sluipen die dient om rond de beperkingen van <code>InMemoryDatabase</code> te werken. Deze code wordt enkel gebruikt tijdens het testen. Hieruit volgt dat de code die in productie  effectief uitgevoerd zal worden, buiten de testen valt. Oops.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Dit is een mooi voorbeeld van een situatie waarin een llm gretig code <em>kakt</em> en zodoende jouw kansen verkleint een waardevolle redenering op te bouwen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Microsoft weerhoudt twee opties.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Repository Pattern</dt>
+<dd>
+<p>Injecteer de <code>DbContext</code> niet rechtstreeks in Services of ApiControllers, maar abstraheer deze weg achter, jawel, Repositories. De repositories kan je <em>uitmocken</em> tijdens het testen. In dit scenario wordt er geen echte database gebruikt tijdens het testen. <strong>Op school is dit de target.</strong></p>
+</dd>
+<dt class="hdlist1">Echte Database</dt>
+<dd>
+<p>Voorzie een echte database waartegen de testen uitgevoerd zullen worden. In dit scenario wordt alle code getest die in een productiescenario uitgevoerd zou worden. Er is immers geen wezenlijk verschil. Enkel de <code>ConnectionString</code> zou kunnen verschillen. Deze aanpak levert de meest waardevolle resultaten en <a href="https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy#summary">geniet dus de voorkeur</a> in een bedrijf die de middelen heeft om alles mooi in te richten. <strong>Op school is dit niet realistisch.</strong></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Een bedrijf zal typisch een aantal verschillende omgevingen beheren waar de software-aanpassingen doorvloeien. Development, Test, Acceptatie, Productie etc. Men kan automatische (geanonimiseerde) database dumps en imports voorzien om in andere omgevingen dan Productie een representatieve situatie te creëren.</p>
+</div>
+<div class="paragraph">
+<p>Voorbeeld:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Export Productie Db</p>
+</li>
+<li>
+<p>Overschrijf Test Db</p>
+</li>
+<li>
+<p>Voer Migrations uit op Test Db</p>
+</li>
+<li>
+<p>Voer testen uit op test Db</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Wanneer je testen herhaaldelijk wil uitvoeren, kan data van voorgaande executies in de weg komen te zitten. Je let er dus best op steeds een elegante <em>teardown</em> te voorzien zodat de omgeving na het uitvoeren van een test opgeruimd wordt voor de volgende test.</p>
+</div>
+<div class="paragraph">
+<p>Deze operaties kunnen ook volledig in een pipeline opgenomen worden. Stel je voor: Db dumps downloaden naar de Build Agent, daarin een Docker opspinnen met, bijvoorbeeld, MySQL, de dump importeren, de connectionstring in de codebase (of environment) duwen, alle testen uitvoeren, resultaten rapporteren aan Azure DevOps en dan de Build Agent gewoon laten recycleren zonder een permanent spoor van deze virtuele infrastructuur na te laten. Het kan allemaal.</p>
 </div>
 </div>
 <div class="sect2">
@@ -462,20 +793,22 @@ public class PriceQuoteResponseContractTests <i class="conum" data-value="2"></i
 <div class="listingblock">
 <div class="title">azure-pipelines.yml</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># ShipIt CI Pipeline
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># Demo CI/CD Pipeline
 pool:
   vmImage: ubuntu-latest
 
 steps:
+# Build
 - task: DotNetCoreCLI@2
-  displayName: Build ShipIt Projects
+  displayName: Build Projects
   inputs:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
+# Test
 - task: DotNetCoreCLI@2 <i class="conum" data-value="1"></i><b>(1)</b>
-  displayName: Test ShipIt Projects
+  displayName: Test Projects
   inputs:
     command: test
     projects: '**/*Tests/*.csproj' <i class="conum" data-value="2"></i><b>(2)</b>
@@ -490,12 +823,12 @@ steps:
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>De project filter is restrictiever dan die van de build task. We willen nu enkel de projecten,en hun dependencies, in scope brengen die tests bevatten. Het is best practice om dit duidelijk te maken adhv de project naam.</td>
+<td>De projectfilter is restrictiever dan die van de build task. We willen nu enkel de projecten in scope brengen die tests bevatten. Het is best practice om het woord "Tests" in de projectnaam op te nemen.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Wanneer deze pipeline uitgevoerd wordt, zal deze testresultaten publiceren.</p>
+<p>Na het uitvoeren van deze pipeline worden de testresultaten beschikbaar gesteld.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -511,21 +844,20 @@ steps:
 <div class="sect1">
 <h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-De volgende stap in het CI/CD verhaal, is Deployment. We hebben tot op heden manueel naar Azure gedeployed. Idealiter zouden we dit automatiseren, maar er zijn restricties van toepassing op de Azure voor studenten die ons verhinderen dit verder uit te diepen.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>De volgende stap in het CI/CD verhaal, is Deployment. We hebben tot op heden manueel naar Azure gedeployed. Idealiter zouden we dit automatiseren.</p>
 </div>
-<div class="sect2">
-<h3 id="_todo"><a class="anchor" href="#_todo"></a>TODO</h3>
-
+<div class="paragraph">
+<p>Om dit te doen, hebben we een verbinding nodig tussen de Azure DevOps Pipeline en onze Azure Subscription. Het leggen van deze verbinding impliceert dat we een identiteit moeten toekennen aan de pipeline, net zoals bij Key Vaults, en deze de nodige rechten geven.</p>
+</div>
+<div class="paragraph">
+<p>Spijtig genoeg hebben we in Azure for Students de nodige rechten niet om identiteiten te beheren voor externe toepassingen, zoals deze pipeline. Bijgevolg stopt het verhaal hier 😑</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/pipelines/pipeline-service-conn.png" alt="pipeline service conn"></span></p>
+</div>
+<div class="paragraph">
+<p>Wil je dit toch uitproberen met een account die niet aan de school verbonden is, kan je de nodige info vinden in de <a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-azure-pipelines?tabs=yaml">MS Docs</a>.</p>
 </div>
 </div>
 </div>
@@ -550,9 +882,8 @@ De volgende stap in het CI/CD verhaal, is Deployment. We hebben tot op heden man
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using a customized version of the Antora default UI.</p>
-  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
-    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+    <p>This page was built using a customized version of the Antora default UI. The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Course material may *not* be used to teach, tutor, coach, or present without obtaining explicit consent from Stefan Courteaux.</p>
 </footer>
 <script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
 <script async src="../_/js/vendor/highlight.js"></script>

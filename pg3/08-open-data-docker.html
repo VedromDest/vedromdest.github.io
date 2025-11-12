@@ -80,24 +80,27 @@
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="04-middleware.html">Middleware</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="06-pipelines-placeholder.html">DevOps Pipelines️ 🚧</a>
+      <li class="nav-item is-active is-current-page" data-depth="1">
+    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker ⭐️</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="06-02-secret-management.html">Secret Management ⭐️</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker</a>
-<ul class="nav-list">
-      <li class="nav-item is-active" data-depth="2">
-    <a class="nav-link" href="08-02-compose.html">Dockerfiles &amp; Compose</a>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️ ⭐️</a>
   </li>
-</ul>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="10-afronden2526.html">Afronden ⭐️</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="99-tips.html">Tips</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie</a>
+    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie AJ2425</a>
 <ul class="nav-list">
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
@@ -117,13 +120,10 @@
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="09-identity-sql-server-docker.html">SQL Server Docker</a>
   </li>
-</ul>
-  </li>
-      <li class="nav-item is-active" data-depth="1">
+      <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="99-tips.html">Tips</a>
+</ul>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
@@ -153,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
-    <li><a href="08-open-data-docker.html">Open Data &amp; Docker</a></li>
+    <li><a href="08-open-data-docker.html">Open Data &amp; Docker ⭐️</a></li>
   </ul>
 </nav>
 </div>
@@ -479,30 +479,421 @@ De gebruikte in-memory database (Redis) vullen kan even duren. Wees geduldig en 
 <div class="paragraph">
 <p><span class="image"><img src="_images/open-data-docker/azure-nok.png" alt="azure nok"></span></p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_zelf_een_docker_image_maken"><a class="anchor" href="#_zelf_een_docker_image_maken"></a>Zelf een Docker image maken</h2>
+<h2 id="_zelf_dockerizen"><a class="anchor" href="#_zelf_dockerizen"></a>Zelf Dockerizen</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_nodig"><a class="anchor" href="#_nodig"></a>Nodig</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>VS code docker plugin installeren</p>
-</li>
-<li>
-<p>Nieuw project maken (empty web)</p>
-</li>
-</ul>
+<h3 id="_backend"><a class="anchor" href="#_backend"></a>Backend</h3>
+<div class="sect3">
+<h4 id="_project_maken"><a class="anchor" href="#_project_maken"></a>Project Maken</h4>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo
+
+stefancourteaux@MBP DockerComposeDemo % mkdir backend
+stefancourteaux@MBP DockerComposeDemo % cd backend</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Api Maken</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet new web -o MiniApi
+The template "ASP.NET Core Empty" was created successfully.
+
+Processing post-creation actions...
+Restoring /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi/MiniApi.csproj:
+Restore succeeded.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Solution (Optioneel)</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet new sln --name Backend
+The template "Solution File" was created successfully.
+
+stefancourteaux@MBP backend % dotnet sln add MiniApi/MiniApi.csproj
+Project `MiniApi/MiniApi.csproj` added to the solution.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Project Runnen</div>
+<div class="content">
+<pre>stefancourteaux@MBP backend % dotnet run --project MiniApi/MiniApi.csproj
+Using launch settings from MiniApi/Properties/launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5021
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Test Run Api</div>
+<div class="content">
+<pre>stefancourteaux@MBP ~ % curl localhost:5021
+Hello World!</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Unieke Responses + CORS (Handig voor straks)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =&gt;
+{
+    options.AddDefaultPolicy(
+        policy =&gt;
+        {
+            policy.SetIsOriginAllowed(origin =&gt;
+                new Uri(origin).Host == "localhost"); <i class="conum" data-value="1"></i><b>(1)</b>
+        });
+});
+
+var app = builder.Build();
+
+app.MapGet("/", () =&gt; $"Hello World! {Guid.NewGuid()}"); <i class="conum" data-value="2"></i><b>(2)</b>
+
+app.UseCors();
+
+app.Run();</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Localhost toegelaten ongeacht port/verb etc</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Responses uniek maken</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dockerizen"><a class="anchor" href="#_dockerizen"></a>Dockerizen</h4>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/backend/MiniApi</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Dockerfile</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /App
+
+# Copy everything
+COPY . ./
+# Restore as distinct layers
+RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
+WORKDIR /App
+COPY --from=build /App/out .
+ENTRYPOINT ["dotnet", "MiniApi.dll"]</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Image Maken</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker build -t mini-api-image -f Dockerfile .
+[+] Building 58.9s (14/14) FINISHED</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker image ls
+REPOSITORY                      TAG    IMAGE ID     CREATED
+mini-api-image                  latest 2d92b4e1dfd6 2 minutes ago <i class="conum" data-value="1"></i><b>(1)</b>
+mcr.microsoft.com/dotnet/aspnet 9.0    c3aee4ea4f51 2 weeks ago
+mysql                           8.0    bf577825b52a 3 months ago</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Daar staat ie dan.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">Container Runnen (Op Basis Van Image)</div>
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % docker run -p 7777:8080 --name api-container mini-api-image <i class="conum" data-value="1"></i><b>(1)</b>
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:8080
+      Application started. Press Ctrl+C to shut down.
+      Content root path: /App</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>8080 is standaard poort in .net container</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/container-running.png" alt="container running"></span></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP MiniApi % curl http://localhost:7777
+Hello World! 88f75ce8-97f2-4446-ab5b-1103e5380509%</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_flow"><a class="anchor" href="#_flow"></a>Flow</h3>
+<h3 id="_frontend"><a class="anchor" href="#_frontend"></a>Frontend</h3>
+<div class="sect3">
+<h4 id="_project_maken_2"><a class="anchor" href="#_project_maken_2"></a>Project Maken</h4>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo
+
+stefancourteaux@MBP DockerComposeDemo % ls
+backend
+
+stefancourteaux@MBP DockerComposeDemo % mkdir frontend
+stefancourteaux@MBP DockerComposeDemo % cd frontend
+
+stefancourteaux@MBP frontend % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">React Project Maken</div>
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % npm create vite@latest mini-fe -- --template react-ts
+&gt; npx
+&gt; create-vite mini-fe --template react-ts
+
+Scaffolding project in /Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend/mini-fe
+
+Done. Now run:
+
+  cd mini-fe
+  npm install
+  npm run dev</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % cd mini-fe</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % npm install
+added 185 packages, and audited 186 packages in 12s</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % npm run dev
+&gt; mini-fe@0.0.0 dev
+&gt; vite
+
+
+  VITE v6.3.2  ready in 839 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help....</pre>
+</div>
+</div>
 <div class="paragraph">
-<p>Voeg de Docker Files toe (niet Compose).</p>
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app.png" alt="react app"></span></p>
+</div>
+<div class="literalblock">
+<div class="title">Axios Toevoegen</div>
+<div class="content">
+<pre>npm install axios</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Api Call Naar Backend</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescriptjsx hljs" data-lang="typescriptjsx">import { useState } from 'react'
+import axios from 'axios'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  const [miniApiResponse, setResponse] = useState('nog niets ontvangen')
+
+
+  const fetchData = async () =&gt; {
+    try {
+      const response = await axios.get('http://localhost:7777');
+      setResponse(response.data);
+    } catch (error) {
+      console.error('MiniApi call mislukt:', error);
+    }
+  };
+
+
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;a href="https://vite.dev" target="_blank"&gt;
+          &lt;img src={viteLogo} className="logo" alt="Vite logo" /&gt;
+        &lt;/a&gt;
+        &lt;a href="https://react.dev" target="_blank"&gt;
+          &lt;img src={reactLogo} className="logo react" alt="React logo" /&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;h1&gt;Vite + React&lt;/h1&gt;
+      &lt;div className="card"&gt;
+        &lt;button onClick={fetchData}&gt;
+          Laatste api response is {miniApiResponse}
+        &lt;/button&gt;
+        &lt;p&gt;
+          Edit &lt;code&gt;src/App.tsx&lt;/code&gt; and save to test HMR
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;p className="read-the-docs"&gt;
+        Click on the Vite and React logos to learn more
+      &lt;/p&gt;
+    &lt;/&gt;
+  )
+}
+
+export default App</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De react app is nu verbonden met de backend in Docker.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app-connected.png" alt="react app connected"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dockerizen_2"><a class="anchor" href="#_dockerizen_2"></a>Dockerizen</h4>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@@MBP frontend % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo/frontend/mini-fe</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Dockerfile</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile"># Build Stage
+FROM node:lts-alpine AS build
+WORKDIR /app
+COPY ./package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Production Stage
+FROM nginx:stable-alpine AS production
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Image Maken</div>
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % docker build -t mini-fe-image -f Dockerfile .</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Container Runnen</div>
+<div class="content">
+<pre>stefancourteaux@@MBP mini-fe % docker run -p 8008:80 --name fe-container mini-fe-image</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De react app die nu ook uit docker geserved wordt, spreekt met success tegen de api die ook uit docker geserved wordt.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/react-app-docker.png" alt="react app docker"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_docker_compose"><a class="anchor" href="#_docker_compose"></a>Docker Compose</h3>
+<div class="paragraph">
+<p>Op dit moment staan front- en backend wel in docker, maar de relatie tussen de 2 containers is niet duidelijk. Wij weten dat ze samen horen, maar docker weet dat niet.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/docker-duo.png" alt="docker duo"></span></p>
+</div>
+<div class="paragraph">
+<p>We kunnen dit expliciet maken. We kunnen een app samenstellen ofte <em>composen</em> uit meerdere docker images.</p>
+</div>
+<div class="literalblock">
+<div class="title">Locatie</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % pwd
+/Users/stefancourteaux/Source/PG3Prep/DockerComposeDemo</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: '3.8'
+
+services:
+  mini-api:
+    build:
+      context: ./backend/MiniApi
+      dockerfile: Dockerfile
+    ports:
+      - "7777:8080"
+
+  mini-fe:
+    build:
+      context: ./frontend/mini-fe
+      dockerfile: Dockerfile
+    ports:
+      - "8008:80"</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Up</div>
+<div class="content">
+<pre>stefancourteaux@MBP DockerComposeDemo % docker compose up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Docker weet nu wel dat de containers samen horen.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/composed-docker.png" alt="composed docker"></span></p>
+</div>
+<div class="paragraph">
+<p>De App werkt nog steeds naar behoren.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/open-data-docker/demo/composed-running.png" alt="composed running"></span></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -511,58 +902,22 @@ De gebruikte in-memory database (Redis) vullen kan even duren. Wees geduldig en 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Dit is de basis manier om een Docker Image te maken. Met Compose kan je complexere scenario&#8217;s uitwerken, zoals we gezien hebben in het Open Data project van de Franse overheid.
+Je kan uiteraard nog veel complexere scenario&#8217;s opzetten en dieper ingaan op (virtual) networking. Dat ondervind je wel in de praktijk indien je terecht komt in een omgeving waar Docker (intensief) gebruikt wordt. Dat wordt ook stilaan een verhaal voor de collega&#8217;s van <em>Systemen en Netwerken</em>.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/vscode-add.png" alt="vscode add"></span></p>
-</div>
-<div class="paragraph">
-<p>Kies ASP.Net</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/vscode-platf.png" alt="vscode platf"></span></p>
-</div>
-<div class="paragraph">
-<p>Kies Linux</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/vscode-os.png" alt="vscode os"></span></p>
-</div>
-<div class="paragraph">
-<p>Er wordt een klassieke Dockerfile aan het project toegevoegd.</p>
-</div>
-<div class="paragraph">
-<p>Trigger een Docker build. Dit levert een image op.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/vscode-build.png" alt="vscode build"></span></p>
-</div>
-<div class="paragraph">
-<p>Deze image zal verschijnen in Docker Desktop.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/docker-run.png" alt="docker run"></span></p>
-</div>
-<div class="paragraph">
-<p>Start de image. Map de port.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/docker-port.png" alt="docker port"></span></p>
-</div>
-<div class="paragraph">
-<p>De image wordt nu een runnende Container.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/docker-running.png" alt="docker running"></span></p>
-</div>
-<div class="paragraph">
-<p>Je kan deze testen door de web api aan te spreken.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/open-data-docker/docker-test.png" alt="docker test"></span></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Dit voorbeeld gebruikt geen cleane React environment settings. Bekijk de aanbevelingen daaromtrent in de cursus <em>Web 3</em>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -572,6 +927,9 @@ Dit is de basis manier om een Docker Image te maken. Met Compose kan je complexe
 </div>
 <div class="paragraph">
 <p><a href="https://kubernetes.io">Kubernetes</a> is géén Microsoft product. Het is een Open Source product dat door verschillende leveranciers aangeboden wordt.</p>
+</div>
+<div class="paragraph">
+<p>Gezien de lessen gebouwd zijn rond dichte integratie met Azure services, waaronder App Services, gaan we er niet dieper op in.</p>
 </div>
 </div>
 </div>
@@ -585,10 +943,10 @@ Dit is de basis manier om een Docker Image te maken. Met Compose kan je complexe
 <p>Probeer zelf de taken van deze week te implementeren. Je kan steeds kijken naar de code uit de les als je vast loopt.</p>
 </li>
 <li>
-<p>Prober zelf een kleine service te maken die in Docker opgestart wordt.</p>
+<p>Informeer je online over gratis/opendata api&#8217;s die nuttig zouden kunnen zijn voor jouw opdracht.</p>
 </li>
 <li>
-<p>Informeer je online over gratis/opendata api&#8217;s die nuttig zouden kunnen zijn voor jouw opdracht.</p>
+<p>Prober zelf een kleine Docker service / compose te maken.</p>
 </li>
 </ul>
 </div>
@@ -614,9 +972,8 @@ Dit is de basis manier om een Docker Image te maken. Met Compose kan je complexe
 </main>
 </div>
 <footer class="footer">
-  <p>This page was built using a customized version of the Antora default UI.</p>
-  <p>The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
-    <p>Content by Stefan Courteaux unless otherwise noted. </p>
+    <p>This page was built using a customized version of the Antora default UI. The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
+    <p>Course material may *not* be used to teach, tutor, coach, or present without obtaining explicit consent from Stefan Courteaux.</p>
 </footer>
 <script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
 <script async src="../_/js/vendor/highlight.js"></script>

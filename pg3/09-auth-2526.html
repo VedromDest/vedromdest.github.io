@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welkom bij Programmeren Gevorderd 3! :: Programmeren Gevorderd 3 (BETA)</title>
+    <title>Authenticatie &amp; Autorisatie AJ 2526 :: Programmeren Gevorderd 3 (BETA)</title>
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
-  <body class="article home">
+  <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
@@ -89,7 +89,7 @@
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️ ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+      <li class="nav-item is-active is-current-page" data-depth="1">
     <a class="nav-link" href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
@@ -153,7 +153,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
-    <li><a href="index.html">Welkom bij Programmeren Gevorderd 3!</a></li>
+    <li><a href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a></li>
   </ul>
 </nav>
 </div>
@@ -162,45 +162,52 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Welkom bij Programmeren Gevorderd 3!</h1>
+<h1 class="page">Authenticatie &amp; Autorisatie AJ 2526</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Dit is nieuwe versie</strong> van de lessen rond autorisatie en authenticatie.<br>
+<br>
+Inhoud en <strong>eindresultaat is equivalent aan de oude versie</strong>, maar de nieuwe versie is pragmatischer (lees: minder werk voor de student).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_doel"><a class="anchor" href="#_doel"></a>Doel</h2>
+<h2 id="_doel_van_deze_les"><a class="anchor" href="#_doel_van_deze_les"></a>Doel van deze les</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Iteratief bouwen van een data-driven async .Net webapi systeem.</p>
+<p>Verschil tussen Authenticatie en Authorisatie</p>
 </li>
 <li>
-<p>Azure DevOps development flow leren kennen.</p>
+<p>Verschil tussen User en Client</p>
 </li>
 <li>
-<p>Systeem installeren in de Azure cloud.</p>
+<p>Identity Providers</p>
+</li>
+<li>
+<p>OAuth (met Identity Server)</p>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_studiemateriaal"><a class="anchor" href="#_studiemateriaal"></a>Studiemateriaal</h2>
+<h2 id="_authenticatie_en_authorisatie"><a class="anchor" href="#_authenticatie_en_authorisatie"></a>Authenticatie en Authorisatie</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Code zal na elke les beschikbaar gesteld worden in het Azure DevOps repository.</p>
-</li>
-<li>
-<p>Deze online cursus is altijd integraal beschikbaar.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Lessen gemarkeerd met ⭐️ werden tijdens het semester geüpdatet.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<div class="openblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -208,19 +215,55 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Het wordt sterk aangemoedigd de <a href="https://dotnet.microsoft.com/en-us/">online documentatie</a> van Microsoft te raadplegen.
+Authenticatie behandelt het onderwerp. <strong>Wie?</strong> Autorisatie behandelt het werkwoord. <strong>Wat?</strong> De intersectie van Authenticatie en Autorisatie bepaalt wie wat mag doen in het systeem.
 </td>
 </tr>
 </table>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_aanpak"><a class="anchor" href="#_aanpak"></a>Aanpak</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>De rode draad doorheen de lessen is de ontwikkeling van een klein systeem voor een bedrijf dat pakjes levert, zoals PostNL of UPS.</p>
+<p>De web api&#8217;s die we gebouwd hebben, staan publiek op Azure. Eender wie ter wereld kan api calls maken. Het is logisch dat een <strong>web</strong> api een bepaalde graad van bereikbaarheid heeft via internet, maar de huidige situatie is niet wenselijk. We moeten beveiliging introduceren.</p>
 </div>
+<div class="paragraph">
+<p>Op dit moment weten we niet wie de calls naar onze api&#8217;s maakt. De ene keer is het een oproep vanuit Postman tijdens de les, de andere keer is het een Noord-Koreaanse hacker. We willen de controle nemen over <strong>wie</strong> calls kan doen naar ons systeem. Om dit te doen, gaan we afdwingen dat het callende systeem of gebruiker zich identificeert, zich <strong>authenticeert</strong>.</p>
+</div>
+<div class="paragraph">
+<p>De meeste applicaties hebben naast authenticatie ook nood aan verschillende <em>(gebruikers)rollen</em>. Denk bijvoorbeeld aan een HR-systeem. Jij hebt een account (authenticatie) en kan daarmee je verlof plannen en je eigen loonfiches bekijken. Je kan de loonfiches van je collega&#8217;s niet bekijken. Je hebt het recht, "de autoriteit", niet. De payroll officer van het HR departement moet dit wil kunnen doen om de job correct uit te voeren. Deze zal wel het recht, de <strong>autorisatie</strong>, krijgen.</p>
+</div>
+<div class="paragraph">
+<p>Een web systeem dat weigert een call uit te voeren omdat de authorisatie en/of authenticatie niet goed zit, zal typisch onderstaande response codes gebruiken.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+401 Unauthorized
+</td>
+<td class="hdlist2">
+<p>The request has not been completed because it lacks valid authentication credentials for the requested resource.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+403 Forbidden
+</td>
+<td class="hdlist2">
+<p>The server understands the request but refuses to authorize it.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Achteraf gezien zouden 401 "Unauthenticated" en, in mindere mate, 403 "Unauthorized" betere namen voor de status codes zijn, maar ze zijn al in gebruik sinds 1996. We moeten dus een beetje van goeie wil zijn en gewoon accepteren dat het zo in elkaar zit.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_users_en_clients"><a class="anchor" href="#_users_en_clients"></a>Users en Clients</h2>
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -228,130 +271,50 @@ Het wordt sterk aangemoedigd de <a href="https://dotnet.microsoft.com/en-us/">on
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Bouw in parallel met de lessen mee aan dezelfde app om het materiaal in te oefenen voor je aan je eigen project begint.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Gestaag zullen er nieuwe business en technische requirements aangebracht worden. De implementatie zal besproken en getoond worden tijdens de les. Het eindresultaat is een cloud applicatie met beknopte functionaliteit.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/totaal/PG3Totaal.drawio.png" alt="PG3Totaal.drawio"></span></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_evaluatie"><a class="anchor" href="#_evaluatie"></a>Evaluatie</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>De student kiest een onderwerp waarrond deze <strong>individueel een cloud project zal bouwen en deployen</strong>. <strong>Geen pakjesbedrijf of architecturale copy-paste van het project uit de lessen</strong>, maar iets grofweg equivalent qua complexiteit.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Consulteer de Studiewijzer voor meer informatie betreffende de evaluatie.
+Een <strong>user(account)</strong> behandelt de authenticatie van een <strong>mens</strong> die een systeem benadert. Een <strong>(applicatie)client</strong> behandelt de authenticatie van een <strong>systeem</strong> die een ander systeem benadert.
 </td>
 </tr>
 </table>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_tooling"><a class="anchor" href="#_tooling"></a>Tooling</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_users"><a class="anchor" href="#_users"></a>Users</h3>
 <div class="paragraph">
-<p>Microsoft investeert sinds 2014 enorm in een platformonafhankelijk .Net ecosysteem dat werkt op Windows, macOS en Linux.</p>
+<p>Wanneer een systeem door <strong>mensen</strong> gebruikt wordt, gaan we deze gebruikers <strong>user</strong>(accounts) toekennen. Een user zal typisch kenmerken dragen die deze identificeren in de alledaagse realiteit: naam, email, adres, telefoonnummer etc. In het systeem zal deze veelal uniek identificeerbaar zijn op basis van <em>username</em>. Vaak wordt het email adres gebruikt als <em>username</em>, maar dat hoeft niet. Er is ook een <em>password</em> om de account te beveiligen, en steeds vaker <a href="https://support.microsoft.com/en-us/topic/what-is-multifactor-authentication-e5e39437-121c-be60-d123-eda06bddf661">multifactor authenticatie</a>.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">We gebruiken onderstaande cloud tooling</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://dev.azure.com">Azure DevOps</a></p>
-</li>
-<li>
-<p><a href="https://portal.azure.com">Azure Portal</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Vele moderne web toepassingen voorzien de nodige functionaliteit opdat een gebruiker zichzelf kan registeren. Eventueel worden er bijkomende rechten manueel toegekend door een helpdesk.</p>
 </div>
-</dd>
-</dl>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Indien je jouw Azure For Students Benefits in het verleden al activeerde (via de Azure Portal), kan het zijn dat deze rechten verlopen zijn. Zolang je student bent, kan je deze benefits <a href="https://go.microsoft.com/fwlink/?linkid=2244463">verlengen</a>.
-</td>
-</tr>
-</table>
+<div class="sect2">
+<h3 id="_app_clients"><a class="anchor" href="#_app_clients"></a>(App) Clients</h3>
+<div class="paragraph">
+<p>Niet enkel mensen gebruiken systemen. Ook systemen gebruiken andere systemen. De systemen die informatie uitwisselen, hebben een Client-Server relatie. Het client-systeem moet zich authenticeren bij het serversysteem om een call te kunnen maken. Hoewel technisch mogelijk, is het <strong>bad practice</strong> om users te voorzien voor systemen. Systemen hebben geen menselijke eigenschappen en integreren via api&#8217;s waar mensen (web) applicaties gebruiken.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">We gebruiken onderstaande desktop tooling</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://dotnet.microsoft.com/en-us/download/dotnet/9.0">.Net 9 SDK</a></p>
-</li>
-<li>
-<p><a href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a></p>
-</li>
-<li>
-<p><a href="https://azure.microsoft.com/en-us/products/storage/storage-explorer/">Azure Storage Explorer</a></p>
-</li>
-<li>
-<p><a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></p>
-</li>
-<li>
-<p><a href="https://git-scm.com/downloads">Git</a></p>
-</li>
-<li>
-<p><a href="https://www.postman.com/downloads/">Postman</a></p>
-</li>
-<li>
-<p><a href="https://code.visualstudio.com">Visual Studio Code</a> met extensions</p>
-<div class="ulist">
-<ul>
-<li>
-<p>"C# Dev Kit" (Visual Studio "light")</p>
-</li>
-<li>
-<p>"SQL Server (mssql)" (vervangt Azure Data Studio)</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Wanneer een systeem wil verbinden met ons <strong>systeem</strong>, voorzien we een <strong><em>Client</em></strong> voor dit client-systeem. Een client is bedoeld om één enkel systeem te authenticeren. Wanneer je samenwerkt met een bedrijf en er verschillende systemen geïntegreerd worden, voorzie je altijd een aparte client voor elk systeem. Zo blijft authenticatie en autorisatie van de verschillende systemen gescheiden.</p>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p>Door aparte clients toe te kennen, verhinder je dat systemen per ongeluk verkeerde operaties in verkeerde systemen uitvoeren. Wanneer de <em>credentials</em> van een client zouden uitlekken, geven deze slechts toegang tot de rechten van het gerelateerde systeem, ipv de som van alle systemen.</p>
 </div>
-</dd>
-<dt class="hdlist1">Waarom geen klassieke Visual Studio?</dt>
-<dd>
-<p>Deze moderne tools verschijnen steeds vaker in het werkveld. Ze leren  gebruiken is belangrijk om de kansen van de student op de arbeidsmarkt te verhogen.</p>
-</dd>
-</dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_broncode_in_deze_cursus"><a class="anchor" href="#_broncode_in_deze_cursus"></a>Broncode In Deze Cursus</h2>
+<h2 id="_identity_providers"><a class="anchor" href="#_identity_providers"></a>Identity Providers</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Tijdens de lessen wordt er aan live coding gedaan. Dit heeft als gevolg dat de code uit de les, en dus in het code repository, niet identiek zal zijn aan deze in de scursus.</p>
+<p>Nu concepten zoals Authenticatie, Autorisatie, Users, Clients etc gekend zijn, kunnen we deze functionaliteiten toevoegen aan ons systeem. Gaan we al de relevante logica, api&#8217;s validaties en dergelijke zelf programmeren? Alle scenario&#8217;s uitdenken? Allerhande afspraken betreffende systeemontwerp met klanten en front-end developers uitwerken? Nee.</p>
 </div>
 <div class="paragraph">
-<p>Laat je hierdoor niet in de war brengen. Je zal snel ondervinden dat deze afwijkingen zeer oppervlakkig zijn en het geheel conceptueel identiek is aan de cursus. Immers: <strong>de lessen volgen de cursus, niet omgekeerd</strong>.</p>
+<p>Er bestaan meerdere <em>Identity Providers</em> die we kunnen integreren in onze .Net applicatie. Deze implementeren verschillende internationaal gebruikte standaarden rond Authenticatie en Autorisatie. Al naargelang de professionele context waarin gewerkt wordt, zal er een keuze gemaakt worden.</p>
+</div>
+<div class="paragraph">
+<p>Microsoft biedt een optie onder de vorm van <a href="https://learn.microsoft.com/en-us/entra/identity-platform/">Identity Platform</a>. Dit is een geldige keuze, maar kan niet vlot gebruikt worden met Azure for Students. Tevens willen we vanuit de opleiding het beeld niet scheppen dat alles uit de Microsoft-winkel moet komen.</p>
+</div>
+<div class="paragraph">
+<p>Een andere zeer populaire Identity Provider is <a href="https://duendesoftware.com/products/identityserver">Identity Server</a>. Deze implementeert de <em>OpenID Connect</em> en <em>Open Auth 2.0</em> protocols. Identity Server is open-source, geschreven in .Net, en gratis voor onderwijs. Een goeie keuze voor ons project!</p>
 </div>
 </div>
 </div>
