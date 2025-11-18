@@ -428,7 +428,7 @@ public class Pet
 <pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public interface IOwnerRepository
 {
     void Create(Owner owner);
-    Owner GetById(int id);
+    Owner? GetById(int id);
     Owner GetByIdIncludePets(int id);
     List&lt;Owner&gt; GetAll();
 }</code></pre>
@@ -483,7 +483,7 @@ public class Pet
 <div class="listingblock">
 <div class="title">OwnerRepository.GetById(int id)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">public class OwnerRepostory : IOwnerRepository
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public class OwnerRepostory : IOwnerRepository
 {
     //...
     public Owner? GetOwnerById(int id)
@@ -516,15 +516,35 @@ public class Pet
 <div class="listingblock">
 <div class="title">OwnerRepository.Create(Owner owner)</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public void Create(Owner owner)
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public Owner Create(Owner owner)
 {
     const string query =
-        "INSERT INTO Owners (FirstName, LastName, Email)
-         VALUES (@FirstName, @LastName, @Email)";
-    using var connection = new MySqlConnection(ConnectionString);
-    connection.Execute(query, owner);
+        @"INSERT INTO dappergent2.Owners (FirstName, LastName, Email)
+          VALUES (@FirstName, @LastName, @Email);
+          SELECT LAST_INSERT_ID()"; <i class="conum" data-value="1"></i><b>(1)</b>
+    using var connection = new MySqlConnection(_connectionString);
+    var id = connection.ExecuteScalar&lt;int&gt;(query, owner);<i class="conum" data-value="2"></i><b>(2)</b>
+    return GetById(id) ?? throw new Exception( <i class="conum" data-value="3"></i><b>(3)</b>
+        $"Owner {owner.FirstName} {owner.LastName} could not be created"
+    );
 }</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>insert</code> én uitlezen laatste identity in scope</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>We verwachten een <code>int</code> - het id - terug.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Steunen op reeds bestaande <code>GetById()</code></td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -535,10 +555,10 @@ public class Pet
 <p>De <code>Get</code> en <code>GetAll</code> methodes zijn analoog aan die voor Owners.</p>
 </div>
 <div class="paragraph">
-<p>Bij de <code>Create(Pet pet)</code> botsen we wel tegen een probleem. Een Pet record heeft een OwnerId nodig, maar de <code>Pet</code> klasse heeft geen <code>OwnerId</code>, enkel een Owner object. Dapper gaat dit niet vanzelf kunnen mappen.</p>
+<p>Bij de <code>Create(Pet pet)</code> botsen we mogelijk tegen een probleem. Een Pet record heeft een <code>OwnerId</code> nodig, maar de <code>Pet</code> klasse heeft deze (eventueel!) niet. Dapper gaat dit niet vanzelf kunnen mappen.</p>
 </div>
 <div class="paragraph">
-<p>We kunnen dit oplossen door een <code>OwnerId</code> te voorzien.</p>
+<p>We kunnen zo een geval oplossen door een <code>OwnerId</code> te voorzien dat steunt op het aanwezige object.</p>
 </div>
 <div class="listingblock">
 <div class="title">Pet</div>
@@ -555,7 +575,7 @@ public class Pet
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Dit wordt steeds uit het <code>Owner</code> object gelezen zodat we geen logica moeten schrijven om de waardes in sync te houden.</td>
+<td>Dit wordt steeds uit het <code>Owner</code> object gelezen zodat we geen logica moeten schrijven om de waardes in-sync te houden.</td>
 </tr>
 </table>
 </div>
