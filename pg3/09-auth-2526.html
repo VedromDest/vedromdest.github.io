@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Authenticatie &amp; Autorisatie AJ 2526 :: Programmeren Gevorderd 3 (BETA)</title>
+    <title>Authenticatie AJ 2526 :: Programmeren Gevorderd 3 (BETA)</title>
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -90,7 +90,10 @@
     <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️ ⭐️</a>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="1">
-    <a class="nav-link" href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a>
+    <a class="nav-link" href="09-auth-2526.html">Authenticatie ⭐️</a>
+  </li>
+      <li class="nav-item is-active" data-depth="1">
+    <a class="nav-link" href="09-auth-2526-2.html">Autorisatie 🚧</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="10-afronden2526.html">Afronden ⭐️</a>
@@ -153,7 +156,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 3</a></li>
-    <li><a href="09-auth-2526.html">Authenticatie en Autorisatie 🚧</a></li>
+    <li><a href="09-auth-2526.html">Authenticatie ⭐️</a></li>
   </ul>
 </nav>
 </div>
@@ -162,7 +165,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Authenticatie &amp; Autorisatie AJ 2526</h1>
+<h1 class="page">Authenticatie AJ 2526</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock important">
@@ -187,7 +190,7 @@ Inhoud en <strong>eindresultaat is equivalent aan de oude versie</strong>, maar 
 <div class="ulist">
 <ul>
 <li>
-<p>Verschil tussen Authenticatie en Authorisatie</p>
+<p>Verschil tussen Authenticatie en Autorisatie</p>
 </li>
 <li>
 <p>Verschil tussen User en Client</p>
@@ -196,15 +199,14 @@ Inhoud en <strong>eindresultaat is equivalent aan de oude versie</strong>, maar 
 <p>Identity Providers</p>
 </li>
 <li>
-<p>OAuth (met Identity Server)</p>
+<p>Initiële Opzet Duende Identity Server</p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_authenticatie_en_authorisatie"><a class="anchor" href="#_authenticatie_en_authorisatie"></a>Authenticatie en Authorisatie</h2>
+<h2 id="_authenticatie_vs_autorisatie"><a class="anchor" href="#_authenticatie_vs_autorisatie"></a>Authenticatie vs Autorisatie</h2>
 <div class="sectionbody">
 <div class="openblock">
 <div class="content">
@@ -232,7 +234,7 @@ Authenticatie behandelt het onderwerp. <strong>Wie?</strong> Autorisatie behande
 <p>De meeste applicaties hebben naast authenticatie ook nood aan verschillende <em>(gebruikers)rollen</em>. Denk bijvoorbeeld aan een HR-systeem. Jij hebt een account (authenticatie) en kan daarmee je verlof plannen en je eigen loonfiches bekijken. Je kan de loonfiches van je collega&#8217;s niet bekijken. Je hebt het recht, "de autoriteit", niet. De payroll officer van het HR departement moet dit wil kunnen doen om de job correct uit te voeren. Deze zal wel het recht, de <strong>autorisatie</strong>, krijgen.</p>
 </div>
 <div class="paragraph">
-<p>Een web systeem dat weigert een call uit te voeren omdat de authorisatie en/of authenticatie niet goed zit, zal typisch onderstaande response codes gebruiken.</p>
+<p>Een web systeem dat weigert een call uit te voeren omdat de autorisatie en/of authenticatie niet goed zit, zal typisch onderstaande response codes gebruiken.</p>
 </div>
 <div class="hdlist">
 <table>
@@ -308,13 +310,772 @@ Een <strong>user(account)</strong> behandelt de authenticatie van een <strong>me
 <p>Nu concepten zoals Authenticatie, Autorisatie, Users, Clients etc gekend zijn, kunnen we deze functionaliteiten toevoegen aan ons systeem. Gaan we al de relevante logica, api&#8217;s validaties en dergelijke zelf programmeren? Alle scenario&#8217;s uitdenken? Allerhande afspraken betreffende systeemontwerp met klanten en front-end developers uitwerken? Nee.</p>
 </div>
 <div class="paragraph">
-<p>Er bestaan meerdere <em>Identity Providers</em> die we kunnen integreren in onze .Net applicatie. Deze implementeren verschillende internationaal gebruikte standaarden rond Authenticatie en Autorisatie. Al naargelang de professionele context waarin gewerkt wordt, zal er een keuze gemaakt worden.</p>
+<p>Er bestaan meerdere <em>Identity Providers</em> die we kunnen integreren in onze applicatie. Deze implementeren verschillende internationaal gebruikte standaarden rond Authenticatie en Autorisatie. Al naargelang de professionele context waarin gewerkt wordt, zal er een keuze gemaakt worden.</p>
 </div>
 <div class="paragraph">
 <p>Microsoft biedt een optie onder de vorm van <a href="https://learn.microsoft.com/en-us/entra/identity-platform/">Identity Platform</a>. Dit is een geldige keuze, maar kan niet vlot gebruikt worden met Azure for Students. Tevens willen we vanuit de opleiding het beeld niet scheppen dat alles uit de Microsoft-winkel moet komen.</p>
 </div>
 <div class="paragraph">
-<p>Een andere zeer populaire Identity Provider is <a href="https://duendesoftware.com/products/identityserver">Identity Server</a>. Deze implementeert de <em>OpenID Connect</em> en <em>Open Auth 2.0</em> protocols. Identity Server is open-source, geschreven in .Net, en gratis voor onderwijs. Een goeie keuze voor ons project!</p>
+<p>Een andere populaire Identity Provider is <a href="https://duendesoftware.com/products/identityserver">Identity Server</a>. Deze implementeert de <em>OpenID Connect</em> en <em>Open Auth 2.0</em> protocols. Identity Server is <a href="https://github.com/DuendeSoftware/">open-source</a>, geschreven in .Net, en gratis voor onderwijs. Een goeie keuze voor ons project!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_azure_sql_server"><a class="anchor" href="#_azure_sql_server"></a>Azure SQL Server</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Identity Server kan werken met een in-memory setup, maar dat is geen realistisch scenario. In de praktijk willen we natuurlijk client en user informatie persisteren. We opteren voor Azure SQL.</p>
+</div>
+<div class="sect2">
+<h3 id="_opzetten"><a class="anchor" href="#_opzetten"></a>Opzetten</h3>
+<div class="paragraph">
+<p>Ga naar de Azure Portal en kies het resource type "SQL Databases".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-resource-type.png" alt="sql resource type">
+</div>
+</div>
+<div class="paragraph">
+<p>Selecteer een standaard Azure SQL Database.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-overview-create-2.png" alt="sql overview create 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Gebruik het aanbod om een gratis SQL Database te maken.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-create-free.png" alt="sql create free">
+</div>
+</div>
+<div class="paragraph">
+<p>Een Azure SQL (Server) kan meerdere databanken bevatten. In deze wizard maak je een Server èn een Database aan.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-create-db.png" alt="sql create db">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Als je reeds een Azure SQL database gebruikt voor jouw project, hoef je geen nieuwe server te maken. Selecteer je bestaande server uit de dropdown om de Identity Server database er aan toe te voegen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Onder Authentication Settings van de Server, kies je voor "Use both SQL Server and Microsoft Entra Authentication". Dit zorgt ervoor dat men zich kan authenticeren met een Azure account en ook een tradionele SQL Server user en wachtwoord.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Kies je eigen Azure account als Admin.</p>
+</li>
+<li>
+<p>Stel ook de SQL server admin login credentials in.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-create-server-2.png" alt="sql create server 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Nu de SQL Server Instance ingesteld is, kunnen we verder met de configuratie van de databank. Onze academische context vereist relaxte netwerkbeveiliging. Kies voor:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"Public endpoint"</p>
+</li>
+<li>
+<p>"Allow Azure services and resources to access this server"</p>
+</li>
+<li>
+<p>"Add current client IP address"</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-create-db-2.png" alt="sql create db 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Klik nu op "Review + Create". Controleer de instellingen en klik dan op "Create".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-review.png" alt="sql review">
+</div>
+</div>
+<div class="paragraph">
+<p>Na even wachten zal de database (en "server" instance) verschijnen als resource in het overzicht.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-sql/sql-resource-created.png" alt="sql resource created">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_verbinden_vs_code"><a class="anchor" href="#_verbinden_vs_code"></a>Verbinden (VS Code)</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+De <a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server (mssql)  VS Code plugin</a> vervangt Azure Data Studio.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Het installeren van deze plugin zal de nodige dependencies meebrengen om je Azure resource te bekijken vanuit VS Code.</p>
+</div>
+<div class="paragraph">
+<p>Voeg een connectie toe op basis van je eigen Azure Account.</p>
+</div>
+<div class="paragraph">
+<p>Je kan naar wens queries uitvoeren. Let op! Op dit moment ben je hoogst waarschijnlijk met admin privileges verbonden.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-sql/sql-vscode-query.png" alt="sql vscode query"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_firewall"><a class="anchor" href="#_firewall"></a>Firewall</h3>
+<div class="paragraph">
+<p>Bij het aanmaken van de DB heb je je IP toegevoegd aan de whitelist. Als je IP verandert, of je van op een andere locatie wil verbinden, moet je het relevante IP toevoegen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/db-firewall.png" alt="db firewall">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/db-firewall-2.png" alt="db firewall 2">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Bepaalde apps, zoals SSMS en de VS Code plugin zullen dit detecteren en je voorstellen het werk voor jou te doen.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_identityserver_sql_login"><a class="anchor" href="#_identityserver_sql_login"></a>IdentityServer SQL Login</h3>
+<div class="paragraph">
+<p>Op dit moment word je persoonlijke Azure identiteit, of een admin SQl login, gebruikt om te authenticeren bij de SQL Server. Dat is de bedoeling niet.</p>
+</div>
+<div class="paragraph">
+<p>We gaan de SQL admin user <strong>niet</strong> door de applicatie laten gebruiken. We maken een aparte user voor Identity Server en kennen de gepaste rechten toe.</p>
+</div>
+<div class="listingblock">
+<div class="title">Definieer een login voor IS op de <code>master</code> database.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE LOGIN IdentityServer WITH PASSWORD = 'kies_een_wachtwoord';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/identity-server-sql/create-login.png" alt="create login"></span></p>
+</div>
+<div class="paragraph">
+<p>De IS database user zal  dus rechten nodig hebben om objecten aan te maken (DDL) in de databank, alsook queries uit te voeren (DML).</p>
+</div>
+<div class="listingblock">
+<div class="title">Definieer een user voor IS op de <code>shipit</code> (niet master!) database.</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE USER IdentityServer FOR LOGIN IdentityServer;
+
+GRANT ALTER ON SCHEMA::dbo TO IdentityServer
+GO
+GRANT INSERT, UPDATE, DELETE, SELECT, REFERENCES ON SCHEMA :: dbo TO IdentityServer
+GO</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Test de credentials die je voor IS gemaakt hebt door een nieuwe database server connectie toe te voegen.</p>
+</div>
+<div class="paragraph">
+<p>Je hebt nu twee verschillende connecties die naar dezelfde SQL Server verwijzen, maar met andere credentials.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Connectie op basis van jouw Azure Account.</p>
+</li>
+<li>
+<p>Connectie op basis van IS SQL user credentials.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/sql-2-conns.png" alt="sql 2 conns">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_identity_server"><a class="anchor" href="#_identity_server"></a>Identity Server</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_installeren"><a class="anchor" href="#_installeren"></a>Installeren</h3>
+<div class="paragraph">
+<p>Identity Server is vlot op te zetten via een dotnet template. Dit template project bevat <strong>Identity Server met ASP.NET Identity</strong> integratie. Op deze manier hebben we ineens alle nodige functionaliteit aan boord om het verhaal voor systemen en personen in te regelen.</p>
+</div>
+<div class="literalblock">
+<div class="title">Identity Server Templates Installeren</div>
+<div class="content">
+<pre>dotnet new install Duende.IdentityServer.Templates</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De duende templates worden nu beschikbaar gesteld op het systeem. Voeg een project toe aan de solution. Kies een duidelijke naam.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/new-project.png" alt="new project">
+</div>
+</div>
+<div class="paragraph">
+<p>Start het nieuwe project op om te controleren of het project correct aangemaakt werd. De Identity Server UI verschijnt.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/first-start.png" alt="first start">
+</div>
+</div>
+<div class="paragraph">
+<p>Deze UI bevat standaard pagina&#8217;s om in en uit te loggen. Web Apps die steunen op de authenticatie met IS, zullen de gebruiker <em>redirecten</em> naar deze login/logout pagina&#8217;s. Desgewenst kan je de IS pagina&#8217;s zelf stylen om visueel aan te sluiten bij je applicatie of bedrijf.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Op school is de context beperkt. In de praktijk zal een Identity Provider typisch meer dan 1 applicatie binnen het bedrijf bedienen. In dat geval zal men de Identity Server niet in de applicatieve solution stoppen, maar wel in een losstaande solution.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_discovery_document"><a class="anchor" href="#_discovery_document"></a>Discovery Document</h3>
+<div class="paragraph">
+<p>Wanneer we onze Identity Server starten, kunnen we het openid-configuration endpoint bezoeken.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>https://localhost:5001/.well-known/openid-configuration</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dit endpoint publiceert een <em>Discovery Document</em>. Het document bevat een gestructureerd (json) overzicht van de endpoints en andere configuratie gerelateerd aan onze Identity Server. Client systemen hebben (een deel van) deze informatie nodig om door de Auth flows te lopen.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{
+    "issuer":"https://localhost:5001",
+    "jwks_uri":"https://localhost:5001/.well-known/openid-configuration/jwks",
+    "authorization_endpoint":"https://localhost:5001/connect/authorize",
+    "token_endpoint":"https://localhost:5001/connect/token",
+    "userinfo_endpoint":"https://localhost:5001/connect/userinfo",
+    "end_session_endpoint":"https://localhost:5001/connect/endsession"
+    ...
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_users_activeren"><a class="anchor" href="#_users_activeren"></a>Users Activeren</h3>
+<div class="paragraph">
+<p>Identity Server bevat standaard twee test gebruikers: <code>bob/Pass123$</code> en <code>alice/Pass123$</code>.
+Toch kunnen we op dit moment nog niet inloggen. Wanneer je navigeert naar een sectie die login vereist, zoals <code><a href="https://localhost:5001/diagnostics" class="bare">https://localhost:5001/diagnostics</a></code>, zal je zien dat de login faalt.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/user-error.png" alt="user error">
+</div>
+</div>
+<div class="paragraph">
+<p>Het systeem vertelt ons dat de <code>AspNetUsers</code> tabel niet bestaat. Helemaal niet gek gezien we effectief geen tabellen aangemaakt hebben.</p>
+</div>
+<div class="paragraph">
+<p><code>ShipIt.IdentityServer/Data/Migrations/20240123193529_Users.cs</code> verraadt dat het systeem met EF Core Migrations werkt.</p>
+</div>
+<div class="paragraph">
+<p>We richting een verbinding met de Azure SQL Server in.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verwijder <code>Microsoft.EntityFrameworkCore.Sqlite</code> nuget.</p>
+</li>
+<li>
+<p>Voeg <code>Microsoft.EntityFrameworkCore.SqlServer</code> nuget toe.</p>
+</li>
+<li>
+<p>Pas de registratie van de DbContext aan.</p>
+</li>
+<li>
+<p>Zet de connectionstring.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">HostingExtensions.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">builder.Services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+    options.UseSqlServer(
+        builder.Configuration
+            .GetConnectionString("DefaultConnection")));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De bestaande migration is niet geschikt voor SQL Server. We wissen de bestaande migrations folder.</p>
+</div>
+<div class="literalblock">
+<div class="title">SQL Server Migrations aanmaken</div>
+<div class="content">
+<pre>dotnet ef migrations add InitAspNetUsers
+-c ApplicationDbContext
+-o Data/Migrations/AspNetUsers</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Uitvoeren</div>
+<div class="content">
+<pre>dotnet ef database update -c ApplicationDbContext</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/db-users.png" alt="db users">
+</div>
+</div>
+<div class="paragraph">
+<p>Nu de tabellen aanwezig zijn, zal Identity Server niet langer met een <code>500</code> reageren op een login poging.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/invalid-user.png" alt="invalid user">
+</div>
+</div>
+<div class="paragraph">
+<p>Dit ziet er al veel netter uit. Laten we de testgebruikers die IS aanlevert in de database stoppen. Zonder users in de database zal het natuurlijk nooit slagen.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP ShipIt.IdentityServer % dotnet run /seed</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/db-users-created.png" alt="db users created">
+</div>
+</div>
+<div class="paragraph">
+<p>Een login poging met aanwezige user <code>alice/Pass123$</code> zal nu wel slagen. Merk op dat de <code>sub</code> claim het Id van de user bevat.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/login-ok.png" alt="login ok">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_systemen_registreren"><a class="anchor" href="#_systemen_registreren"></a>Systemen Registreren</h3>
+<div class="paragraph">
+<p>Je kan Identity Server systeemclients laten afhandelen op basis van een in-memory configuratie (<code>Config.cs</code>). Dit is zeer handig om te leren en testen. We starten met een in-memory configuratie en persisteren deze vervolgens in een echte databank.</p>
+</div>
+<div class="paragraph">
+<p>We stellen als doel het beschermen van de ShipIt Quote Api. We testen dit initieel met Postman, wat ons brengt tot volgende stappen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>App Client registeren in Identity Server</p>
+</li>
+<li>
+<p>Quote Api inhaken op Identity Server</p>
+</li>
+<li>
+<p>Testen met Postman</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_postman_client_registreren"><a class="anchor" href="#_postman_client_registreren"></a>Postman Client Registreren</h4>
+<div class="listingblock">
+<div class="title">ShipIt.IdentityServer/Config.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static class Config {
+    public static IEnumerable&lt;IdentityResource&gt; IdentityResources =&gt;
+        new IdentityResource[] {
+            new IdentityResources.OpenId(),
+            new IdentityResources.Profile(),
+        };
+
+    public static IEnumerable&lt;ApiScope&gt; ApiScopes =&gt;
+        new ApiScope[] {
+            new ApiScope("shipit.pricequotes.api.read")
+        };
+
+    public static IEnumerable&lt;Client&gt; Clients =&gt;
+        new Client[] {
+            new Client{
+                ClientId = "postman-client", <i class="conum" data-value="1"></i><b>(1)</b>
+                AllowedGrantTypes = GrantTypes.ClientCredentials, <i class="conum" data-value="2"></i><b>(2)</b>
+                ClientSecrets = {
+                    new Secret("eenGrootGeheim".Sha256()) <i class="conum" data-value="3"></i><b>(3)</b>
+                },
+                AllowedScopes = { "shipit.pricequotes.api.read" } <i class="conum" data-value="4"></i><b>(4)</b>
+            }
+        };
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kan een willekeurige string zijn. Gebruik een sprekende naam wanneer mogelijk.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Client is bedoeld om in een <a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow">Client Credentials Flow</a> gebruikt te worden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>In Identity Server houden we een hash bij van het secret. De cleartext versie wordt overhandigd aan de klant. Wij bewaren de cleartext versie niet. Moest Identity Server op dit moment al met een databank gekoppeld zijn, zouden we daarin het resultaat van de hash bewaren.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Scopes waar deze Client gebruik kan van maken.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_quote_api_inhaken"><a class="anchor" href="#_quote_api_inhaken"></a>Quote Api Inhaken</h4>
+<div class="paragraph">
+<p>Voeg <code>Microsoft.AspNetCore.Authentication.JwtBearer</code> toe aan <code>ShipIt.PriceQuote.Api</code>. Dit laat ons toe de authenticatie en autorisatie tijdens het bootstrappen van de api in te stellen.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuotes.Api/Program.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">//...
+builder.Services.AddAuthentication()
+    .AddJwtBearer(options =&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+        options.Authority = "https://localhost:5001"; <i class="conum" data-value="2"></i><b>(2)</b>
+        options.TokenValidationParameters.ValidateAudience = false; <i class="conum" data-value="3"></i><b>(3)</b>
+    });
+
+builder.Services.AddAuthorization();
+
+//...</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>JwtBearer is het soort authenticatie token.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Onze service zal deze Identity Provider vertrouwen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Optionele audience claim check. Out of scope voor de lessen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>👩‍🔬 Observatie 1</strong><br>
+Start Identity Server én de Quote Api op. Test het <code>GET</code> endpoint van de Quote Api met Postman. Dit zal <em>gewoon</em> werken. Waarom? Omdat de Quote Api op dit moment wel verbonden is met Identity Server, maar geen checks doet.</p>
+</div>
+<div class="paragraph">
+<p>Om af te dwingen dat een caller een token nodig heeft om een operatie in onze Quote controller aan te roepen, plaatsen we het <code>Authorize</code> attribute.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.PriceQuote.Api/Controllers/PriceQuoteController.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-c# hljs" data-lang="c#">[Route("api/[controller]")]
+[Authorize] <i class="conum" data-value="1"></i><b>(1)</b>
+[ApiController]
+public class QuoteController : ControllerBase
+{
+    //...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Elke actie in deze Controller vereist nu een geauthenticeerde caller.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>👩‍🔬 Observatie 2</strong><br>
+Start Identity Server én de Quote Api op. Test het <code>GET</code> endpoint van de Quote Api met Postman. Dit zal niet langer werken. Waarom? Omdat de Quote Api op dit moment de identiteit van de caller controleert, en deze afwezig is in het request.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/postman-unauth.png" alt="postman unauth">
+</div>
+</div>
+<div class="paragraph">
+<p>We moeten een token ophalen bij Identity Server. Hiervoor maken we gebruik van de <em>Client Credentials</em> die we eerder geconfigureerd hebben.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/postman-get-token.png" alt="postman get token">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+We kunnen de inhoud van een token analyseren op <a href="https://jwt.io">jwt.io</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>👩‍🔬 Observatie 3</strong><br>
+Start Identity Server én de Quote Api op. Test het <code>GET</code> endpoint van de Quote Api met Postman met <code>Authorization</code> header. Het formaat van header waarde is "Bearer", gevolgd door een spatie, gevolgd door de inhoud van het token. Dit zal wel werken.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/postman-succes.png" alt="postman succes">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In Postman kan je ook gebruik maken van de functionaliteit in de "Authorization" tab.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ef_core"><a class="anchor" href="#_ef_core"></a>EF Core</h4>
+<div class="literalblock">
+<div class="title">Voeg IS EF Core toe</div>
+<div class="content">
+<pre>dotnet add package Duende.IdentityServer.EntityFramework</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Gebruik dezelfde versie als <code>Duende.IdentityServer.AspNetIdentity</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">Build IS project</div>
+<div class="content">
+<pre>dotnet build</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Voeg de <code>ConfigurationDbContext</code> toe in <code>HostingExtensions.cs</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">public static WebApplication ConfigureServices(
+    this WebApplicationBuilder builder)
+{
+    builder.Services.AddRazorPages();
+
+    <i class="conum" data-value="1"></i><b>(1)</b>
+    builder.Services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt;
+        options.UseSqlServer(
+            builder.Configuration
+                .GetConnectionString("DefaultConnection"))); <i class="conum" data-value="3"></i><b>(3)</b>
+
+    <i class="conum" data-value="2"></i><b>(2)</b>
+    builder.Services.AddDbContext&lt;ConfigurationDbContext&gt;(options =&gt;
+        options.UseSqlServer(
+            builder.Configuration
+                .GetConnectionString("DefaultConnection"), <i class="conum" data-value="3"></i><b>(3)</b>
+            options =&gt; options.MigrationsAssembly(
+                typeof(Program).Assembly.GetName().Name))); <i class="conum" data-value="4"></i><b>(4)</b>
+
+    //...
+
+    builder.Services
+        .AddIdentityServer(options =&gt;
+        {
+            //...
+        })
+        .AddConfigurationStore() <i class="conum" data-value="5"></i><b>(5)</b>
+        .AddAspNetIdentity&lt;ApplicationUser&gt;();
+
+    //...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deze <code>ApplicationDbContext</code> stond er al en dient voor de users.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deze <code>ConfigurationDbContext</code> is nieuw en dient voor app clients / IS config.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>De DbContexts verwijzen naar dezelfde database, maar andere tabellen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Op deze manier verschijnen de migrations in de source van onze binary, niet in degene die de DbContext bevat (de nuget)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Verwijder de InMemory items en registreer de EF Core config store.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="title">Genereer de migration</div>
+<div class="content">
+<pre>dotnet ef migrations add InitAppClients
+-c ConfigurationDbContext
+-o Data/Migrations/AppClients/ConfigurationDb</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Directory Tree Migrations</div>
+<div class="content">
+<pre>ShipIt.IdentityServer
+...
+├── Data
+│   ├── ApplicationDbContext.cs
+│   └── Migrations
+│       ├── AppClients
+│       │   └── ConfigurationDb
+│       │       ├── 20251116093539_InitAppClients.cs
+│       │       ├── 20251116093539_InitAppClients.Designer.cs
+│       │       └── ConfigurationDbContextModelSnapshot.cs
+│       └── AspNetUsers
+│           ├── 20251113110549_InitAspNetUsers.cs
+│           ├── 20251113110549_InitAspNetUsers.Designer.cs
+│           └── ApplicationDbContextModelSnapshot.cs
+...</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="title">Uitvoeren</div>
+<div class="content">
+<pre>dotnet ef database update -c ConfigurationDbContext</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De Identity Server (client) configuratie tabellen bestaan nu in de database.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/is-tables-created.png" alt="is tables created">
+</div>
+</div>
+<div class="paragraph">
+<p>Het kan handig zijn onze in-memory Config in database op te slaan om verder te kunnen testen met deze clients. Ik heb daarom de <code>EnsureSeedData()</code> methode uitgebreid.</p>
+</div>
+<div class="listingblock">
+<div class="title">ShipIt.IdentityServer/SeedData.cs</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">//...
+using (var scope = app.Services
+        .GetRequiredService&lt;IServiceScopeFactory&gt;().CreateScope()) {
+
+    var context = scope.ServiceProvider
+        .GetRequiredService&lt;ConfigurationDbContext&gt;();
+
+    Log.Debug("Overwriting db clients with Config.cs");
+    context.Clients.RemoveRange(context.Clients);
+    foreach (var client in Config.Clients)
+        context.Clients.Add(client.ToEntity());
+    context.SaveChanges();
+    Log.Debug("Clients overwrite done");
+
+    Log.Debug("Adding IdentityResources");
+    foreach (var resource in Config.IdentityResources)
+        if(!context.IdentityResources.Any(db =&gt;
+                resource.Name == db.Name))
+            context.IdentityResources.Add(resource.ToEntity());
+    context.SaveChanges();
+    Log.Debug("Adding IdentityResources done");
+
+    Log.Debug("Adding ApiScopes");
+    foreach (var resource in Config.ApiScopes)
+        if(!context.ApiScopes.Any(db =&gt;
+                resource.Name == db.Name))
+            context.ApiScopes.Add(resource.ToEntity());
+    context.SaveChanges();
+    Log.Debug("Adding ApiScopes done");
+// ...</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>stefancourteaux@MBP ShipIt.IdentityServer % dotnet run /seed</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/identity-server-quick/clients-db.png" alt="clients db">
+</div>
+</div>
+<div class="paragraph">
+<p>Doe de postman test opnieuw om te valideren dat alles nog correct werkt.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
