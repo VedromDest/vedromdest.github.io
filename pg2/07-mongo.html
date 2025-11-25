@@ -324,15 +324,24 @@
 <div class="listingblock">
 <div class="title">Collection Aanspreken</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">var client = new MongoClient("mongodb://localhost:27017");
+<pre class="highlightjs highlight"><code class="language-csharp hljs" data-lang="csharp">// Connect to MongoDB Server
+var mongoClient = new MongoClient("mongodb://localhost:27017");
 
-var db = client.GetDatabase("pg2");
-if(db is null)
-    throw new Exception("Database not found");
+// Connect to MongoDB Database
+const string databaseName = "pg2gent";
+var dbExists = mongoClient.ListDatabaseNames().ToList().Contains(databaseName);
+if(!dbExists)
+    throw new Exception($"Database '{databaseName}' not found");
+var database = mongoClient.GetDatabase(databaseName);
+Console.WriteLine("Connected to database " + database.DatabaseNamespace);
 
-var coll = db.GetCollection&lt;DemoModel&gt;("testcollection");
-if(coll is null)
-    throw new Exception("Collection not found");</code></pre>
+// Obtain handle to collection
+const string collectionName = "voorbeeldcollection";
+var collectionExists = database.ListCollectionNames().ToList().Contains(collectionName);
+if(!collectionExists)
+    throw new Exception($"Collection '{collectionName}' not found");
+var collection = database.GetCollection&lt;GentModel&gt;(collectionName);
+Console.WriteLine("Obtained handle to collection " + collection.CollectionNamespace);</code></pre>
 </div>
 </div>
 <div class="sect2">
