@@ -57,78 +57,78 @@
     <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
     <h3 class="title"><a href="index.html">Gevorderd 3</a></h3>
 <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="0">
+  <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="01-cloud-connected.html">Cloud Connected</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="02-microservices.html">Microservices</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="02-az-devops.html">Azure DevOps</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="03-git.html">Git Gebruik</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="05-cosmos.html">Cosmos Database</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="07-blob.html">Blob Storage</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="04-middleware.html">Middleware</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="08-open-data-docker.html">Open Data &amp; Docker ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="06-02-secret-management.html">Secret Management ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="06-pipelines.html">DevOps Pipelines️ ⭐️</a>
   </li>
-      <li class="nav-item is-active is-current-page" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="09-auth-2526.html">Authenticatie ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
-    <a class="nav-link" href="09-auth-2526-2.html">Autorisatie 🚧</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="09-auth-2526-2.html">Autorisatie ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="10-afronden2526.html">Afronden ⭐️</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="99-tips.html">Tips</a>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="09-auth.html">Authenticatie en Autorisatie AJ2425</a>
+    <a class="nav-link" href="09-auth.html">Authenticatie AJ2425 🙅‍♂️</a>
 <ul class="nav-list">
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-server-systemen.html">App Clients (OAuth)</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-server-gebruikers.html">Test Users (OIDC)</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-server-shipitapp.html">Web App Verbinden</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-server-sql.html">Config in Azure SQL</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-server-aspnetid.html">ASP.Net Identity Users</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="09-identity-sql-server-docker.html">SQL Server Docker</a>
   </li>
-      <li class="nav-item is-active" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="10-afronden.html">Totaalplaatje Afronden</a>
   </li>
 </ul>
   </li>
-      <li class="nav-item is-active" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="80-lesopnames-2425S2.html">Lesopnames 📺</a>
   </li>
 </ul>
@@ -506,8 +506,11 @@ Bepaalde apps, zoals SSMS en de VS Code plugin zullen dit detecteren en je voors
 <div class="listingblock">
 <div class="title">Definieer een user voor IS op de <code>shipit</code> (niet master!) database.</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE USER IdentityServer FOR LOGIN IdentityServer;
+<pre class="highlightjs highlight"><code class="language-sql hljs" data-lang="sql">CREATE USER IdentityServer FOR LOGIN IdentityServer
+GO
 
+GRANT CREATE TABLE TO IdentityServer
+GO
 GRANT ALTER ON SCHEMA::dbo TO IdentityServer
 GO
 GRANT INSERT, UPDATE, DELETE, SELECT, REFERENCES ON SCHEMA :: dbo TO IdentityServer
@@ -743,7 +746,7 @@ Toch kunnen we op dit moment nog niet inloggen. Wanneer je navigeert naar een se
 
     public static IEnumerable&lt;ApiScope&gt; ApiScopes =&gt;
         new ApiScope[] {
-            new ApiScope("shipit.pricequotes.api.read")
+            new ApiScope("shipit.pricequotes.api")
         };
 
     public static IEnumerable&lt;Client&gt; Clients =&gt;
@@ -754,7 +757,7 @@ Toch kunnen we op dit moment nog niet inloggen. Wanneer je navigeert naar een se
                 ClientSecrets = {
                     new Secret("eenGrootGeheim".Sha256()) <i class="conum" data-value="3"></i><b>(3)</b>
                 },
-                AllowedScopes = { "shipit.pricequotes.api.read" } <i class="conum" data-value="4"></i><b>(4)</b>
+                AllowedScopes = { "shipit.pricequotes.api" } <i class="conum" data-value="4"></i><b>(4)</b>
             }
         };
 }</code></pre>
@@ -1086,8 +1089,7 @@ using (var scope = app.Services
 <footer class="footer">
     <p>This page was built using a customized version of the Antora default UI. The source code for the default UI is licensed under the terms of the MPL-2.0 license.</p>
     <p>Course material may *not* be used to teach, tutor, coach, or present without obtaining explicit consent from Stefan Courteaux.</p>
-</footer>
-<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+</footer><script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
 <script async src="../_/js/vendor/highlight.js"></script>
   </body>
 </html>
