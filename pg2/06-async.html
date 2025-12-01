@@ -105,7 +105,7 @@
     <a class="nav-link" href="05-dapper.html">Dapper Micro ORM</a>
   </li>
       <li class="nav-item is-active is-current-page" data-depth="1">
-    <a class="nav-link" href="06-async.html">Asynchroon &amp; Parallel Programmeren</a>
+    <a class="nav-link" href="06-async.html">Parallel &amp; Async 🌟</a>
   </li>
       <li class="nav-item is-active" data-depth="1">
     <a class="nav-link" href="07-mongo.html">MongoDB</a>
@@ -134,6 +134,9 @@
   </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-06-mongo.html">Api + MongoDB</a>
+  </li>
+      <li class="nav-item is-active" data-depth="2">
+    <a class="nav-link" href="90-08-async.html">Async</a>
   </li>
       <li class="nav-item is-active" data-depth="2">
     <a class="nav-link" href="90-07-alles.html">Cover-All</a>
@@ -165,7 +168,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Gevorderd 2</a></li>
-    <li><a href="06-async.html">Asynchroon &amp; Parallel Programmeren</a></li>
+    <li><a href="06-async.html">Parallel &amp; Async 🌟</a></li>
   </ul>
 </nav>
 </div>
@@ -326,10 +329,8 @@ Tijdens de les werd context geschetst voor het Parallel en Async verhaal door ha
 </div>
 </div>
 <div class="sect1">
-<h2 id="_academische_voorbeelden"><a class="anchor" href="#_academische_voorbeelden"></a>Academische Voorbeelden</h2>
+<h2 id="_de_parallelle_patisserie"><a class="anchor" href="#_de_parallelle_patisserie"></a>De Parallelle Patisserie</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_de_parallelle_patisserie"><a class="anchor" href="#_de_parallelle_patisserie"></a>De Parallelle Patisserie</h3>
 <div class="paragraph">
 <p>We benaderen het bakken van pistolets vanuit C#.</p>
 </div>
@@ -367,8 +368,8 @@ Om de analogie werkbaar te houden, werken we met kortere tijdspannes. Minuten ui
 </tr>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_een_pistolet_bakken"><a class="anchor" href="#_een_pistolet_bakken"></a>Een Pistolet Bakken</h4>
+<div class="sect2">
+<h3 id="_een_pistolet_bakken"><a class="anchor" href="#_een_pistolet_bakken"></a>Een Pistolet Bakken</h3>
 <div class="paragraph">
 <p>We beschouwen een bakkerij en bakken één <code>Pistolet</code>.</p>
 </div>
@@ -418,8 +419,8 @@ Verstreken tijd 0:00:22:00,0000000 (Realiteit).</pre>
 <p>De totale executietijd is 22ms. Dit is de baktijd van één <code>Pistolet</code> + overhead van <code>WriteLine</code> etc.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_100_pistolets_bakken"><a class="anchor" href="#_100_pistolets_bakken"></a>100 Pistolets Bakken</h4>
+<div class="sect2">
+<h3 id="_100_pistolets_bakken"><a class="anchor" href="#_100_pistolets_bakken"></a>100 Pistolets Bakken</h3>
 <div class="paragraph">
 <p>We gaan natuurlijk onze boterham niet verdienen als bakker wanneer we maar één <code>Pistolet</code> in de winkel liggen hebben. We willen 100 <code>Pistolets</code> bakken!</p>
 </div>
@@ -473,8 +474,8 @@ Verstreken tijd 1:15:13:00,0000000 (Realiteit).</pre>
 <p>De totale executietijd is 2,35s. Dit vertaalt zich naar meer dan een dag in de realiteit. Dit is niet alleen niet rendabel, maar ook praktisch onhaalbaar!</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_100_pistolets_bakken_in_parallel"><a class="anchor" href="#_100_pistolets_bakken_in_parallel"></a>100 Pistolets Bakken In Parallel</h4>
+<div class="sect2">
+<h3 id="_100_pistolets_bakken_in_parallel"><a class="anchor" href="#_100_pistolets_bakken_in_parallel"></a>100 Pistolets Bakken In Parallel</h3>
 <div class="paragraph">
 <p>In werkelijkheid bakt de bakker natuurlijk die 100 <code>Pistolets</code> tegelijk, ofte in <em>Parallel</em>.</p>
 </div>
@@ -526,7 +527,7 @@ Verstreken tijd 0:03:50:00,0000000 (Realiteit).</pre>
 <p>Maar&#8230;&#8203; in de realiteit zouden de 100 <code>Pistolets</code> toch wel op 20 minuten parallel gebakken zijn? Waarom duurt het langer in C#?</p>
 </div>
 <div class="paragraph">
-<p>Het is zo dat het voorbereiden, uitvoeren en opvolgen van parallele code een kost heeft voor het systeem. .Net handelt deze (complexe!) coördinatie volledig voor ons af, maar de <em>overhead</em> die daaruit volgt, is onvermijdbaar.</p>
+<p>Het is zo dat het voorbereiden, uitvoeren en opvolgen van parallelle code een kost heeft voor het systeem. .Net handelt deze (complexe!) coördinatie volledig voor ons af, maar de <em>overhead</em> die daaruit volgt, is onvermijdbaar.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -548,8 +549,10 @@ Verstreken tijd 0:03:50:00,0000000 (Realiteit).</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_de_asynchrone_ambtenaar"><a class="anchor" href="#_de_asynchrone_ambtenaar"></a>De Asynchrone Ambtenaar</h3>
+</div>
+<div class="sect1">
+<h2 id="_de_asynchrone_ambtenaar"><a class="anchor" href="#_de_asynchrone_ambtenaar"></a>De Asynchrone Ambtenaar</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We beschouwen het Ministerie Van Gedane Zaken, waar menig ambtenaar elke dag opnieuw gedurende exact 7 uur en 36 minuten het beste van zichzelf geeft.</p>
 </div>
@@ -579,8 +582,8 @@ Verstreken tijd 0:03:50:00,0000000 (Realiteit).</pre>
 }</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_een_rustige_dag"><a class="anchor" href="#_een_rustige_dag"></a>Een Rustige Dag</h4>
+<div class="sect2">
+<h3 id="_een_rustige_dag"><a class="anchor" href="#_een_rustige_dag"></a>Een Rustige Dag</h3>
 <div class="paragraph">
 <p>Vandaag twee kleine taken te doen.</p>
 </div>
@@ -621,8 +624,8 @@ Verstreken tijd 0:06:08:00,0000000 (Realiteit).</pre>
 <p>Tijd zat om koffie te drinken en de werkdag is zelfs nog niet voorbij. Chill.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_een_drukke_dag"><a class="anchor" href="#_een_drukke_dag"></a>Een Drukke Dag</h4>
+<div class="sect2">
+<h3 id="_een_drukke_dag"><a class="anchor" href="#_een_drukke_dag"></a>Een Drukke Dag</h3>
 <div class="paragraph">
 <p>Vandaag heeft Karel veel werk.</p>
 </div>
@@ -659,8 +662,8 @@ Verstreken tijd 0:07:35:00,0000000 (Realiteit).</pre>
 <p>7h35 minuten gewerkt en dus geen tijd om koffie te drinken. Hopelijk wordt het morgen rustiger!</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_de_chef_is_terug"><a class="anchor" href="#_de_chef_is_terug"></a>De Chef Is Terug</h4>
+<div class="sect2">
+<h3 id="_de_chef_is_terug"><a class="anchor" href="#_de_chef_is_terug"></a>De Chef Is Terug</h3>
 <div class="paragraph">
 <p>De <code>Chef</code> is terug van zijn jaarlijks zomerverlof. Zes weken Toscane hebben de man volledig opgeladen. Tijd om met volle goesting stokken in de wielen te steken! De komende weken zullen de ambtenaren voor alle grote taken toestemming moeten vragen&#8230;&#8203;</p>
 </div>
@@ -727,8 +730,8 @@ Verstreken tijd 0:09:53:00,0000000 (Realiteit).</pre>
 <p>9h en 53 minuten om het werk gedaan te krijgen. Als er ooit nog tijd is om koffie te drinken, weten we in elk geval over wat te praten!</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_waarom_wachten_met_het_werk"><a class="anchor" href="#_waarom_wachten_met_het_werk"></a>Waarom Wachten Met Het Werk?</h4>
+<div class="sect2">
+<h3 id="_waarom_wachten_met_het_werk"><a class="anchor" href="#_waarom_wachten_met_het_werk"></a>Waarom Wachten Met Het Werk?</h3>
 <div class="paragraph">
 <p>Kan dat hier niet een beetje efficiënter? Misschien. Karel is natuurlijk geen computer. We kunnen niet verwachten dat hij meerdere dingen in parallel kan doen. Maar, misschien kunnen we wel verwachten dat hij niet met zijn vingers draait terwijl hij op toestemming wacht? Misschien kan hij terwijl aan iets anders werken?</p>
 </div>
@@ -819,15 +822,37 @@ Verstreken tijd 0:07:37:00,0000000 (Realiteit).</pre>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_oefening"><a class="anchor" href="#_oefening"></a>Oefening</h2>
+<h2 id="_toepassing"><a class="anchor" href="#_toepassing"></a>Toepassing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Er staat bij deze les op GitHub een extra project met Async/Parallel demo waar je mee kan spelen.</p>
+<p>Typisch willen we alle calls naar I/O dependencies <code>async</code> schrijven. We weten dat onze code <em>efkes</em> zal moeten wachten op het resultaat. Dit kan lokale disc access, database access, of http calls naar andere services zijn.</p>
 </div>
 <div class="paragraph">
-<p>Bedenk enkele sync/async/parallel functionaliteiten om te voegen aan de codebase. Schrijf scenarios in Program.cs en controleer of ze zich gedragen zoals je verwacht.</p>
+<p>Door het wachten te omvatten in asynchrone operaties, wordt dit wachten <em>non-blocking</em>. Op die manier kunnen de CPU cycles gebruikt worden door een andere operatie die wel direct concreet werk te doen heeft.</p>
+</div>
+<div class="paragraph">
+<p>Deze asynchrone aard zal door de calls stack naar boven bubbelen. Kortom: als je async database calls maakt, zal je web api endpoint een <code>Task&lt;&#8230;&#8203;&gt;</code>. Dat is geen probleem, want de webapi infrastructuur is daar op voorzien.</p>
+</div>
+<div class="paragraph">
+<p>Een server krijgt massa&#8217;s api calls die elkaar overlappen in de tijd. Hoewel wij zelf niet expliciet <em>Threads</em> aanmaken, voorziet dotnet achter de schermen een <em>ThreadPool</em> waarin de web api calls overlappend afgehandeld worden*. Hoe meer wachttijd we non-blocking programmeren, hoe meer werk er per thread afgehandeld kan worden.</p>
+</div>
+<div class="paragraph">
+<p>Het toewijzen van taken aan Threads wordt volledig door dotnet beheerd.</p>
+</div>
+<div class="paragraph">
+<p>*Dit is de reden dat nagenoeg alles <code>Scoped</code> (uniek object per request) geïnjecteerd wordt in een web api.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concurrent_collections"><a class="anchor" href="#_concurrent_collections"></a>Concurrent Collections</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wanneer een collection gemuteerd wordt door meerdere Tasks/Threads, kan dit leiden tot corruptie van de data. Om dat te verhinderen is extra logica nodig. Deze hoef je niet zelf te voorzien. Dotnet voorziet een aantal <a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/thread-safe/">threadsafe collections</a>, zoals de <code>ConcurrentBag</code>. Denk eraan deze te gebruiken wanneer je een collection zelf deelt tussen Tasks/Threads.</p>
+</div>
+<div class="paragraph">
+<p>De extra logica om collections thread safe te maken, heeft natuurlijk een kost. Dit is een van de verschillende punten waarop parallelle code moet synchroniseren. Deze overhead is niet verwaarloosbaar. Je moet afwegen of <em>het sop de kool waard is</em>.</p>
 </div>
 </div>
 </div>
