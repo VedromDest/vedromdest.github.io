@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ShipIt Afronden :: Programmeren Gevorderd 3 (BETA)</title>
+    <title>Afronden :: Programmeren Gevorderd 3 (BETA)</title>
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -165,7 +165,136 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">ShipIt Afronden</h1>
+<h1 class="page">Afronden</h1>
+<div class="sect1">
+<h2 id="_prep"><a class="anchor" href="#_prep"></a>Prep</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Gebruikt .net 9 LTS of 10 STS voor je eigen services. Laat de .net versie van Identity Server template onveranderd.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test je applicatie lokaal nog eens goed door.</p>
+</li>
+<li>
+<p>Controleer of de codebase nog hardcoded settings bevat.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Indien dat zo is, verplaats je deze naar configuratie</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Options Pattern, <a href="05-cosmos.html" class="xref page">gezien in de les</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hertest grondig.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Controleer dat alle code in versiebeheer zit.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_azure"><a class="anchor" href="#_azure"></a>Azure</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_backend"><a class="anchor" href="#_backend"></a>Backend</h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Onderschat niet hoeveel tijd je nodig zal hebben om de deployment volledig juist te krijgen. Dit kan een significante drempel vormen. Dat is normaal en deel van het leerproces.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Je zal een <em>Resource Group</em> hebben waaronder je de verschillende elementen samenbrengt</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Azure SQL, <a href="09-auth-2526.html" class="xref page">gezien in de les</a></p>
+</li>
+<li>
+<p>Azure Blob, <a href="07-blob.html" class="xref page">gezien in de les</a></p>
+</li>
+<li>
+<p>Azure Cosmos, <a href="05-cosmos.html" class="xref page">gezien in de les</a></p>
+</li>
+<li>
+<p>Azure KeyVault, <a href="06-02-secret-management.html" class="xref page">gezien in de les</a></p>
+</li>
+<li>
+<p>App Services, <a href="02-az-devops.html" class="xref page">gezien in de les</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Identity Server, <a href="09-auth-2526.html" class="xref page">gezien in de les</a></p>
+</li>
+<li>
+<p>1 bijkomende App Service per <code>.Api</code> project dat je gemaakt hebt</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>De moeilijkheid ligt in alles correct verbonden krijgen. Alle settings moeten naar de juiste endpoints (op Azure) wijzen en je client/role settings moeten juist staan in de Identity Server database.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_front_end"><a class="anchor" href="#_front_end"></a>Front End</h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Als je frontend ergens gehost wordt, en je backend correct werkt, maar de frontend niet tegen de backend kan praten, zal dit meestal aan <em>CORS</em> problemen liggen. Controleer dat je eigen api&#8217;s in <code>Program.cs</code> de passende CORS policies hebben, alsook clients in de IS database de correcte redirect en CORS origins hebben.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Indien je dit semester ook WEB3 volgt</strong>, zal het project voor dat vak aansluiten (<a href="09-auth-2526-2.html" class="xref page">gezien in de les</a>) op de backend die je voor PG3 maakt. Deze communicatie verloopt volledig over HTTP, wat wil zeggen dat je de frontend elders kan hosten. Deze moet wel degelijk ergens gehost zijn - lokaal runnen tijdens demo is niet voldoende.</p>
+</div>
+<div class="paragraph">
+<p>Indien je de frontend toch in Azure wil hosten, is een <a href="https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-web-framework?tabs=bash&amp;pivots=vanilla-js">Static Web App</a> daarvoor het geschikte resource type.</p>
+</div>
+<div class="paragraph">
+<p><strong>Indien je dit semester geen WEB3 volgt</strong>, dient de UI enkel om te illustreren dat je frontend met backend en IS technisch kan verbinden. Er hoeft geen noemenswaardige functionaliteit aanwezig te zijn. Je mag deze lokaal runnen.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_zonder_azure"><a class="anchor" href="#_zonder_azure"></a>Zonder Azure</h2>
+<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -173,10 +302,82 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Tegen het einde van de lessenreeks, valideren we dat alle besproken materie en technieken toegepast werd in de ShipIt voorbeeldapplicatie. We sturen bij waar nodig en deployen het geheel een laatste keer op Azure.
+<strong>Deze alternatieve manier van werken is enkel van toepassing voor studenten die door administratieve pech geen toegang hebben tot Azure.</strong><br>
+<br>
+Je dient verplicht bewijsstukken in die bevestigen dat je oprecht geprobeerd hebt je account in orde te krijgen. Dit om de eenvoudige reden dat de lesgever moet kunnen staven waarom jij een afwijkende opdracht hebt.
 </td>
 </tr>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_docker_compose"><a class="anchor" href="#_docker_compose"></a>Docker Compose</h3>
+<div class="paragraph">
+<p>Het evidente alternatief is een <code>docker-compose</code> setup voorzien. Dit is niet exact hetzelfde als Azure gebruiken, maar het verplicht je een aantal analoge problemen op te lossen. Onderschat ook hier de tijd niet die je nodig zal hebben om alles te leren en <em>just right</em> te krijgen.</p>
+</div>
+<div class="paragraph">
+<p>Je hebt een werkend voorbeeld van een app met drie architectuurlagen gekregen: <a href="https://github.com/VedromDest/docker-compose-demo" class="bare">https://github.com/VedromDest/docker-compose-demo</a> ✅</p>
+</div>
+<div class="paragraph">
+<p>Wat je moet doen voor het project is <em>analoog</em>, maar niet <em>identiek</em>. Jouw afgewerkte compose setup zal minstens 7 images bevatten 😉</p>
+</div>
+<div class="sect3">
+<h4 id="_azure_sql"><a class="anchor" href="#_azure_sql"></a>Azure SQL</h4>
+<div class="paragraph">
+<p>Gebruik SQL Server in Docker</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker pull mcr.microsoft.com/mssql/server:2022-latest</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Wachtw00rd1" -p 1433:1433 --name sql1 --hostname sql1 -d mcr.microsoft.com/mssql/server:2022-latest</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>De server admin username is <code>sa</code> ‼️</p>
+</div>
+<div class="paragraph">
+<p>Met de admin user kan je nieuwe databases en users maken naar wens.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_azure_blob"><a class="anchor" href="#_azure_blob"></a>Azure Blob</h4>
+<div class="paragraph">
+<p>Gebruik <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-install-azurite?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&amp;bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&amp;tabs=docker-hub%2Cblob-storage">Azurite in Docker</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_azure_cosmos"><a class="anchor" href="#_azure_cosmos"></a>Azure Cosmos</h4>
+<div class="paragraph">
+<p>Gebruik <a href="https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&amp;pivots=api-nosql">Cosmos Emulator in Docker</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_azure_keyvault"><a class="anchor" href="#_azure_keyvault"></a>Azure KeyVault</h4>
+<div class="paragraph">
+<p>Geen officieel alternatief, dus:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Geen hardcoded settings.</p>
+</li>
+<li>
+<p>Overal Options Pattern gebruikt, <a href="05-cosmos.html" class="xref page">gezien in de les</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_app_service_static_web_app_front_end"><a class="anchor" href="#_app_service_static_web_app_front_end"></a>App Service &amp; Static Web App (front end)</h4>
+<div class="paragraph">
+<p>Identity Server, elke <code>.Api</code>, alsook de frontend, resulteren telkens in een eigen docker image, <a href="08-open-data-docker.html" class="xref page">gezien in de les</a>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </article>
   </div>
